@@ -172,8 +172,18 @@ function GETB(s, i)
 end
 
 function GET(s, i)
-	if type(s) == 'table' then return s.index and s:index(i) or s[i] end
-	return GETB(s, i * 2) | (GETB(s, i * 2 + 1) << 8)
+	if s == 0 then
+		-- Z-machine header mockup
+		s = {
+			[0] = 3,       -- version (not actually used)
+			[1] = 15,      -- release number (Release 15)
+			[8] = 0,       -- Flags 2 (transcript bit is bit 0)
+	}
+	end
+	assert(type(s) == 'table', "GET requires a table")
+	return i == 0 and #s or s[i]
+	-- if type(s) == 'table' then return s.index and s:index(i) or s[i] end
+	-- return GETB(s, i * 2) | (GETB(s, i * 2 + 1) << 8)
 end
 
 function READ()

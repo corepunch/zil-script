@@ -8,6 +8,19 @@
       "args": [
         "main.lua"
       ],
+
+      // "label": "build and run tinylisp",
+      // "type": "shell",
+      // "command": "gcc",
+      // "args": [
+      //   "tinylisp.c",
+      //   "-o",
+      //   "tinylisp",
+      //   "-lm",
+      //   "&&",
+      //   "./tinylisp",
+      //   "tmp.zil"
+      // ],
       "group": {
         "kind": "build",
         "isDefault": true
