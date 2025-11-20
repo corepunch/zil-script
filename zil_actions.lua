@@ -519,8 +519,7 @@ FWEEP = function(N)
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('FWEEP\n'..__res) end
 end
-BAT_DROPS = {0,MINE_1,MINE_2,MINE_3,MINE_4,LADDER_TOP,LADDER_BOTTOM,SQUEEKY_ROOM,MINE_ENTRANCE}
-
+BAT_DROPS = LTABLE(0,MINE_1,MINE_2,MINE_3,MINE_4,LADDER_TOP,LADDER_BOTTOM,SQUEEKY_ROOM,MINE_ENTRANCE)
 BELL_F = function()
 	local __ok, __res = pcall(function()
 
@@ -1726,8 +1725,7 @@ APPLY(function() LOW_TIDE = nil return LOW_TIDE end)
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('I_RFILL\n'..__res) end
 end
-LOUD_RUNS = {0,DAMP_CAVE,ROUND_ROOM,DEEP_CANYON}
-
+LOUD_RUNS = LTABLE(0,DAMP_CAVE,ROUND_ROOM,DEEP_CANYON)
 I_REMPTY = function()
 	local __ok, __res = pcall(function()
   FSET(RESERVOIR, RLANDBIT)
@@ -1750,8 +1748,7 @@ APPLY(function() LOW_TIDE = T return LOW_TIDE end)
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('I_REMPTY\n'..__res) end
 end
-DROWNINGS = {"up to your ankles.","up to your shin.","up to your knees.","up to your hips.","up to your waist.","up to your chest.","up to your neck.","over your head.","high in your lungs."}
-
+DROWNINGS = LTABLE("up to your ankles.","up to your shin.","up to your knees.","up to your hips.","up to your waist.","up to your chest.","up to your neck.","over your head.","high in your lungs.")
 WATER_LEVEL = 0
 BUTTON_F = function()
 	local __ok, __res = pcall(function()
@@ -2188,8 +2185,7 @@ CYCLOPS_ROOM_FCN = function(RARG)
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('CYCLOPS_ROOM_FCN\n'..__res) end
 end
-CYCLOMAD = {"The cyclops seems somewhat agitated.","The cyclops appears to be getting more agitated.","The cyclops is moving about the room, looking for something.","The cyclops was looking for salt and pepper. No doubt they are\ncondiments for his upcoming snack.","The cyclops is moving toward you in an unfriendly manner.","You have two choices: 1. Leave  2. Become dinner."}
-
+CYCLOMAD = LTABLE("The cyclops seems somewhat agitated.","The cyclops appears to be getting more agitated.","The cyclops is moving about the room, looking for something.","The cyclops was looking for salt and pepper. No doubt they are\ncondiments for his upcoming snack.","The cyclops is moving toward you in an unfriendly manner.","You have two choices: 1. Leave  2. Become dinner.")
 LOUD_FLAG = nil
 LOUD_ROOM_FCN = function(RARG)
 	local WRD
@@ -2884,8 +2880,7 @@ PAINTING_FCN = function()
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('PAINTING_FCN\n'..__res) end
 end
-LAMP_TABLE = {100,"The lamp appears a bit dimmer.",70,"The lamp is definitely dimmer now.",15,"The lamp is nearly out.",0}
-
+LAMP_TABLE = LTABLE(100,"The lamp appears a bit dimmer.",70,"The lamp is definitely dimmer now.",15,"The lamp is nearly out.",0)
 LANTERN = function()
 	local __ok, __res = pcall(function()
 
@@ -3187,8 +3182,7 @@ CANDLES_FCN = function()
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('CANDLES_FCN\n'..__res) end
 end
-CANDLE_TABLE = {20,"The candles grow shorter.",10,"The candles are becoming quite short.",5,"The candles won't last long now.",0}
-
+CANDLE_TABLE = LTABLE(20,"The candles grow shorter.",10,"The candles are becoming quite short.",5,"The candles won't last long now.",0)
 CAVE2_ROOM = function(RARG)
 	local __ok, __res = pcall(function()
 
@@ -3618,12 +3612,9 @@ RIVER_FUNCTION = function()
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('RIVER_FUNCTION\n'..__res) end
 end
-RIVER_SPEEDS = {RIVER_1,4,RIVER_2,4,RIVER_3,3,RIVER_4,2,RIVER_5,1}
-
-RIVER_NEXT = {RIVER_1,RIVER_2,RIVER_3,RIVER_4,RIVER_5}
-
-RIVER_LAUNCH = {DAM_BASE,RIVER_1,WHITE_CLIFFS_NORTH,RIVER_3,WHITE_CLIFFS_SOUTH,RIVER_4,SHORE,RIVER_5,SANDY_BEACH,RIVER_4,RESERVOIR_SOUTH,RESERVOIR,RESERVOIR_NORTH,RESERVOIR,STREAM_VIEW,IN_STREAM}
-
+RIVER_SPEEDS = LTABLE(RIVER_1,4,RIVER_2,4,RIVER_3,3,RIVER_4,2,RIVER_5,1)
+RIVER_NEXT = LTABLE(RIVER_1,RIVER_2,RIVER_3,RIVER_4,RIVER_5)
+RIVER_LAUNCH = LTABLE(DAM_BASE,RIVER_1,WHITE_CLIFFS_NORTH,RIVER_3,WHITE_CLIFFS_SOUTH,RIVER_4,SHORE,RIVER_5,SANDY_BEACH,RIVER_4,RESERVOIR_SOUTH,RESERVOIR,RESERVOIR_NORTH,RESERVOIR,STREAM_VIEW,IN_STREAM)
 I_RIVER = function()
 	local RM
 	local __ok, __res = pcall(function()
@@ -3834,8 +3825,7 @@ SAND_FUNCTION = function()
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('SAND_FUNCTION\n'..__res) end
 end
-BDIGS = {"You seem to be digging a hole here.","The hole is getting deeper, but that's about it.","You are surrounded by a wall of sand on all sides."}
-
+BDIGS = LTABLE("You seem to be digging a hole here.","The hole is getting deeper, but that's about it.","You are surrounded by a wall of sand on all sides.")
 TREE_ROOM = function(RARG)
 	local F
 	local __ok, __res = pcall(function()
@@ -4373,24 +4363,15 @@ STAGGER = 6
 LOSE_WEAPON = 7
 HESITATE = 8
 SITTING_DUCK = 9
-DEF1 = {MISSED,MISSED,MISSED,MISSED,STAGGER,STAGGER,UNCONSCIOUS,UNCONSCIOUS,KILLED,KILLED,KILLED,KILLED,KILLED}
-
-DEF2A = {MISSED,MISSED,MISSED,MISSED,MISSED,STAGGER,STAGGER,LIGHT_WOUND,LIGHT_WOUND,UNCONSCIOUS}
-
-DEF2B = {MISSED,MISSED,MISSED,STAGGER,STAGGER,LIGHT_WOUND,LIGHT_WOUND,LIGHT_WOUND,UNCONSCIOUS,KILLED,KILLED,KILLED}
-
-DEF3A = {MISSED,MISSED,MISSED,MISSED,MISSED,STAGGER,STAGGER,LIGHT_WOUND,LIGHT_WOUND,SERIOUS_WOUND,SERIOUS_WOUND}
-
-DEF3B = {MISSED,MISSED,MISSED,STAGGER,STAGGER,LIGHT_WOUND,LIGHT_WOUND,LIGHT_WOUND,SERIOUS_WOUND,SERIOUS_WOUND,SERIOUS_WOUND}
-
-DEF3C = {MISSED,STAGGER,STAGGER,LIGHT_WOUND,LIGHT_WOUND,LIGHT_WOUND,LIGHT_WOUND,SERIOUS_WOUND,SERIOUS_WOUND,SERIOUS_WOUND}
-
-DEF1_RES = {DEF1,0,0}
-
-DEF2_RES = {DEF2A,DEF2B,0,0}
-
-DEF3_RES = {DEF3A,0,DEF3B,0,DEF3C}
-
+DEF1 = LTABLE(MISSED,MISSED,MISSED,MISSED,STAGGER,STAGGER,UNCONSCIOUS,UNCONSCIOUS,KILLED,KILLED,KILLED,KILLED,KILLED)
+DEF2A = LTABLE(MISSED,MISSED,MISSED,MISSED,MISSED,STAGGER,STAGGER,LIGHT_WOUND,LIGHT_WOUND,UNCONSCIOUS)
+DEF2B = LTABLE(MISSED,MISSED,MISSED,STAGGER,STAGGER,LIGHT_WOUND,LIGHT_WOUND,LIGHT_WOUND,UNCONSCIOUS,KILLED,KILLED,KILLED)
+DEF3A = LTABLE(MISSED,MISSED,MISSED,MISSED,MISSED,STAGGER,STAGGER,LIGHT_WOUND,LIGHT_WOUND,SERIOUS_WOUND,SERIOUS_WOUND)
+DEF3B = LTABLE(MISSED,MISSED,MISSED,STAGGER,STAGGER,LIGHT_WOUND,LIGHT_WOUND,LIGHT_WOUND,SERIOUS_WOUND,SERIOUS_WOUND,SERIOUS_WOUND)
+DEF3C = LTABLE(MISSED,STAGGER,STAGGER,LIGHT_WOUND,LIGHT_WOUND,LIGHT_WOUND,LIGHT_WOUND,SERIOUS_WOUND,SERIOUS_WOUND,SERIOUS_WOUND)
+DEF1_RES = LTABLE(DEF1,0,0)
+DEF2_RES = LTABLE(DEF2A,DEF2B,0,0)
+DEF3_RES = LTABLE(DEF3A,0,DEF3B,0,DEF3C)
 STRENGTH_MAX = 7
 STRENGTH_MIN = 2
 CURE_WAIT = 30
@@ -4945,154 +4926,16 @@ I_CURE = function()
 end
 F_WEP = 0
 F_DEF = 1
-HERO_MELEE = {{{"Your ",F_WEP," misses the ",F_DEF," by an inch."}
-,{"A good slash, but it misses the ",F_DEF," by a mile."}
-,{"You charge, but the ",F_DEF," jumps nimbly aside."}
-,{"Clang! Crash! The ",F_DEF," parries."}
-,{"A quick stroke, but the ",F_DEF," is on guard."}
-,{"A good stroke, but it's too slow; the ",F_DEF," dodges."}
-}
-,{{"Your ",F_WEP," crashes down, knocking the ",F_DEF," into dreamland."}
-,{"The ",F_DEF," is battered into unconsciousness."}
-,{"A furious exchange, and the ",F_DEF," is knocked out!"}
-,{"The haft of your ",F_WEP," knocks out the ",F_DEF,"."}
-,{"The ",F_DEF," is knocked out!"}
-}
-,{{"It's curtains for the ",F_DEF," as your ",F_WEP," removes his head."}
-,{"The fatal blow strikes the ",F_DEF," square in the heart: He dies."}
-,{"The ",F_DEF," takes a fatal blow and slumps to the floor dead."}
-}
-,{{"The ",F_DEF," is struck on the arm; blood begins to trickle down."}
-,{"Your ",F_WEP," pinks the ",F_DEF," on the wrist, but it's not serious."}
-,{"Your stroke lands, but it was only the flat of the blade."}
-,{"The blow lands, making a shallow gash in the ",F_DEF,"'s arm!"}
-}
-,{{"The ",F_DEF," receives a deep gash in his side."}
-,{"A savage blow on the thigh! The ",F_DEF," is stunned but can still fight!"}
-,{"Slash! Your blow lands! That one hit an artery, it could be serious!"}
-,{"Slash! Your stroke connects! This could be serious!"}
-}
-,{{"The ",F_DEF," is staggered, and drops to his knees."}
-,{"The ",F_DEF," is momentarily disoriented and can't fight back."}
-,{"The force of your blow knocks the ",F_DEF," back, stunned."}
-,{"The ",F_DEF," is confused and can't fight back."}
-,{"The quickness of your thrust knocks the ",F_DEF," back, stunned."}
-}
-,{{"The ",F_DEF,"'s weapon is knocked to the floor, leaving him unarmed."}
-,{"The ",F_DEF," is disarmed by a subtle feint past his guard."}
-}
-}
-
-CYCLOPS_MELEE = {{{"The Cyclops misses, but the backwash almost knocks you over."}
-,{"The Cyclops rushes you, but runs into the wall."}
-}
-,{{"The Cyclops sends you crashing to the floor, unconscious."}
-}
-,{{"The Cyclops breaks your neck with a massive smash."}
-}
-,{{"A quick punch, but it was only a glancing blow."}
-,{"A glancing blow from the Cyclops' fist."}
-}
-,{{"The monster smashes his huge fist into your chest, breaking several\nribs."}
-,{"The Cyclops almost knocks the wind out of you with a quick punch."}
-}
-,{{"The Cyclops lands a punch that knocks the wind out of you."}
-,{"Heedless of your weapons, the Cyclops tosses you against the rock\nwall of the room."}
-}
-,{{"The Cyclops grabs your ",F_WEP,", tastes it, and throws it to the\nground in disgust."}
-,{"The monster grabs you on the wrist, squeezes, and you drop your\n",F_WEP," in pain."}
-}
-,{{"The Cyclops seems unable to decide whether to broil or stew his\ndinner."}
-}
-,{{"The Cyclops, no sportsman, dispatches his unconscious victim."}
-}
-}
-
-TROLL_MELEE = {{{"The troll swings his axe, but it misses."}
-,{"The troll's axe barely misses your ear."}
-,{"The axe sweeps past as you jump aside."}
-,{"The axe crashes against the rock, throwing sparks!"}
-}
-,{{"The flat of the troll's axe hits you delicately on the head, knocking\nyou out."}
-}
-,{{"The troll neatly removes your head."}
-,{"The troll's axe stroke cleaves you from the nave to the chops."}
-,{"The troll's axe removes your head."}
-}
-,{{"The axe gets you right in the side. Ouch!"}
-,{"The flat of the troll's axe skins across your forearm."}
-,{"The troll's swing almost knocks you over as you barely parry\nin time."}
-,{"The troll swings his axe, and it nicks your arm as you dodge."}
-}
-,{{"The troll charges, and his axe slashes you on your ",F_WEP," arm."}
-,{"An axe stroke makes a deep wound in your leg."}
-,{"The troll's axe swings down, gashing your shoulder."}
-}
-,{{"The troll hits you with a glancing blow, and you are momentarily\nstunned."}
-,{"The troll swings; the blade turns on your armor but crashes\nbroadside into your head."}
-,{"You stagger back under a hail of axe strokes."}
-,{"The troll's mighty blow drops you to your knees."}
-}
-,{{"The axe hits your ",F_WEP," and knocks it spinning."}
-,{"The troll swings, you parry, but the force of his blow knocks your ",F_WEP," away."}
-,{"The axe knocks your ",F_WEP," out of your hand. It falls to the floor."}
-}
-,{{"The troll hesitates, fingering his axe."}
-,{"The troll scratches his head ruminatively:  Might you be magically\nprotected, he wonders?"}
-}
-,{{"Conquering his fears, the troll puts you to death."}
-}
-}
-
-THIEF_MELEE = {{{"The thief stabs nonchalantly with his stiletto and misses."}
-,{"You dodge as the thief comes in low."}
-,{"You parry a lightning thrust, and the thief salutes you with\na grim nod."}
-,{"The thief tries to sneak past your guard, but you twist away."}
-}
-,{{"Shifting in the midst of a thrust, the thief knocks you unconscious\nwith the haft of his stiletto."}
-,{"The thief knocks you out."}
-}
-,{{"Finishing you off, the thief inserts his blade into your heart."}
-,{"The thief comes in from the side, feints, and inserts the blade\ninto your ribs."}
-,{"The thief bows formally, raises his stiletto, and with a wry grin,\nends the battle and your life."}
-}
-,{{"A quick thrust pinks your left arm, and blood starts to\ntrickle down."}
-,{"The thief draws blood, raking his stiletto across your arm."}
-,{"The stiletto flashes faster than you can follow, and blood wells\nfrom your leg."}
-,{"The thief slowly approaches, strikes like a snake, and leaves\nyou wounded."}
-}
-,{{"The thief strikes like a snake! The resulting wound is serious."}
-,{"The thief stabs a deep cut in your upper arm."}
-,{"The stiletto touches your forehead, and the blood obscures your\nvision."}
-,{"The thief strikes at your wrist, and suddenly your grip is slippery\nwith blood."}
-}
-,{{"The butt of his stiletto cracks you on the skull, and you stagger\nback."}
-,{"The thief rams the haft of his blade into your stomach, leaving\nyou out of breath."}
-,{"The thief attacks, and you fall back desperately."}
-}
-,{{"A long, theatrical slash. You catch it on your ",F_WEP,", but the\nthief twists his knife, and the ",F_WEP," goes flying."}
-,{"The thief neatly flips your ",F_WEP," out of your hands, and it drops\nto the floor."}
-,{"You parry a low thrust, and your ",F_WEP," slips out of your hand."}
-}
-,{{"The thief, a man of superior breeding, pauses for a moment to consider the propriety of finishing you off."}
-,{"The thief amuses himself by searching your pockets."}
-,{"The thief entertains himself by rifling your pack."}
-}
-,{{"The thief, forgetting his essentially genteel upbringing, cuts your\nthroat."}
-,{"The thief, a pragmatist, dispatches you as a threat to his\nlivelihood."}
-}
-}
-
+HERO_MELEE = LTABLE(LTABLE(LTABLE("Your ",F_WEP," misses the ",F_DEF," by an inch."),LTABLE("A good slash, but it misses the ",F_DEF," by a mile."),LTABLE("You charge, but the ",F_DEF," jumps nimbly aside."),LTABLE("Clang! Crash! The ",F_DEF," parries."),LTABLE("A quick stroke, but the ",F_DEF," is on guard."),LTABLE("A good stroke, but it's too slow; the ",F_DEF," dodges.")),LTABLE(LTABLE("Your ",F_WEP," crashes down, knocking the ",F_DEF," into dreamland."),LTABLE("The ",F_DEF," is battered into unconsciousness."),LTABLE("A furious exchange, and the ",F_DEF," is knocked out!"),LTABLE("The haft of your ",F_WEP," knocks out the ",F_DEF,"."),LTABLE("The ",F_DEF," is knocked out!")),LTABLE(LTABLE("It's curtains for the ",F_DEF," as your ",F_WEP," removes his head."),LTABLE("The fatal blow strikes the ",F_DEF," square in the heart: He dies."),LTABLE("The ",F_DEF," takes a fatal blow and slumps to the floor dead.")),LTABLE(LTABLE("The ",F_DEF," is struck on the arm; blood begins to trickle down."),LTABLE("Your ",F_WEP," pinks the ",F_DEF," on the wrist, but it's not serious."),LTABLE("Your stroke lands, but it was only the flat of the blade."),LTABLE("The blow lands, making a shallow gash in the ",F_DEF,"'s arm!")),LTABLE(LTABLE("The ",F_DEF," receives a deep gash in his side."),LTABLE("A savage blow on the thigh! The ",F_DEF," is stunned but can still fight!"),LTABLE("Slash! Your blow lands! That one hit an artery, it could be serious!"),LTABLE("Slash! Your stroke connects! This could be serious!")),LTABLE(LTABLE("The ",F_DEF," is staggered, and drops to his knees."),LTABLE("The ",F_DEF," is momentarily disoriented and can't fight back."),LTABLE("The force of your blow knocks the ",F_DEF," back, stunned."),LTABLE("The ",F_DEF," is confused and can't fight back."),LTABLE("The quickness of your thrust knocks the ",F_DEF," back, stunned.")),LTABLE(LTABLE("The ",F_DEF,"'s weapon is knocked to the floor, leaving him unarmed."),LTABLE("The ",F_DEF," is disarmed by a subtle feint past his guard.")))
+CYCLOPS_MELEE = LTABLE(LTABLE(LTABLE("The Cyclops misses, but the backwash almost knocks you over."),LTABLE("The Cyclops rushes you, but runs into the wall.")),LTABLE(LTABLE("The Cyclops sends you crashing to the floor, unconscious.")),LTABLE(LTABLE("The Cyclops breaks your neck with a massive smash.")),LTABLE(LTABLE("A quick punch, but it was only a glancing blow."),LTABLE("A glancing blow from the Cyclops' fist.")),LTABLE(LTABLE("The monster smashes his huge fist into your chest, breaking several\nribs."),LTABLE("The Cyclops almost knocks the wind out of you with a quick punch.")),LTABLE(LTABLE("The Cyclops lands a punch that knocks the wind out of you."),LTABLE("Heedless of your weapons, the Cyclops tosses you against the rock\nwall of the room.")),LTABLE(LTABLE("The Cyclops grabs your ",F_WEP,", tastes it, and throws it to the\nground in disgust."),LTABLE("The monster grabs you on the wrist, squeezes, and you drop your\n",F_WEP," in pain.")),LTABLE(LTABLE("The Cyclops seems unable to decide whether to broil or stew his\ndinner.")),LTABLE(LTABLE("The Cyclops, no sportsman, dispatches his unconscious victim.")))
+TROLL_MELEE = LTABLE(LTABLE(LTABLE("The troll swings his axe, but it misses."),LTABLE("The troll's axe barely misses your ear."),LTABLE("The axe sweeps past as you jump aside."),LTABLE("The axe crashes against the rock, throwing sparks!")),LTABLE(LTABLE("The flat of the troll's axe hits you delicately on the head, knocking\nyou out.")),LTABLE(LTABLE("The troll neatly removes your head."),LTABLE("The troll's axe stroke cleaves you from the nave to the chops."),LTABLE("The troll's axe removes your head.")),LTABLE(LTABLE("The axe gets you right in the side. Ouch!"),LTABLE("The flat of the troll's axe skins across your forearm."),LTABLE("The troll's swing almost knocks you over as you barely parry\nin time."),LTABLE("The troll swings his axe, and it nicks your arm as you dodge.")),LTABLE(LTABLE("The troll charges, and his axe slashes you on your ",F_WEP," arm."),LTABLE("An axe stroke makes a deep wound in your leg."),LTABLE("The troll's axe swings down, gashing your shoulder.")),LTABLE(LTABLE("The troll hits you with a glancing blow, and you are momentarily\nstunned."),LTABLE("The troll swings; the blade turns on your armor but crashes\nbroadside into your head."),LTABLE("You stagger back under a hail of axe strokes."),LTABLE("The troll's mighty blow drops you to your knees.")),LTABLE(LTABLE("The axe hits your ",F_WEP," and knocks it spinning."),LTABLE("The troll swings, you parry, but the force of his blow knocks your ",F_WEP," away."),LTABLE("The axe knocks your ",F_WEP," out of your hand. It falls to the floor.")),LTABLE(LTABLE("The troll hesitates, fingering his axe."),LTABLE("The troll scratches his head ruminatively:  Might you be magically\nprotected, he wonders?")),LTABLE(LTABLE("Conquering his fears, the troll puts you to death.")))
+THIEF_MELEE = LTABLE(LTABLE(LTABLE("The thief stabs nonchalantly with his stiletto and misses."),LTABLE("You dodge as the thief comes in low."),LTABLE("You parry a lightning thrust, and the thief salutes you with\na grim nod."),LTABLE("The thief tries to sneak past your guard, but you twist away.")),LTABLE(LTABLE("Shifting in the midst of a thrust, the thief knocks you unconscious\nwith the haft of his stiletto."),LTABLE("The thief knocks you out.")),LTABLE(LTABLE("Finishing you off, the thief inserts his blade into your heart."),LTABLE("The thief comes in from the side, feints, and inserts the blade\ninto your ribs."),LTABLE("The thief bows formally, raises his stiletto, and with a wry grin,\nends the battle and your life.")),LTABLE(LTABLE("A quick thrust pinks your left arm, and blood starts to\ntrickle down."),LTABLE("The thief draws blood, raking his stiletto across your arm."),LTABLE("The stiletto flashes faster than you can follow, and blood wells\nfrom your leg."),LTABLE("The thief slowly approaches, strikes like a snake, and leaves\nyou wounded.")),LTABLE(LTABLE("The thief strikes like a snake! The resulting wound is serious."),LTABLE("The thief stabs a deep cut in your upper arm."),LTABLE("The stiletto touches your forehead, and the blood obscures your\nvision."),LTABLE("The thief strikes at your wrist, and suddenly your grip is slippery\nwith blood.")),LTABLE(LTABLE("The butt of his stiletto cracks you on the skull, and you stagger\nback."),LTABLE("The thief rams the haft of his blade into your stomach, leaving\nyou out of breath."),LTABLE("The thief attacks, and you fall back desperately.")),LTABLE(LTABLE("A long, theatrical slash. You catch it on your ",F_WEP,", but the\nthief twists his knife, and the ",F_WEP," goes flying."),LTABLE("The thief neatly flips your ",F_WEP," out of your hands, and it drops\nto the floor."),LTABLE("You parry a low thrust, and your ",F_WEP," slips out of your hand.")),LTABLE(LTABLE("The thief, a man of superior breeding, pauses for a moment to consider the propriety of finishing you off."),LTABLE("The thief amuses himself by searching your pockets."),LTABLE("The thief entertains himself by rifling your pack.")),LTABLE(LTABLE("The thief, forgetting his essentially genteel upbringing, cuts your\nthroat."),LTABLE("The thief, a pragmatist, dispatches you as a threat to his\nlivelihood.")))
 V_VILLAIN = 0
 V_BEST = 1
 V_BEST_ADV = 2
 V_PROB = 3
 V_MSGS = 4
-VILLAINS = {{TROLL,SWORD,1,0,TROLL_MELEE}
-,{THIEF,KNIFE,1,0,THIEF_MELEE}
-,{CYCLOPS,nil,0,0,CYCLOPS_MELEE}
-}
-
+VILLAINS = LTABLE(LTABLE(TROLL,SWORD,1,0,TROLL_MELEE),LTABLE(THIEF,KNIFE,1,0,THIEF_MELEE),LTABLE(CYCLOPS,nil,0,0,CYCLOPS_MELEE))
 I_FIGHT = function()
   local FIGHTQ = nil
   local LEN = GET(VILLAINS, 0)

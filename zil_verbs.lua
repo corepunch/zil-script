@@ -1199,8 +1199,7 @@ V_LEAP = function()
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('V_LEAP\n'..__res) end
 end
-JUMPLOSS = {0,"You should have looked before you leaped.","In the movies, your life would be passing before your eyes.","Geronimo..."}
-
+JUMPLOSS = LTABLE(0,"You should have looked before you leaped.","In the movies, your life would be passing before your eyes.","Geronimo...")
 V_LEAVE = function()
 	local __ok, __res = pcall(function()
 	return   DO_WALK(PQOUT)
@@ -1868,8 +1867,7 @@ V_SKIP = function()
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('V_SKIP\n'..__res) end
 end
-WHEEEEE = {0,"Very good. Now you can go to the second grade.","Are you enjoying yourself?","Wheeeeeeeeee!!!!!","Do you expect me to applaud?"}
-
+WHEEEEE = LTABLE(0,"Very good. Now you can go to the second grade.","Are you enjoying yourself?","Wheeeeeeeeee!!!!!","Do you expect me to applaud?")
 V_SMELL = function()
 	local __ok, __res = pcall(function()
 	return   TELL("It smells like a ", D, PRSO, ".", CR)
@@ -2918,8 +2916,7 @@ CEXITFLAG = 1
 CEXITSTR = 1
 DEXITOBJ = 1
 DEXITSTR = 1
-INDENTS = {"","  ","    ","      ","        ","          "}
-
+INDENTS = LTABLE("","  ","    ","      ","        ","          ")
 HACK_HACK = function(STR)
 	local __ok, __res = pcall(function()
 
@@ -2933,8 +2930,7 @@ HACK_HACK = function(STR)
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('HACK_HACK\n'..__res) end
 end
-HO_HUM = {0," doesn't seem to work."," isn't notably helpful."," has no effect."}
-
+HO_HUM = LTABLE(0," doesn't seem to work."," isn't notably helpful."," has no effect.")
 NO_GO_TELL = function(AV, WLOC)
 	local __ok, __res = pcall(function()
 
@@ -3173,13 +3169,9 @@ THIS_IS_IT = function(OBJ)
 end
 
 if   NEQUALQ(ZORK_NUMBER, 3) then 
-  SWIMYUKS = {0,"You can't swim in the dungeon."}
-
+  SWIMYUKS = LTABLE(0,"You can't swim in the dungeon.")
 
 end
-HELLOS = {0,"Hello.","Good day.","Nice weather we've been having lately.","Goodbye."}
-
-YUKS = {0,"A valiant attempt.","You can't be serious.","An interesting idea...","What a concept!"}
-
-DUMMY = {0,"Look around.","Too late for that.","Have your eyes checked."}
-
+HELLOS = LTABLE(0,"Hello.","Good day.","Nice weather we've been having lately.","Goodbye.")
+YUKS = LTABLE(0,"A valiant attempt.","You can't be serious.","An interesting idea...","What a concept!")
+DUMMY = LTABLE(0,"Look around.","Too late for that.","Have your eyes checked.")

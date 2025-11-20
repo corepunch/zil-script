@@ -5,8 +5,7 @@ PRSO = nil
 P_TABLE = 0
 P_ONEOBJ = 0
 P_SYNTAX = 0
-P_CCTBL = {0,0,0,0}
-
+P_CCTBL = LTABLE(0,0,0,0)
 CC_SBPTR = 0
 CC_SEPTR = 1
 CC_DBPTR = 2
@@ -21,8 +20,7 @@ RESERVE_LEXV = ITABLE(59)
 RESERVE_PTR = nil
 P_INBUF = ITABLE(120)
 OOPS_INBUF = ITABLE(120)
-OOPS_TABLE = {nil,nil,nil,nil}
-
+OOPS_TABLE = LTABLE(nil,nil,nil,nil)
 O_PTR = 0
 O_START = 1
 O_LENGTH = 2
@@ -42,14 +40,10 @@ P_PSOFF = 4
 P_P1OFF = 5
 P_P1BITS = 3
 P_ITBLLEN = 9
-P_ITBL = {0,0,0,0,0,0,0,0,0,0}
-
-P_OTBL = {0,0,0,0,0,0,0,0,0,0}
-
-P_VTBL = {0,0,0,0}
-
-P_OVTBL = {0}
-
+P_ITBL = LTABLE(0,0,0,0,0,0,0,0,0,0)
+P_OTBL = LTABLE(0,0,0,0,0,0,0,0,0,0)
+P_VTBL = LTABLE(0,0,0,0)
+P_OVTBL = LTABLE(0)
 P_NCN = 0
 P_VERB = 0
 P_VERBN = 1
@@ -941,6 +935,7 @@ SYNTAX_CHECK = function()
     	error(false)
   end
 
+  TELL("SYNTAX-CHECK ", VERBS, VERB, CR)
 APPLY(function() SYN = GET(VERBS, SUB(255, VERB)) return SYN end)
 APPLY(function() LEN = GETB(SYN, 0) return LEN end)
 APPLY(function() SYN = REST(SYN) return SYN end)

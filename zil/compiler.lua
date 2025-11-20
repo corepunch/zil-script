@@ -491,17 +491,16 @@ form.SYNTAX = function(buf, node, indent, add_return)
 end
 
 -- TABLE/LTABLE
-local function compile_table(buf, node, indent, add_return)
-  local start = safeget(node[1], 'type') == "list" and 2 or 1
-  buf.write("{")
-  for i = start, #node do
-    print_node(buf, node[i], 0, add_return and i == #node)
-    if i < #node then buf.write(",") end
-  end
-  buf.writeln("}")
-end
-form.TABLE = compile_table
-form.LTABLE = compile_table
+-- local function compile_table(buf, node, indent, add_return)
+--   local start = safeget(node[1], 'type') == "list" and 2 or 1
+--   buf.write("{")
+--   for i = start, #node do
+--     print_node(buf, node[i], 0, add_return and i == #node)
+--     if i < #node then buf.write(",") end
+--   end
+--   buf.writeln("}")
+-- end
+-- form.LTABLE = compile_table
 -- form.ITABLE = compile_table
 
 -- form.TABLE = function(buf, node)
@@ -513,19 +512,20 @@ form.LTABLE = compile_table
 --   end
 --   buf.writeln(")")
 -- end
--- form.LTABLE = function(buf, node)
---   local start = safeget(node[1], 'type') == "list" and 2 or 1
---   buf.write("LTABLE(")
---   for i = start, #node do
---     print_node(buf, node[i], 0)
---     if i < #node then buf.write(",") end
---   end
---   buf.writeln(")")
--- end
+form.LTABLE = function(buf, node)
+  local start = safeget(node[1], 'type') == "list" and 2 or 1
+  buf.write("LTABLE(")
+  for i = start, #node do
+    print_node(buf, node[i], 0)
+    if i < #node then buf.write(",") end
+  end
+  buf.write(")")
+end
 form.ITABLE = function(buf, node)
   local num = node[1].value == "NONE" and node[2].value or node[1].value
   buf.write("ITABLE(%s)", num)
 end
+form.TABLE = form.LTABLE
 
 -- AND/OR
 local function compile_logical(buf, node, indent, add_return, op)

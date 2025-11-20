@@ -286,6 +286,10 @@ function DECL_OBJECT(name)
 	return #OBJECTS
 end
 
+local function makeword(val)
+	return string.char(val&0xff, (val>>8)&0xff)
+end
+
 function OBJECT(object)
 	local function findobj(name)
 		for _, o in ipairs(OBJECTS) do
@@ -296,9 +300,6 @@ function OBJECT(object)
 		local num = register(PROPERTIES, name)
 		if not _G["PQ"..name] then _G["PQ"..name] = num end
 		return string.char(num|((#body-1)<<5))..body
-	end
-	local function makeword(val)
-		return string.char(val&0xff, (val>>8)&0xff)
 	end
 	local o = findobj(object.NAME)
 	local t = {string.char(#object.NAME), object.NAME}
@@ -377,22 +378,17 @@ end
 -- function GET(t, i) return type(t) == 'table' and t[i * 2] or 0 end
 -- function GETB(t, i) return type(t) == 'table' and t[i] or 0 end
 
-function GETB(s, i) 
+function GETB(s, i)
 	assert(type(s) == 'number')
-	-- if type(s) == 'string' then return s[i+1] end
 	if s == 0 then return GET(s) end
 	return mem:byte(s+i)
+	-- if s == 0 then return GET(s)
+	-- elseif type(s) == 'string' then return i==0 and #i or s:byte(i)
+	-- elseif type(s) == 'table' then return i==0 and #s or table.concat(s):byte(i)
+	-- elseif type(s) == 'number' then return mem:byte(s+i)
+	-- else 
+	-- 	error("GETB: Unsupported type "..type(s))
 	-- end
-	-- if type(s) == 'table' then 
-	-- 	if i == 0 and s.max_size then return s.max_size end
-	-- 	if s.size_at_one then
-	-- 		if i == 1 then return #s end
-	-- 		s = string.char(s.max_size or #s)..string.char(#s)..table.concat(s)
-	-- 	else
-	-- 		s = string.char(#s)..table.concat(s)
-	-- 	end
-	-- end
-	-- return s:byte(i + 1) or 0
 end
 
 function GET(s, i)
@@ -414,12 +410,12 @@ function GET(s, i)
 	-- return GETB(s, i * 2) | (GETB(s, i * 2 + 1) << 8)
 end
 
--- local buf = true
+local buf = true
 
 function READ(inbuf, parse)
-	-- if not buf then os.exit(0) end
-	-- local s = "walk north"
-	local s = io.read()
+	if not buf then os.exit(0) end
+	local s = "open mailbox"
+	-- local s = io.read()
 	local p = {}
 	for pos, word in s:gmatch("()(%S+)") do
 		local index = cache.words[word:lower()] or 0
@@ -494,19 +490,32 @@ end
 function ENABLE(i) i.ENABLED = true end
 function DISABLE(i) i.ENABLED = false end
 
-local function write_string(k)
-	local address = #mem + 1
-	mem = mem..k..'\0'
-	return address 
-end
-
 local function write_word(k)
 	return writemem(string.char(k&0xff,(k>>8)&0xff))
+end
+
+local function write_string(k)
+	local address = write_word(#mem)
+	mem = mem..k
+	return address
 end
 
 function ITABLE(size)
 	local address = write_word(size)
 	writemem(string.rep("\0", size))
+	return address
+end
+
+function LTABLE(...)
+	local tbl = {}
+	for _, v in ipairs {...} do
+		if type(v) == 'string' then table.insert(tbl, makeword(write_string(v)))
+		elseif type(v) == 'number' then table.insert(tbl, makeword(v))
+		else error("LTABLE: Unsupported type")
+		end
+	end
+	local address = write_word((#{...})*2)
+	writemem(table.concat(tbl))
 	return address
 end
 
