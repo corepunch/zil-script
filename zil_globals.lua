@@ -1,35 +1,25 @@
-GLOBAL_OBJECTS = setmetatable({}, { __tostring = function(self) return self.DESC or "GLOBAL_OBJECTS" end })
-LOCAL_GLOBALS = setmetatable({}, { __tostring = function(self) return self.DESC or "LOCAL_GLOBALS" end })
-ROOMS = setmetatable({}, { __tostring = function(self) return self.DESC or "ROOMS" end })
-INTNUM = setmetatable({}, { __tostring = function(self) return self.DESC or "INTNUM" end })
-PSEUDO_OBJECT = setmetatable({}, { __tostring = function(self) return self.DESC or "PSEUDO_OBJECT" end })
-IT = setmetatable({}, { __tostring = function(self) return self.DESC or "IT" end })
-NOT_HERE_OBJECT = setmetatable({}, { __tostring = function(self) return self.DESC or "NOT_HERE_OBJECT" end })
-NOT_HERE_OBJECT_F = nil
-NOT_HERE_PRINT = nil
-NULL_F = nil
-BLESSINGS = setmetatable({}, { __tostring = function(self) return self.DESC or "BLESSINGS" end })
-STAIRS = setmetatable({}, { __tostring = function(self) return self.DESC or "STAIRS" end })
-STAIRS_F = nil
-SAILOR = setmetatable({}, { __tostring = function(self) return self.DESC or "SAILOR" end })
-SAILOR_FCN = nil
-GROUND = setmetatable({}, { __tostring = function(self) return self.DESC or "GROUND" end })
-GROUND_FUNCTION = nil
-GRUE = setmetatable({}, { __tostring = function(self) return self.DESC or "GRUE" end })
-GRUE_FUNCTION = nil
-LUNGS = setmetatable({}, { __tostring = function(self) return self.DESC or "LUNGS" end })
-ME = setmetatable({}, { __tostring = function(self) return self.DESC or "ME" end })
-CRETIN_FCN = nil
-ADVENTURER = setmetatable({}, { __tostring = function(self) return self.DESC or "ADVENTURER" end })
-PATHOBJ = setmetatable({}, { __tostring = function(self) return self.DESC or "PATHOBJ" end })
-PATH_OBJECT = nil
-ZORKMID = setmetatable({}, { __tostring = function(self) return self.DESC or "ZORKMID" end })
-ZORKMID_FUNCTION = nil
-HANDS = setmetatable({}, { __tostring = function(self) return self.DESC or "HANDS" end })
+GLOBAL_OBJECTS = DECL_OBJECT("GLOBAL_OBJECTS")
+LOCAL_GLOBALS = DECL_OBJECT("LOCAL_GLOBALS")
+ROOMS = DECL_OBJECT("ROOMS")
+INTNUM = DECL_OBJECT("INTNUM")
+PSEUDO_OBJECT = DECL_OBJECT("PSEUDO_OBJECT")
+IT = DECL_OBJECT("IT")
+NOT_HERE_OBJECT = DECL_OBJECT("NOT_HERE_OBJECT")
+BLESSINGS = DECL_OBJECT("BLESSINGS")
+STAIRS = DECL_OBJECT("STAIRS")
+SAILOR = DECL_OBJECT("SAILOR")
+GROUND = DECL_OBJECT("GROUND")
+GRUE = DECL_OBJECT("GRUE")
+LUNGS = DECL_OBJECT("LUNGS")
+ME = DECL_OBJECT("ME")
+ADVENTURER = DECL_OBJECT("ADVENTURER")
+PATHOBJ = DECL_OBJECT("PATHOBJ")
+ZORKMID = DECL_OBJECT("ZORKMID")
+HANDS = DECL_OBJECT("HANDS")
 
 OBJECT {
 	NAME = "GLOBAL_OBJECTS",
-	FLAGS = (1<<RMUNGBIT)|(1<<INVISIBLE)|(1<<TOUCHBIT)|(1<<SURFACEBIT)|(1<<TRYTAKEBIT)|(1<<OPENBIT)|(1<<SEARCHBIT)|(1<<TRANSBIT)|(1<<ONBIT)|(1<<RLANDBIT)|(1<<FIGHTBIT)|(1<<STAGGERED)|(1<<WEARBIT),
+	FLAGS = {"RMUNGBIT","INVISIBLE","TOUCHBIT","SURFACEBIT","TRYTAKEBIT","OPENBIT","SEARCHBIT","TRANSBIT","ONBIT","RLANDBIT","FIGHTBIT","STAGGERED","WEARBIT"},
 }
 OBJECT {
 	NAME = "LOCAL_GLOBALS",
@@ -54,7 +44,7 @@ OBJECT {
 	NAME = "INTNUM",
 	LOC = GLOBAL_OBJECTS,
 	SYNONYM = {"INTNUM"},
-	FLAGS = (1<<TOOLBIT),
+	FLAGS = {"TOOLBIT"},
 	DESC = "number",
 }
 OBJECT {
@@ -68,7 +58,7 @@ OBJECT {
 	LOC = GLOBAL_OBJECTS,
 	SYNONYM = {"IT","THEM","HER","HIM"},
 	DESC = "random object",
-	FLAGS = (1<<NDESCBIT)|(1<<TOUCHBIT),
+	FLAGS = {"NDESCBIT","TOUCHBIT"},
 }
 OBJECT {
 	NAME = "NOT_HERE_OBJECT",
@@ -99,7 +89,7 @@ APPLY(function() QUOTE_FLAG = nil return QUOTE_FLAG end)
     NOT_HERE_PRINT(PRSOQ)
     TELL(" here!", CR)
   elseif T then 
-    TELL("The ", WINNER, " seems confused. \"I don't see any ")
+    TELL("The ", D, WINNER, " seems confused. \"I don't see any ")
     NOT_HERE_PRINT(PRSOQ)
     TELL(" here!\"", CR)
   end
@@ -147,7 +137,7 @@ OBJECT {
 	LOC = GLOBAL_OBJECTS,
 	SYNONYM = {"BLESSINGS","GRACES"},
 	DESC = "blessings",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 }
 OBJECT {
 	NAME = "STAIRS",
@@ -155,7 +145,7 @@ OBJECT {
 	SYNONYM = {"STAIRS","STEPS","STAIRCASE","STAIRWAY"},
 	ADJECTIVE = {"STONE","DARK","MARBLE","FORBIDDING","STEEP"},
 	DESC = "stairs",
-	FLAGS = (1<<NDESCBIT)|(1<<CLIMBBIT),
+	FLAGS = {"NDESCBIT","CLIMBBIT"},
 	ACTION = STAIRS_F,
 }
 STAIRS_F = function()
@@ -174,7 +164,7 @@ OBJECT {
 	LOC = GLOBAL_OBJECTS,
 	SYNONYM = {"SAILOR","FOOTPAD","AVIATOR"},
 	DESC = "sailor",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 	ACTION = SAILOR_FCN,
 }
 SAILOR_FCN = function()
@@ -255,14 +245,14 @@ OBJECT {
 	LOC = GLOBAL_OBJECTS,
 	SYNONYM = {"LUNGS","AIR","MOUTH","BREATH"},
 	DESC = "blast of air",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 }
 OBJECT {
 	NAME = "ME",
 	LOC = GLOBAL_OBJECTS,
 	SYNONYM = {"ME","MYSELF","SELF","CRETIN"},
 	DESC = "cretin",
-	FLAGS = (1<<ACTORBIT),
+	FLAGS = {"ACTORBIT"},
 	ACTION = CRETIN_FCN,
 }
 CRETIN_FCN = function()
@@ -315,7 +305,7 @@ OBJECT {
 	NAME = "ADVENTURER",
 	SYNONYM = {"ADVENTURER"},
 	DESC = "cretin",
-	FLAGS = (1<<NDESCBIT)|(1<<INVISIBLE)|(1<<SACREDBIT)|(1<<ACTORBIT),
+	FLAGS = {"NDESCBIT","INVISIBLE","SACREDBIT","ACTORBIT"},
 	STRENGTH = 0,
 	ACTION = 0,
 }
@@ -325,7 +315,7 @@ OBJECT {
 	SYNONYM = {"TRAIL","PATH"},
 	ADJECTIVE = {"FOREST","NARROW","LONG","WINDING"},
 	DESC = "passage",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 	ACTION = PATH_OBJECT,
 }
 PATH_OBJECT = function()
@@ -369,5 +359,5 @@ OBJECT {
 	SYNONYM = {"PAIR","HANDS","HAND"},
 	ADJECTIVE = {"BARE"},
 	DESC = "pair of hands",
-	FLAGS = (1<<NDESCBIT)|(1<<TOOLBIT),
+	FLAGS = {"NDESCBIT","TOOLBIT"},
 }

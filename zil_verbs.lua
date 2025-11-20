@@ -1,192 +1,3 @@
-V_VERBOSE = nil
-V_BRIEF = nil
-V_SUPER_BRIEF = nil
-V_INVENTORY = nil
-FINISH = nil
-V_QUIT = nil
-V_RESTART = nil
-V_RESTORE = nil
-V_SAVE = nil
-V_SCRIPT = nil
-V_UNSCRIPT = nil
-V_VERSION = nil
-V_VERIFY = nil
-V_COMMAND_FILE = nil
-V_RANDOM = nil
-V_RECORD = nil
-V_UNRECORD = nil
-V_ADVENT = nil
-V_ALARM = nil
-V_ANSWER = nil
-V_ATTACK = nil
-V_BACK = nil
-V_BLAST = nil
-PRE_BOARD = nil
-V_BOARD = nil
-V_BREATHE = nil
-V_BRUSH = nil
-V_BUG = nil
-TELL_NO_PRSI = nil
-PRE_BURN = nil
-V_BURN = nil
-V_CHOMP = nil
-V_CLIMB_DOWN = nil
-V_CLIMB_FOO = nil
-V_CLIMB_ON = nil
-V_CLIMB_UP = nil
-V_CLOSE = nil
-V_COMMAND = nil
-V_COUNT = nil
-V_CROSS = nil
-V_CURSES = nil
-V_CUT = nil
-V_DEFLATE = nil
-V_DIG = nil
-V_DISEMBARK = nil
-V_DISENCHANT = nil
-V_DRINK = nil
-V_DRINK_FROM = nil
-PRE_DROP = nil
-V_DROP = nil
-V_EAT = nil
-HIT_SPOT = nil
-V_ECHO = nil
-V_ENCHANT = nil
-REMOVE_CAREFULLY = nil
-V_ENTER = nil
-V_EXAMINE = nil
-V_EXIT = nil
-V_EXORCISE = nil
-PRE_FILL = nil
-V_FILL = nil
-V_FIND = nil
-V_FOLLOW = nil
-V_FROBOZZ = nil
-PRE_GIVE = nil
-V_GIVE = nil
-V_HATCH = nil
-V_HELLO = nil
-V_INCANT = nil
-V_INFLATE = nil
-V_KICK = nil
-V_KISS = nil
-V_KNOCK = nil
-V_LAMP_OFF = nil
-V_LAMP_ON = nil
-V_LAUNCH = nil
-V_LEAN_ON = nil
-V_LEAP = nil
-V_LEAVE = nil
-V_LISTEN = nil
-V_LOCK = nil
-V_LOOK = nil
-V_LOOK_BEHIND = nil
-V_LOOK_INSIDE = nil
-V_LOOK_ON = nil
-V_LOOK_UNDER = nil
-V_LOWER = nil
-V_MAKE = nil
-V_MELT = nil
-PRE_MOVE = nil
-V_MOVE = nil
-V_MUMBLE = nil
-PRE_MUNG = nil
-V_MUNG = nil
-V_ODYSSEUS = nil
-V_OIL = nil
-V_OPEN = nil
-V_OVERBOARD = nil
-V_PICK = nil
-V_PLAY = nil
-V_PLUG = nil
-V_POUR_ON = nil
-V_PRAY = nil
-V_PUMP = nil
-V_PUSH = nil
-V_PUSH_TO = nil
-PRE_PUT = nil
-V_PUT = nil
-V_PUT_BEHIND = nil
-V_PUT_ON = nil
-V_PUT_UNDER = nil
-V_RAISE = nil
-V_RAPE = nil
-PRE_READ = nil
-V_READ = nil
-V_READ_PAGE = nil
-V_REPENT = nil
-V_REPLY = nil
-V_RING = nil
-V_RUB = nil
-V_SAY = nil
-V_SEARCH = nil
-V_SEND = nil
-PRE_SGIVE = nil
-V_SGIVE = nil
-V_SHAKE = nil
-SHAKE_LOOP = nil
-V_SKIP = nil
-V_SMELL = nil
-V_SPIN = nil
-V_SPRAY = nil
-V_SQUEEZE = nil
-V_SSPRAY = nil
-V_STAB = nil
-V_STAND = nil
-V_STAY = nil
-V_STRIKE = nil
-V_SWIM = nil
-V_SWING = nil
-PRE_TAKE = nil
-V_TAKE = nil
-V_TELL = nil
-V_THROUGH = nil
-V_THROW = nil
-V_THROW_OFF = nil
-V_TIE = nil
-V_TIE_UP = nil
-V_TREASURE = nil
-PRE_TURN = nil
-V_TURN = nil
-V_UNLOCK = nil
-V_UNTIE = nil
-V_WAIT = nil
-V_WALK = nil
-V_WALK_AROUND = nil
-V_WALK_TO = nil
-V_WAVE = nil
-V_WEAR = nil
-V_WIN = nil
-V_WIND = nil
-V_WISH = nil
-V_YELL = nil
-V_ZORK = nil
-V_FIRST_LOOK = nil
-DESCRIBE_ROOM = nil
-DESCRIBE_OBJECTS = nil
-DESCRIBE_OBJECT = nil
-PRINT_CONTENTS = nil
-PRINT_CONT = nil
-FIRSTER = nil
-SEE_INSIDEQ = nil
-SCORE_UPD = nil
-SCORE_OBJ = nil
-YESQ = nil
-ITAKE = nil
-IDROP = nil
-CCOUNT = nil
-WEIGHT = nil
-HACK_HACK = nil
-NO_GO_TELL = nil
-GOTO = nil
-LKP = nil
-DO_WALK = nil
-GLOBAL_INQ = nil
-FIND_IN = nil
-HELDQ = nil
-OTHER_SIDE = nil
-MUNG_ROOM = nil
-THIS_IS_IT = nil
 
 VERBOSE = nil
 SUPER_BRIEF = nil
@@ -429,15 +240,15 @@ V_ALARM = function()
 
   if FSETQ(PRSO, ACTORBIT) then 
     
-    if LQ(GETP(PRSO, "STRENGTH"), 0) then 
-      TELL("The ", PRSO, " is rudely awakened.", CR)
+    if LQ(GETP(PRSO, PQSTRENGTH), 0) then 
+      TELL("The ", D, PRSO, " is rudely awakened.", CR)
       	return AWAKEN(PRSO)
     elseif T then 
       	return TELL("He's wide awake, or haven't you noticed...", CR)
     end
 
   elseif T then 
-    	return TELL("The ", PRSO, " isn't sleeping.", CR)
+    	return TELL("The ", D, PRSO, " isn't sleeping.", CR)
   end
 
 	end)
@@ -458,13 +269,13 @@ V_ATTACK = function()
 	local __ok, __res = pcall(function()
 
   if NOT(FSETQ(PRSO, ACTORBIT)) then 
-    	return TELL("I've known strange people, but fighting a ", PRSO, "?", CR)
+    	return TELL("I've known strange people, but fighting a ", D, PRSO, "?", CR)
   elseif PASS(NOT(PRSI) or EQUALQ(PRSI, HANDS)) then 
-    	return TELL("Trying to attack a ", PRSO, " with your bare hands is suicidal.", CR)
+    	return TELL("Trying to attack a ", D, PRSO, " with your bare hands is suicidal.", CR)
   elseif NOT(INQ(PRSI, WINNER)) then 
-    	return TELL("You aren't even holding the ", PRSI, ".", CR)
+    	return TELL("You aren't even holding the ", D, PRSI, ".", CR)
   elseif NOT(FSETQ(PRSI, WEAPONBIT)) then 
-    	return TELL("Trying to attack the ", PRSO, " with a ", PRSI, " is suicidal.", CR)
+    	return TELL("Trying to attack the ", D, PRSO, " with a ", D, PRSI, " is suicidal.", CR)
   elseif T then 
     	return HERO_BLOW()
   end
@@ -497,9 +308,9 @@ APPLY(function() AV = LOC(WINNER) return AV end)
   elseif FSETQ(PRSO, VEHBIT) then 
     
     if NOT(INQ(PRSO, HERE)) then 
-      TELL("The ", PRSO, " must be on the ground to be boarded.", CR)
+      TELL("The ", D, PRSO, " must be on the ground to be boarded.", CR)
     elseif FSETQ(AV, VEHBIT) then 
-      TELL("You are already in the ", AV, "!", CR)
+      TELL("You are already in the ", D, AV, "!", CR)
     elseif T then 
       	error(false)
     end
@@ -508,7 +319,7 @@ APPLY(function() AV = LOC(WINNER) return AV end)
     PERFORM(VQSWIM, PRSO)
     	error(true)
   elseif T then 
-    TELL("You have a theory on how to board a ", PRSO, ", perhaps?", CR)
+    TELL("You have a theory on how to board a ", D, PRSO, ", perhaps?", CR)
   end
 
 	return   RFATAL()
@@ -519,9 +330,9 @@ end
 V_BOARD = function()
 	local AV
 	local __ok, __res = pcall(function()
-  TELL("You are now in the ", PRSO, ".", CR)
+  TELL("You are now in the ", D, PRSO, ".", CR)
   MOVE(WINNER, PRSO)
-  APPLY(GETP(PRSO, "ACTION"), M_ENTER)
+  APPLY(GETP(PRSO, PQACTION), M_ENTER)
 	error(true)
 	end)
 	if __ok or type(__res) == 'boolean' then return __res
@@ -563,7 +374,7 @@ PRE_BURN = function()
   elseif FLAMINGQ(PRSI) then 
     	error(false)
   elseif T then 
-    	return TELL("With a ", PRSI, "??!?", CR)
+    	return TELL("With a ", D, PRSI, "??!?", CR)
   end
 
 	end)
@@ -579,7 +390,7 @@ V_BURN = function()
     
     if PASS(INQ(PRSO, WINNER) or INQ(WINNER, PRSO)) then 
       REMOVE_CAREFULLY(PRSO)
-      TELL("The ", PRSO)
+      TELL("The ", D, PRSO)
       TELL(" catches fire. Unfortunately, you were ")
       
       if INQ(WINNER, PRSO) then 
@@ -591,11 +402,11 @@ V_BURN = function()
       	return JIGS_UP(" it at the time.")
     elseif T then 
       REMOVE_CAREFULLY(PRSO)
-      	return TELL("The ", PRSO, " catches fire and is consumed.", CR)
+      	return TELL("The ", D, PRSO, " catches fire and is consumed.", CR)
     end
 
   elseif T then 
-    	return TELL("You can't burn a ", PRSO, ".", CR)
+    	return TELL("You can't burn a ", D, PRSO, ".", CR)
   end
 
 	end)
@@ -611,14 +422,14 @@ V_CHOMP = function()
 end
 V_CLIMB_DOWN = function()
 	local __ok, __res = pcall(function()
-	return   V_CLIMB_UP("DOWN", PRSO)
+	return   V_CLIMB_UP(PQDOWN, PRSO)
 	end)
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('V_CLIMB_DOWN\n'..__res) end
 end
 V_CLIMB_FOO = function()
 	local __ok, __res = pcall(function()
-	return   V_CLIMB_UP("UP", PRSO)
+	return   V_CLIMB_UP(PQUP, PRSO)
 	end)
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('V_CLIMB_FOO\n'..__res) end
@@ -630,7 +441,7 @@ V_CLIMB_ON = function()
     PERFORM(VQBOARD, PRSO)
     	error(true)
   elseif T then 
-    	return TELL("You can't climb onto the ", PRSO, ".", CR)
+    	return TELL("You can't climb onto the ", D, PRSO, ".", CR)
   end
 
 	end)
@@ -640,7 +451,7 @@ end
 V_CLIMB_UP = function(DIR, OBJ)
 	local X
 	local TX
-  DIR = DIR or "UP"
+  DIR = DIR or PQUP
   OBJ = OBJ or nil
 	local __ok, __res = pcall(function()
 
@@ -655,7 +466,7 @@ V_CLIMB_UP = function(DIR, OBJ)
       APPLY(function() X = PTSIZE(TX) return X end)
       
       if PASS(EQUALQ(X, NEXIT) or PASS(EQUALQ(X, CEXIT, DEXIT, UEXIT) and NOT(GLOBAL_INQ(PRSO, GETB(TX, 0))))) then 
-        TELL("The ", OBJ, " do")
+        TELL("The ", D, OBJ, " do")
         
         if NOT(EQUALQ(OBJ, STAIRS)) then 
           TELL("es")
@@ -663,7 +474,7 @@ V_CLIMB_UP = function(DIR, OBJ)
 
         TELL("n't lead ")
         
-        if EQUALQ(DIR, "UP") then 
+        if EQUALQ(DIR, PQUP) then 
           TELL("up")
         elseif T then 
           TELL("down")
@@ -677,7 +488,7 @@ V_CLIMB_UP = function(DIR, OBJ)
 
     DO_WALK(DIR)
     	error(true)
-  elseif PASS(OBJ and ZMEMQ(WQWALL, APPLY(function() X = GETPT(PRSO, "SYNONYM") return X end), PTSIZE(X))) then 
+  elseif PASS(OBJ and ZMEMQ(WQWALL, APPLY(function() X = GETPT(PRSO, PQSYNONYM) return X end), PTSIZE(X))) then 
     	return TELL("Climbing the walls is to no avail.", CR)
   elseif PASS(NOT(EQUALQ(HERE, PATH)) and EQUALQ(OBJ, nil, TREE) and GLOBAL_INQ(TREE, HERE)) then 
     TELL("There are no climbable trees here.", CR)
@@ -696,8 +507,8 @@ V_CLOSE = function()
 	local __ok, __res = pcall(function()
 
   if PASS(NOT(FSETQ(PRSO, CONTBIT)) and NOT(FSETQ(PRSO, DOORBIT))) then 
-    	return TELL("You must tell me how to do that to a ", PRSO, ".", CR)
-  elseif PASS(NOT(FSETQ(PRSO, SURFACEBIT)) and NOT(EQUALQ(GETP(PRSO, "CAPACITY"), 0))) then 
+    	return TELL("You must tell me how to do that to a ", D, PRSO, ".", CR)
+  elseif PASS(NOT(FSETQ(PRSO, SURFACEBIT)) and NOT(EQUALQ(GETP(PRSO, PQCAPACITY), 0))) then 
     
     if FSETQ(PRSO, OPENBIT) then 
       FCLEAR(PRSO, OPENBIT)
@@ -716,7 +527,7 @@ V_CLOSE = function()
     
     if FSETQ(PRSO, OPENBIT) then 
       FCLEAR(PRSO, OPENBIT)
-      	return TELL("The ", PRSO, " is now closed.", CR)
+      	return TELL("The ", D, PRSO, " is now closed.", CR)
     elseif T then 
       	return TELL("It is already closed.", CR)
     end
@@ -733,7 +544,7 @@ V_COMMAND = function()
 	local __ok, __res = pcall(function()
 
   if FSETQ(PRSO, ACTORBIT) then 
-    	return TELL("The ", PRSO, " pays no attention.", CR)
+    	return TELL("The ", D, PRSO, " pays no attention.", CR)
   elseif T then 
     	return TELL("You cannot talk to that!", CR)
   end
@@ -794,11 +605,11 @@ V_CUT = function()
     end
 
     REMOVE_CAREFULLY(PRSO)
-    	return TELL("Your skillful ", PRSI, "smanship slices the ", PRSO, " into innumerable slivers which blow away.", CR)
+    	return TELL("Your skillful ", D, PRSI, "smanship slices the ", D, PRSO, " into innumerable slivers which blow away.", CR)
   elseif NOT(FSETQ(PRSI, WEAPONBIT)) then 
-    	return TELL("The \"cutting edge\" of a ", PRSI, " is hardly adequate.", CR)
+    	return TELL("The \"cutting edge\" of a ", D, PRSI, " is hardly adequate.", CR)
   elseif T then 
-    	return TELL("Strange concept, cutting the ", PRSO, "....", CR)
+    	return TELL("Strange concept, cutting the ", D, PRSO, "....", CR)
   end
 
 	end)
@@ -827,9 +638,9 @@ V_DIG = function()
 
 
   if FSETQ(PRSI, TOOLBIT) then 
-    	return TELL("Digging with the ", PRSI, " is slow and tedious.", CR)
+    	return TELL("Digging with the ", D, PRSI, " is slow and tedious.", CR)
   elseif T then 
-    	return TELL("Digging with a ", PRSI, " is silly.", CR)
+    	return TELL("Digging with a ", D, PRSI, " is silly.", CR)
   end
 
 	end)
@@ -928,15 +739,15 @@ V_EAT = function()
     elseif PASS(NOT(NOBJ) or NOT(ACCESSIBLEQ(NOBJ))) then 
       	return TELL("There isn't any water here.", CR)
     elseif PASS(ACCESSIBLEQ(NOBJ) and NOT(INQ(NOBJ, WINNER))) then 
-      	return TELL("You have to be holding the ", NOBJ, " first.", CR)
+      	return TELL("You have to be holding the ", D, NOBJ, " first.", CR)
     elseif NOT(FSETQ(NOBJ, OPENBIT)) then 
-      	return TELL("You'll have to open the ", NOBJ, " first.", CR)
+      	return TELL("You'll have to open the ", D, NOBJ, " first.", CR)
     elseif T then 
       	return HIT_SPOT()
     end
 
   elseif NOT(PASS(EATQ or DRINKQ)) then 
-    	return TELL("I don't think that the ", PRSO, " would agree with you.", CR)
+    	return TELL("I don't think that the ", D, PRSO, " would agree with you.", CR)
   end
 
 	end)
@@ -1030,7 +841,7 @@ APPLY(function() LIT = LITQ(HERE) return LIT end)
 end
 V_ENTER = function()
 	local __ok, __res = pcall(function()
-	return   DO_WALK("IN")
+	return   DO_WALK(PQIN)
 	end)
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('V_ENTER\n'..__res) end
@@ -1038,12 +849,12 @@ end
 V_EXAMINE = function()
 	local __ok, __res = pcall(function()
 
-  if GETP(PRSO, "TEXT") then 
-    	return TELL(GETP(PRSO, "TEXT"), CR)
+  if GETP(PRSO, PQTEXT) then 
+    	return TELL(GETP(PRSO, PQTEXT), CR)
   elseif PASS(FSETQ(PRSO, CONTBIT) or FSETQ(PRSO, DOORBIT)) then 
     	return V_LOOK_INSIDE()
   elseif T then 
-    	return TELL("There's nothing special about the ", PRSO, ".", CR)
+    	return TELL("There's nothing special about the ", D, PRSO, ".", CR)
   end
 
 	end)
@@ -1060,7 +871,7 @@ V_EXIT = function()
     PERFORM(VQDISEMBARK, PRSO)
     	error(true)
   else 
-    	return DO_WALK("OUT")
+    	return DO_WALK(PQOUT)
   end
 
 	end)
@@ -1079,7 +890,7 @@ PRE_FILL = function()
 	local __ok, __res = pcall(function()
 
   if NOT(PRSI) then 
-    APPLY(function() TX = GETPT(HERE, "GLOBAL") return TX end)
+    APPLY(function() TX = GETPT(HERE, PQGLOBAL) return TX end)
     
     if PASS(TX and ZMEMQB(GLOBAL_WATER, TX, SUB(PTSIZE(TX), 1))) then 
       PERFORM(VQFILL, PRSO, GLOBAL_WATER)
@@ -1144,11 +955,11 @@ V_FIND = function()
   elseif PASS(INQ(PRSO, HERE) or GLOBAL_INQ(PRSO, HERE) or EQUALQ(PRSO, PSEUDO_OBJECT)) then 
     	return TELL("It's right here.", CR)
   elseif FSETQ(L, ACTORBIT) then 
-    	return TELL("The ", L, " has it.", CR)
+    	return TELL("The ", D, L, " has it.", CR)
   elseif FSETQ(L, SURFACEBIT) then 
-    	return TELL("It's on the ", L, ".", CR)
+    	return TELL("It's on the ", D, L, ".", CR)
   elseif FSETQ(L, CONTBIT) then 
-    	return TELL("It's in the ", L, ".", CR)
+    	return TELL("It's in the ", D, L, ".", CR)
   elseif T then 
     	return TELL("Beats me.", CR)
   end
@@ -1175,7 +986,7 @@ PRE_GIVE = function()
 	local __ok, __res = pcall(function()
 
   if NOT(HELDQ(PRSO)) then 
-    	return TELL("That's easy for you to say since you don't even have the ", PRSO, ".", CR)
+    	return TELL("That's easy for you to say since you don't even have the ", D, PRSO, ".", CR)
   end
 
 	end)
@@ -1186,9 +997,9 @@ V_GIVE = function()
 	local __ok, __res = pcall(function()
 
   if NOT(FSETQ(PRSI, ACTORBIT)) then 
-    	return TELL("You can't give a ", PRSO, " to a ", PRSI, "!", CR)
+    	return TELL("You can't give a ", D, PRSO, " to a ", D, PRSI, "!", CR)
   elseif T then 
-    	return TELL("The ", PRSI, " refuses it politely.", CR)
+    	return TELL("The ", D, PRSI, " refuses it politely.", CR)
   end
 
 	end)
@@ -1209,9 +1020,9 @@ V_HELLO = function()
   if PRSO then 
     
     if FSETQ(PRSO, ACTORBIT) then 
-      	return TELL("The ", PRSO, " bows his head to you in greeting.", CR)
+      	return TELL("The ", D, PRSO, " bows his head to you in greeting.", CR)
     elseif T then 
-      	return TELL("It's a well known fact that only schizophrenics say \"Hello\" to a ", PRSO, ".", CR)
+      	return TELL("It's a well known fact that only schizophrenics say \"Hello\" to a ", D, PRSO, ".", CR)
     end
 
   elseif T then 
@@ -1259,7 +1070,7 @@ V_KNOCK = function()
   if FSETQ(PRSO, DOORBIT) then 
     	return TELL("Nobody's home.", CR)
   elseif T then 
-    	return TELL("Why knock on a ", PRSO, "?", CR)
+    	return TELL("Why knock on a ", D, PRSO, "?", CR)
   end
 
 	end)
@@ -1280,7 +1091,7 @@ V_LAMP_OFF = function()
         APPLY(function() LIT = LITQ(HERE) return LIT end)
       end
 
-      TELL("The ", PRSO, " is now off.", CR)
+      TELL("The ", D, PRSO, " is now off.", CR)
       
       if NOT(LIT) then 
         TELL("It is now pitch black.", CR)
@@ -1306,7 +1117,7 @@ V_LAMP_ON = function()
       TELL("It is already on.", CR)
     elseif T then 
       FSET(PRSO, ONBIT)
-      TELL("The ", PRSO, " is now on.", CR)
+      TELL("The ", D, PRSO, " is now on.", CR)
       
       if NOT(LIT) then 
         APPLY(function() LIT = LITQ(HERE) return LIT end)
@@ -1317,7 +1128,7 @@ V_LAMP_ON = function()
     end
 
   elseif FSETQ(PRSO, BURNBIT) then 
-    TELL("If you wish to burn the ", PRSO, ", you should say so.", CR)
+    TELL("If you wish to burn the ", D, PRSO, ", you should say so.", CR)
   elseif T then 
     TELL("You can't turn that on.", CR)
   end
@@ -1357,7 +1168,7 @@ V_LEAP = function()
     if INQ(PRSO, HERE) then 
       
       if FSETQ(PRSO, ACTORBIT) then 
-        	return TELL("The ", PRSO, " is too big to jump over.", CR)
+        	return TELL("The ", D, PRSO, " is too big to jump over.", CR)
       elseif T then 
         	return V_SKIP()
       end
@@ -1366,7 +1177,7 @@ V_LEAP = function()
       	return TELL("That would be a good trick.", CR)
     end
 
-  elseif APPLY(function() TX = GETPT(HERE, "DOWN") return TX end) then 
+  elseif APPLY(function() TX = GETPT(HERE, PQDOWN) return TX end) then 
     APPLY(function() S = PTSIZE(TX) return S end)
     
     if PASS(EQUALQ(S, 2) or PASS(EQUALQ(S, 4) and NOT(VALUE(GETB(TX, 1))))) then 
@@ -1374,7 +1185,7 @@ V_LEAP = function()
       	return JIGS_UP(PICK_ONE(JUMPLOSS))
     elseif EQUALQ(HERE, UP_A_TREE) then 
       TELL("In a feat of unaccustomed daring, you manage to land on your feet without\nkilling yourself.", CR, CR)
-      DO_WALK("DOWN")
+      DO_WALK(PQDOWN)
       	error(true)
     elseif T then 
       	return V_SKIP()
@@ -1392,14 +1203,14 @@ JUMPLOSS = {0,"You should have looked before you leaped.","In the movies, your l
 
 V_LEAVE = function()
 	local __ok, __res = pcall(function()
-	return   DO_WALK("OUT")
+	return   DO_WALK(PQOUT)
 	end)
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('V_LEAVE\n'..__res) end
 end
 V_LISTEN = function()
 	local __ok, __res = pcall(function()
-	return   TELL("The ", PRSO, " makes no sound.", CR)
+	return   TELL("The ", D, PRSO, " makes no sound.", CR)
 	end)
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('V_LISTEN\n'..__res) end
@@ -1424,7 +1235,7 @@ V_LOOK = function()
 end
 V_LOOK_BEHIND = function()
 	local __ok, __res = pcall(function()
-	return   TELL("There is nothing behind the ", PRSO, ".", CR)
+	return   TELL("There is nothing behind the ", D, PRSO, ".", CR)
 	end)
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('V_LOOK_BEHIND\n'..__res) end
@@ -1435,9 +1246,9 @@ V_LOOK_INSIDE = function()
   if FSETQ(PRSO, DOORBIT) then 
     
     if FSETQ(PRSO, OPENBIT) then 
-      TELL("The ", PRSO, " is open, but I can't tell what's beyond it.")
+      TELL("The ", D, PRSO, " is open, but I can't tell what's beyond it.")
     elseif T then 
-      TELL("The ", PRSO, " is closed.")
+      TELL("The ", D, PRSO, " is closed.")
     end
 
     	return CRLF()
@@ -1452,15 +1263,15 @@ V_LOOK_INSIDE = function()
       elseif NULL_F() then 
         	error(true)
       elseif T then 
-        	return TELL("The ", PRSO, " is empty.", CR)
+        	return TELL("The ", D, PRSO, " is empty.", CR)
       end
 
     elseif T then 
-      	return TELL("The ", PRSO, " is closed.", CR)
+      	return TELL("The ", D, PRSO, " is closed.", CR)
     end
 
   elseif T then 
-    	return TELL("You can't look inside a ", PRSO, ".", CR)
+    	return TELL("You can't look inside a ", D, PRSO, ".", CR)
   end
 
 	end)
@@ -1474,7 +1285,7 @@ V_LOOK_ON = function()
     PERFORM(VQLOOK_INSIDE, PRSO)
     	error(true)
   elseif T then 
-    	return TELL("Look on a ", PRSO, "???", CR)
+    	return TELL("Look on a ", D, PRSO, "???", CR)
   end
 
 	end)
@@ -1504,7 +1315,7 @@ V_MAKE = function()
 end
 V_MELT = function()
 	local __ok, __res = pcall(function()
-	return   TELL("It's not clear that a ", PRSO, " can be melted.", CR)
+	return   TELL("It's not clear that a ", D, PRSO, " can be melted.", CR)
 	end)
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('V_MELT\n'..__res) end
@@ -1524,9 +1335,9 @@ V_MOVE = function()
 	local __ok, __res = pcall(function()
 
   if FSETQ(PRSO, TAKEBIT) then 
-    	return TELL("Moving the ", PRSO, " reveals nothing.", CR)
+    	return TELL("Moving the ", D, PRSO, " reveals nothing.", CR)
   elseif T then 
-    	return TELL("You can't move the ", PRSO, ".", CR)
+    	return TELL("You can't move the ", D, PRSO, ".", CR)
   end
 
 	end)
@@ -1546,12 +1357,12 @@ PRE_MUNG = function()
   if NULL_F() then 
     	error(true)
   elseif PASS(NOT(PRSI) or NOT(FSETQ(PRSI, WEAPONBIT))) then 
-    TELL("Trying to destroy the ", PRSO, " with ")
+    TELL("Trying to destroy the ", D, PRSO, " with ")
     
     if NOT(PRSI) then 
       TELL("your bare hands")
     elseif T then 
-      TELL("a ", PRSI)
+      TELL("a ", D, PRSI)
     end
 
     	return TELL(" is futile.", CR)
@@ -1605,7 +1416,7 @@ V_OPEN = function()
 	local STR
 	local __ok, __res = pcall(function()
 
-  if PASS(FSETQ(PRSO, CONTBIT) and NOT(EQUALQ(GETP(PRSO, "CAPACITY"), 0))) then 
+  if PASS(FSETQ(PRSO, CONTBIT) and NOT(EQUALQ(GETP(PRSO, PQCAPACITY), 0))) then 
     
     if FSETQ(PRSO, OPENBIT) then 
       	return TELL("It is already open.", CR)
@@ -1615,11 +1426,11 @@ V_OPEN = function()
       
       if PASS(NOT(FIRSTQ(PRSO)) or FSETQ(PRSO, TRANSBIT)) then 
         	return TELL("Opened.", CR)
-      elseif PASS(APPLY(function() F = FIRSTQ(PRSO) return F end) and NOT(NEXTQ(F)) and NOT(FSETQ(F, TOUCHBIT)) and APPLY(function() STR = GETP(F, "FDESC") return STR end)) then 
-        TELL("The ", PRSO, " opens.", CR)
+      elseif PASS(APPLY(function() F = FIRSTQ(PRSO) return F end) and NOT(NEXTQ(F)) and NOT(FSETQ(F, TOUCHBIT)) and APPLY(function() STR = GETP(F, PQFDESC) return STR end)) then 
+        TELL("The ", D, PRSO, " opens.", CR)
         	return TELL(STR, CR)
       elseif T then 
-        TELL("Opening the ", PRSO, " reveals ")
+        TELL("Opening the ", D, PRSO, " reveals ")
         PRINT_CONTENTS(PRSO)
         	return TELL(".", CR)
       end
@@ -1631,12 +1442,12 @@ V_OPEN = function()
     if FSETQ(PRSO, OPENBIT) then 
       	return TELL("It is already open.", CR)
     elseif T then 
-      TELL("The ", PRSO, " opens.", CR)
+      TELL("The ", D, PRSO, " opens.", CR)
       	return FSET(PRSO, OPENBIT)
     end
 
   elseif T then 
-    	return TELL("You must tell me how to do that to a ", PRSO, ".", CR)
+    	return TELL("You must tell me how to do that to a ", D, PRSO, ".", CR)
   end
 
 	end)
@@ -1651,7 +1462,7 @@ V_OVERBOARD = function()
     
     if FSETQ(APPLY(function() LOCN = LOC(WINNER) return LOCN end), VEHBIT) then 
       MOVE(PRSO, LOC(LOCN))
-      	return TELL("Ahoy -- ", PRSO, " overboard!", CR)
+      	return TELL("Ahoy -- ", D, PRSO, " overboard!", CR)
     elseif T then 
       	return TELL("You're not in anything!", CR)
     end
@@ -1678,7 +1489,7 @@ V_PLAY = function()
 	local __ok, __res = pcall(function()
 
   if FSETQ(PRSO, ACTORBIT) then 
-    TELL("You become so engrossed in the role of the ", PRSO, " that\nyou kill yourself, just as he might have done!", CR)
+    TELL("You become so engrossed in the role of the ", D, PRSO, " that\nyou kill yourself, just as he might have done!", CR)
     	return JIGS_UP("")
   else 
     	return TELL("That's silly!", CR)
@@ -1702,12 +1513,12 @@ V_POUR_ON = function()
     REMOVE_CAREFULLY(PRSO)
     
     if FLAMINGQ(PRSI) then 
-      TELL("The ", PRSI, " is extinguished.", CR)
+      TELL("The ", D, PRSI, " is extinguished.", CR)
       NULL_F()
       FCLEAR(PRSI, ONBIT)
       	return FCLEAR(PRSI, FLAMEBIT)
     elseif T then 
-      	return TELL("The water spills over the ", PRSI, ", to the floor, and evaporates.", CR)
+      	return TELL("The water spills over the ", D, PRSI, ", to the floor, and evaporates.", CR)
     end
 
   elseif EQUALQ(PRSO, PUTTY) then 
@@ -1737,7 +1548,7 @@ V_PUMP = function()
 	local __ok, __res = pcall(function()
 
   if PASS(PRSI and NOT(EQUALQ(PRSI, PUMP))) then 
-    	return TELL("Pump it up with a ", PRSI, "?", CR)
+    	return TELL("Pump it up with a ", D, PRSI, "?", CR)
   elseif INQ(PUMP, WINNER) then 
     	return PERFORM(VQINFLATE, PRSO, PUMP)
   elseif T then 
@@ -1786,16 +1597,16 @@ V_PUT = function()
 
 
   if NOT(FSETQ(PRSI, OPENBIT)) then 
-    TELL("The ", PRSI, " isn't open.", CR)
+    TELL("The ", D, PRSI, " isn't open.", CR)
     	return THIS_IS_IT(PRSI)
   elseif EQUALQ(PRSI, PRSO) then 
     	return TELL("How can you do that?", CR)
   elseif INQ(PRSO, PRSI) then 
-    	return TELL("The ", PRSO, " is already in the ", PRSI, ".", CR)
-  elseif GQ(SUB(ADD(WEIGHT(PRSI), WEIGHT(PRSO)), GETP(PRSI, "SIZE")), GETP(PRSI, "CAPACITY")) then 
+    	return TELL("The ", D, PRSO, " is already in the ", D, PRSI, ".", CR)
+  elseif GQ(SUB(ADD(WEIGHT(PRSI), WEIGHT(PRSO)), GETP(PRSI, PQSIZE)), GETP(PRSI, PQCAPACITY)) then 
     	return TELL("There's no room.", CR)
   elseif PASS(NOT(HELDQ(PRSO)) and FSETQ(PRSO, TRYTAKEBIT)) then 
-    TELL("You don't have the ", PRSO, ".", CR)
+    TELL("You don't have the ", D, PRSO, ".", CR)
     	error(true)
   elseif PASS(NOT(HELDQ(PRSO)) and NOT(ITAKE())) then 
     	error(true)
@@ -1826,7 +1637,7 @@ V_PUT_ON = function()
   elseif FSETQ(PRSI, SURFACEBIT) then 
     	return V_PUT()
   elseif T then 
-    	return TELL("There's no good surface on the ", PRSI, ".", CR)
+    	return TELL("There's no good surface on the ", D, PRSI, ".", CR)
   end
 
 	end)
@@ -1860,7 +1671,7 @@ PRE_READ = function()
   if NOT(LIT) then 
     	return TELL("It is impossible to read in the dark.", CR)
   elseif PASS(PRSI and NOT(FSETQ(PRSI, TRANSBIT))) then 
-    	return TELL("How does one look through a ", PRSI, "?", CR)
+    	return TELL("How does one look through a ", D, PRSI, "?", CR)
   end
 
 	end)
@@ -1871,9 +1682,9 @@ V_READ = function()
 	local __ok, __res = pcall(function()
 
   if NOT(FSETQ(PRSO, READBIT)) then 
-    	return TELL("How does one read a ", PRSO, "?", CR)
+    	return TELL("How does one read a ", D, PRSO, "?", CR)
   elseif T then 
-    	return TELL(GETP(PRSO, "TEXT"), CR)
+    	return TELL(GETP(PRSO, PQTEXT), CR)
   end
 
 	end)
@@ -1897,7 +1708,7 @@ V_REPENT = function()
 end
 V_REPLY = function()
 	local __ok, __res = pcall(function()
-  TELL("It is hardly likely that the ", PRSO, " is interested.", CR)
+  TELL("It is hardly likely that the ", D, PRSO, " is interested.", CR)
 APPLY(function() P_CONT = nil return P_CONT end)
 APPLY(function() QUOTE_FLAG = nil return QUOTE_FLAG end)
 	error(true)
@@ -1931,7 +1742,7 @@ V_SAY = function()
 APPLY(function() QUOTE_FLAG = nil return QUOTE_FLAG end)
 
   if APPLY(function() V = FIND_IN(HERE, ACTORBIT) return V end) then 
-    TELL("You must address the ", V, " directly.", CR)
+    TELL("You must address the ", D, V, " directly.", CR)
     APPLY(function() P_CONT = nil return P_CONT end)
   elseif NOT(EQUALQ(GET(P_LEXV, P_CONT), WQHELLO)) then 
     APPLY(function() P_CONT = nil return P_CONT end)
@@ -1954,7 +1765,7 @@ V_SEND = function()
 	local __ok, __res = pcall(function()
 
   if FSETQ(PRSO, ACTORBIT) then 
-    	return TELL("Why would you send for the ", PRSO, "?", CR)
+    	return TELL("Why would you send for the ", D, PRSO, "?", CR)
   elseif T then 
     	return TELL("That doesn't make sends.", CR)
   end
@@ -2007,7 +1818,7 @@ V_SHAKE = function()
     elseif T then 
       
       if FIRSTQ(PRSO) then 
-        	return TELL("It sounds like there is something inside the ", PRSO, ".", CR)
+        	return TELL("It sounds like there is something inside the ", D, PRSO, ".", CR)
       elseif T then 
         	return TELL("The ", D, PRSO, " sounds empty.", CR)
       end
@@ -2061,7 +1872,7 @@ WHEEEEE = {0,"Very good. Now you can go to the second grade.","Are you enjoying 
 
 V_SMELL = function()
 	local __ok, __res = pcall(function()
-	return   TELL("It smells like a ", PRSO, ".", CR)
+	return   TELL("It smells like a ", D, PRSO, ".", CR)
 	end)
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('V_SMELL\n'..__res) end
@@ -2084,7 +1895,7 @@ V_SQUEEZE = function()
 	local __ok, __res = pcall(function()
 
   if FSETQ(PRSO, ACTORBIT) then 
-    TELL("The ", PRSO, " does not understand this.")
+    TELL("The ", D, PRSO, " does not understand this.")
   elseif T then 
     TELL("How singularly useless.")
   end
@@ -2109,7 +1920,7 @@ V_STAB = function()
     PERFORM(VQATTACK, PRSO, W)
     	error(true)
   elseif T then 
-    	return TELL("No doubt you propose to stab the ", PRSO, " with your pinky?", CR)
+    	return TELL("No doubt you propose to stab the ", D, PRSO, " with your pinky?", CR)
   end
 
 	end)
@@ -2141,7 +1952,7 @@ V_STRIKE = function()
 	local __ok, __res = pcall(function()
 
   if FSETQ(PRSO, ACTORBIT) then 
-    	return TELL("Since you aren't versed in hand-to-hand combat, you'd better attack the ", PRSO, " with a weapon.", CR)
+    	return TELL("Since you aren't versed in hand-to-hand combat, you'd better attack the ", D, PRSO, " with a weapon.", CR)
   elseif T then 
     PERFORM(VQLAMP_ON, PRSO)
     	error(true)
@@ -2203,7 +2014,7 @@ PRE_TAKE = function()
     NULL_F()
     
     if NOT(EQUALQ(PRSI, LOC(PRSO))) then 
-      	return TELL("The ", PRSO, " isn't in the ", PRSI, ".", CR)
+      	return TELL("The ", D, PRSO, " isn't in the ", D, PRSI, ".", CR)
     elseif T then 
       APPLY(function() PRSI = nil return PRSI end)
       	error(false)
@@ -2223,7 +2034,7 @@ V_TAKE = function()
   if EQUALQ(ITAKE(), T) then 
     
     if FSETQ(PRSO, WEARBIT) then 
-      	return TELL("You are now wearing the ", PRSO, ".", CR)
+      	return TELL("You are now wearing the ", D, PRSO, ".", CR)
     elseif T then 
       	return TELL("Taken.", CR)
     end
@@ -2243,11 +2054,11 @@ V_TELL = function()
       APPLY(function() WINNER = PRSO return WINNER end)
       	return APPLY(function() HERE = LOC(WINNER) return HERE end)
     elseif T then 
-      	return TELL("The ", PRSO, " pauses for a moment, perhaps thinking that you should reread\nthe manual.", CR)
+      	return TELL("The ", D, PRSO, " pauses for a moment, perhaps thinking that you should reread\nthe manual.", CR)
     end
 
   elseif T then 
-    TELL("You can't talk to the ", PRSO, "!", CR)
+    TELL("You can't talk to the ", D, PRSO, "!", CR)
     APPLY(function() QUOTE_FLAG = nil return QUOTE_FLAG end)
     APPLY(function() P_CONT = nil return P_CONT end)
     	return RFATAL()
@@ -2270,7 +2081,7 @@ V_THROUGH = function(OBJ)
     	error(true)
   elseif PASS(OBJ or NOT(FSETQ(PRSO, TAKEBIT))) then 
     NULL_F()
-    	return TELL("You hit your head against the ", PRSO, " as you attempt this feat.", CR)
+    	return TELL("You hit your head against the ", D, PRSO, " as you attempt this feat.", CR)
   elseif INQ(PRSO, WINNER) then 
     	return TELL("That would involve quite a contortion!", CR)
   elseif T then 
@@ -2287,11 +2098,11 @@ V_THROW = function()
   if IDROP() then 
     
     if EQUALQ(PRSI, ME) then 
-      TELL("A terrific throw! The ", PRSO)
+      TELL("A terrific throw! The ", D, PRSO)
       APPLY(function() WINNER = PLAYER return WINNER end)
       	return JIGS_UP(" hits you squarely in the head. Normally,\nthis wouldn't do much damage, but by incredible mischance, you fall over\nbackwards trying to duck, and break your neck, justice being swift and\nmerciful in the Great Underground Empire.")
     elseif PASS(PRSI and FSETQ(PRSI, ACTORBIT)) then 
-      	return TELL("The ", PRSI, " ducks as the ", PRSO, " flies by and crashes to the ground.", CR)
+      	return TELL("The ", D, PRSI, " ducks as the ", D, PRSO, " flies by and crashes to the ground.", CR)
     elseif T then 
       	return TELL("Thrown.", CR)
     end
@@ -2317,7 +2128,7 @@ V_TIE = function()
   if EQUALQ(PRSI, WINNER) then 
     	return TELL("You can't tie anything to yourself.", CR)
   elseif T then 
-    	return TELL("You can't tie the ", PRSO, " to that.", CR)
+    	return TELL("You can't tie the ", D, PRSO, " to that.", CR)
   end
 
 	end)
@@ -2450,7 +2261,7 @@ V_WALK = function()
         TELL(STR, CR)
         	return RFATAL()
       elseif T then 
-        TELL("The ", OBJ, " is closed.", CR)
+        TELL("The ", D, OBJ, " is closed.", CR)
         THIS_IS_IT(OBJ)
         	return RFATAL()
       end
@@ -2508,7 +2319,7 @@ V_WEAR = function()
 	local __ok, __res = pcall(function()
 
   if NOT(FSETQ(PRSO, WEARBIT)) then 
-    	return TELL("You can't wear the ", PRSO, ".", CR)
+    	return TELL("You can't wear the ", D, PRSO, ".", CR)
   elseif T then 
     PERFORM(VQTAKE, PRSO)
     	error(true)
@@ -2527,7 +2338,7 @@ V_WIN = function()
 end
 V_WIND = function()
 	local __ok, __res = pcall(function()
-	return   TELL("You cannot wind up a ", PRSO, ".", CR)
+	return   TELL("You cannot wind up a ", D, PRSO, ".", CR)
 	end)
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('V_WIND\n'..__res) end
@@ -2603,10 +2414,10 @@ APPLY(function() VQ = PASS(LOOKQ or VERBOSE) return VQ end)
 
 
   if INQ(HERE, ROOMS) then 
-    TELL(HERE)
+    TELL(D, HERE)
     
     if FSETQ(APPLY(function() AV = LOC(WINNER) return AV end), VEHBIT) then 
-      TELL(", in the ", AV)
+      TELL(", in the ", D, AV)
     end
 
     CRLF()
@@ -2616,17 +2427,17 @@ APPLY(function() VQ = PASS(LOOKQ or VERBOSE) return VQ end)
   if PASS(LOOKQ or NOT(SUPER_BRIEF)) then 
     APPLY(function() AV = LOC(WINNER) return AV end)
     
-    if PASS(VQ and APPLY(GETP(HERE, "ACTION"), M_LOOK)) then 
+    if PASS(VQ and APPLY(GETP(HERE, PQACTION), M_LOOK)) then 
       	error(true)
-    elseif PASS(VQ and APPLY(function() STR = GETP(HERE, "LDESC") return STR end)) then 
+    elseif PASS(VQ and APPLY(function() STR = GETP(HERE, PQLDESC) return STR end)) then 
       TELL(STR, CR)
     elseif T then 
-      APPLY(GETP(HERE, "ACTION"), M_FLASH)
+      APPLY(GETP(HERE, PQACTION), M_FLASH)
     end
 
     
     if PASS(NOT(EQUALQ(HERE, AV)) and FSETQ(AV, VEHBIT)) then 
-      APPLY(GETP(AV, "ACTION"), M_LOOK)
+      APPLY(GETP(AV, PQACTION), M_LOOK)
     end
 
   end
@@ -2661,12 +2472,12 @@ DESCRIBE_OBJECT = function(OBJ, VQ, LEVEL)
 	local __ok, __res = pcall(function()
 APPLY(function() DESC_OBJECT = OBJ return DESC_OBJECT end)
 
-  if PASS(ZEROQ(LEVEL) and APPLY(GETP(OBJ, "DESCFCN"), M_OBJDESC)) then 
+  if PASS(ZEROQ(LEVEL) and APPLY(GETP(OBJ, PQDESCFCN), M_OBJDESC)) then 
     	error(true)
-  elseif PASS(ZEROQ(LEVEL) and PASS(PASS(NOT(FSETQ(OBJ, TOUCHBIT)) and APPLY(function() STR = GETP(OBJ, "FDESC") return STR end)) or APPLY(function() STR = GETP(OBJ, "LDESC") return STR end))) then 
+  elseif PASS(ZEROQ(LEVEL) and PASS(PASS(NOT(FSETQ(OBJ, TOUCHBIT)) and APPLY(function() STR = GETP(OBJ, PQFDESC) return STR end)) or APPLY(function() STR = GETP(OBJ, PQLDESC) return STR end))) then 
     TELL(STR)
   elseif ZEROQ(LEVEL) then 
-    TELL("There is a ", OBJ, " here")
+    TELL("There is a ", D, OBJ, " here")
     
     if FSETQ(OBJ, ONBIT) then 
       TELL(" (providing light)")
@@ -2675,7 +2486,7 @@ APPLY(function() DESC_OBJECT = OBJ return DESC_OBJECT end)
     TELL(".")
   elseif T then 
     TELL(GET(INDENTS, LEVEL))
-    TELL("A ", OBJ)
+    TELL("A ", D, OBJ)
     
     if FSETQ(OBJ, ONBIT) then 
       TELL(" (providing light)")
@@ -2688,7 +2499,7 @@ APPLY(function() DESC_OBJECT = OBJ return DESC_OBJECT end)
   NULL_F()
 
   if PASS(ZEROQ(LEVEL) and APPLY(function() AV = LOC(WINNER) return AV end) and FSETQ(AV, VEHBIT)) then 
-    TELL(" (outside the ", AV, ")")
+    TELL(" (outside the ", D, AV, ")")
   end
 
   CRLF()
@@ -2725,7 +2536,7 @@ PRINT_CONTENTS = function(OBJ)
 
       end
 
-      TELL("a ", F)
+      TELL("a ", D, F)
       
       if PASS(NOT(ITQ) and NOT(TWOQ)) then 
         APPLY(function() ITQ = F return ITQ end)
@@ -2791,7 +2602,7 @@ APPLY(function() SHIT = T return SHIT end)
       elseif EQUALQ(Y, AV) then 
         APPLY(function() PVQ = T return PVQ end)
       elseif EQUALQ(Y, WINNER) then 
-      elseif PASS(NOT(FSETQ(Y, INVISIBLE)) and NOT(FSETQ(Y, TOUCHBIT)) and APPLY(function() STR = GETP(Y, "FDESC") return STR end)) then 
+      elseif PASS(NOT(FSETQ(Y, INVISIBLE)) and NOT(FSETQ(Y, TOUCHBIT)) and APPLY(function() STR = GETP(Y, PQFDESC) return STR end)) then 
         
         if NOT(FSETQ(Y, NDESCBIT)) then 
           TELL(STR, CR)
@@ -2799,7 +2610,7 @@ APPLY(function() SHIT = T return SHIT end)
         end
 
         
-        if PASS(SEE_INSIDEQ(Y) and NOT(GETP(LOC(Y), "DESCFCN")) and FIRSTQ(Y)) then 
+        if PASS(SEE_INSIDEQ(Y) and NOT(GETP(LOC(Y), PQDESCFCN)) and FIRSTQ(Y)) then 
           
           if PRINT_CONT(Y, VQ, 0) then 
             APPLY(function() bSTQ = nil return bSTQ end)
@@ -2828,7 +2639,7 @@ APPLY(function() Y = FIRSTQ(OBJ) return Y end)
 
       return 
     elseif EQUALQ(Y, AV, ADVENTURER) then 
-    elseif PASS(NOT(FSETQ(Y, INVISIBLE)) and PASS(INVQ or FSETQ(Y, TOUCHBIT) or NOT(GETP(Y, "FDESC")))) then 
+    elseif PASS(NOT(FSETQ(Y, INVISIBLE)) and PASS(INVQ or FSETQ(Y, TOUCHBIT) or NOT(GETP(Y, PQFDESC)))) then 
       
       if NOT(FSETQ(Y, NDESCBIT)) then 
         
@@ -2890,11 +2701,11 @@ FIRSTER = function(OBJ, LEVEL)
 
     
     if FSETQ(OBJ, SURFACEBIT) then 
-      	return TELL("Sitting on the ", OBJ, " is: ", CR)
+      	return TELL("Sitting on the ", D, OBJ, " is: ", CR)
     elseif FSETQ(OBJ, ACTORBIT) then 
-      	return TELL("The ", OBJ, " is holding: ", CR)
+      	return TELL("The ", D, OBJ, " is holding: ", CR)
     elseif T then 
-      	return TELL("The ", OBJ, " contains:", CR)
+      	return TELL("The ", D, OBJ, " contains:", CR)
     end
 
   end
@@ -2935,9 +2746,9 @@ SCORE_OBJ = function(OBJ)
 	local TEMP
 	local __ok, __res = pcall(function()
 
-  if GQ(APPLY(function() TEMP = GETP(OBJ, "VALUE") return TEMP end), 0) then 
+  if GQ(APPLY(function() TEMP = GETP(OBJ, PQVALUE) return TEMP end), 0) then 
     SCORE_UPD(TEMP)
-    	return PUTP(OBJ, "VALUE", 0)
+    	return PUTP(OBJ, PQVALUE, 0)
   end
 
 	end)
@@ -3023,10 +2834,10 @@ IDROP = function()
 	local __ok, __res = pcall(function()
 
   if PASS(NOT(INQ(PRSO, WINNER)) and NOT(INQ(LOC(PRSO), WINNER))) then 
-    TELL("You're not carrying the ", PRSO, ".", CR)
+    TELL("You're not carrying the ", D, PRSO, ".", CR)
     	error(false)
   elseif PASS(NOT(INQ(PRSO, WINNER)) and NOT(FSETQ(LOC(PRSO), OPENBIT))) then 
-    TELL("The ", PRSO, " is closed.", CR)
+    TELL("The ", D, PRSO, " is closed.", CR)
     	error(false)
   elseif T then 
     MOVE(PRSO, LOC(WINNER))
@@ -3090,7 +2901,7 @@ WEIGHT = function(OBJ)
 
   end
 
-	return   ADD(WT, GETP(OBJ, "SIZE"))
+	return   ADD(WT, GETP(OBJ, PQSIZE))
 	end)
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('WEIGHT\n'..__res) end
@@ -3113,9 +2924,9 @@ HACK_HACK = function(STR)
 	local __ok, __res = pcall(function()
 
   if PASS(INQ(PRSO, GLOBAL_OBJECTS) and VERBQ(WAVE, RAISE, LOWER)) then 
-    	return TELL("The ", PRSO, " isn't here!", CR)
+    	return TELL("The ", D, PRSO, " isn't here!", CR)
   elseif T then 
-    	return TELL(STR, PRSO, PICK_ONE(HO_HUM), CR)
+    	return TELL(STR, D, PRSO, PICK_ONE(HO_HUM), CR)
   end
 
 	end)
@@ -3128,7 +2939,7 @@ NO_GO_TELL = function(AV, WLOC)
 	local __ok, __res = pcall(function()
 
   if AV then 
-    TELL("You can't go there in a ", WLOC, ".")
+    TELL("You can't go there in a ", D, WLOC, ".")
   elseif T then 
     TELL("You can't go there without a vehicle.")
   end
@@ -3150,7 +2961,7 @@ APPLY(function() OLIT = LIT return OLIT end)
 APPLY(function() OHERE = HERE return OHERE end)
 
   if FSETQ(WLOC, VEHBIT) then 
-    APPLY(function() AV = GETP(WLOC, "VTYPE") return AV end)
+    APPLY(function() AV = GETP(WLOC, PQVTYPE) return AV end)
   end
 
 
@@ -3164,12 +2975,12 @@ APPLY(function() OHERE = HERE return OHERE end)
     NO_GO_TELL(AV, WLOC)
     	error(false)
   elseif FSETQ(RM, RMUNGBIT) then 
-    TELL(GETP(RM, "LDESC"), CR)
+    TELL(GETP(RM, PQLDESC), CR)
     	error(false)
   elseif T then 
     
     if PASS(LB and NOT(FSETQ(HERE, RLANDBIT)) and NOT(DEAD) and FSETQ(WLOC, VEHBIT)) then 
-      TELL("The ", WLOC, " comes to a rest on the shore.", CR, CR)
+      TELL("The ", D, WLOC, " comes to a rest on the shore.", CR, CR)
     end
 
     
@@ -3192,7 +3003,7 @@ APPLY(function() OHERE = HERE return OHERE end)
         TELL("Oh, no! A lurking grue slithered into the ")
         
         if FSETQ(LOC(WINNER), VEHBIT) then 
-          TELL(LOC(WINNER))
+          TELL(D, LOC(WINNER))
         elseif T then 
           TELL("room")
         end
@@ -3209,13 +3020,13 @@ APPLY(function() OHERE = HERE return OHERE end)
       APPLY(function() P_CONT = nil return P_CONT end)
     end
 
-    APPLY(GETP(HERE, "ACTION"), M_ENTER)
+    APPLY(GETP(HERE, PQACTION), M_ENTER)
     SCORE_OBJ(RM)
     
     if NOT(EQUALQ(HERE, RM)) then 
       	error(true)
     elseif PASS(NOT(EQUALQ(ADVENTURER, WINNER)) and INQ(ADVENTURER, OHERE)) then 
-      TELL("The ", WINNER, " leaves the room.", CR)
+      TELL("The ", D, WINNER, " leaves the room.", CR)
     elseif PASS(EQUALQ(HERE, OHERE) and EQUALQ(HERE, ENTRANCE_TO_HADES)) then 
       	error(true)
     elseif PASS(VQ and EQUALQ(WINNER, ADVENTURER)) then 
@@ -3267,7 +3078,7 @@ GLOBAL_INQ = function(OBJ1, OBJ2)
 	local TX
 	local __ok, __res = pcall(function()
 
-  if APPLY(function() TX = GETPT(OBJ2, "GLOBAL") return TX end) then 
+  if APPLY(function() TX = GETPT(OBJ2, PQGLOBAL) return TX end) then 
     	return ZMEMQB(OBJ1, TX, SUB(PTSIZE(TX), 1))
   end
 
@@ -3348,7 +3159,7 @@ MUNG_ROOM = function(RM, STR)
 	local __ok, __res = pcall(function()
 
   FSET(RM, RMUNGBIT)
-	return   PUTP(RM, "LDESC", STR)
+	return   PUTP(RM, PQLDESC, STR)
 	end)
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('MUNG_ROOM\n'..__res) end

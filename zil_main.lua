@@ -1,6 +1,3 @@
-MAIN_LOOP = nil
-MAIN_LOOP_1 = nil
-PERFORM = nil
 
 SERIAL = 0
 PLAYER = nil
@@ -242,7 +239,7 @@ APPLY(function() PTBL = T return PTBL end)
 
     
     if NOT(EQUALQ(V, M_FATAL)) then 
-      APPLY(function() V = APPLY(GETP(LOC(WINNER), "ACTION"), M_END) return V end)
+      APPLY(function() V = APPLY(GETP(LOC(WINNER), PQACTION), M_END) return V end)
     end
 
     
@@ -314,17 +311,17 @@ APPLY(function() PRSI = I return PRSI end)
     APPLY(function() O = PRSO return O end)
     APPLY(function() I = PRSI return I end)
     
-    if APPLY(function() V = APPLY(GETP(WINNER, "ACTION")) return V end) then 
+    if APPLY(function() V = APPLY(GETP(WINNER, PQACTION)) return V end) then 
       -- V
-    elseif APPLY(function() V = APPLY(GETP(LOC(WINNER), "ACTION"), M_BEG) return V end) then 
+    elseif APPLY(function() V = APPLY(GETP(LOC(WINNER), PQACTION), M_BEG) return V end) then 
       -- V
     elseif APPLY(function() V = APPLY(GET(PREACTIONS, A)) return V end) then 
       -- V
-    elseif PASS(I and APPLY(function() V = APPLY(GETP(I, "ACTION")) return V end)) then 
+    elseif PASS(I and APPLY(function() V = APPLY(GETP(I, PQACTION)) return V end)) then 
       -- V
-    elseif PASS(O and NOT(EQUALQ(A, VQWALK)) and LOC(O) and APPLY(function() V = APPLY(GETP(LOC(O), "CONTFCN")) return V end)) then 
+    elseif PASS(O and NOT(EQUALQ(A, VQWALK)) and LOC(O) and APPLY(function() V = APPLY(GETP(LOC(O), PQCONTFCN)) return V end)) then 
       -- V
-    elseif PASS(O and NOT(EQUALQ(A, VQWALK)) and APPLY(function() V = APPLY(GETP(O, "ACTION")) return V end)) then 
+    elseif PASS(O and NOT(EQUALQ(A, VQWALK)) and APPLY(function() V = APPLY(GETP(O, PQACTION)) return V end)) then 
       -- V
     elseif APPLY(function() V = APPLY(GET(ACTIONS, A)) return V end) then 
       -- V

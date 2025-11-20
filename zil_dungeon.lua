@@ -1,239 +1,235 @@
-BOARD = setmetatable({}, { __tostring = function(self) return self.DESC or "BOARD" end })
-TEETH = setmetatable({}, { __tostring = function(self) return self.DESC or "TEETH" end })
-WALL = setmetatable({}, { __tostring = function(self) return self.DESC or "WALL" end })
-GRANITE_WALL = setmetatable({}, { __tostring = function(self) return self.DESC or "GRANITE_WALL" end })
-SONGBIRD = setmetatable({}, { __tostring = function(self) return self.DESC or "SONGBIRD" end })
-WHITE_HOUSE = setmetatable({}, { __tostring = function(self) return self.DESC or "WHITE_HOUSE" end })
-FOREST = setmetatable({}, { __tostring = function(self) return self.DESC or "FOREST" end })
-TREE = setmetatable({}, { __tostring = function(self) return self.DESC or "TREE" end })
-MOUNTAIN_RANGE = setmetatable({}, { __tostring = function(self) return self.DESC or "MOUNTAIN_RANGE" end })
-GLOBAL_WATER = setmetatable({}, { __tostring = function(self) return self.DESC or "GLOBAL_WATER" end })
-WATER = setmetatable({}, { __tostring = function(self) return self.DESC or "WATER" end })
-KITCHEN_WINDOW = setmetatable({}, { __tostring = function(self) return self.DESC or "KITCHEN_WINDOW" end })
-CHIMNEY = setmetatable({}, { __tostring = function(self) return self.DESC or "CHIMNEY" end })
-GHOSTS = setmetatable({}, { __tostring = function(self) return self.DESC or "GHOSTS" end })
-SKULL = setmetatable({}, { __tostring = function(self) return self.DESC or "SKULL" end })
-LOWERED_BASKET = setmetatable({}, { __tostring = function(self) return self.DESC or "LOWERED_BASKET" end })
-RAISED_BASKET = setmetatable({}, { __tostring = function(self) return self.DESC or "RAISED_BASKET" end })
-LUNCH = setmetatable({}, { __tostring = function(self) return self.DESC or "LUNCH" end })
-BAT = setmetatable({}, { __tostring = function(self) return self.DESC or "BAT" end })
-BELL = setmetatable({}, { __tostring = function(self) return self.DESC or "BELL" end })
-HOT_BELL = setmetatable({}, { __tostring = function(self) return self.DESC or "HOT_BELL" end })
-AXE = setmetatable({}, { __tostring = function(self) return self.DESC or "AXE" end })
-BOLT = setmetatable({}, { __tostring = function(self) return self.DESC or "BOLT" end })
-BUBBLE = setmetatable({}, { __tostring = function(self) return self.DESC or "BUBBLE" end })
-ALTAR = setmetatable({}, { __tostring = function(self) return self.DESC or "ALTAR" end })
-BOOK = setmetatable({}, { __tostring = function(self) return self.DESC or "BOOK" end })
-BROKEN_LAMP = setmetatable({}, { __tostring = function(self) return self.DESC or "BROKEN_LAMP" end })
-SCEPTRE = setmetatable({}, { __tostring = function(self) return self.DESC or "SCEPTRE" end })
-TIMBERS = setmetatable({}, { __tostring = function(self) return self.DESC or "TIMBERS" end })
-SLIDE = setmetatable({}, { __tostring = function(self) return self.DESC or "SLIDE" end })
-KITCHEN_TABLE = setmetatable({}, { __tostring = function(self) return self.DESC or "KITCHEN_TABLE" end })
-ATTIC_TABLE = setmetatable({}, { __tostring = function(self) return self.DESC or "ATTIC_TABLE" end })
-SANDWICH_BAG = setmetatable({}, { __tostring = function(self) return self.DESC or "SANDWICH_BAG" end })
-TOOL_CHEST = setmetatable({}, { __tostring = function(self) return self.DESC or "TOOL_CHEST" end })
-YELLOW_BUTTON = setmetatable({}, { __tostring = function(self) return self.DESC or "YELLOW_BUTTON" end })
-BROWN_BUTTON = setmetatable({}, { __tostring = function(self) return self.DESC or "BROWN_BUTTON" end })
-RED_BUTTON = setmetatable({}, { __tostring = function(self) return self.DESC or "RED_BUTTON" end })
-BLUE_BUTTON = setmetatable({}, { __tostring = function(self) return self.DESC or "BLUE_BUTTON" end })
-TROPHY_CASE = setmetatable({}, { __tostring = function(self) return self.DESC or "TROPHY_CASE" end })
-RUG = setmetatable({}, { __tostring = function(self) return self.DESC or "RUG" end })
-CHALICE = setmetatable({}, { __tostring = function(self) return self.DESC or "CHALICE" end })
-GARLIC = setmetatable({}, { __tostring = function(self) return self.DESC or "GARLIC" end })
-TRIDENT = setmetatable({}, { __tostring = function(self) return self.DESC or "TRIDENT" end })
-CYCLOPS = setmetatable({}, { __tostring = function(self) return self.DESC or "CYCLOPS" end })
-DAM = setmetatable({}, { __tostring = function(self) return self.DESC or "DAM" end })
-TRAP_DOOR = setmetatable({}, { __tostring = function(self) return self.DESC or "TRAP_DOOR" end })
-BOARDED_WINDOW = setmetatable({}, { __tostring = function(self) return self.DESC or "BOARDED_WINDOW" end })
-FRONT_DOOR = setmetatable({}, { __tostring = function(self) return self.DESC or "FRONT_DOOR" end })
-BARROW_DOOR = setmetatable({}, { __tostring = function(self) return self.DESC or "BARROW_DOOR" end })
-BARROW = setmetatable({}, { __tostring = function(self) return self.DESC or "BARROW" end })
-BOTTLE = setmetatable({}, { __tostring = function(self) return self.DESC or "BOTTLE" end })
-CRACK = setmetatable({}, { __tostring = function(self) return self.DESC or "CRACK" end })
-COFFIN = setmetatable({}, { __tostring = function(self) return self.DESC or "COFFIN" end })
-GRATE = setmetatable({}, { __tostring = function(self) return self.DESC or "GRATE" end })
-PUMP = setmetatable({}, { __tostring = function(self) return self.DESC or "PUMP" end })
-DIAMOND = setmetatable({}, { __tostring = function(self) return self.DESC or "DIAMOND" end })
-JADE = setmetatable({}, { __tostring = function(self) return self.DESC or "JADE" end })
-KNIFE = setmetatable({}, { __tostring = function(self) return self.DESC or "KNIFE" end })
-BONES = setmetatable({}, { __tostring = function(self) return self.DESC or "BONES" end })
-BURNED_OUT_LANTERN = setmetatable({}, { __tostring = function(self) return self.DESC or "BURNED_OUT_LANTERN" end })
-BAG_OF_COINS = setmetatable({}, { __tostring = function(self) return self.DESC or "BAG_OF_COINS" end })
-LAMP = setmetatable({}, { __tostring = function(self) return self.DESC or "LAMP" end })
-EMERALD = setmetatable({}, { __tostring = function(self) return self.DESC or "EMERALD" end })
-ADVERTISEMENT = setmetatable({}, { __tostring = function(self) return self.DESC or "ADVERTISEMENT" end })
-LEAK = setmetatable({}, { __tostring = function(self) return self.DESC or "LEAK" end })
-MACHINE = setmetatable({}, { __tostring = function(self) return self.DESC or "MACHINE" end })
-INFLATED_BOAT = setmetatable({}, { __tostring = function(self) return self.DESC or "INFLATED_BOAT" end })
-MAILBOX = setmetatable({}, { __tostring = function(self) return self.DESC or "MAILBOX" end })
-MATCH = setmetatable({}, { __tostring = function(self) return self.DESC or "MATCH" end })
-MIRROR_2 = setmetatable({}, { __tostring = function(self) return self.DESC or "MIRROR_2" end })
-MIRROR_1 = setmetatable({}, { __tostring = function(self) return self.DESC or "MIRROR_1" end })
-PAINTING = setmetatable({}, { __tostring = function(self) return self.DESC or "PAINTING" end })
-CANDLES = setmetatable({}, { __tostring = function(self) return self.DESC or "CANDLES" end })
-GUNK = setmetatable({}, { __tostring = function(self) return self.DESC or "GUNK" end })
-BODIES = setmetatable({}, { __tostring = function(self) return self.DESC or "BODIES" end })
-LEAVES = setmetatable({}, { __tostring = function(self) return self.DESC or "LEAVES" end })
-PUNCTURED_BOAT = setmetatable({}, { __tostring = function(self) return self.DESC or "PUNCTURED_BOAT" end })
-INFLATABLE_BOAT = setmetatable({}, { __tostring = function(self) return self.DESC or "INFLATABLE_BOAT" end })
-BAR = setmetatable({}, { __tostring = function(self) return self.DESC or "BAR" end })
-POT_OF_GOLD = setmetatable({}, { __tostring = function(self) return self.DESC or "POT_OF_GOLD" end })
-PRAYER = setmetatable({}, { __tostring = function(self) return self.DESC or "PRAYER" end })
-RAILING = setmetatable({}, { __tostring = function(self) return self.DESC or "RAILING" end })
-RAINBOW = setmetatable({}, { __tostring = function(self) return self.DESC or "RAINBOW" end })
-RIVER = setmetatable({}, { __tostring = function(self) return self.DESC or "RIVER" end })
-BUOY = setmetatable({}, { __tostring = function(self) return self.DESC or "BUOY" end })
-TREASURE_INSIDE = nil
-ROPE = setmetatable({}, { __tostring = function(self) return self.DESC or "ROPE" end })
-RUSTY_KNIFE = setmetatable({}, { __tostring = function(self) return self.DESC or "RUSTY_KNIFE" end })
-SAND = setmetatable({}, { __tostring = function(self) return self.DESC or "SAND" end })
-BRACELET = setmetatable({}, { __tostring = function(self) return self.DESC or "BRACELET" end })
-SCREWDRIVER = setmetatable({}, { __tostring = function(self) return self.DESC or "SCREWDRIVER" end })
-KEYS = setmetatable({}, { __tostring = function(self) return self.DESC or "KEYS" end })
-SHOVEL = setmetatable({}, { __tostring = function(self) return self.DESC or "SHOVEL" end })
-COAL = setmetatable({}, { __tostring = function(self) return self.DESC or "COAL" end })
-LADDER = setmetatable({}, { __tostring = function(self) return self.DESC or "LADDER" end })
-SCARAB = setmetatable({}, { __tostring = function(self) return self.DESC or "SCARAB" end })
-LARGE_BAG = setmetatable({}, { __tostring = function(self) return self.DESC or "LARGE_BAG" end })
-STILETTO = setmetatable({}, { __tostring = function(self) return self.DESC or "STILETTO" end })
-MACHINE_SWITCH = setmetatable({}, { __tostring = function(self) return self.DESC or "MACHINE_SWITCH" end })
-WOODEN_DOOR = setmetatable({}, { __tostring = function(self) return self.DESC or "WOODEN_DOOR" end })
-SWORD = setmetatable({}, { __tostring = function(self) return self.DESC or "SWORD" end })
-MAP = setmetatable({}, { __tostring = function(self) return self.DESC or "MAP" end })
-BOAT_LABEL = setmetatable({}, { __tostring = function(self) return self.DESC or "BOAT_LABEL" end })
-THIEF = setmetatable({}, { __tostring = function(self) return self.DESC or "THIEF" end })
-PEDESTAL = setmetatable({}, { __tostring = function(self) return self.DESC or "PEDESTAL" end })
-TORCH = setmetatable({}, { __tostring = function(self) return self.DESC or "TORCH" end })
-GUIDE = setmetatable({}, { __tostring = function(self) return self.DESC or "GUIDE" end })
-TROLL = setmetatable({}, { __tostring = function(self) return self.DESC or "TROLL" end })
-TRUNK = setmetatable({}, { __tostring = function(self) return self.DESC or "TRUNK" end })
-TUBE = setmetatable({}, { __tostring = function(self) return self.DESC or "TUBE" end })
-PUTTY = setmetatable({}, { __tostring = function(self) return self.DESC or "PUTTY" end })
-ENGRAVINGS = setmetatable({}, { __tostring = function(self) return self.DESC or "ENGRAVINGS" end })
-OWNERS_MANUAL = setmetatable({}, { __tostring = function(self) return self.DESC or "OWNERS_MANUAL" end })
-CLIMBABLE_CLIFF = setmetatable({}, { __tostring = function(self) return self.DESC or "CLIMBABLE_CLIFF" end })
-WHITE_CLIFF = setmetatable({}, { __tostring = function(self) return self.DESC or "WHITE_CLIFF" end })
-WRENCH = setmetatable({}, { __tostring = function(self) return self.DESC or "WRENCH" end })
-CONTROL_PANEL = setmetatable({}, { __tostring = function(self) return self.DESC or "CONTROL_PANEL" end })
-NEST = setmetatable({}, { __tostring = function(self) return self.DESC or "NEST" end })
-EGG = setmetatable({}, { __tostring = function(self) return self.DESC or "EGG" end })
-BROKEN_EGG = setmetatable({}, { __tostring = function(self) return self.DESC or "BROKEN_EGG" end })
-BAUBLE = setmetatable({}, { __tostring = function(self) return self.DESC or "BAUBLE" end })
-CANARY = setmetatable({}, { __tostring = function(self) return self.DESC or "CANARY" end })
-BROKEN_CANARY = setmetatable({}, { __tostring = function(self) return self.DESC or "BROKEN_CANARY" end })
-WEST_OF_HOUSE = setmetatable({}, { __tostring = function(self) return self.DESC or "WEST_OF_HOUSE" end })
-STONE_BARROW = setmetatable({}, { __tostring = function(self) return self.DESC or "STONE_BARROW" end })
-NORTH_OF_HOUSE = setmetatable({}, { __tostring = function(self) return self.DESC or "NORTH_OF_HOUSE" end })
-SOUTH_OF_HOUSE = setmetatable({}, { __tostring = function(self) return self.DESC or "SOUTH_OF_HOUSE" end })
-EAST_OF_HOUSE = setmetatable({}, { __tostring = function(self) return self.DESC or "EAST_OF_HOUSE" end })
-FOREST_1 = setmetatable({}, { __tostring = function(self) return self.DESC or "FOREST_1" end })
-FOREST_2 = setmetatable({}, { __tostring = function(self) return self.DESC or "FOREST_2" end })
-MOUNTAINS = setmetatable({}, { __tostring = function(self) return self.DESC or "MOUNTAINS" end })
-FOREST_3 = setmetatable({}, { __tostring = function(self) return self.DESC or "FOREST_3" end })
-PATH = setmetatable({}, { __tostring = function(self) return self.DESC or "PATH" end })
-UP_A_TREE = setmetatable({}, { __tostring = function(self) return self.DESC or "UP_A_TREE" end })
-GRATING_CLEARING = setmetatable({}, { __tostring = function(self) return self.DESC or "GRATING_CLEARING" end })
-GRATING_EXIT = nil
-CLEARING = setmetatable({}, { __tostring = function(self) return self.DESC or "CLEARING" end })
-KITCHEN = setmetatable({}, { __tostring = function(self) return self.DESC or "KITCHEN" end })
-ATTIC = setmetatable({}, { __tostring = function(self) return self.DESC or "ATTIC" end })
-LIVING_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "LIVING_ROOM" end })
-CELLAR = setmetatable({}, { __tostring = function(self) return self.DESC or "CELLAR" end })
-TROLL_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "TROLL_ROOM" end })
-EAST_OF_CHASM = setmetatable({}, { __tostring = function(self) return self.DESC or "EAST_OF_CHASM" end })
-GALLERY = setmetatable({}, { __tostring = function(self) return self.DESC or "GALLERY" end })
-STUDIO = setmetatable({}, { __tostring = function(self) return self.DESC or "STUDIO" end })
-MAZE_1 = setmetatable({}, { __tostring = function(self) return self.DESC or "MAZE_1" end })
-MAZE_2 = setmetatable({}, { __tostring = function(self) return self.DESC or "MAZE_2" end })
-MAZE_3 = setmetatable({}, { __tostring = function(self) return self.DESC or "MAZE_3" end })
-MAZE_4 = setmetatable({}, { __tostring = function(self) return self.DESC or "MAZE_4" end })
-DEAD_END_1 = setmetatable({}, { __tostring = function(self) return self.DESC or "DEAD_END_1" end })
-MAZE_5 = setmetatable({}, { __tostring = function(self) return self.DESC or "MAZE_5" end })
-DEAD_END_2 = setmetatable({}, { __tostring = function(self) return self.DESC or "DEAD_END_2" end })
-MAZE_6 = setmetatable({}, { __tostring = function(self) return self.DESC or "MAZE_6" end })
-MAZE_7 = setmetatable({}, { __tostring = function(self) return self.DESC or "MAZE_7" end })
-MAZE_8 = setmetatable({}, { __tostring = function(self) return self.DESC or "MAZE_8" end })
-DEAD_END_3 = setmetatable({}, { __tostring = function(self) return self.DESC or "DEAD_END_3" end })
-MAZE_9 = setmetatable({}, { __tostring = function(self) return self.DESC or "MAZE_9" end })
-MAZE_10 = setmetatable({}, { __tostring = function(self) return self.DESC or "MAZE_10" end })
-MAZE_11 = setmetatable({}, { __tostring = function(self) return self.DESC or "MAZE_11" end })
-GRATING_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "GRATING_ROOM" end })
-MAZE_12 = setmetatable({}, { __tostring = function(self) return self.DESC or "MAZE_12" end })
-DEAD_END_4 = setmetatable({}, { __tostring = function(self) return self.DESC or "DEAD_END_4" end })
-MAZE_13 = setmetatable({}, { __tostring = function(self) return self.DESC or "MAZE_13" end })
-MAZE_14 = setmetatable({}, { __tostring = function(self) return self.DESC or "MAZE_14" end })
-MAZE_15 = setmetatable({}, { __tostring = function(self) return self.DESC or "MAZE_15" end })
-CYCLOPS_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "CYCLOPS_ROOM" end })
-STRANGE_PASSAGE = setmetatable({}, { __tostring = function(self) return self.DESC or "STRANGE_PASSAGE" end })
-TREASURE_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "TREASURE_ROOM" end })
-RESERVOIR_SOUTH = setmetatable({}, { __tostring = function(self) return self.DESC or "RESERVOIR_SOUTH" end })
-RESERVOIR = setmetatable({}, { __tostring = function(self) return self.DESC or "RESERVOIR" end })
-RESERVOIR_NORTH = setmetatable({}, { __tostring = function(self) return self.DESC or "RESERVOIR_NORTH" end })
-STREAM_VIEW = setmetatable({}, { __tostring = function(self) return self.DESC or "STREAM_VIEW" end })
-IN_STREAM = setmetatable({}, { __tostring = function(self) return self.DESC or "IN_STREAM" end })
-MIRROR_ROOM_1 = setmetatable({}, { __tostring = function(self) return self.DESC or "MIRROR_ROOM_1" end })
-MIRROR_ROOM_2 = setmetatable({}, { __tostring = function(self) return self.DESC or "MIRROR_ROOM_2" end })
-SMALL_CAVE = setmetatable({}, { __tostring = function(self) return self.DESC or "SMALL_CAVE" end })
-TINY_CAVE = setmetatable({}, { __tostring = function(self) return self.DESC or "TINY_CAVE" end })
-COLD_PASSAGE = setmetatable({}, { __tostring = function(self) return self.DESC or "COLD_PASSAGE" end })
-NARROW_PASSAGE = setmetatable({}, { __tostring = function(self) return self.DESC or "NARROW_PASSAGE" end })
-WINDING_PASSAGE = setmetatable({}, { __tostring = function(self) return self.DESC or "WINDING_PASSAGE" end })
-TWISTING_PASSAGE = setmetatable({}, { __tostring = function(self) return self.DESC or "TWISTING_PASSAGE" end })
-ATLANTIS_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "ATLANTIS_ROOM" end })
-EW_PASSAGE = setmetatable({}, { __tostring = function(self) return self.DESC or "EW_PASSAGE" end })
-ROUND_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "ROUND_ROOM" end })
-DEEP_CANYON = setmetatable({}, { __tostring = function(self) return self.DESC or "DEEP_CANYON" end })
-DAMP_CAVE = setmetatable({}, { __tostring = function(self) return self.DESC or "DAMP_CAVE" end })
-LOUD_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "LOUD_ROOM" end })
-NS_PASSAGE = setmetatable({}, { __tostring = function(self) return self.DESC or "NS_PASSAGE" end })
-CHASM_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "CHASM_ROOM" end })
-ENTRANCE_TO_HADES = setmetatable({}, { __tostring = function(self) return self.DESC or "ENTRANCE_TO_HADES" end })
-LAND_OF_LIVING_DEAD = setmetatable({}, { __tostring = function(self) return self.DESC or "LAND_OF_LIVING_DEAD" end })
-ENGRAVINGS_CAVE = setmetatable({}, { __tostring = function(self) return self.DESC or "ENGRAVINGS_CAVE" end })
-EGYPT_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "EGYPT_ROOM" end })
-DOME_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "DOME_ROOM" end })
-TORCH_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "TORCH_ROOM" end })
-NORTH_TEMPLE = setmetatable({}, { __tostring = function(self) return self.DESC or "NORTH_TEMPLE" end })
-SOUTH_TEMPLE = setmetatable({}, { __tostring = function(self) return self.DESC or "SOUTH_TEMPLE" end })
-DAM_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "DAM_ROOM" end })
-DAM_LOBBY = setmetatable({}, { __tostring = function(self) return self.DESC or "DAM_LOBBY" end })
-MAINTENANCE_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "MAINTENANCE_ROOM" end })
-DAM_BASE = setmetatable({}, { __tostring = function(self) return self.DESC or "DAM_BASE" end })
-RIVER_1 = setmetatable({}, { __tostring = function(self) return self.DESC or "RIVER_1" end })
-RIVER_2 = setmetatable({}, { __tostring = function(self) return self.DESC or "RIVER_2" end })
-RIVER_3 = setmetatable({}, { __tostring = function(self) return self.DESC or "RIVER_3" end })
-WHITE_CLIFFS_NORTH = setmetatable({}, { __tostring = function(self) return self.DESC or "WHITE_CLIFFS_NORTH" end })
-WHITE_CLIFFS_SOUTH = setmetatable({}, { __tostring = function(self) return self.DESC or "WHITE_CLIFFS_SOUTH" end })
-RIVER_4 = setmetatable({}, { __tostring = function(self) return self.DESC or "RIVER_4" end })
-RIVER_5 = setmetatable({}, { __tostring = function(self) return self.DESC or "RIVER_5" end })
-SHORE = setmetatable({}, { __tostring = function(self) return self.DESC or "SHORE" end })
-SANDY_BEACH = setmetatable({}, { __tostring = function(self) return self.DESC or "SANDY_BEACH" end })
-SANDY_CAVE = setmetatable({}, { __tostring = function(self) return self.DESC or "SANDY_CAVE" end })
-ARAGAIN_FALLS = setmetatable({}, { __tostring = function(self) return self.DESC or "ARAGAIN_FALLS" end })
-ON_RAINBOW = setmetatable({}, { __tostring = function(self) return self.DESC or "ON_RAINBOW" end })
-END_OF_RAINBOW = setmetatable({}, { __tostring = function(self) return self.DESC or "END_OF_RAINBOW" end })
-CANYON_BOTTOM = setmetatable({}, { __tostring = function(self) return self.DESC or "CANYON_BOTTOM" end })
-CLIFF_MIDDLE = setmetatable({}, { __tostring = function(self) return self.DESC or "CLIFF_MIDDLE" end })
-CANYON_VIEW = setmetatable({}, { __tostring = function(self) return self.DESC or "CANYON_VIEW" end })
-CANYON_VIEW_F = nil
-MINE_ENTRANCE = setmetatable({}, { __tostring = function(self) return self.DESC or "MINE_ENTRANCE" end })
-SQUEEKY_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "SQUEEKY_ROOM" end })
-BAT_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "BAT_ROOM" end })
-SHAFT_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "SHAFT_ROOM" end })
-SMELLY_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "SMELLY_ROOM" end })
-GAS_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "GAS_ROOM" end })
-LADDER_TOP = setmetatable({}, { __tostring = function(self) return self.DESC or "LADDER_TOP" end })
-LADDER_BOTTOM = setmetatable({}, { __tostring = function(self) return self.DESC or "LADDER_BOTTOM" end })
-DEAD_END_5 = setmetatable({}, { __tostring = function(self) return self.DESC or "DEAD_END_5" end })
-TIMBER_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "TIMBER_ROOM" end })
-LOWER_SHAFT = setmetatable({}, { __tostring = function(self) return self.DESC or "LOWER_SHAFT" end })
-MACHINE_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "MACHINE_ROOM" end })
-MINE_1 = setmetatable({}, { __tostring = function(self) return self.DESC or "MINE_1" end })
-MINE_2 = setmetatable({}, { __tostring = function(self) return self.DESC or "MINE_2" end })
-MINE_3 = setmetatable({}, { __tostring = function(self) return self.DESC or "MINE_3" end })
-MINE_4 = setmetatable({}, { __tostring = function(self) return self.DESC or "MINE_4" end })
-SLIDE_ROOM = setmetatable({}, { __tostring = function(self) return self.DESC or "SLIDE_ROOM" end })
-GO = nil
+BOARD = DECL_OBJECT("BOARD")
+TEETH = DECL_OBJECT("TEETH")
+WALL = DECL_OBJECT("WALL")
+GRANITE_WALL = DECL_OBJECT("GRANITE_WALL")
+SONGBIRD = DECL_OBJECT("SONGBIRD")
+WHITE_HOUSE = DECL_OBJECT("WHITE_HOUSE")
+FOREST = DECL_OBJECT("FOREST")
+TREE = DECL_OBJECT("TREE")
+MOUNTAIN_RANGE = DECL_OBJECT("MOUNTAIN_RANGE")
+GLOBAL_WATER = DECL_OBJECT("GLOBAL_WATER")
+WATER = DECL_OBJECT("WATER")
+KITCHEN_WINDOW = DECL_OBJECT("KITCHEN_WINDOW")
+CHIMNEY = DECL_OBJECT("CHIMNEY")
+GHOSTS = DECL_OBJECT("GHOSTS")
+SKULL = DECL_OBJECT("SKULL")
+LOWERED_BASKET = DECL_OBJECT("LOWERED_BASKET")
+RAISED_BASKET = DECL_OBJECT("RAISED_BASKET")
+LUNCH = DECL_OBJECT("LUNCH")
+BAT = DECL_OBJECT("BAT")
+BELL = DECL_OBJECT("BELL")
+HOT_BELL = DECL_OBJECT("HOT_BELL")
+AXE = DECL_OBJECT("AXE")
+BOLT = DECL_OBJECT("BOLT")
+BUBBLE = DECL_OBJECT("BUBBLE")
+ALTAR = DECL_OBJECT("ALTAR")
+BOOK = DECL_OBJECT("BOOK")
+BROKEN_LAMP = DECL_OBJECT("BROKEN_LAMP")
+SCEPTRE = DECL_OBJECT("SCEPTRE")
+TIMBERS = DECL_OBJECT("TIMBERS")
+SLIDE = DECL_OBJECT("SLIDE")
+KITCHEN_TABLE = DECL_OBJECT("KITCHEN_TABLE")
+ATTIC_TABLE = DECL_OBJECT("ATTIC_TABLE")
+SANDWICH_BAG = DECL_OBJECT("SANDWICH_BAG")
+TOOL_CHEST = DECL_OBJECT("TOOL_CHEST")
+YELLOW_BUTTON = DECL_OBJECT("YELLOW_BUTTON")
+BROWN_BUTTON = DECL_OBJECT("BROWN_BUTTON")
+RED_BUTTON = DECL_OBJECT("RED_BUTTON")
+BLUE_BUTTON = DECL_OBJECT("BLUE_BUTTON")
+TROPHY_CASE = DECL_OBJECT("TROPHY_CASE")
+RUG = DECL_OBJECT("RUG")
+CHALICE = DECL_OBJECT("CHALICE")
+GARLIC = DECL_OBJECT("GARLIC")
+TRIDENT = DECL_OBJECT("TRIDENT")
+CYCLOPS = DECL_OBJECT("CYCLOPS")
+DAM = DECL_OBJECT("DAM")
+TRAP_DOOR = DECL_OBJECT("TRAP_DOOR")
+BOARDED_WINDOW = DECL_OBJECT("BOARDED_WINDOW")
+FRONT_DOOR = DECL_OBJECT("FRONT_DOOR")
+BARROW_DOOR = DECL_OBJECT("BARROW_DOOR")
+BARROW = DECL_OBJECT("BARROW")
+BOTTLE = DECL_OBJECT("BOTTLE")
+CRACK = DECL_OBJECT("CRACK")
+COFFIN = DECL_OBJECT("COFFIN")
+GRATE = DECL_OBJECT("GRATE")
+PUMP = DECL_OBJECT("PUMP")
+DIAMOND = DECL_OBJECT("DIAMOND")
+JADE = DECL_OBJECT("JADE")
+KNIFE = DECL_OBJECT("KNIFE")
+BONES = DECL_OBJECT("BONES")
+BURNED_OUT_LANTERN = DECL_OBJECT("BURNED_OUT_LANTERN")
+BAG_OF_COINS = DECL_OBJECT("BAG_OF_COINS")
+LAMP = DECL_OBJECT("LAMP")
+EMERALD = DECL_OBJECT("EMERALD")
+ADVERTISEMENT = DECL_OBJECT("ADVERTISEMENT")
+LEAK = DECL_OBJECT("LEAK")
+MACHINE = DECL_OBJECT("MACHINE")
+INFLATED_BOAT = DECL_OBJECT("INFLATED_BOAT")
+MAILBOX = DECL_OBJECT("MAILBOX")
+MATCH = DECL_OBJECT("MATCH")
+MIRROR_2 = DECL_OBJECT("MIRROR_2")
+MIRROR_1 = DECL_OBJECT("MIRROR_1")
+PAINTING = DECL_OBJECT("PAINTING")
+CANDLES = DECL_OBJECT("CANDLES")
+GUNK = DECL_OBJECT("GUNK")
+BODIES = DECL_OBJECT("BODIES")
+LEAVES = DECL_OBJECT("LEAVES")
+PUNCTURED_BOAT = DECL_OBJECT("PUNCTURED_BOAT")
+INFLATABLE_BOAT = DECL_OBJECT("INFLATABLE_BOAT")
+BAR = DECL_OBJECT("BAR")
+POT_OF_GOLD = DECL_OBJECT("POT_OF_GOLD")
+PRAYER = DECL_OBJECT("PRAYER")
+RAILING = DECL_OBJECT("RAILING")
+RAINBOW = DECL_OBJECT("RAINBOW")
+RIVER = DECL_OBJECT("RIVER")
+BUOY = DECL_OBJECT("BUOY")
+ROPE = DECL_OBJECT("ROPE")
+RUSTY_KNIFE = DECL_OBJECT("RUSTY_KNIFE")
+SAND = DECL_OBJECT("SAND")
+BRACELET = DECL_OBJECT("BRACELET")
+SCREWDRIVER = DECL_OBJECT("SCREWDRIVER")
+KEYS = DECL_OBJECT("KEYS")
+SHOVEL = DECL_OBJECT("SHOVEL")
+COAL = DECL_OBJECT("COAL")
+LADDER = DECL_OBJECT("LADDER")
+SCARAB = DECL_OBJECT("SCARAB")
+LARGE_BAG = DECL_OBJECT("LARGE_BAG")
+STILETTO = DECL_OBJECT("STILETTO")
+MACHINE_SWITCH = DECL_OBJECT("MACHINE_SWITCH")
+WOODEN_DOOR = DECL_OBJECT("WOODEN_DOOR")
+SWORD = DECL_OBJECT("SWORD")
+MAP = DECL_OBJECT("MAP")
+BOAT_LABEL = DECL_OBJECT("BOAT_LABEL")
+THIEF = DECL_OBJECT("THIEF")
+PEDESTAL = DECL_OBJECT("PEDESTAL")
+TORCH = DECL_OBJECT("TORCH")
+GUIDE = DECL_OBJECT("GUIDE")
+TROLL = DECL_OBJECT("TROLL")
+TRUNK = DECL_OBJECT("TRUNK")
+TUBE = DECL_OBJECT("TUBE")
+PUTTY = DECL_OBJECT("PUTTY")
+ENGRAVINGS = DECL_OBJECT("ENGRAVINGS")
+OWNERS_MANUAL = DECL_OBJECT("OWNERS_MANUAL")
+CLIMBABLE_CLIFF = DECL_OBJECT("CLIMBABLE_CLIFF")
+WHITE_CLIFF = DECL_OBJECT("WHITE_CLIFF")
+WRENCH = DECL_OBJECT("WRENCH")
+CONTROL_PANEL = DECL_OBJECT("CONTROL_PANEL")
+NEST = DECL_OBJECT("NEST")
+EGG = DECL_OBJECT("EGG")
+BROKEN_EGG = DECL_OBJECT("BROKEN_EGG")
+BAUBLE = DECL_OBJECT("BAUBLE")
+CANARY = DECL_OBJECT("CANARY")
+BROKEN_CANARY = DECL_OBJECT("BROKEN_CANARY")
+WEST_OF_HOUSE = DECL_OBJECT("WEST_OF_HOUSE")
+STONE_BARROW = DECL_OBJECT("STONE_BARROW")
+NORTH_OF_HOUSE = DECL_OBJECT("NORTH_OF_HOUSE")
+SOUTH_OF_HOUSE = DECL_OBJECT("SOUTH_OF_HOUSE")
+EAST_OF_HOUSE = DECL_OBJECT("EAST_OF_HOUSE")
+FOREST_1 = DECL_OBJECT("FOREST_1")
+FOREST_2 = DECL_OBJECT("FOREST_2")
+MOUNTAINS = DECL_OBJECT("MOUNTAINS")
+FOREST_3 = DECL_OBJECT("FOREST_3")
+PATH = DECL_OBJECT("PATH")
+UP_A_TREE = DECL_OBJECT("UP_A_TREE")
+GRATING_CLEARING = DECL_OBJECT("GRATING_CLEARING")
+CLEARING = DECL_OBJECT("CLEARING")
+KITCHEN = DECL_OBJECT("KITCHEN")
+ATTIC = DECL_OBJECT("ATTIC")
+LIVING_ROOM = DECL_OBJECT("LIVING_ROOM")
+CELLAR = DECL_OBJECT("CELLAR")
+TROLL_ROOM = DECL_OBJECT("TROLL_ROOM")
+EAST_OF_CHASM = DECL_OBJECT("EAST_OF_CHASM")
+GALLERY = DECL_OBJECT("GALLERY")
+STUDIO = DECL_OBJECT("STUDIO")
+MAZE_1 = DECL_OBJECT("MAZE_1")
+MAZE_2 = DECL_OBJECT("MAZE_2")
+MAZE_3 = DECL_OBJECT("MAZE_3")
+MAZE_4 = DECL_OBJECT("MAZE_4")
+DEAD_END_1 = DECL_OBJECT("DEAD_END_1")
+MAZE_5 = DECL_OBJECT("MAZE_5")
+DEAD_END_2 = DECL_OBJECT("DEAD_END_2")
+MAZE_6 = DECL_OBJECT("MAZE_6")
+MAZE_7 = DECL_OBJECT("MAZE_7")
+MAZE_8 = DECL_OBJECT("MAZE_8")
+DEAD_END_3 = DECL_OBJECT("DEAD_END_3")
+MAZE_9 = DECL_OBJECT("MAZE_9")
+MAZE_10 = DECL_OBJECT("MAZE_10")
+MAZE_11 = DECL_OBJECT("MAZE_11")
+GRATING_ROOM = DECL_OBJECT("GRATING_ROOM")
+MAZE_12 = DECL_OBJECT("MAZE_12")
+DEAD_END_4 = DECL_OBJECT("DEAD_END_4")
+MAZE_13 = DECL_OBJECT("MAZE_13")
+MAZE_14 = DECL_OBJECT("MAZE_14")
+MAZE_15 = DECL_OBJECT("MAZE_15")
+CYCLOPS_ROOM = DECL_OBJECT("CYCLOPS_ROOM")
+STRANGE_PASSAGE = DECL_OBJECT("STRANGE_PASSAGE")
+TREASURE_ROOM = DECL_OBJECT("TREASURE_ROOM")
+RESERVOIR_SOUTH = DECL_OBJECT("RESERVOIR_SOUTH")
+RESERVOIR = DECL_OBJECT("RESERVOIR")
+RESERVOIR_NORTH = DECL_OBJECT("RESERVOIR_NORTH")
+STREAM_VIEW = DECL_OBJECT("STREAM_VIEW")
+IN_STREAM = DECL_OBJECT("IN_STREAM")
+MIRROR_ROOM_1 = DECL_OBJECT("MIRROR_ROOM_1")
+MIRROR_ROOM_2 = DECL_OBJECT("MIRROR_ROOM_2")
+SMALL_CAVE = DECL_OBJECT("SMALL_CAVE")
+TINY_CAVE = DECL_OBJECT("TINY_CAVE")
+COLD_PASSAGE = DECL_OBJECT("COLD_PASSAGE")
+NARROW_PASSAGE = DECL_OBJECT("NARROW_PASSAGE")
+WINDING_PASSAGE = DECL_OBJECT("WINDING_PASSAGE")
+TWISTING_PASSAGE = DECL_OBJECT("TWISTING_PASSAGE")
+ATLANTIS_ROOM = DECL_OBJECT("ATLANTIS_ROOM")
+EW_PASSAGE = DECL_OBJECT("EW_PASSAGE")
+ROUND_ROOM = DECL_OBJECT("ROUND_ROOM")
+DEEP_CANYON = DECL_OBJECT("DEEP_CANYON")
+DAMP_CAVE = DECL_OBJECT("DAMP_CAVE")
+LOUD_ROOM = DECL_OBJECT("LOUD_ROOM")
+NS_PASSAGE = DECL_OBJECT("NS_PASSAGE")
+CHASM_ROOM = DECL_OBJECT("CHASM_ROOM")
+ENTRANCE_TO_HADES = DECL_OBJECT("ENTRANCE_TO_HADES")
+LAND_OF_LIVING_DEAD = DECL_OBJECT("LAND_OF_LIVING_DEAD")
+ENGRAVINGS_CAVE = DECL_OBJECT("ENGRAVINGS_CAVE")
+EGYPT_ROOM = DECL_OBJECT("EGYPT_ROOM")
+DOME_ROOM = DECL_OBJECT("DOME_ROOM")
+TORCH_ROOM = DECL_OBJECT("TORCH_ROOM")
+NORTH_TEMPLE = DECL_OBJECT("NORTH_TEMPLE")
+SOUTH_TEMPLE = DECL_OBJECT("SOUTH_TEMPLE")
+DAM_ROOM = DECL_OBJECT("DAM_ROOM")
+DAM_LOBBY = DECL_OBJECT("DAM_LOBBY")
+MAINTENANCE_ROOM = DECL_OBJECT("MAINTENANCE_ROOM")
+DAM_BASE = DECL_OBJECT("DAM_BASE")
+RIVER_1 = DECL_OBJECT("RIVER_1")
+RIVER_2 = DECL_OBJECT("RIVER_2")
+RIVER_3 = DECL_OBJECT("RIVER_3")
+WHITE_CLIFFS_NORTH = DECL_OBJECT("WHITE_CLIFFS_NORTH")
+WHITE_CLIFFS_SOUTH = DECL_OBJECT("WHITE_CLIFFS_SOUTH")
+RIVER_4 = DECL_OBJECT("RIVER_4")
+RIVER_5 = DECL_OBJECT("RIVER_5")
+SHORE = DECL_OBJECT("SHORE")
+SANDY_BEACH = DECL_OBJECT("SANDY_BEACH")
+SANDY_CAVE = DECL_OBJECT("SANDY_CAVE")
+ARAGAIN_FALLS = DECL_OBJECT("ARAGAIN_FALLS")
+ON_RAINBOW = DECL_OBJECT("ON_RAINBOW")
+END_OF_RAINBOW = DECL_OBJECT("END_OF_RAINBOW")
+CANYON_BOTTOM = DECL_OBJECT("CANYON_BOTTOM")
+CLIFF_MIDDLE = DECL_OBJECT("CLIFF_MIDDLE")
+CANYON_VIEW = DECL_OBJECT("CANYON_VIEW")
+MINE_ENTRANCE = DECL_OBJECT("MINE_ENTRANCE")
+SQUEEKY_ROOM = DECL_OBJECT("SQUEEKY_ROOM")
+BAT_ROOM = DECL_OBJECT("BAT_ROOM")
+SHAFT_ROOM = DECL_OBJECT("SHAFT_ROOM")
+SMELLY_ROOM = DECL_OBJECT("SMELLY_ROOM")
+GAS_ROOM = DECL_OBJECT("GAS_ROOM")
+LADDER_TOP = DECL_OBJECT("LADDER_TOP")
+LADDER_BOTTOM = DECL_OBJECT("LADDER_BOTTOM")
+DEAD_END_5 = DECL_OBJECT("DEAD_END_5")
+TIMBER_ROOM = DECL_OBJECT("TIMBER_ROOM")
+LOWER_SHAFT = DECL_OBJECT("LOWER_SHAFT")
+MACHINE_ROOM = DECL_OBJECT("MACHINE_ROOM")
+MINE_1 = DECL_OBJECT("MINE_1")
+MINE_2 = DECL_OBJECT("MINE_2")
+MINE_3 = DECL_OBJECT("MINE_3")
+MINE_4 = DECL_OBJECT("MINE_4")
+SLIDE_ROOM = DECL_OBJECT("SLIDE_ROOM")
 
 DIRECTIONS("NORTH", "EAST", "WEST", "SOUTH", "NE", "NW", "SE", "SW", "UP", "DOWN", "IN", "OUT", "LAND", nil)
 SCORE_MAX = 350
@@ -243,7 +239,7 @@ OBJECT {
 	LOC = LOCAL_GLOBALS,
 	SYNONYM = {"BOARDS","BOARD"},
 	DESC = "board",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 	ACTION = BOARD_F,
 }
 OBJECT {
@@ -251,7 +247,7 @@ OBJECT {
 	LOC = GLOBAL_OBJECTS,
 	SYNONYM = {"OVERBOARD","TEETH"},
 	DESC = "set of teeth",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 	ACTION = TEETH_F,
 }
 OBJECT {
@@ -275,7 +271,7 @@ OBJECT {
 	SYNONYM = {"BIRD","SONGBIRD"},
 	ADJECTIVE = {"SONG"},
 	DESC = "songbird",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 	ACTION = SONGBIRD_F,
 }
 OBJECT {
@@ -284,7 +280,7 @@ OBJECT {
 	SYNONYM = {"HOUSE"},
 	ADJECTIVE = {"WHITE","BEAUTI","COLONI"},
 	DESC = "white house",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 	ACTION = WHITE_HOUSE_F,
 }
 OBJECT {
@@ -292,7 +288,7 @@ OBJECT {
 	LOC = LOCAL_GLOBALS,
 	SYNONYM = {"FOREST","TREES","PINES","HEMLOCKS"},
 	DESC = "forest",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 	ACTION = FOREST_F,
 }
 OBJECT {
@@ -301,7 +297,7 @@ OBJECT {
 	SYNONYM = {"TREE","BRANCH"},
 	ADJECTIVE = {"LARGE","STORM"},
 	DESC = "tree",
-	FLAGS = (1<<NDESCBIT)|(1<<CLIMBBIT),
+	FLAGS = {"NDESCBIT","CLIMBBIT"},
 }
 OBJECT {
 	NAME = "MOUNTAIN_RANGE",
@@ -309,7 +305,7 @@ OBJECT {
 	DESC = "mountain range",
 	SYNONYM = {"MOUNTAIN","RANGE"},
 	ADJECTIVE = {"IMPASSABLE","FLATHEAD"},
-	FLAGS = (1<<NDESCBIT)|(1<<CLIMBBIT),
+	FLAGS = {"NDESCBIT","CLIMBBIT"},
 	ACTION = MOUNTAIN_RANGE_F,
 }
 OBJECT {
@@ -317,7 +313,7 @@ OBJECT {
 	LOC = LOCAL_GLOBALS,
 	SYNONYM = {"WATER","QUANTITY"},
 	DESC = "water",
-	FLAGS = (1<<DRINKBIT),
+	FLAGS = {"DRINKBIT"},
 	ACTION = WATER_F,
 }
 OBJECT {
@@ -325,7 +321,7 @@ OBJECT {
 	LOC = BOTTLE,
 	SYNONYM = {"WATER","QUANTITY","LIQUID","H2O"},
 	DESC = "quantity of water",
-	FLAGS = (1<<TRYTAKEBIT)|(1<<TAKEBIT)|(1<<DRINKBIT),
+	FLAGS = {"TRYTAKEBIT","TAKEBIT","DRINKBIT"},
 	ACTION = WATER_F,
 	SIZE = 4,
 }
@@ -335,7 +331,7 @@ OBJECT {
 	SYNONYM = {"WINDOW"},
 	ADJECTIVE = {"KITCHEN","SMALL"},
 	DESC = "kitchen window",
-	FLAGS = (1<<DOORBIT)|(1<<NDESCBIT),
+	FLAGS = {"DOORBIT","NDESCBIT"},
 	ACTION = KITCHEN_WINDOW_F,
 }
 OBJECT {
@@ -345,7 +341,7 @@ OBJECT {
 	ADJECTIVE = {"DARK","NARROW"},
 	DESC = "chimney",
 	ACTION = CHIMNEY_F,
-	FLAGS = (1<<CLIMBBIT)|(1<<NDESCBIT),
+	FLAGS = {"CLIMBBIT","NDESCBIT"},
 }
 OBJECT {
 	NAME = "GHOSTS",
@@ -353,7 +349,7 @@ OBJECT {
 	SYNONYM = {"GHOSTS","SPIRITS","FIENDS","FORCE"},
 	ADJECTIVE = {"INVISIBLE","EVIL"},
 	DESC = "number of ghosts",
-	FLAGS = (1<<ACTORBIT)|(1<<NDESCBIT),
+	FLAGS = {"ACTORBIT","NDESCBIT"},
 	ACTION = GHOSTS_F,
 }
 OBJECT {
@@ -363,7 +359,7 @@ OBJECT {
 	ADJECTIVE = {"CRYSTAL"},
 	DESC = "crystal skull",
 	FDESC = "Lying in one corner of the room is a beautifully carved crystal skull.\nIt appears to be grinning at you rather nastily.",
-	FLAGS = (1<<TAKEBIT),
+	FLAGS = {"TAKEBIT"},
 	VALUE = 10,
 	TVALUE = 10,
 }
@@ -374,7 +370,7 @@ OBJECT {
 	ADJECTIVE = {"LOWERED"},
 	LDESC = "From the chain is suspended a basket.",
 	DESC = "basket",
-	FLAGS = (1<<TRYTAKEBIT),
+	FLAGS = {"TRYTAKEBIT"},
 	ACTION = BASKET_F,
 }
 OBJECT {
@@ -382,7 +378,7 @@ OBJECT {
 	LOC = SHAFT_ROOM,
 	SYNONYM = {"CAGE","DUMBWAITER","BASKET"},
 	DESC = "basket",
-	FLAGS = (1<<TRANSBIT)|(1<<TRYTAKEBIT)|(1<<CONTBIT)|(1<<OPENBIT),
+	FLAGS = {"TRANSBIT","TRYTAKEBIT","CONTBIT","OPENBIT"},
 	ACTION = BASKET_F,
 	LDESC = "At the end of the chain is a basket.",
 	CAPACITY = 50,
@@ -393,7 +389,7 @@ OBJECT {
 	SYNONYM = {"FOOD","SANDWICH","LUNCH","DINNER"},
 	ADJECTIVE = {"HOT","PEPPER"},
 	DESC = "lunch",
-	FLAGS = (1<<TAKEBIT)|(1<<FOODBIT),
+	FLAGS = {"TAKEBIT","FOODBIT"},
 	LDESC = "A hot pepper sandwich is here.",
 }
 OBJECT {
@@ -402,7 +398,7 @@ OBJECT {
 	SYNONYM = {"BAT","VAMPIRE"},
 	ADJECTIVE = {"VAMPIRE","DERANGED"},
 	DESC = "bat",
-	FLAGS = (1<<ACTORBIT)|(1<<TRYTAKEBIT),
+	FLAGS = {"ACTORBIT","TRYTAKEBIT"},
 	DESCFCN = BAT_D,
 	ACTION = BAT_F,
 }
@@ -412,7 +408,7 @@ OBJECT {
 	SYNONYM = {"BELL"},
 	ADJECTIVE = {"SMALL","BRASS"},
 	DESC = "brass bell",
-	FLAGS = (1<<TAKEBIT),
+	FLAGS = {"TAKEBIT"},
 	ACTION = BELL_F,
 }
 OBJECT {
@@ -420,7 +416,7 @@ OBJECT {
 	SYNONYM = {"BELL"},
 	ADJECTIVE = {"BRASS","HOT","RED","SMALL"},
 	DESC = "red hot brass bell",
-	FLAGS = (1<<TRYTAKEBIT),
+	FLAGS = {"TRYTAKEBIT"},
 	ACTION = HOT_BELL_F,
 	LDESC = "On the ground is a red hot bell.",
 }
@@ -430,7 +426,7 @@ OBJECT {
 	SYNONYM = {"AXE","AX"},
 	ADJECTIVE = {"BLOODY"},
 	DESC = "bloody axe",
-	FLAGS = (1<<WEAPONBIT)|(1<<TRYTAKEBIT)|(1<<TAKEBIT)|(1<<NDESCBIT),
+	FLAGS = {"WEAPONBIT","TRYTAKEBIT","TAKEBIT","NDESCBIT"},
 	ACTION = AXE_F,
 	SIZE = 25,
 }
@@ -440,7 +436,7 @@ OBJECT {
 	SYNONYM = {"BOLT","NUT"},
 	ADJECTIVE = {"METAL","LARGE"},
 	DESC = "bolt",
-	FLAGS = (1<<NDESCBIT)|(1<<TURNBIT)|(1<<TRYTAKEBIT),
+	FLAGS = {"NDESCBIT","TURNBIT","TRYTAKEBIT"},
 	ACTION = BOLT_F,
 }
 OBJECT {
@@ -449,7 +445,7 @@ OBJECT {
 	SYNONYM = {"BUBBLE"},
 	ADJECTIVE = {"SMALL","GREEN","PLASTIC"},
 	DESC = "green bubble",
-	FLAGS = (1<<NDESCBIT)|(1<<TRYTAKEBIT),
+	FLAGS = {"NDESCBIT","TRYTAKEBIT"},
 	ACTION = BUBBLE_F,
 }
 OBJECT {
@@ -457,7 +453,7 @@ OBJECT {
 	LOC = SOUTH_TEMPLE,
 	SYNONYM = {"ALTAR"},
 	DESC = "altar",
-	FLAGS = (1<<NDESCBIT)|(1<<SURFACEBIT)|(1<<CONTBIT)|(1<<OPENBIT),
+	FLAGS = {"NDESCBIT","SURFACEBIT","CONTBIT","OPENBIT"},
 	CAPACITY = 50,
 }
 OBJECT {
@@ -466,7 +462,7 @@ OBJECT {
 	SYNONYM = {"BOOK","PRAYER","PAGE","BOOKS"},
 	ADJECTIVE = {"LARGE","BLACK"},
 	DESC = "black book",
-	FLAGS = (1<<READBIT)|(1<<TAKEBIT)|(1<<CONTBIT)|(1<<BURNBIT)|(1<<TURNBIT),
+	FLAGS = {"READBIT","TAKEBIT","CONTBIT","BURNBIT","TURNBIT"},
 	ACTION = BLACK_BOOK,
 	FDESC = "On the altar is a large black book, open to page 569.",
 	SIZE = 10,
@@ -477,7 +473,7 @@ OBJECT {
 	SYNONYM = {"LAMP","LANTERN"},
 	ADJECTIVE = {"BROKEN"},
 	DESC = "broken lantern",
-	FLAGS = (1<<TAKEBIT),
+	FLAGS = {"TAKEBIT"},
 }
 OBJECT {
 	NAME = "SCEPTRE",
@@ -485,7 +481,7 @@ OBJECT {
 	SYNONYM = {"SCEPTRE","SCEPTER","TREASURE"},
 	ADJECTIVE = {"SHARP","EGYPTIAN","ANCIENT","ENAMELED"},
 	DESC = "sceptre",
-	FLAGS = (1<<TAKEBIT)|(1<<WEAPONBIT),
+	FLAGS = {"TAKEBIT","WEAPONBIT"},
 	ACTION = SCEPTRE_FUNCTION,
 	LDESC = "An ornamented sceptre, tapering to a sharp point, is here.",
 	FDESC = "A sceptre, possibly that of ancient Egypt itself, is in the coffin. The\nsceptre is ornamented with colored enamel, and tapers to a sharp point.",
@@ -499,7 +495,7 @@ OBJECT {
 	SYNONYM = {"TIMBERS","PILE"},
 	ADJECTIVE = {"WOODEN","BROKEN"},
 	DESC = "broken timber",
-	FLAGS = (1<<TAKEBIT),
+	FLAGS = {"TAKEBIT"},
 	SIZE = 50,
 }
 OBJECT {
@@ -508,7 +504,7 @@ OBJECT {
 	SYNONYM = {"CHUTE","RAMP","SLIDE"},
 	ADJECTIVE = {"STEEP","METAL","TWISTING"},
 	DESC = "chute",
-	FLAGS = (1<<CLIMBBIT),
+	FLAGS = {"CLIMBBIT"},
 	ACTION = SLIDE_FUNCTION,
 }
 OBJECT {
@@ -517,7 +513,7 @@ OBJECT {
 	SYNONYM = {"TABLE"},
 	ADJECTIVE = {"KITCHEN"},
 	DESC = "kitchen table",
-	FLAGS = (1<<NDESCBIT)|(1<<CONTBIT)|(1<<OPENBIT)|(1<<SURFACEBIT),
+	FLAGS = {"NDESCBIT","CONTBIT","OPENBIT","SURFACEBIT"},
 	CAPACITY = 50,
 }
 OBJECT {
@@ -525,7 +521,7 @@ OBJECT {
 	LOC = ATTIC,
 	SYNONYM = {"TABLE"},
 	DESC = "table",
-	FLAGS = (1<<NDESCBIT)|(1<<CONTBIT)|(1<<OPENBIT)|(1<<SURFACEBIT),
+	FLAGS = {"NDESCBIT","CONTBIT","OPENBIT","SURFACEBIT"},
 	CAPACITY = 40,
 }
 OBJECT {
@@ -534,7 +530,7 @@ OBJECT {
 	SYNONYM = {"BAG","SACK"},
 	ADJECTIVE = {"BROWN","ELONGATED","SMELLY"},
 	DESC = "brown sack",
-	FLAGS = (1<<TAKEBIT)|(1<<CONTBIT)|(1<<BURNBIT),
+	FLAGS = {"TAKEBIT","CONTBIT","BURNBIT"},
 	FDESC = "On the table is an elongated brown sack, smelling of hot peppers.",
 	CAPACITY = 9,
 	SIZE = 9,
@@ -546,7 +542,7 @@ OBJECT {
 	SYNONYM = {"CHEST","CHESTS","GROUP","TOOLCHESTS"},
 	ADJECTIVE = {"TOOL"},
 	DESC = "group of tool chests",
-	FLAGS = (1<<CONTBIT)|(1<<OPENBIT)|(1<<TRYTAKEBIT)|(1<<SACREDBIT),
+	FLAGS = {"CONTBIT","OPENBIT","TRYTAKEBIT","SACREDBIT"},
 	ACTION = TOOL_CHEST_FCN,
 }
 OBJECT {
@@ -555,7 +551,7 @@ OBJECT {
 	SYNONYM = {"BUTTON","SWITCH"},
 	ADJECTIVE = {"YELLOW"},
 	DESC = "yellow button",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 	ACTION = BUTTON_F,
 }
 OBJECT {
@@ -564,7 +560,7 @@ OBJECT {
 	SYNONYM = {"BUTTON","SWITCH"},
 	ADJECTIVE = {"BROWN"},
 	DESC = "brown button",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 	ACTION = BUTTON_F,
 }
 OBJECT {
@@ -573,7 +569,7 @@ OBJECT {
 	SYNONYM = {"BUTTON","SWITCH"},
 	ADJECTIVE = {"RED"},
 	DESC = "red button",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 	ACTION = BUTTON_F,
 }
 OBJECT {
@@ -582,7 +578,7 @@ OBJECT {
 	SYNONYM = {"BUTTON","SWITCH"},
 	ADJECTIVE = {"BLUE"},
 	DESC = "blue button",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 	ACTION = BUTTON_F,
 }
 OBJECT {
@@ -591,7 +587,7 @@ OBJECT {
 	SYNONYM = {"CASE"},
 	ADJECTIVE = {"TROPHY"},
 	DESC = "trophy case",
-	FLAGS = (1<<TRANSBIT)|(1<<CONTBIT)|(1<<NDESCBIT)|(1<<TRYTAKEBIT)|(1<<SEARCHBIT),
+	FLAGS = {"TRANSBIT","CONTBIT","NDESCBIT","TRYTAKEBIT","SEARCHBIT"},
 	ACTION = TROPHY_CASE_FCN,
 	CAPACITY = 10000,
 }
@@ -601,7 +597,7 @@ OBJECT {
 	SYNONYM = {"RUG","CARPET"},
 	ADJECTIVE = {"LARGE","ORIENTAL"},
 	DESC = "carpet",
-	FLAGS = (1<<NDESCBIT)|(1<<TRYTAKEBIT),
+	FLAGS = {"NDESCBIT","TRYTAKEBIT"},
 	ACTION = RUG_FCN,
 }
 OBJECT {
@@ -610,7 +606,7 @@ OBJECT {
 	SYNONYM = {"CHALICE","CUP","SILVER","TREASURE"},
 	ADJECTIVE = {"SILVER","ENGRAVINGS"},
 	DESC = "chalice",
-	FLAGS = (1<<TAKEBIT)|(1<<TRYTAKEBIT)|(1<<CONTBIT),
+	FLAGS = {"TAKEBIT","TRYTAKEBIT","CONTBIT"},
 	ACTION = CHALICE_FCN,
 	LDESC = "There is a silver chalice, intricately engraved, here.",
 	CAPACITY = 5,
@@ -623,7 +619,7 @@ OBJECT {
 	LOC = SANDWICH_BAG,
 	SYNONYM = {"GARLIC","CLOVE"},
 	DESC = "clove of garlic",
-	FLAGS = (1<<TAKEBIT)|(1<<FOODBIT),
+	FLAGS = {"TAKEBIT","FOODBIT"},
 	ACTION = GARLIC_F,
 	SIZE = 4,
 }
@@ -633,7 +629,7 @@ OBJECT {
 	SYNONYM = {"TRIDENT","FORK","TREASURE"},
 	ADJECTIVE = {"POSEIDON","OWN","CRYSTAL"},
 	DESC = "crystal trident",
-	FLAGS = (1<<TAKEBIT),
+	FLAGS = {"TAKEBIT"},
 	FDESC = "On the shore lies Poseidon's own crystal trident.",
 	SIZE = 20,
 	VALUE = 4,
@@ -645,7 +641,7 @@ OBJECT {
 	SYNONYM = {"CYCLOPS","MONSTER","EYE"},
 	ADJECTIVE = {"HUNGRY","GIANT"},
 	DESC = "cyclops",
-	FLAGS = (1<<ACTORBIT)|(1<<NDESCBIT)|(1<<TRYTAKEBIT),
+	FLAGS = {"ACTORBIT","NDESCBIT","TRYTAKEBIT"},
 	ACTION = CYCLOPS_FCN,
 	STRENGTH = 10000,
 }
@@ -654,7 +650,7 @@ OBJECT {
 	LOC = DAM_ROOM,
 	SYNONYM = {"DAM","GATE","GATES","FCD/#3"},
 	DESC = "dam",
-	FLAGS = (1<<NDESCBIT)|(1<<TRYTAKEBIT),
+	FLAGS = {"NDESCBIT","TRYTAKEBIT"},
 	ACTION = DAM_FUNCTION,
 }
 OBJECT {
@@ -663,7 +659,7 @@ OBJECT {
 	SYNONYM = {"DOOR","TRAPDOOR","TRAP_DOOR","COVER"},
 	ADJECTIVE = {"TRAP","DUSTY"},
 	DESC = "trap door",
-	FLAGS = (1<<DOORBIT)|(1<<NDESCBIT)|(1<<INVISIBLE),
+	FLAGS = {"DOORBIT","NDESCBIT","INVISIBLE"},
 	ACTION = TRAP_DOOR_FCN,
 }
 OBJECT {
@@ -672,7 +668,7 @@ OBJECT {
 	SYNONYM = {"WINDOW"},
 	ADJECTIVE = {"BOARDED"},
 	DESC = "boarded window",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 	ACTION = BOARDED_WINDOW_FCN,
 }
 OBJECT {
@@ -681,7 +677,7 @@ OBJECT {
 	SYNONYM = {"DOOR"},
 	ADJECTIVE = {"FRONT","BOARDED"},
 	DESC = "door",
-	FLAGS = (1<<DOORBIT)|(1<<NDESCBIT),
+	FLAGS = {"DOORBIT","NDESCBIT"},
 	ACTION = FRONT_DOOR_FCN,
 }
 OBJECT {
@@ -690,7 +686,7 @@ OBJECT {
 	SYNONYM = {"DOOR"},
 	ADJECTIVE = {"HUGE","STONE"},
 	DESC = "stone door",
-	FLAGS = (1<<DOORBIT)|(1<<NDESCBIT)|(1<<OPENBIT),
+	FLAGS = {"DOORBIT","NDESCBIT","OPENBIT"},
 	ACTION = BARROW_DOOR_FCN,
 }
 OBJECT {
@@ -699,7 +695,7 @@ OBJECT {
 	SYNONYM = {"BARROW","TOMB"},
 	ADJECTIVE = {"MASSIVE","STONE"},
 	DESC = "stone barrow",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 	ACTION = BARROW_FCN,
 }
 OBJECT {
@@ -708,7 +704,7 @@ OBJECT {
 	SYNONYM = {"BOTTLE","CONTAINER"},
 	ADJECTIVE = {"CLEAR","GLASS"},
 	DESC = "glass bottle",
-	FLAGS = (1<<TAKEBIT)|(1<<TRANSBIT)|(1<<CONTBIT),
+	FLAGS = {"TAKEBIT","TRANSBIT","CONTBIT"},
 	ACTION = BOTTLE_FUNCTION,
 	FDESC = "A bottle is sitting on the table.",
 	CAPACITY = 4,
@@ -719,7 +715,7 @@ OBJECT {
 	SYNONYM = {"CRACK"},
 	ADJECTIVE = {"NARROW"},
 	DESC = "crack",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 	ACTION = CRACK_FCN,
 }
 OBJECT {
@@ -728,7 +724,7 @@ OBJECT {
 	SYNONYM = {"COFFIN","CASKET","TREASURE"},
 	ADJECTIVE = {"SOLID","GOLD"},
 	DESC = "gold coffin",
-	FLAGS = (1<<TAKEBIT)|(1<<CONTBIT)|(1<<SACREDBIT)|(1<<SEARCHBIT),
+	FLAGS = {"TAKEBIT","CONTBIT","SACREDBIT","SEARCHBIT"},
 	LDESC = "The solid-gold coffin used for the burial of Ramses II is here.",
 	CAPACITY = 35,
 	SIZE = 55,
@@ -740,7 +736,7 @@ OBJECT {
 	LOC = LOCAL_GLOBALS,
 	SYNONYM = {"GRATE","GRATING"},
 	DESC = "grating",
-	FLAGS = (1<<DOORBIT)|(1<<NDESCBIT)|(1<<INVISIBLE),
+	FLAGS = {"DOORBIT","NDESCBIT","INVISIBLE"},
 	ACTION = GRATE_FUNCTION,
 }
 OBJECT {
@@ -749,14 +745,14 @@ OBJECT {
 	SYNONYM = {"PUMP","AIR_PUMP","TOOL","TOOLS"},
 	ADJECTIVE = {"SMALL","HAND_HELD"},
 	DESC = "hand-held air pump",
-	FLAGS = (1<<TAKEBIT)|(1<<TOOLBIT),
+	FLAGS = {"TAKEBIT","TOOLBIT"},
 }
 OBJECT {
 	NAME = "DIAMOND",
 	SYNONYM = {"DIAMOND","TREASURE"},
 	ADJECTIVE = {"HUGE","ENORMOUS"},
 	DESC = "huge diamond",
-	FLAGS = (1<<TAKEBIT),
+	FLAGS = {"TAKEBIT"},
 	LDESC = "There is an enormous diamond (perfectly cut) here.",
 	VALUE = 10,
 	TVALUE = 10,
@@ -767,7 +763,7 @@ OBJECT {
 	SYNONYM = {"FIGURINE","TREASURE"},
 	ADJECTIVE = {"EXQUISITE","JADE"},
 	DESC = "jade figurine",
-	FLAGS = (1<<TAKEBIT),
+	FLAGS = {"TAKEBIT"},
 	LDESC = "There is an exquisite jade figurine here.",
 	SIZE = 10,
 	VALUE = 5,
@@ -779,7 +775,7 @@ OBJECT {
 	SYNONYM = {"KNIVES","KNIFE","BLADE"},
 	ADJECTIVE = {"NASTY","UNRUSTY"},
 	DESC = "nasty knife",
-	FLAGS = (1<<TAKEBIT)|(1<<WEAPONBIT)|(1<<TRYTAKEBIT),
+	FLAGS = {"TAKEBIT","WEAPONBIT","TRYTAKEBIT"},
 	FDESC = "On a table is a nasty-looking knife.",
 	ACTION = KNIFE_F,
 }
@@ -788,7 +784,7 @@ OBJECT {
 	LOC = MAZE_5,
 	SYNONYM = {"BONES","SKELETON","BODY"},
 	DESC = "skeleton",
-	FLAGS = (1<<TRYTAKEBIT)|(1<<NDESCBIT),
+	FLAGS = {"TRYTAKEBIT","NDESCBIT"},
 	ACTION = SKELETON,
 }
 OBJECT {
@@ -797,7 +793,7 @@ OBJECT {
 	SYNONYM = {"LANTERN","LAMP"},
 	ADJECTIVE = {"RUSTY","BURNED","DEAD","USELESS"},
 	DESC = "burned-out lantern",
-	FLAGS = (1<<TAKEBIT),
+	FLAGS = {"TAKEBIT"},
 	FDESC = "The deceased adventurer's useless lantern is here.",
 	SIZE = 20,
 }
@@ -807,7 +803,7 @@ OBJECT {
 	SYNONYM = {"BAG","COINS","TREASURE"},
 	ADJECTIVE = {"OLD","LEATHER"},
 	DESC = "leather bag of coins",
-	FLAGS = (1<<TAKEBIT),
+	FLAGS = {"TAKEBIT"},
 	LDESC = "An old leather bag, bulging with coins, is here.",
 	ACTION = BAG_OF_COINS_F,
 	SIZE = 15,
@@ -820,7 +816,7 @@ OBJECT {
 	SYNONYM = {"LAMP","LANTERN","LIGHT"},
 	ADJECTIVE = {"BRASS"},
 	DESC = "brass lantern",
-	FLAGS = (1<<TAKEBIT)|(1<<LIGHTBIT),
+	FLAGS = {"TAKEBIT","LIGHTBIT"},
 	ACTION = LANTERN,
 	FDESC = "A battery-powered brass lantern is on the trophy case.",
 	LDESC = "There is a brass lantern (battery-powered) here.",
@@ -832,7 +828,7 @@ OBJECT {
 	SYNONYM = {"EMERALD","TREASURE"},
 	ADJECTIVE = {"LARGE"},
 	DESC = "large emerald",
-	FLAGS = (1<<TAKEBIT),
+	FLAGS = {"TAKEBIT"},
 	VALUE = 5,
 	TVALUE = 10,
 }
@@ -842,7 +838,7 @@ OBJECT {
 	SYNONYM = {"ADVERTISEMENT","LEAFLET","BOOKLET","MAIL"},
 	ADJECTIVE = {"SMALL"},
 	DESC = "leaflet",
-	FLAGS = (1<<READBIT)|(1<<TAKEBIT)|(1<<BURNBIT),
+	FLAGS = {"READBIT","TAKEBIT","BURNBIT"},
 	LDESC = "A small leaflet is on the ground.",
 	TEXT = "\"WELCOME TO ZORK!|\n|\nZORK is a game of adventure, danger, and low cunning. In it you\nwill explore some of the most amazing territory ever seen by mortals.\nNo computer should be without one!\"",
 	SIZE = 2,
@@ -852,7 +848,7 @@ OBJECT {
 	LOC = MAINTENANCE_ROOM,
 	SYNONYM = {"LEAK","DRIP","PIPE"},
 	DESC = "leak",
-	FLAGS = (1<<NDESCBIT)|(1<<INVISIBLE),
+	FLAGS = {"NDESCBIT","INVISIBLE"},
 	ACTION = LEAK_FUNCTION,
 }
 OBJECT {
@@ -860,7 +856,7 @@ OBJECT {
 	LOC = MACHINE_ROOM,
 	SYNONYM = {"MACHINE","PDP10","DRYER","LID"},
 	DESC = "machine",
-	FLAGS = (1<<CONTBIT)|(1<<NDESCBIT)|(1<<TRYTAKEBIT),
+	FLAGS = {"CONTBIT","NDESCBIT","TRYTAKEBIT"},
 	ACTION = MACHINE_F,
 	CAPACITY = 50,
 }
@@ -869,7 +865,7 @@ OBJECT {
 	SYNONYM = {"BOAT","RAFT"},
 	ADJECTIVE = {"INFLAT","MAGIC","PLASTIC","SEAWORTHY"},
 	DESC = "magic boat",
-	FLAGS = (1<<TAKEBIT)|(1<<BURNBIT)|(1<<VEHBIT)|(1<<OPENBIT)|(1<<SEARCHBIT),
+	FLAGS = {"TAKEBIT","BURNBIT","VEHBIT","OPENBIT","SEARCHBIT"},
 	ACTION = RBOAT_FUNCTION,
 	CAPACITY = 100,
 	SIZE = 20,
@@ -881,7 +877,7 @@ OBJECT {
 	SYNONYM = {"MAILBOX","BOX"},
 	ADJECTIVE = {"SMALL"},
 	DESC = "small mailbox",
-	FLAGS = (1<<CONTBIT)|(1<<TRYTAKEBIT),
+	FLAGS = {"CONTBIT","TRYTAKEBIT"},
 	CAPACITY = 10,
 	ACTION = MAILBOX_F,
 }
@@ -891,7 +887,7 @@ OBJECT {
 	SYNONYM = {"MATCH","MATCHES","MATCHBOOK"},
 	ADJECTIVE = {"MATCH"},
 	DESC = "matchbook",
-	FLAGS = (1<<READBIT)|(1<<TAKEBIT),
+	FLAGS = {"READBIT","TAKEBIT"},
 	ACTION = MATCH_FUNCTION,
 	LDESC = "There is a matchbook whose cover says \"Visit Beautiful FCD#3\" here.",
 	SIZE = 2,
@@ -902,7 +898,7 @@ OBJECT {
 	LOC = MIRROR_ROOM_2,
 	SYNONYM = {"REFLECTION","MIRROR","ENORMOUS"},
 	DESC = "mirror",
-	FLAGS = (1<<TRYTAKEBIT)|(1<<NDESCBIT),
+	FLAGS = {"TRYTAKEBIT","NDESCBIT"},
 	ACTION = MIRROR_MIRROR,
 }
 OBJECT {
@@ -910,7 +906,7 @@ OBJECT {
 	LOC = MIRROR_ROOM_1,
 	SYNONYM = {"REFLECTION","MIRROR","ENORMOUS"},
 	DESC = "mirror",
-	FLAGS = (1<<TRYTAKEBIT)|(1<<NDESCBIT),
+	FLAGS = {"TRYTAKEBIT","NDESCBIT"},
 	ACTION = MIRROR_MIRROR,
 }
 OBJECT {
@@ -919,7 +915,7 @@ OBJECT {
 	SYNONYM = {"PAINTING","ART","CANVAS","TREASURE"},
 	ADJECTIVE = {"BEAUTI"},
 	DESC = "painting",
-	FLAGS = (1<<TAKEBIT)|(1<<BURNBIT),
+	FLAGS = {"TAKEBIT","BURNBIT"},
 	ACTION = PAINTING_FCN,
 	FDESC = "Fortunately, there is still one chance for you to be a vandal, for on\nthe far wall is a painting of unparalleled beauty.",
 	LDESC = "A painting by a neglected genius is here.",
@@ -933,7 +929,7 @@ OBJECT {
 	SYNONYM = {"CANDLES","PAIR"},
 	ADJECTIVE = {"BURNING"},
 	DESC = "pair of candles",
-	FLAGS = (1<<TAKEBIT)|(1<<FLAMEBIT)|(1<<ONBIT)|(1<<LIGHTBIT),
+	FLAGS = {"TAKEBIT","FLAMEBIT","ONBIT","LIGHTBIT"},
 	ACTION = CANDLES_FCN,
 	FDESC = "On the two ends of the altar are burning candles.",
 	SIZE = 10,
@@ -943,7 +939,7 @@ OBJECT {
 	SYNONYM = {"GUNK","PIECE","SLAG"},
 	ADJECTIVE = {"SMALL","VITREOUS"},
 	DESC = "small piece of vitreous slag",
-	FLAGS = (1<<TAKEBIT)|(1<<TRYTAKEBIT),
+	FLAGS = {"TAKEBIT","TRYTAKEBIT"},
 	ACTION = GUNK_FUNCTION,
 	SIZE = 10,
 }
@@ -953,7 +949,7 @@ OBJECT {
 	SYNONYM = {"BODIES","BODY","REMAINS","PILE"},
 	ADJECTIVE = {"MANGLED"},
 	DESC = "pile of bodies",
-	FLAGS = (1<<NDESCBIT)|(1<<TRYTAKEBIT),
+	FLAGS = {"NDESCBIT","TRYTAKEBIT"},
 	ACTION = BODY_FUNCTION,
 }
 OBJECT {
@@ -961,7 +957,7 @@ OBJECT {
 	LOC = GRATING_CLEARING,
 	SYNONYM = {"LEAVES","LEAF","PILE"},
 	DESC = "pile of leaves",
-	FLAGS = (1<<TAKEBIT)|(1<<BURNBIT)|(1<<TRYTAKEBIT),
+	FLAGS = {"TAKEBIT","BURNBIT","TRYTAKEBIT"},
 	ACTION = LEAF_PILE,
 	LDESC = "On the ground is a pile of leaves.",
 	SIZE = 25,
@@ -971,7 +967,7 @@ OBJECT {
 	SYNONYM = {"BOAT","PILE","PLASTIC"},
 	ADJECTIVE = {"PLASTIC","PUNCTURE","LARGE"},
 	DESC = "punctured boat",
-	FLAGS = (1<<TAKEBIT)|(1<<BURNBIT),
+	FLAGS = {"TAKEBIT","BURNBIT"},
 	ACTION = DBOAT_FUNCTION,
 	SIZE = 20,
 }
@@ -981,7 +977,7 @@ OBJECT {
 	SYNONYM = {"BOAT","PILE","PLASTIC","VALVE"},
 	ADJECTIVE = {"PLASTIC","INFLAT"},
 	DESC = "pile of plastic",
-	FLAGS = (1<<TAKEBIT)|(1<<BURNBIT),
+	FLAGS = {"TAKEBIT","BURNBIT"},
 	ACTION = IBOAT_FUNCTION,
 	LDESC = "There is a folded pile of plastic here which has a small valve\nattached.",
 	SIZE = 20,
@@ -992,7 +988,7 @@ OBJECT {
 	SYNONYM = {"BAR","PLATINUM","TREASURE"},
 	ADJECTIVE = {"PLATINUM","LARGE"},
 	DESC = "platinum bar",
-	FLAGS = (1<<TAKEBIT)|(1<<SACREDBIT),
+	FLAGS = {"TAKEBIT","SACREDBIT"},
 	LDESC = "On the ground is a large platinum bar.",
 	SIZE = 20,
 	VALUE = 10,
@@ -1004,7 +1000,7 @@ OBJECT {
 	SYNONYM = {"POT","GOLD","TREASURE"},
 	ADJECTIVE = {"GOLD"},
 	DESC = "pot of gold",
-	FLAGS = (1<<TAKEBIT)|(1<<INVISIBLE),
+	FLAGS = {"TAKEBIT","INVISIBLE"},
 	FDESC = "At the end of the rainbow is a pot of gold.",
 	SIZE = 15,
 	VALUE = 10,
@@ -1016,7 +1012,7 @@ OBJECT {
 	SYNONYM = {"PRAYER","INSCRIPTION"},
 	ADJECTIVE = {"ANCIENT","OLD"},
 	DESC = "prayer",
-	FLAGS = (1<<READBIT)|(1<<SACREDBIT)|(1<<NDESCBIT),
+	FLAGS = {"READBIT","SACREDBIT","NDESCBIT"},
 	TEXT = "The prayer is inscribed in an ancient script, rarely used today. It seems\nto be a philippic against small insects, absent-mindedness, and the picking\nup and dropping of small objects. The final verse consigns trespassers to\nthe land of the dead. All evidence indicates that the beliefs of the ancient\nZorkers were obscure.",
 }
 OBJECT {
@@ -1025,14 +1021,14 @@ OBJECT {
 	SYNONYM = {"RAILING","RAIL"},
 	ADJECTIVE = {"WOODEN"},
 	DESC = "wooden railing",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 }
 OBJECT {
 	NAME = "RAINBOW",
 	LOC = LOCAL_GLOBALS,
 	SYNONYM = {"RAINBOW"},
 	DESC = "rainbow",
-	FLAGS = (1<<NDESCBIT)|(1<<CLIMBBIT),
+	FLAGS = {"NDESCBIT","CLIMBBIT"},
 	ACTION = RAINBOW_FCN,
 }
 OBJECT {
@@ -1042,7 +1038,7 @@ OBJECT {
 	SYNONYM = {"RIVER"},
 	ADJECTIVE = {"FRIGID"},
 	ACTION = RIVER_FUNCTION,
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 }
 OBJECT {
 	NAME = "BUOY",
@@ -1050,7 +1046,7 @@ OBJECT {
 	SYNONYM = {"BUOY"},
 	ADJECTIVE = {"RED"},
 	DESC = "red buoy",
-	FLAGS = (1<<TAKEBIT)|(1<<CONTBIT),
+	FLAGS = {"TAKEBIT","CONTBIT"},
 	FDESC = "There is a red buoy here (probably a warning).",
 	CAPACITY = 20,
 	SIZE = 10,
@@ -1074,7 +1070,7 @@ OBJECT {
 	SYNONYM = {"ROPE","HEMP","COIL"},
 	ADJECTIVE = {"LARGE"},
 	DESC = "rope",
-	FLAGS = (1<<TAKEBIT)|(1<<SACREDBIT)|(1<<TRYTAKEBIT),
+	FLAGS = {"TAKEBIT","SACREDBIT","TRYTAKEBIT"},
 	ACTION = ROPE_FUNCTION,
 	FDESC = "A large coil of rope is lying in the corner.",
 	SIZE = 10,
@@ -1085,7 +1081,7 @@ OBJECT {
 	SYNONYM = {"KNIVES","KNIFE"},
 	ADJECTIVE = {"RUSTY"},
 	DESC = "rusty knife",
-	FLAGS = (1<<TAKEBIT)|(1<<TRYTAKEBIT)|(1<<WEAPONBIT)|(1<<TOOLBIT),
+	FLAGS = {"TAKEBIT","TRYTAKEBIT","WEAPONBIT","TOOLBIT"},
 	ACTION = RUSTY_KNIFE_FCN,
 	FDESC = "Beside the skeleton is a rusty knife.",
 	SIZE = 20,
@@ -1095,7 +1091,7 @@ OBJECT {
 	LOC = SANDY_CAVE,
 	SYNONYM = {"SAND"},
 	DESC = "sand",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 	ACTION = SAND_FUNCTION,
 }
 OBJECT {
@@ -1104,7 +1100,7 @@ OBJECT {
 	SYNONYM = {"BRACELET","JEWEL","SAPPHIRE","TREASURE"},
 	ADJECTIVE = {"SAPPHIRE"},
 	DESC = "sapphire-encrusted bracelet",
-	FLAGS = (1<<TAKEBIT),
+	FLAGS = {"TAKEBIT"},
 	SIZE = 10,
 	VALUE = 5,
 	TVALUE = 5,
@@ -1115,7 +1111,7 @@ OBJECT {
 	SYNONYM = {"SCREWDRIVER","TOOL","TOOLS","DRIVER"},
 	ADJECTIVE = {"SCREW"},
 	DESC = "screwdriver",
-	FLAGS = (1<<TAKEBIT)|(1<<TOOLBIT),
+	FLAGS = {"TAKEBIT","TOOLBIT"},
 }
 OBJECT {
 	NAME = "KEYS",
@@ -1123,7 +1119,7 @@ OBJECT {
 	SYNONYM = {"KEY"},
 	ADJECTIVE = {"SKELETON"},
 	DESC = "skeleton key",
-	FLAGS = (1<<TAKEBIT)|(1<<TOOLBIT),
+	FLAGS = {"TAKEBIT","TOOLBIT"},
 	SIZE = 10,
 }
 OBJECT {
@@ -1131,7 +1127,7 @@ OBJECT {
 	LOC = SANDY_BEACH,
 	SYNONYM = {"SHOVEL","TOOL","TOOLS"},
 	DESC = "shovel",
-	FLAGS = (1<<TAKEBIT)|(1<<TOOLBIT),
+	FLAGS = {"TAKEBIT","TOOLBIT"},
 	SIZE = 15,
 }
 OBJECT {
@@ -1140,7 +1136,7 @@ OBJECT {
 	SYNONYM = {"COAL","PILE","HEAP"},
 	ADJECTIVE = {"SMALL"},
 	DESC = "small pile of coal",
-	FLAGS = (1<<TAKEBIT)|(1<<BURNBIT),
+	FLAGS = {"TAKEBIT","BURNBIT"},
 	SIZE = 20,
 }
 OBJECT {
@@ -1149,7 +1145,7 @@ OBJECT {
 	SYNONYM = {"LADDER"},
 	ADJECTIVE = {"WOODEN","RICKETY","NARROW"},
 	DESC = "wooden ladder",
-	FLAGS = (1<<NDESCBIT)|(1<<CLIMBBIT),
+	FLAGS = {"NDESCBIT","CLIMBBIT"},
 }
 OBJECT {
 	NAME = "SCARAB",
@@ -1157,7 +1153,7 @@ OBJECT {
 	SYNONYM = {"SCARAB","BUG","BEETLE","TREASURE"},
 	ADJECTIVE = {"BEAUTI","CARVED","JEWELED"},
 	DESC = "beautiful jeweled scarab",
-	FLAGS = (1<<TAKEBIT)|(1<<INVISIBLE),
+	FLAGS = {"TAKEBIT","INVISIBLE"},
 	SIZE = 8,
 	VALUE = 5,
 	TVALUE = 5,
@@ -1169,7 +1165,7 @@ OBJECT {
 	ADJECTIVE = {"LARGE","THIEFS"},
 	DESC = "large bag",
 	ACTION = LARGE_BAG_F,
-	FLAGS = (1<<TRYTAKEBIT)|(1<<NDESCBIT),
+	FLAGS = {"TRYTAKEBIT","NDESCBIT"},
 }
 OBJECT {
 	NAME = "STILETTO",
@@ -1178,7 +1174,7 @@ OBJECT {
 	ADJECTIVE = {"VICIOUS"},
 	DESC = "stiletto",
 	ACTION = STILETTO_FUNCTION,
-	FLAGS = (1<<WEAPONBIT)|(1<<TRYTAKEBIT)|(1<<TAKEBIT)|(1<<NDESCBIT),
+	FLAGS = {"WEAPONBIT","TRYTAKEBIT","TAKEBIT","NDESCBIT"},
 	SIZE = 10,
 }
 OBJECT {
@@ -1186,7 +1182,7 @@ OBJECT {
 	LOC = MACHINE_ROOM,
 	SYNONYM = {"SWITCH"},
 	DESC = "switch",
-	FLAGS = (1<<NDESCBIT)|(1<<TURNBIT),
+	FLAGS = {"NDESCBIT","TURNBIT"},
 	ACTION = MSWITCH_FUNCTION,
 }
 OBJECT {
@@ -1195,7 +1191,7 @@ OBJECT {
 	SYNONYM = {"DOOR","LETTERING","WRITING"},
 	ADJECTIVE = {"WOODEN","GOTHIC","STRANGE","WEST"},
 	DESC = "wooden door",
-	FLAGS = (1<<DOORBIT)|(1<<NDESCBIT)|(1<<TRANSBIT),
+	FLAGS = {"DOORBIT","NDESCBIT","TRANSBIT"},
 	ACTION = FRONT_DOOR_FCN,
 	TEXT = "The engravings translate to \"This space intentionally left blank.\"",
 }
@@ -1205,7 +1201,7 @@ OBJECT {
 	SYNONYM = {"SWORD","ORCRIST","GLAMDRING","BLADE"},
 	ADJECTIVE = {"ELVISH","OLD","ANTIQUE"},
 	DESC = "sword",
-	FLAGS = (1<<TAKEBIT)|(1<<WEAPONBIT)|(1<<TRYTAKEBIT),
+	FLAGS = {"TAKEBIT","WEAPONBIT","TRYTAKEBIT"},
 	ACTION = SWORD_FCN,
 	FDESC = "Above the trophy case hangs an elvish sword of great antiquity.",
 	SIZE = 30,
@@ -1217,7 +1213,7 @@ OBJECT {
 	SYNONYM = {"PARCHMENT","MAP"},
 	ADJECTIVE = {"ANTIQUE","OLD","ANCIENT"},
 	DESC = "ancient map",
-	FLAGS = (1<<INVISIBLE)|(1<<READBIT)|(1<<TAKEBIT),
+	FLAGS = {"INVISIBLE","READBIT","TAKEBIT"},
 	FDESC = "In the trophy case is an ancient parchment which appears to be a map.",
 	SIZE = 2,
 	TEXT = "The map shows a forest with three clearings. The largest clearing contains\na house. Three paths leave the large clearing. One of these paths, leading\nsouthwest, is marked \"To Stone Barrow\".",
@@ -1228,7 +1224,7 @@ OBJECT {
 	SYNONYM = {"LABEL","FINEPRINT","PRINT"},
 	ADJECTIVE = {"TAN","FINE"},
 	DESC = "tan label",
-	FLAGS = (1<<READBIT)|(1<<TAKEBIT)|(1<<BURNBIT),
+	FLAGS = {"READBIT","TAKEBIT","BURNBIT"},
 	SIZE = 2,
 	TEXT = "  !!!!FROBOZZ MAGIC BOAT COMPANY!!!!|\n|\nHello, Sailor!|\n|\nInstructions for use:|\n|\n   To get into a body of water, say \"Launch\".|\n   To get to shore, say \"Land\" or the direction in which you want\nto maneuver the boat.|\n|\nWarranty:|\n|\n  This boat is guaranteed against all defects for a period of 76\nmilliseconds from date of purchase or until first used, whichever comes first.|\n|\nWarning:|\n   This boat is made of thin plastic.|\n   Good Luck!",
 }
@@ -1238,7 +1234,7 @@ OBJECT {
 	SYNONYM = {"THIEF","ROBBER","MAN","PERSON"},
 	ADJECTIVE = {"SHADY","SUSPICIOUS","SEEDY"},
 	DESC = "thief",
-	FLAGS = (1<<ACTORBIT)|(1<<INVISIBLE)|(1<<CONTBIT)|(1<<OPENBIT)|(1<<TRYTAKEBIT),
+	FLAGS = {"ACTORBIT","INVISIBLE","CONTBIT","OPENBIT","TRYTAKEBIT"},
 	ACTION = ROBBER_FUNCTION,
 	LDESC = "There is a suspicious-looking individual, holding a large bag, leaning\nagainst one wall. He is armed with a deadly stiletto.",
 	STRENGTH = 5,
@@ -1249,7 +1245,7 @@ OBJECT {
 	SYNONYM = {"PEDESTAL"},
 	ADJECTIVE = {"WHITE","MARBLE"},
 	DESC = "pedestal",
-	FLAGS = (1<<NDESCBIT)|(1<<CONTBIT)|(1<<OPENBIT)|(1<<SURFACEBIT),
+	FLAGS = {"NDESCBIT","CONTBIT","OPENBIT","SURFACEBIT"},
 	ACTION = DUMB_CONTAINER,
 	CAPACITY = 30,
 }
@@ -1259,7 +1255,7 @@ OBJECT {
 	SYNONYM = {"TORCH","IVORY","TREASURE"},
 	ADJECTIVE = {"FLAMING","IVORY"},
 	DESC = "torch",
-	FLAGS = (1<<TAKEBIT)|(1<<FLAMEBIT)|(1<<ONBIT)|(1<<LIGHTBIT),
+	FLAGS = {"TAKEBIT","FLAMEBIT","ONBIT","LIGHTBIT"},
 	ACTION = TORCH_OBJECT,
 	FDESC = "Sitting on the pedestal is a flaming torch, made of ivory.",
 	SIZE = 20,
@@ -1272,7 +1268,7 @@ OBJECT {
 	SYNONYM = {"GUIDE","BOOK","BOOKS","GUIDEBOOKS"},
 	ADJECTIVE = {"TOUR","GUIDE"},
 	DESC = "tour guidebook",
-	FLAGS = (1<<READBIT)|(1<<TAKEBIT)|(1<<BURNBIT),
+	FLAGS = {"READBIT","TAKEBIT","BURNBIT"},
 	FDESC = "Some guidebooks entitled \"Flood Control Dam #3\" are on the reception\ndesk.",
 	TEXT = "\"	Flood Control Dam #3|\n|\nFCD#3 was constructed in year 783 of the Great Underground Empire to\nharness the mighty Frigid River. This work was supported by a grant of\n37 million zorkmids from your omnipotent local tyrant Lord Dimwit\nFlathead the Excessive. This impressive structure is composed of\n370,000 cubic feet of concrete, is 256 feet tall at the center, and 193\nfeet wide at the top. The lake created behind the dam has a volume\nof 1.7 billion cubic feet, an area of 12 million square feet, and a\nshore line of 36 thousand feet.|\n|\nThe construction of FCD#3 took 112 days from ground breaking to\nthe dedication. It required a work force of 384 slaves, 34 slave\ndrivers, 12 engineers, 2 turtle doves, and a partridge in a pear\ntree. The work was managed by a command team composed of 2345\nbureaucrats, 2347 secretaries (at least two of whom could type),\n12,256 paper shufflers, 52,469 rubber stampers, 245,193 red tape\nprocessors, and nearly one million dead trees.|\n|\nWe will now point out some of the more interesting features\nof FCD#3 as we conduct you on a guided tour of the facilities:|\n|\n        1) You start your tour here in the Dam Lobby. You will notice\non your right that....",
 }
@@ -1282,7 +1278,7 @@ OBJECT {
 	SYNONYM = {"TROLL"},
 	ADJECTIVE = {"NASTY"},
 	DESC = "troll",
-	FLAGS = (1<<ACTORBIT)|(1<<OPENBIT)|(1<<TRYTAKEBIT),
+	FLAGS = {"ACTORBIT","OPENBIT","TRYTAKEBIT"},
 	ACTION = TROLL_FCN,
 	LDESC = "A nasty-looking troll, brandishing a bloody axe, blocks all passages\nout of the room.",
 	STRENGTH = 2,
@@ -1293,7 +1289,7 @@ OBJECT {
 	SYNONYM = {"TRUNK","CHEST","JEWELS","TREASURE"},
 	ADJECTIVE = {"OLD"},
 	DESC = "trunk of jewels",
-	FLAGS = (1<<TAKEBIT)|(1<<INVISIBLE),
+	FLAGS = {"TAKEBIT","INVISIBLE"},
 	FDESC = "Lying half buried in the mud is an old trunk, bulging with jewels.",
 	LDESC = "There is an old trunk here, bulging with assorted jewels.",
 	ACTION = TRUNK_F,
@@ -1306,7 +1302,7 @@ OBJECT {
 	LOC = MAINTENANCE_ROOM,
 	SYNONYM = {"TUBE","TOOTH","PASTE"},
 	DESC = "tube",
-	FLAGS = (1<<TAKEBIT)|(1<<CONTBIT)|(1<<READBIT),
+	FLAGS = {"TAKEBIT","CONTBIT","READBIT"},
 	ACTION = TUBE_FUNCTION,
 	LDESC = "There is an object which looks like a tube of toothpaste here.",
 	CAPACITY = 7,
@@ -1319,7 +1315,7 @@ OBJECT {
 	SYNONYM = {"MATERIAL","GUNK"},
 	ADJECTIVE = {"VISCOUS"},
 	DESC = "viscous material",
-	FLAGS = (1<<TAKEBIT)|(1<<TOOLBIT),
+	FLAGS = {"TAKEBIT","TOOLBIT"},
 	SIZE = 6,
 	ACTION = PUTTY_FCN,
 }
@@ -1329,7 +1325,7 @@ OBJECT {
 	SYNONYM = {"WALL","ENGRAVINGS","INSCRIPTION"},
 	ADJECTIVE = {"OLD","ANCIENT"},
 	DESC = "wall with engravings",
-	FLAGS = (1<<READBIT)|(1<<SACREDBIT),
+	FLAGS = {"READBIT","SACREDBIT"},
 	LDESC = "There are old engravings on the walls here.",
 	TEXT = "The engravings were incised in the living rock of the cave wall by\nan unknown hand. They depict, in symbolic form, the beliefs of the\nancient Zorkers. Skillfully interwoven with the bas reliefs are excerpts\nillustrating the major religious tenets of that time. Unfortunately, a\nlater age seems to have considered them blasphemous and just as skillfully\nexcised them.",
 }
@@ -1339,7 +1335,7 @@ OBJECT {
 	SYNONYM = {"MANUAL","PIECE","PAPER"},
 	ADJECTIVE = {"ZORK","OWNERS","SMALL"},
 	DESC = "ZORK owner's manual",
-	FLAGS = (1<<READBIT)|(1<<TAKEBIT),
+	FLAGS = {"READBIT","TAKEBIT"},
 	FDESC = "Loosely attached to a wall is a small piece of paper.",
 	TEXT = "Congratulations!|\n|\nYou are the privileged owner of ZORK I: The Great Underground Empire,\na self-contained and self-maintaining universe. If used and maintained\nin accordance with normal operating practices for small universes, ZORK\nwill provide many months of trouble-free operation.",
 }
@@ -1350,7 +1346,7 @@ OBJECT {
 	ADJECTIVE = {"ROCKY","SHEER"},
 	DESC = "cliff",
 	ACTION = CLIFF_OBJECT,
-	FLAGS = (1<<NDESCBIT)|(1<<CLIMBBIT),
+	FLAGS = {"NDESCBIT","CLIMBBIT"},
 }
 OBJECT {
 	NAME = "WHITE_CLIFF",
@@ -1358,7 +1354,7 @@ OBJECT {
 	SYNONYM = {"CLIFF","CLIFFS"},
 	ADJECTIVE = {"WHITE"},
 	DESC = "white cliffs",
-	FLAGS = (1<<NDESCBIT)|(1<<CLIMBBIT),
+	FLAGS = {"NDESCBIT","CLIMBBIT"},
 	ACTION = WCLIF_OBJECT,
 }
 OBJECT {
@@ -1366,7 +1362,7 @@ OBJECT {
 	LOC = MAINTENANCE_ROOM,
 	SYNONYM = {"WRENCH","TOOL","TOOLS"},
 	DESC = "wrench",
-	FLAGS = (1<<TAKEBIT)|(1<<TOOLBIT),
+	FLAGS = {"TAKEBIT","TOOLBIT"},
 	SIZE = 10,
 }
 OBJECT {
@@ -1375,7 +1371,7 @@ OBJECT {
 	SYNONYM = {"PANEL"},
 	ADJECTIVE = {"CONTROL"},
 	DESC = "control panel",
-	FLAGS = (1<<NDESCBIT),
+	FLAGS = {"NDESCBIT"},
 }
 OBJECT {
 	NAME = "NEST",
@@ -1383,7 +1379,7 @@ OBJECT {
 	SYNONYM = {"NEST"},
 	ADJECTIVE = {"BIRDS"},
 	DESC = "bird's nest",
-	FLAGS = (1<<TAKEBIT)|(1<<BURNBIT)|(1<<CONTBIT)|(1<<OPENBIT)|(1<<SEARCHBIT),
+	FLAGS = {"TAKEBIT","BURNBIT","CONTBIT","OPENBIT","SEARCHBIT"},
 	FDESC = "Beside you on the branch is a small bird's nest.",
 	CAPACITY = 20,
 }
@@ -1393,7 +1389,7 @@ OBJECT {
 	SYNONYM = {"EGG","TREASURE"},
 	ADJECTIVE = {"BIRDS","ENCRUSTED","JEWELED"},
 	DESC = "jewel-encrusted egg",
-	FLAGS = (1<<TAKEBIT)|(1<<CONTBIT)|(1<<SEARCHBIT),
+	FLAGS = {"TAKEBIT","CONTBIT","SEARCHBIT"},
 	ACTION = EGG_OBJECT,
 	VALUE = 5,
 	TVALUE = 5,
@@ -1405,7 +1401,7 @@ OBJECT {
 	SYNONYM = {"EGG","TREASURE"},
 	ADJECTIVE = {"BROKEN","BIRDS","ENCRUSTED","JEWEL"},
 	DESC = "broken jewel-encrusted egg",
-	FLAGS = (1<<TAKEBIT)|(1<<CONTBIT)|(1<<OPENBIT),
+	FLAGS = {"TAKEBIT","CONTBIT","OPENBIT"},
 	CAPACITY = 6,
 	TVALUE = 2,
 	LDESC = "There is a somewhat ruined egg here.",
@@ -1415,7 +1411,7 @@ OBJECT {
 	SYNONYM = {"BAUBLE","TREASURE"},
 	ADJECTIVE = {"BRASS","BEAUTI"},
 	DESC = "beautiful brass bauble",
-	FLAGS = (1<<TAKEBIT),
+	FLAGS = {"TAKEBIT"},
 	VALUE = 1,
 	TVALUE = 1,
 }
@@ -1425,7 +1421,7 @@ OBJECT {
 	SYNONYM = {"CANARY","TREASURE"},
 	ADJECTIVE = {"CLOCKWORK","GOLD","GOLDEN"},
 	DESC = "golden clockwork canary",
-	FLAGS = (1<<TAKEBIT)|(1<<SEARCHBIT),
+	FLAGS = {"TAKEBIT","SEARCHBIT"},
 	ACTION = CANARY_OBJECT,
 	VALUE = 6,
 	TVALUE = 4,
@@ -1437,7 +1433,7 @@ OBJECT {
 	SYNONYM = {"CANARY","TREASURE"},
 	ADJECTIVE = {"BROKEN","CLOCKWORK","GOLD","GOLDEN"},
 	DESC = "broken clockwork canary",
-	FLAGS = (1<<TAKEBIT),
+	FLAGS = {"TAKEBIT"},
 	ACTION = CANARY_OBJECT,
 	TVALUE = 1,
 	FDESC = "There is a golden clockwork canary nestled in the egg. It seems to\nhave recently had a bad experience. The mountings for its jewel-like\neyes are empty, and its silver beak is crumpled. Through a cracked\ncrystal window below its left wing you can see the remains of\nintricate machinery. It is not clear what result winding it would\nhave, as the mainspring seems sprung.",
@@ -1462,10 +1458,10 @@ ROOM {
 	SE = SOUTH_OF_HOUSE,
 	WEST = FOREST_1,
 	EAST = "The door is boarded and you can't remove the boards.",
-	SW = {STONE_BARROW, WON_FLAG},
-	IN = {STONE_BARROW, WON_FLAG},
+	SW = {STONE_BARROW, flag = WON_FLAG},
+	IN = {STONE_BARROW, flag = WON_FLAG},
 	ACTION = WEST_HOUSE,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = WHITE_HOUSE,
 }
 ROOM {
@@ -1475,7 +1471,7 @@ ROOM {
 	DESC = "Stone Barrow",
 	NE = WEST_OF_HOUSE,
 	ACTION = STONE_BARROW_FCN,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 }
 ROOM {
 	NAME = "NORTH_OF_HOUSE",
@@ -1488,7 +1484,7 @@ ROOM {
 	EAST = EAST_OF_HOUSE,
 	NORTH = PATH,
 	SOUTH = "The windows are all boarded.",
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = BOARDED_WINDOW,
 }
 ROOM {
@@ -1502,7 +1498,7 @@ ROOM {
 	NW = WEST_OF_HOUSE,
 	SOUTH = FOREST_3,
 	NORTH = "The windows are all boarded.",
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = BOARDED_WINDOW,
 }
 ROOM {
@@ -1514,10 +1510,10 @@ ROOM {
 	SW = SOUTH_OF_HOUSE,
 	NW = NORTH_OF_HOUSE,
 	EAST = CLEARING,
-	WEST = {KITCHEN, KITCHEN_WINDOW, OPENBIT},
-	IN = {KITCHEN, KITCHEN_WINDOW, OPENBIT},
+	WEST = {KITCHEN, door = KITCHEN_WINDOW},
+	IN = {KITCHEN, door = KITCHEN_WINDOW},
 	ACTION = EAST_HOUSE,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = WHITE_HOUSE,
 }
 ROOM {
@@ -1531,7 +1527,7 @@ ROOM {
 	SOUTH = FOREST_3,
 	WEST = "You would need a machete to go further west.",
 	ACTION = FOREST_ROOM,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = TREE,
 }
 ROOM {
@@ -1545,7 +1541,7 @@ ROOM {
 	SOUTH = CLEARING,
 	WEST = PATH,
 	ACTION = FOREST_ROOM,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = TREE,
 }
 ROOM {
@@ -1558,7 +1554,7 @@ ROOM {
 	EAST = "The mountains are impassable.",
 	SOUTH = FOREST_2,
 	WEST = FOREST_2,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = TREE,
 }
 ROOM {
@@ -1573,7 +1569,7 @@ ROOM {
 	WEST = FOREST_1,
 	NW = SOUTH_OF_HOUSE,
 	ACTION = FOREST_ROOM,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = TREE,
 }
 ROOM {
@@ -1587,7 +1583,7 @@ ROOM {
 	SOUTH = NORTH_OF_HOUSE,
 	WEST = FOREST_1,
 	ACTION = FOREST_ROOM,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = TREE,
 }
 ROOM {
@@ -1597,7 +1593,7 @@ ROOM {
 	DOWN = PATH,
 	UP = "You cannot climb any higher.",
 	ACTION = TREE_ROOM,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = TREE,
 }
 ROOM {
@@ -1610,7 +1606,7 @@ ROOM {
 	SOUTH = PATH,
 	DOWN = PER,
 	ACTION = CLEARING_FCN,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = WHITE_HOUSE,
 }
 GRATING_EXIT = function()
@@ -1646,20 +1642,20 @@ ROOM {
 	SOUTH = FOREST_3,
 	WEST = EAST_OF_HOUSE,
 	ACTION = FOREST_ROOM,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = TREE,
 }
 ROOM {
 	NAME = "KITCHEN",
 	LOC = ROOMS,
 	DESC = "Kitchen",
-	EAST = {EAST_OF_HOUSE, KITCHEN_WINDOW, OPENBIT},
+	EAST = {EAST_OF_HOUSE, door = KITCHEN_WINDOW},
 	WEST = LIVING_ROOM,
-	OUT = {EAST_OF_HOUSE, KITCHEN_WINDOW, OPENBIT},
+	OUT = {EAST_OF_HOUSE, door = KITCHEN_WINDOW},
 	UP = ATTIC,
-	DOWN = {STUDIO, FALSE_FLAG, "Only Santa Claus climbs down chimneys."},
+	DOWN = {STUDIO, flag = FALSE_FLAG, say = "Only Santa Claus climbs down chimneys."},
 	ACTION = KITCHEN_FCN,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	VALUE = 10,
 	GLOBAL = KITCHEN_WINDOW,
 }
@@ -1669,7 +1665,7 @@ ROOM {
 	LDESC = "This is the attic. The only exit is a stairway leading down.",
 	DESC = "Attic",
 	DOWN = KITCHEN,
-	FLAGS = (1<<RLANDBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","SACREDBIT"},
 	GLOBAL = STAIRS,
 }
 ROOM {
@@ -1677,10 +1673,10 @@ ROOM {
 	LOC = ROOMS,
 	DESC = "Living Room",
 	EAST = KITCHEN,
-	WEST = {STRANGE_PASSAGE, MAGIC_FLAG, "The door is nailed shut."},
+	WEST = {STRANGE_PASSAGE, flag = MAGIC_FLAG, say = "The door is nailed shut."},
 	DOWN = PER,
 	ACTION = LIVING_ROOM_FCN,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = WOODEN_DOOR,
 	PSEUDO = "NAILS",
 }
@@ -1690,10 +1686,10 @@ ROOM {
 	DESC = "Cellar",
 	NORTH = TROLL_ROOM,
 	SOUTH = EAST_OF_CHASM,
-	UP = {LIVING_ROOM, TRAP_DOOR, OPENBIT},
+	UP = {LIVING_ROOM, door = TRAP_DOOR},
 	WEST = "You try to ascend the ramp, but it is impossible, and you slide back down.",
 	ACTION = CELLAR_FCN,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	VALUE = 25,
 	GLOBAL = TRAP_DOOR,
 }
@@ -1703,9 +1699,9 @@ ROOM {
 	LDESC = "This is a small room with passages to the east and south and a\nforbidding hole leading west. Bloodstains and deep scratches\n(perhaps made by an axe) mar the walls.",
 	DESC = "The Troll Room",
 	SOUTH = CELLAR,
-	EAST = {EW_PASSAGE, TROLL_FLAG, "The troll fends you off with a menacing gesture."},
-	WEST = {MAZE_1, TROLL_FLAG, "The troll fends you off with a menacing gesture."},
-	FLAGS = (1<<RLANDBIT),
+	EAST = {EW_PASSAGE, flag = TROLL_FLAG, say = "The troll fends you off with a menacing gesture."},
+	WEST = {MAZE_1, flag = TROLL_FLAG, say = "The troll fends you off with a menacing gesture."},
+	FLAGS = {"RLANDBIT"},
 	ACTION = TROLL_ROOM_F,
 }
 ROOM {
@@ -1716,7 +1712,7 @@ ROOM {
 	NORTH = CELLAR,
 	EAST = GALLERY,
 	DOWN = "The chasm probably leads straight to the infernal regions.",
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	PSEUDO = "CHASM",
 }
 ROOM {
@@ -1726,7 +1722,7 @@ ROOM {
 	DESC = "Gallery",
 	WEST = EAST_OF_CHASM,
 	NORTH = STUDIO,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT),
+	FLAGS = {"RLANDBIT","ONBIT"},
 }
 ROOM {
 	NAME = "STUDIO",
@@ -1735,7 +1731,7 @@ ROOM {
 	DESC = "Studio",
 	SOUTH = GALLERY,
 	UP = PER,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	GLOBAL = CHIMNEY,
 	PSEUDO = "DOOR",
 }
@@ -1748,7 +1744,7 @@ ROOM {
 	NORTH = MAZE_1,
 	SOUTH = MAZE_2,
 	WEST = MAZE_4,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "MAZE_2",
@@ -1758,7 +1754,7 @@ ROOM {
 	SOUTH = MAZE_1,
 	DOWN = PER,
 	EAST = MAZE_3,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "MAZE_3",
@@ -1768,7 +1764,7 @@ ROOM {
 	WEST = MAZE_2,
 	NORTH = MAZE_4,
 	UP = MAZE_5,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "MAZE_4",
@@ -1778,7 +1774,7 @@ ROOM {
 	WEST = MAZE_3,
 	NORTH = MAZE_1,
 	EAST = DEAD_END_1,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "DEAD_END_1",
@@ -1786,7 +1782,7 @@ ROOM {
 	DESC = "Dead End",
 	LDESC = "You have come to a dead end in the maze.",
 	SOUTH = MAZE_4,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "MAZE_5",
@@ -1796,7 +1792,7 @@ ROOM {
 	EAST = DEAD_END_2,
 	NORTH = MAZE_3,
 	SW = MAZE_6,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "DEAD_END_2",
@@ -1804,7 +1800,7 @@ ROOM {
 	DESC = "Dead End",
 	LDESC = "You have come to a dead end in the maze.",
 	WEST = MAZE_5,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "MAZE_6",
@@ -1815,7 +1811,7 @@ ROOM {
 	EAST = MAZE_7,
 	WEST = MAZE_6,
 	UP = MAZE_9,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "MAZE_7",
@@ -1827,7 +1823,7 @@ ROOM {
 	DOWN = PER,
 	EAST = MAZE_8,
 	SOUTH = MAZE_15,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "MAZE_8",
@@ -1837,7 +1833,7 @@ ROOM {
 	NE = MAZE_7,
 	WEST = MAZE_8,
 	SE = DEAD_END_3,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "DEAD_END_3",
@@ -1845,7 +1841,7 @@ ROOM {
 	DESC = "Dead End",
 	LDESC = "You have come to a dead end in the maze.",
 	NORTH = MAZE_8,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "MAZE_9",
@@ -1858,7 +1854,7 @@ ROOM {
 	SOUTH = MAZE_13,
 	WEST = MAZE_12,
 	NW = MAZE_9,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "MAZE_10",
@@ -1868,7 +1864,7 @@ ROOM {
 	EAST = MAZE_9,
 	WEST = MAZE_13,
 	UP = MAZE_11,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "MAZE_11",
@@ -1879,17 +1875,17 @@ ROOM {
 	DOWN = MAZE_10,
 	NW = MAZE_13,
 	SW = MAZE_12,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "GRATING_ROOM",
 	LOC = ROOMS,
 	DESC = "Grating Room",
 	SW = MAZE_11,
-	UP = {GRATING_CLEARING, GRATE, OPENBIT, "The grating is closed."},
+	UP = {GRATING_CLEARING, door = GRATE, say = "The grating is closed."},
 	ACTION = MAZE_11_FCN,
 	GLOBAL = GRATE,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "MAZE_12",
@@ -1901,7 +1897,7 @@ ROOM {
 	EAST = MAZE_13,
 	UP = MAZE_9,
 	NORTH = DEAD_END_4,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "DEAD_END_4",
@@ -1909,7 +1905,7 @@ ROOM {
 	DESC = "Dead End",
 	LDESC = "You have come to a dead end in the maze.",
 	SOUTH = MAZE_12,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "MAZE_13",
@@ -1920,7 +1916,7 @@ ROOM {
 	DOWN = MAZE_12,
 	SOUTH = MAZE_10,
 	WEST = MAZE_11,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "MAZE_14",
@@ -1931,7 +1927,7 @@ ROOM {
 	NW = MAZE_14,
 	NE = MAZE_7,
 	SOUTH = MAZE_7,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "MAZE_15",
@@ -1941,17 +1937,17 @@ ROOM {
 	WEST = MAZE_14,
 	SOUTH = MAZE_7,
 	SE = CYCLOPS_ROOM,
-	FLAGS = (1<<RLANDBIT)|(1<<MAZEBIT),
+	FLAGS = {"RLANDBIT","MAZEBIT"},
 }
 ROOM {
 	NAME = "CYCLOPS_ROOM",
 	LOC = ROOMS,
 	DESC = "Cyclops Room",
 	NW = MAZE_15,
-	EAST = {STRANGE_PASSAGE, MAGIC_FLAG, "The east wall is solid rock."},
-	UP = {TREASURE_ROOM, CYCLOPS_FLAG, "The cyclops doesn't look like he'll let you past."},
+	EAST = {STRANGE_PASSAGE, flag = MAGIC_FLAG, say = "The east wall is solid rock."},
+	UP = {TREASURE_ROOM, flag = CYCLOPS_FLAG, say = "The cyclops doesn't look like he'll let you past."},
 	ACTION = CYCLOPS_ROOM_FCN,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	GLOBAL = STAIRS,
 }
 ROOM {
@@ -1962,7 +1958,7 @@ ROOM {
 	WEST = CYCLOPS_ROOM,
 	IN = CYCLOPS_ROOM,
 	EAST = LIVING_ROOM,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	GLOBAL = WOODEN_DOOR,
 }
 ROOM {
@@ -1972,7 +1968,7 @@ ROOM {
 	DESC = "Treasure Room",
 	DOWN = CYCLOPS_ROOM,
 	ACTION = TREASURE_ROOM_FCN,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	VALUE = 25,
 	GLOBAL = STAIRS,
 }
@@ -1984,9 +1980,9 @@ ROOM {
 	SW = CHASM_ROOM,
 	EAST = DAM_ROOM,
 	WEST = STREAM_VIEW,
-	NORTH = {RESERVOIR, LOW_TIDE, "You would drown."},
+	NORTH = {RESERVOIR, flag = LOW_TIDE, say = "You would drown."},
 	ACTION = RESERVOIR_SOUTH_FCN,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	GLOBAL = GLOBAL_WATER,
 	PSEUDO = "LAKE",
 }
@@ -2000,7 +1996,7 @@ ROOM {
 	WEST = IN_STREAM,
 	DOWN = "The dam blocks your way.",
 	ACTION = RESERVOIR_FCN,
-	FLAGS = (1<<NONLANDBIT),
+	FLAGS = {"NONLANDBIT"},
 	PSEUDO = "STREAM",
 	GLOBAL = GLOBAL_WATER,
 }
@@ -2009,9 +2005,9 @@ ROOM {
 	LOC = ROOMS,
 	DESC = "Reservoir North",
 	NORTH = ATLANTIS_ROOM,
-	SOUTH = {RESERVOIR, LOW_TIDE, "You would drown."},
+	SOUTH = {RESERVOIR, flag = LOW_TIDE, say = "You would drown."},
 	ACTION = RESERVOIR_NORTH_FCN,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	GLOBAL = GLOBAL_WATER,
 	PSEUDO = "LAKE",
 }
@@ -2022,7 +2018,7 @@ ROOM {
 	DESC = "Stream View",
 	EAST = RESERVOIR_SOUTH,
 	WEST = "The stream emerges from a spot too small for you to enter.",
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	GLOBAL = GLOBAL_WATER,
 	PSEUDO = "STREAM",
 }
@@ -2036,7 +2032,7 @@ ROOM {
 	LAND = STREAM_VIEW,
 	DOWN = RESERVOIR,
 	EAST = RESERVOIR,
-	FLAGS = (1<<NONLANDBIT),
+	FLAGS = {"NONLANDBIT"},
 	GLOBAL = GLOBAL_WATER,
 	PSEUDO = "STREAM",
 }
@@ -2048,7 +2044,7 @@ ROOM {
 	WEST = TWISTING_PASSAGE,
 	EAST = SMALL_CAVE,
 	ACTION = MIRROR_ROOM,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "MIRROR_ROOM_2",
@@ -2058,7 +2054,7 @@ ROOM {
 	NORTH = NARROW_PASSAGE,
 	EAST = TINY_CAVE,
 	ACTION = MIRROR_ROOM,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT),
+	FLAGS = {"RLANDBIT","ONBIT"},
 }
 ROOM {
 	NAME = "SMALL_CAVE",
@@ -2069,7 +2065,7 @@ ROOM {
 	DOWN = ATLANTIS_ROOM,
 	SOUTH = ATLANTIS_ROOM,
 	WEST = TWISTING_PASSAGE,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	GLOBAL = STAIRS,
 }
 ROOM {
@@ -2081,7 +2077,7 @@ ROOM {
 	WEST = WINDING_PASSAGE,
 	DOWN = ENTRANCE_TO_HADES,
 	ACTION = CAVE2_ROOM,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	GLOBAL = STAIRS,
 }
 ROOM {
@@ -2091,7 +2087,7 @@ ROOM {
 	DESC = "Cold Passage",
 	SOUTH = MIRROR_ROOM_1,
 	WEST = SLIDE_ROOM,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "NARROW_PASSAGE",
@@ -2100,7 +2096,7 @@ ROOM {
 	DESC = "Narrow Passage",
 	NORTH = ROUND_ROOM,
 	SOUTH = MIRROR_ROOM_2,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "WINDING_PASSAGE",
@@ -2109,7 +2105,7 @@ ROOM {
 	DESC = "Winding Passage",
 	NORTH = MIRROR_ROOM_2,
 	EAST = TINY_CAVE,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "TWISTING_PASSAGE",
@@ -2118,7 +2114,7 @@ ROOM {
 	DESC = "Twisting Passage",
 	NORTH = MIRROR_ROOM_1,
 	EAST = SMALL_CAVE,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "ATLANTIS_ROOM",
@@ -2127,7 +2123,7 @@ ROOM {
 	DESC = "Atlantis Room",
 	UP = SMALL_CAVE,
 	SOUTH = RESERVOIR_NORTH,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	GLOBAL = STAIRS,
 }
 ROOM {
@@ -2139,7 +2135,7 @@ ROOM {
 	WEST = TROLL_ROOM,
 	DOWN = CHASM_ROOM,
 	NORTH = CHASM_ROOM,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	VALUE = 5,
 	GLOBAL = STAIRS,
 }
@@ -2153,7 +2149,7 @@ ROOM {
 	NORTH = NS_PASSAGE,
 	SOUTH = NARROW_PASSAGE,
 	SE = ENGRAVINGS_CAVE,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "DEEP_CANYON",
@@ -2163,7 +2159,7 @@ ROOM {
 	EAST = DAM_ROOM,
 	SW = NS_PASSAGE,
 	DOWN = LOUD_ROOM,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	ACTION = DEEP_CANYON_F,
 	GLOBAL = STAIRS,
 }
@@ -2175,7 +2171,7 @@ ROOM {
 	WEST = LOUD_ROOM,
 	EAST = WHITE_CLIFFS_NORTH,
 	SOUTH = "It is too narrow for most insects.",
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	GLOBAL = CRACK,
 }
 ROOM {
@@ -2186,7 +2182,7 @@ ROOM {
 	WEST = ROUND_ROOM,
 	UP = DEEP_CANYON,
 	ACTION = LOUD_ROOM_FCN,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	GLOBAL = STAIRS,
 }
 ROOM {
@@ -2197,7 +2193,7 @@ ROOM {
 	NORTH = CHASM_ROOM,
 	NE = DEEP_CANYON,
 	SOUTH = ROUND_ROOM,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "CHASM_ROOM",
@@ -2209,7 +2205,7 @@ ROOM {
 	UP = EW_PASSAGE,
 	SOUTH = NS_PASSAGE,
 	DOWN = "Are you out of your mind?",
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	GLOBAL = CRACK,
 	PSEUDO = "CHASM",
 }
@@ -2218,10 +2214,10 @@ ROOM {
 	LOC = ROOMS,
 	DESC = "Entrance to Hades",
 	UP = TINY_CAVE,
-	IN = {LAND_OF_LIVING_DEAD, LLD_FLAG, "Some invisible force prevents you from passing through the gate."},
-	SOUTH = {LAND_OF_LIVING_DEAD, LLD_FLAG, "Some invisible force prevents you from passing through the gate."},
+	IN = {LAND_OF_LIVING_DEAD, flag = LLD_FLAG, say = "Some invisible force prevents you from passing through the gate."},
+	SOUTH = {LAND_OF_LIVING_DEAD, flag = LLD_FLAG, say = "Some invisible force prevents you from passing through the gate."},
 	ACTION = LLD_ROOM,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT),
+	FLAGS = {"RLANDBIT","ONBIT"},
 	GLOBAL = BODIES,
 	PSEUDO = "GATE",
 }
@@ -2232,7 +2228,7 @@ ROOM {
 	DESC = "Land of the Dead",
 	OUT = ENTRANCE_TO_HADES,
 	NORTH = ENTRANCE_TO_HADES,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT),
+	FLAGS = {"RLANDBIT","ONBIT"},
 	GLOBAL = BODIES,
 }
 ROOM {
@@ -2242,7 +2238,7 @@ ROOM {
 	DESC = "Engravings Cave",
 	NW = ROUND_ROOM,
 	EAST = DOME_ROOM,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "EGYPT_ROOM",
@@ -2251,7 +2247,7 @@ ROOM {
 	DESC = "Egyptian Room",
 	WEST = NORTH_TEMPLE,
 	UP = NORTH_TEMPLE,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	GLOBAL = STAIRS,
 }
 ROOM {
@@ -2259,9 +2255,9 @@ ROOM {
 	LOC = ROOMS,
 	DESC = "Dome Room",
 	WEST = ENGRAVINGS_CAVE,
-	DOWN = {TORCH_ROOM, DOME_FLAG, "You cannot go down without fracturing many bones."},
+	DOWN = {TORCH_ROOM, flag = DOME_FLAG, say = "You cannot go down without fracturing many bones."},
 	ACTION = DOME_ROOM_FCN,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	PSEUDO = "DOME",
 }
 ROOM {
@@ -2272,7 +2268,7 @@ ROOM {
 	SOUTH = NORTH_TEMPLE,
 	DOWN = NORTH_TEMPLE,
 	ACTION = TORCH_ROOM_FCN,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	GLOBAL = STAIRS,
 	PSEUDO = "DOME",
 }
@@ -2287,7 +2283,7 @@ ROOM {
 	OUT = TORCH_ROOM,
 	UP = TORCH_ROOM,
 	SOUTH = SOUTH_TEMPLE,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = STAIRS,
 }
 ROOM {
@@ -2296,8 +2292,8 @@ ROOM {
 	LDESC = "This is the south end of a large temple. In front of you is what\nappears to be an altar. In one corner is a small hole in the floor\nwhich leads into darkness. You probably could not get back up it.",
 	DESC = "Altar",
 	NORTH = NORTH_TEMPLE,
-	DOWN = {TINY_CAVE, COFFIN_CURE, "You haven't a prayer of getting the coffin down there."},
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	DOWN = {TINY_CAVE, flag = COFFIN_CURE, say = "You haven't a prayer of getting the coffin down there."},
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	ACTION = SOUTH_TEMPLE_FCN,
 }
 ROOM {
@@ -2310,7 +2306,7 @@ ROOM {
 	NORTH = DAM_LOBBY,
 	WEST = RESERVOIR_SOUTH,
 	ACTION = DAM_ROOM_FCN,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT),
+	FLAGS = {"RLANDBIT","ONBIT"},
 	GLOBAL = GLOBAL_WATER,
 }
 ROOM {
@@ -2321,7 +2317,7 @@ ROOM {
 	SOUTH = DAM_ROOM,
 	NORTH = MAINTENANCE_ROOM,
 	EAST = MAINTENANCE_ROOM,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT),
+	FLAGS = {"RLANDBIT","ONBIT"},
 }
 ROOM {
 	NAME = "MAINTENANCE_ROOM",
@@ -2330,7 +2326,7 @@ ROOM {
 	DESC = "Maintenance Room",
 	SOUTH = DAM_LOBBY,
 	WEST = DAM_LOBBY,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "DAM_BASE",
@@ -2339,7 +2335,7 @@ ROOM {
 	DESC = "Dam Base",
 	NORTH = DAM_ROOM,
 	UP = DAM_ROOM,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = GLOBAL_WATER,
 }
 ROOM {
@@ -2352,7 +2348,7 @@ ROOM {
 	LAND = DAM_BASE,
 	DOWN = RIVER_2,
 	EAST = "The White Cliffs prevent your landing here.",
-	FLAGS = (1<<NONLANDBIT)|(1<<SACREDBIT)|(1<<ONBIT),
+	FLAGS = {"NONLANDBIT","SACREDBIT","ONBIT"},
 	GLOBAL = GLOBAL_WATER,
 }
 ROOM {
@@ -2365,7 +2361,7 @@ ROOM {
 	LAND = "There is no safe landing spot here.",
 	EAST = "The White Cliffs prevent your landing here.",
 	WEST = "Just in time you steer away from the rocks.",
-	FLAGS = (1<<NONLANDBIT)|(1<<SACREDBIT),
+	FLAGS = {"NONLANDBIT","SACREDBIT"},
 	GLOBAL = GLOBAL_WATER,
 }
 ROOM {
@@ -2377,7 +2373,7 @@ ROOM {
 	DOWN = RIVER_4,
 	LAND = WHITE_CLIFFS_NORTH,
 	WEST = WHITE_CLIFFS_NORTH,
-	FLAGS = (1<<NONLANDBIT)|(1<<SACREDBIT),
+	FLAGS = {"NONLANDBIT","SACREDBIT"},
 	GLOBAL = GLOBAL_WATER,
 }
 ROOM {
@@ -2385,10 +2381,10 @@ ROOM {
 	LOC = ROOMS,
 	LDESC = "You are on a narrow strip of beach which runs along the base of the\nWhite Cliffs. There is a narrow path heading south along the Cliffs\nand a tight passage leading west into the cliffs themselves.",
 	DESC = "White Cliffs Beach",
-	SOUTH = {WHITE_CLIFFS_SOUTH, DEFLATE, "The path is too narrow."},
-	WEST = {DAMP_CAVE, DEFLATE, "The path is too narrow."},
+	SOUTH = {WHITE_CLIFFS_SOUTH, flag = DEFLATE, say = "The path is too narrow."},
+	WEST = {DAMP_CAVE, flag = DEFLATE, say = "The path is too narrow."},
 	ACTION = WHITE_CLIFFS_FUNCTION,
-	FLAGS = (1<<RLANDBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","SACREDBIT"},
 	GLOBAL = GLOBAL_WATER,
 }
 ROOM {
@@ -2396,9 +2392,9 @@ ROOM {
 	LOC = ROOMS,
 	LDESC = "You are on a rocky, narrow strip of beach beside the Cliffs. A\nnarrow path leads north along the shore.",
 	DESC = "White Cliffs Beach",
-	NORTH = {WHITE_CLIFFS_NORTH, DEFLATE, "The path is too narrow."},
+	NORTH = {WHITE_CLIFFS_NORTH, flag = DEFLATE, say = "The path is too narrow."},
 	ACTION = WHITE_CLIFFS_FUNCTION,
-	FLAGS = (1<<RLANDBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","SACREDBIT"},
 	GLOBAL = GLOBAL_WATER,
 }
 ROOM {
@@ -2412,7 +2408,7 @@ ROOM {
 	WEST = WHITE_CLIFFS_SOUTH,
 	EAST = SANDY_BEACH,
 	ACTION = RIVR4_ROOM,
-	FLAGS = (1<<NONLANDBIT)|(1<<SACREDBIT),
+	FLAGS = {"NONLANDBIT","SACREDBIT"},
 	GLOBAL = GLOBAL_WATER,
 }
 ROOM {
@@ -2423,7 +2419,7 @@ ROOM {
 	UP = "You cannot go upstream due to strong currents.",
 	EAST = SHORE,
 	LAND = SHORE,
-	FLAGS = (1<<NONLANDBIT)|(1<<SACREDBIT)|(1<<ONBIT),
+	FLAGS = {"NONLANDBIT","SACREDBIT","ONBIT"},
 	GLOBAL = GLOBAL_WATER,
 }
 ROOM {
@@ -2433,7 +2429,7 @@ ROOM {
 	DESC = "Shore",
 	NORTH = SANDY_BEACH,
 	SOUTH = ARAGAIN_FALLS,
-	FLAGS = (1<<RLANDBIT)|(1<<SACREDBIT)|(1<<ONBIT),
+	FLAGS = {"RLANDBIT","SACREDBIT","ONBIT"},
 	GLOBAL = GLOBAL_WATER,
 }
 ROOM {
@@ -2443,7 +2439,7 @@ ROOM {
 	DESC = "Sandy Beach",
 	NE = SANDY_CAVE,
 	SOUTH = SHORE,
-	FLAGS = (1<<RLANDBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","SACREDBIT"},
 	GLOBAL = GLOBAL_WATER,
 }
 ROOM {
@@ -2452,18 +2448,18 @@ ROOM {
 	LDESC = "This is a sand-filled cave whose exit is to the southwest.",
 	DESC = "Sandy Cave",
 	SW = SANDY_BEACH,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "ARAGAIN_FALLS",
 	LOC = ROOMS,
 	DESC = "Aragain Falls",
-	WEST = {ON_RAINBOW, RAINBOW_FLAG},
+	WEST = {ON_RAINBOW, flag = RAINBOW_FLAG},
 	DOWN = "It's a long way...",
 	NORTH = SHORE,
-	UP = {ON_RAINBOW, RAINBOW_FLAG},
+	UP = {ON_RAINBOW, flag = RAINBOW_FLAG},
 	ACTION = FALLS_ROOM,
-	FLAGS = (1<<RLANDBIT)|(1<<SACREDBIT)|(1<<ONBIT),
+	FLAGS = {"RLANDBIT","SACREDBIT","ONBIT"},
 	GLOBAL = GLOBAL_WATER,
 }
 ROOM {
@@ -2473,7 +2469,7 @@ ROOM {
 	DESC = "On the Rainbow",
 	WEST = END_OF_RAINBOW,
 	EAST = ARAGAIN_FALLS,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = RAINBOW,
 }
 ROOM {
@@ -2481,11 +2477,11 @@ ROOM {
 	LOC = ROOMS,
 	LDESC = "You are on a small, rocky beach on the continuation of the Frigid\nRiver past the Falls. The beach is narrow due to the presence of the\nWhite Cliffs. The river canyon opens here and sunlight shines in\nfrom above. A rainbow crosses over the falls to the east and a narrow\npath continues to the southwest.",
 	DESC = "End of Rainbow",
-	UP = {ON_RAINBOW, RAINBOW_FLAG},
-	NE = {ON_RAINBOW, RAINBOW_FLAG},
-	EAST = {ON_RAINBOW, RAINBOW_FLAG},
+	UP = {ON_RAINBOW, flag = RAINBOW_FLAG},
+	NE = {ON_RAINBOW, flag = RAINBOW_FLAG},
+	EAST = {ON_RAINBOW, flag = RAINBOW_FLAG},
 	SW = CANYON_BOTTOM,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT),
+	FLAGS = {"RLANDBIT","ONBIT"},
 	GLOBAL = GLOBAL_WATER,
 }
 ROOM {
@@ -2495,7 +2491,7 @@ ROOM {
 	DESC = "Canyon Bottom",
 	UP = CLIFF_MIDDLE,
 	NORTH = END_OF_RAINBOW,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = GLOBAL_WATER,
 }
 ROOM {
@@ -2505,7 +2501,7 @@ ROOM {
 	DESC = "Rocky Ledge",
 	UP = CANYON_VIEW,
 	DOWN = CANYON_BOTTOM,
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = CLIMBABLE_CLIFF,
 }
 ROOM {
@@ -2518,7 +2514,7 @@ ROOM {
 	NW = CLEARING,
 	WEST = FOREST_3,
 	SOUTH = "Storm-tossed trees block your way.",
-	FLAGS = (1<<RLANDBIT)|(1<<ONBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = CLIMBABLE_CLIFF,
 	ACTION = CANYON_VIEW_F,
 }
@@ -2542,7 +2538,7 @@ ROOM {
 	SOUTH = SLIDE_ROOM,
 	IN = SQUEEKY_ROOM,
 	WEST = SQUEEKY_ROOM,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "SQUEEKY_ROOM",
@@ -2551,7 +2547,7 @@ ROOM {
 	DESC = "Squeaky Room",
 	NORTH = BAT_ROOM,
 	EAST = MINE_ENTRANCE,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "BAT_ROOM",
@@ -2560,7 +2556,7 @@ ROOM {
 	SOUTH = SQUEEKY_ROOM,
 	EAST = SHAFT_ROOM,
 	ACTION = BATS_ROOM,
-	FLAGS = (1<<RLANDBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","SACREDBIT"},
 }
 ROOM {
 	NAME = "SHAFT_ROOM",
@@ -2570,7 +2566,7 @@ ROOM {
 	DOWN = "You wouldn't fit and would die if you could.",
 	WEST = BAT_ROOM,
 	NORTH = SMELLY_ROOM,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	PSEUDO = "CHAIN",
 }
 ROOM {
@@ -2580,7 +2576,7 @@ ROOM {
 	DESC = "Smelly Room",
 	DOWN = GAS_ROOM,
 	SOUTH = SHAFT_ROOM,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	GLOBAL = STAIRS,
 	PSEUDO = "ODOR",
 }
@@ -2592,7 +2588,7 @@ ROOM {
 	UP = SMELLY_ROOM,
 	EAST = MINE_1,
 	ACTION = BOOM_ROOM,
-	FLAGS = (1<<RLANDBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","SACREDBIT"},
 	GLOBAL = STAIRS,
 	PSEUDO = "GAS",
 }
@@ -2603,7 +2599,7 @@ ROOM {
 	DESC = "Ladder Top",
 	DOWN = LADDER_BOTTOM,
 	UP = MINE_4,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	GLOBAL = LADDER,
 }
 ROOM {
@@ -2614,7 +2610,7 @@ ROOM {
 	SOUTH = DEAD_END_5,
 	WEST = TIMBER_ROOM,
 	UP = LADDER_TOP,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	GLOBAL = LADDER,
 }
 ROOM {
@@ -2623,7 +2619,7 @@ ROOM {
 	DESC = "Dead End",
 	LDESC = "You have come to a dead end in the mine.",
 	NORTH = LADDER_BOTTOM,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "TIMBER_ROOM",
@@ -2631,9 +2627,9 @@ ROOM {
 	LDESC = "This is a long and narrow passage, which is cluttered with broken\ntimbers. A wide passage comes from the east and turns at the\nwest end of the room into a very narrow passageway. From the west\ncomes a strong draft.",
 	DESC = "Timber Room",
 	EAST = LADDER_BOTTOM,
-	WEST = {LOWER_SHAFT, EMPTY_HANDED, "You cannot fit through this passage with that load."},
+	WEST = {LOWER_SHAFT, flag = EMPTY_HANDED, say = "You cannot fit through this passage with that load."},
 	ACTION = NO_OBJS,
-	FLAGS = (1<<RLANDBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","SACREDBIT"},
 }
 ROOM {
 	NAME = "LOWER_SHAFT",
@@ -2641,10 +2637,10 @@ ROOM {
 	LDESC = "This is a small drafty room in which is the bottom of a long\nshaft. To the south is a passageway and to the east a very narrow\npassage. In the shaft can be seen a heavy iron chain.",
 	DESC = "Drafty Room",
 	SOUTH = MACHINE_ROOM,
-	OUT = {TIMBER_ROOM, EMPTY_HANDED, "You cannot fit through this passage with that load."},
-	EAST = {TIMBER_ROOM, EMPTY_HANDED, "You cannot fit through this passage with that load."},
+	OUT = {TIMBER_ROOM, flag = EMPTY_HANDED, say = "You cannot fit through this passage with that load."},
+	EAST = {TIMBER_ROOM, flag = EMPTY_HANDED, say = "You cannot fit through this passage with that load."},
 	ACTION = NO_OBJS,
-	FLAGS = (1<<RLANDBIT)|(1<<SACREDBIT),
+	FLAGS = {"RLANDBIT","SACREDBIT"},
 	PSEUDO = "CHAIN",
 }
 ROOM {
@@ -2653,7 +2649,7 @@ ROOM {
 	DESC = "Machine Room",
 	NORTH = LOWER_SHAFT,
 	ACTION = MACHINE_ROOM_FCN,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "MINE_1",
@@ -2663,7 +2659,7 @@ ROOM {
 	NORTH = GAS_ROOM,
 	EAST = MINE_1,
 	NE = MINE_2,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "MINE_2",
@@ -2673,7 +2669,7 @@ ROOM {
 	NORTH = MINE_2,
 	SOUTH = MINE_1,
 	SE = MINE_3,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "MINE_3",
@@ -2683,7 +2679,7 @@ ROOM {
 	SOUTH = MINE_3,
 	SW = MINE_4,
 	EAST = MINE_2,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "MINE_4",
@@ -2693,7 +2689,7 @@ ROOM {
 	NORTH = MINE_3,
 	WEST = MINE_4,
 	DOWN = LADDER_TOP,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 }
 ROOM {
 	NAME = "SLIDE_ROOM",
@@ -2703,7 +2699,7 @@ ROOM {
 	EAST = COLD_PASSAGE,
 	NORTH = MINE_ENTRANCE,
 	DOWN = CELLAR,
-	FLAGS = (1<<RLANDBIT),
+	FLAGS = {"RLANDBIT"},
 	GLOBAL = SLIDE,
 }
 HOUSE_AROUND = {WEST_OF_HOUSE,NORTH_OF_HOUSE,EAST_OF_HOUSE,SOUTH_OF_HOUSE,WEST_OF_HOUSE}
@@ -2721,7 +2717,7 @@ GO = function()
   ENABLE(QUEUE(I_THIEF, -1))
   QUEUE(I_CANDLES, 40)
   QUEUE(I_LANTERN, 200)
-  PUTP(INFLATED_BOAT, "VTYPE", NONLANDBIT)
+  PUTP(INFLATED_BOAT, PQVTYPE, NONLANDBIT)
   PUT(DEF1_RES, 1, REST(DEF1, 2))
   PUT(DEF1_RES, 2, REST(DEF1, 4))
   PUT(DEF2_RES, 2, REST(DEF2B, 2))

@@ -58,7 +58,8 @@ local function value(node)
   
   -- Property references (,P?...)
   if val:match("^,P%?") then
-    return string.format('"%s"', val:sub(4))
+    -- return string.format('"PQ%s"', val:sub(4))
+    return string.format('PQ%s', val:sub(4))
   end
 
   -- Convert identifier to Lua-safe name
@@ -82,16 +83,6 @@ local function value(node)
 end
 
 -- Field writer functions
-local function write_flags(buf, node)
-  local first = true
-  for child in Compiler.iter_children(node, 1) do
-    if not first then buf.write("|") end
-    
-    buf.write("(1<<%s)", value(child))
-    first = false
-  end
-end
-
 local function write_list_string(buf, node)
   buf.write("{")
   local first = true
@@ -122,7 +113,7 @@ local function write_value_field(buf, node)
 end
 
 local FIELD_WRITERS = {
-  FLAGS = write_flags,
+  FLAGS = write_list_string,
   SYNONYM = write_list_string,
   ADJECTIVE = write_list_string,
   DESC = write_string_field,
@@ -132,7 +123,7 @@ local FIELD_WRITERS = {
   IN = write_value_field,
 }
 -- Navigation direction writer
--- Format: (direction TO room [IF condition [IS flag]] [ELSE fallback])
+-- Format: (direction TO room [IF condition [IS flag]] [ELSE say])
 local function write_nav(buf, node)
   local parts = {}
   
@@ -148,7 +139,7 @@ local function write_nav(buf, node)
   -- parts[5] = IS (optional)
   -- parts[6] = flag (optional)
   -- parts[7] = ELSE (optional)
-  -- parts[8] = fallback (optional)
+  -- parts[8] = say (optional)
   
   if safeget(parts[3], 'value') == "IF" and parts[4] then
     -- Conditional navigation - use table and/or for short-circuit evaluation
@@ -156,7 +147,9 @@ local function write_nav(buf, node)
     
     -- Check for IS flag test
     if safeget(parts[5], 'value') == "IS" and parts[6] then
-      cond = string.format("%s, %sBIT", cond, value(parts[6]))
+      cond = "door = "..cond
+    else
+      cond = "flag = "..cond
     end
     
     local room = value(parts[2])
@@ -164,10 +157,10 @@ local function write_nav(buf, node)
     -- Check for ELSE clause
     local else_idx = safeget(parts[5], 'value') == "ELSE" and 6 or
                      safeget(parts[7], 'value') == "ELSE" and 8 or nil
-    local fallback = else_idx and parts[else_idx] and value(parts[else_idx]) or nil
+    local say = else_idx and parts[else_idx] and value(parts[else_idx]) or nil
     
-    if fallback then
-      buf.write("{%s, %s, %s}", room, cond, fallback)
+    if say then
+      buf.write("{%s, %s, say = %s}", room, cond, say)
     else
       buf.write("{%s, %s}", room, cond)
     end
@@ -539,16 +532,14 @@ local function compile_logical(buf, node, indent, add_return, op)
   if indent == 1 then buf.indent(indent) end
   buf.write("PASS(")
   for i = 1, #node do
-    if node[i].value ~= "D" then
-      if is_cond(node[i]) then
-        buf.write("APPLY(function()")
-        print_node(buf, node[i], indent + 1, true)
-        buf.write(" end)")
-      else
-        print_node(buf, node[i], indent + 1, false)
-      end
-      if i < #node then buf.write(string.format(" %s ", string.lower(op))) end
+    if is_cond(node[i]) then
+      buf.write("APPLY(function()")
+      print_node(buf, node[i], indent + 1, true)
+      buf.write(" end)")
+    else
+      print_node(buf, node[i], indent + 1, false)
     end
+    if i < #node then buf.write(string.format(" %s ", string.lower(op))) end
   end
   buf.write(")")
 end
@@ -595,16 +586,14 @@ function print_node(buf, node, indent, add_return)
       }
       buf.write("%s(", ops[node.name] or node.name:gsub("%-", "_"):gsub("%?", "Q"))
       for i = 1, #node do
-        if node[i].value ~= "D" then
-          if is_cond(node[i]) then
-            buf.write("APPLY(function()")
-            print_node(buf, node[i], indent + 1, true)
-            buf.write(" end)")
-          else
-            print_node(buf, node[i], indent + 1, false)
-          end
-          if i < #node then buf.write(", ") end
+        if is_cond(node[i]) then
+          buf.write("APPLY(function()")
+          print_node(buf, node[i], indent + 1, true)
+          buf.write(" end)")
+        else
+          print_node(buf, node[i], indent + 1, false)
         end
+        if i < #node then buf.write(", ") end
       end
       buf.write(")")
     end
@@ -620,7 +609,7 @@ end
 -- Top-level compilation functions
 local function compile_routine(decl, body, node)
   local name = value(node[1])
-  decl.writeln("%s = nil", name)
+  -- decl.writeln("%s = nil", name)
   body.write("%s = function(", name)
   write_function_header(body, node)
   body.writeln("\tlocal __ok, __res = pcall(function()")
@@ -636,7 +625,8 @@ end
 
 local function compile_object(decl, body, node)
   local name = value(node[1])
-  decl.writeln('%s = setmetatable({}, { __tostring = function(self) return self.DESC or "%s" end })', name, name)
+  -- decl.writeln('%s = setmetatable({}, { __tostring = function(self) return self.DESC or "%s" end })', name, name)
+  decl.writeln('%s = DECL_OBJECT("%s")', name, name)
   body.writeln("%s {", node.name)
   body.writeln("\tNAME = \"%s\",", name)
   for i = 2, #node do

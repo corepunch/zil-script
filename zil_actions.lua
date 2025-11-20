@@ -1,189 +1,3 @@
-WEST_HOUSE = nil
-EAST_HOUSE = nil
-OPEN_CLOSE = nil
-BOARD_F = nil
-TEETH_F = nil
-GRANITE_WALL_F = nil
-SONGBIRD_F = nil
-WHITE_HOUSE_F = nil
-GO_NEXT = nil
-FOREST_F = nil
-MOUNTAIN_RANGE_F = nil
-WATER_F = nil
-KITCHEN_WINDOW_F = nil
-GHOSTS_F = nil
-BASKET_F = nil
-BAT_F = nil
-FLY_ME = nil
-FWEEP = nil
-BELL_F = nil
-HOT_BELL_F = nil
-BOARDED_WINDOW_FCN = nil
-NAILS_PSEUDO = nil
-CRACK_FCN = nil
-KITCHEN_FCN = nil
-STONE_BARROW_FCN = nil
-BARROW_DOOR_FCN = nil
-BARROW_FCN = nil
-TROPHY_CASE_FCN = nil
-LIVING_ROOM_FCN = nil
-TOUCH_ALL = nil
-OTVAL_FROB = nil
-TRAP_DOOR_FCN = nil
-CELLAR_FCN = nil
-CHIMNEY_F = nil
-UP_CHIMNEY_FUNCTION = nil
-TRAP_DOOR_EXIT = nil
-RUG_FCN = nil
-AXE_F = nil
-STILETTO_FUNCTION = nil
-WEAPON_FUNCTION = nil
-TROLL_FCN = nil
-LEAVES_APPEAR = nil
-LEAF_PILE = nil
-CLEARING_FCN = nil
-MAZE_11_FCN = nil
-GRATE_FUNCTION = nil
-MAZE_DIODES = nil
-RUSTY_KNIFE_FCN = nil
-KNIFE_F = nil
-SKELETON = nil
-TORCH_OBJECT = nil
-MIRROR_ROOM = nil
-MIRROR_MIRROR = nil
-TORCH_ROOM_FCN = nil
-DOME_ROOM_FCN = nil
-LLD_ROOM = nil
-I_XB = nil
-I_XC = nil
-I_XBH = nil
-DAM_ROOM_FCN = nil
-BOLT_F = nil
-BUBBLE_F = nil
-INTEGRAL_PART = nil
-I_RFILL = nil
-I_REMPTY = nil
-BUTTON_F = nil
-TOOL_CHEST_FCN = nil
-I_MAINT_ROOM = nil
-LEAK_FUNCTION = nil
-FIX_MAINT_LEAK = nil
-PUTTY_FCN = nil
-TUBE_FUNCTION = nil
-DAM_FUNCTION = nil
-WITH_TELL = nil
-RESERVOIR_SOUTH_FCN = nil
-RESERVOIR_FCN = nil
-RESERVOIR_NORTH_FCN = nil
-BOTTLE_FUNCTION = nil
-CYCLOPS_FCN = nil
-I_CYCLOPS = nil
-CYCLOPS_ROOM_FCN = nil
-LOUD_ROOM_FCN = nil
-DEEP_CANYON_F = nil
-THIEF_VS_ADVENTURER = nil
-STOLE_LIGHTQ = nil
-HACK_TREASURES = nil
-DEPOSIT_BOOTY = nil
-ROB_MAZE = nil
-ROBBER_FUNCTION = nil
-LARGE_BAG_F = nil
-MOVE_ALL = nil
-CHALICE_FCN = nil
-TREASURE_ROOM_FCN = nil
-THIEF_IN_TREASURE = nil
-FRONT_DOOR_FCN = nil
-BODY_FUNCTION = nil
-BLACK_BOOK = nil
-PAINTING_FCN = nil
-LANTERN = nil
-MAILBOX_F = nil
-MATCH_FUNCTION = nil
-I_MATCH = nil
-I_LANTERN = nil
-I_CANDLES = nil
-LIGHT_INT = nil
-MIN = nil
-CANDLES_FCN = nil
-CAVE2_ROOM = nil
-SWORD_FCN = nil
-BOOM_ROOM = nil
-BAT_D = nil
-BATS_ROOM = nil
-MACHINE_ROOM_FCN = nil
-MACHINE_F = nil
-MSWITCH_FUNCTION = nil
-GUNK_FUNCTION = nil
-NO_OBJS = nil
-SOUTH_TEMPLE_FCN = nil
-WHITE_CLIFFS_FUNCTION = nil
-SCEPTRE_FUNCTION = nil
-FALLS_ROOM = nil
-RAINBOW_FCN = nil
-DBOAT_FUNCTION = nil
-FIX_BOAT = nil
-RIVER_FUNCTION = nil
-I_RIVER = nil
-RBOAT_FUNCTION = nil
-BREATHE = nil
-IBOAT_FUNCTION = nil
-RIVR4_ROOM = nil
-SAND_FUNCTION = nil
-TREE_ROOM = nil
-EGG_OBJECT = nil
-BAD_EGG = nil
-CANARY_OBJECT = nil
-FOREST_ROOMQ = nil
-I_FOREST_ROOM = nil
-FOREST_ROOM = nil
-WCLIF_OBJECT = nil
-CLIFF_OBJECT = nil
-ROPE_FUNCTION = nil
-UNTIE_FROM = nil
-SLIDE_FUNCTION = nil
-SLIDER = nil
-SANDWICH_BAG_FCN = nil
-DEAD_FUNCTION = nil
-LAKE_PSEUDO = nil
-STREAM_PSEUDO = nil
-CHASM_PSEUDO = nil
-DOME_PSEUDO = nil
-GATE_PSEUDO = nil
-DOOR_PSEUDO = nil
-PAINT_PSEUDO = nil
-GAS_PSEUDO = nil
-DO_FIGHT = nil
-REMARK = nil
-FIGHT_STRENGTH = nil
-VILLAIN_STRENGTH = nil
-FIND_WEAPON = nil
-VILLAIN_BLOW = nil
-HERO_BLOW = nil
-WINNER_RESULT = nil
-VILLAIN_RESULT = nil
-WINNINGQ = nil
-I_CURE = nil
-I_FIGHT = nil
-AWAKEN = nil
-I_SWORD = nil
-INFESTEDQ = nil
-I_THIEF = nil
-DROP_JUNK = nil
-RECOVER_STILETTO = nil
-STEAL_JUNK = nil
-ROB = nil
-V_DIAGNOSE = nil
-V_SCORE = nil
-JIGS_UP = nil
-RANDOMIZE_OBJECTS = nil
-KILL_INTERRUPTS = nil
-BAG_OF_COINS_F = nil
-TRUNK_F = nil
-STUPID_CONTAINER = nil
-DUMB_CONTAINER = nil
-GARLIC_F = nil
-CHAIN_PSEUDO = nil
-TROLL_ROOM_F = nil
 
 WEST_HOUSE = function(RARG)
 	local __ok, __res = pcall(function()
@@ -272,7 +86,7 @@ TEETH_F = function()
     elseif NOT(PRSI) then 
       	return TELL("Dental hygiene is highly recommended, but I'm not sure what you want\nto brush them with.", CR)
     elseif T then 
-      	return TELL("A nice idea, but with a ", PRSI, "?", CR)
+      	return TELL("A nice idea, but with a ", D, PRSI, "?", CR)
     end
 
   end
@@ -496,11 +310,11 @@ APPLY(function() AV = LOC(WINNER) return AV end)
   if PASS(VERBQ(TAKE, PUT) and NOT(PIQ)) then 
     
     if PASS(AV and PASS(EQUALQ(AV, PRSI) or PASS(NOT(PRSI) and NOT(INQ(W, AV))))) then 
-      TELL("There is now a puddle in the bottom of the ", AV, ".", CR)
+      TELL("There is now a puddle in the bottom of the ", D, AV, ".", CR)
       REMOVE_CAREFULLY(PRSO)
       	return MOVE(PRSO, AV)
     elseif PASS(PRSI and NOT(EQUALQ(PRSI, BOTTLE))) then 
-      TELL("The water leaks out of the ", PRSI, " and evaporates immediately.", CR)
+      TELL("The water leaks out of the ", D, PRSI, " and evaporates immediately.", CR)
       	return REMOVE_CAREFULLY(W)
     elseif INQ(BOTTLE, WINNER) then 
       
@@ -540,7 +354,7 @@ APPLY(function() AV = LOC(WINNER) return AV end)
     REMOVE_CAREFULLY(WATER)
     
     if AV then 
-      TELL("There is now a puddle in the bottom of the ", AV, ".", CR)
+      TELL("There is now a puddle in the bottom of the ", D, AV, ".", CR)
       	return MOVE(WATER, AV)
     elseif T then 
       TELL("The water spills to the floor and evaporates immediately.", CR)
@@ -568,9 +382,9 @@ KITCHEN_WINDOW_F = function()
   elseif VERBQ(WALK, BOARD, THROUGH) then 
     
     if EQUALQ(HERE, KITCHEN) then 
-      DO_WALK("EAST")
+      DO_WALK(PQEAST)
     elseif T then 
-      DO_WALK("WEST")
+      DO_WALK(PQWEST)
     end
 
     	error(true)
@@ -732,7 +546,7 @@ HOT_BELL_F = function()
   elseif PASS(VERBQ(RUB) or PASS(VERBQ(RING) and PRSI)) then 
     
     if FSETQ(PRSI, BURNBIT) then 
-      TELL("The ", PRSI, " burns and is consumed.", CR)
+      TELL("The ", D, PRSI, " burns and is consumed.", CR)
       	return REMOVE_CAREFULLY(PRSI)
     elseif EQUALQ(PRSI, HANDS) then 
       	return TELL("The bell is too hot to touch.", CR)
@@ -803,7 +617,7 @@ KITCHEN_FCN = function(RARG)
   elseif EQUALQ(RARG, M_BEG) then 
     
     if PASS(VERBQ(CLIMB_UP) and EQUALQ(PRSO, STAIRS)) then 
-      	return DO_WALK("UP")
+      	return DO_WALK(PQUP)
     elseif PASS(VERBQ(CLIMB_UP) and EQUALQ(PRSO, STAIRS)) then 
       	return TELL("There are no stairs leading down.", CR)
     end
@@ -817,7 +631,7 @@ end
 STONE_BARROW_FCN = function(RARG)
 	local __ok, __res = pcall(function()
 
-  if PASS(EQUALQ(RARG, M_BEG) and PASS(VERBQ(ENTER) or PASS(VERBQ(WALK) and EQUALQ(PRSO, "WEST", "IN")) or PASS(VERBQ(THROUGH) and EQUALQ(PRSO, BARROW)))) then 
+  if PASS(EQUALQ(RARG, M_BEG) and PASS(VERBQ(ENTER) or PASS(VERBQ(WALK) and EQUALQ(PRSO, PQWEST, PQIN)) or PASS(VERBQ(THROUGH) and EQUALQ(PRSO, BARROW)))) then 
     TELL("Inside the Barrow|\nAs you enter the barrow, the door closes inexorably behind you. Around\nyou it is dark, but ahead is an enormous cavern, brightly lit. Through\nits center runs a wide stream. Spanning the stream is a small wooden\nfootbridge, and beyond a path leads into a dark tunnel. Above the\nbridge, floating in the air, is a large sign. It reads:  All ye who\nstand before this bridge have completed a great and perilous adventure\nwhich has tested your wit and courage. You have mastered")
     
     if EQUALQ(BAND(GETB(0, 1), 8), 0) then 
@@ -848,7 +662,7 @@ BARROW_FCN = function()
 	local __ok, __res = pcall(function()
 
   if VERBQ(THROUGH) then 
-    	return DO_WALK("WEST")
+    	return DO_WALK(PQWEST)
   end
 
 	end)
@@ -953,7 +767,7 @@ APPLY(function() F = FIRSTQ(O) return F end)
       return SCORE
     end
 
-    APPLY(function() SCORE = ADD(SCORE, GETP(F, "TVALUE")) return SCORE end)
+    APPLY(function() SCORE = ADD(SCORE, GETP(F, PQTVALUE)) return SCORE end)
     
     if FIRSTQ(F) then 
       OTVAL_FROB(F)
@@ -1153,9 +967,9 @@ WEAPON_FUNCTION = function(W, V)
   elseif VERBQ(TAKE) then 
     
     if INQ(W, V) then 
-      TELL("The ", V, " swings it out of your reach.", CR)
+      TELL("The ", D, V, " swings it out of your reach.", CR)
     elseif T then 
-      TELL("The ", W, " seems white-hot. You can't hold on to it.", CR)
+      TELL("The ", D, W, " seems white-hot. You can't hold on to it.", CR)
     end
 
     -- 	return T
@@ -1180,11 +994,11 @@ TROLL_FCN = function(MODE)
       FSET(AXE, NDESCBIT)
       FCLEAR(AXE, WEAPONBIT)
       MOVE(AXE, TROLL)
-      PUTP(TROLL, "LDESC", "A nasty-looking troll, brandishing a bloody axe, blocks all passages out\nof the room.")
+      PUTP(TROLL, PQLDESC, "A nasty-looking troll, brandishing a bloody axe, blocks all passages out\nof the room.")
       PASS(INQ(TROLL, HERE) and TELL("The troll, angered and humiliated, recovers his weapon. He appears to have\nan axe to grind with you.", CR))
       -- 	return T
     elseif INQ(TROLL, HERE) then 
-      PUTP(TROLL, "LDESC", "A pathetically babbling troll is here.")
+      PUTP(TROLL, PQLDESC, "A pathetically babbling troll is here.")
       TELL("The troll, disarmed, cowers in terror, pleading for his life in\nthe guttural tongue of the trolls.", CR)
       -- 	return T
     end
@@ -1207,7 +1021,7 @@ TROLL_FCN = function(MODE)
       FSET(AXE, WEAPONBIT)
     end
 
-    PUTP(TROLL, "LDESC", "An unconscious troll is sprawled on the floor. All passages\nout of the room are open.")
+    PUTP(TROLL, PQLDESC, "An unconscious troll is sprawled on the floor. All passages\nout of the room are open.")
     	return APPLY(function() TROLL_FLAG = T return TROLL_FLAG end)
   elseif EQUALQ(MODE, F_CONSCIOUS) then 
     
@@ -1218,14 +1032,14 @@ TROLL_FCN = function(MODE)
 
     
     if INQ(AXE, TROLL) then 
-      PUTP(TROLL, "LDESC", "A nasty-looking troll, brandishing a bloody axe, blocks\nall passages out of the room.")
+      PUTP(TROLL, PQLDESC, "A nasty-looking troll, brandishing a bloody axe, blocks\nall passages out of the room.")
     elseif INQ(AXE, TROLL_ROOM) then 
       FSET(AXE, NDESCBIT)
       FCLEAR(AXE, WEAPONBIT)
       MOVE(AXE, TROLL)
-      PUTP(TROLL, "LDESC", "A nasty-looking troll, brandishing a bloody axe, blocks\nall passages out of the room.")
+      PUTP(TROLL, PQLDESC, "A nasty-looking troll, brandishing a bloody axe, blocks\nall passages out of the room.")
     elseif T then 
-      PUTP(TROLL, "LDESC", "A troll is here.")
+      PUTP(TROLL, PQLDESC, "A troll is here.")
     end
 
     	return APPLY(function() TROLL_FLAG = nil return TROLL_FLAG end)
@@ -1240,7 +1054,7 @@ TROLL_FCN = function(MODE)
   elseif NOT(MODE) then 
     
     if VERBQ(EXAMINE) then 
-      	return TELL(GETP(TROLL, "LDESC"), CR)
+      	return TELL(GETP(TROLL, PQLDESC), CR)
     elseif PASS(PASS(VERBQ(THROW, GIVE) and PRSO and EQUALQ(PRSI, TROLL)) or VERBQ(TAKE, MOVE, MUNG)) then 
       AWAKEN(TROLL)
       
@@ -1252,13 +1066,13 @@ TROLL_FCN = function(MODE)
           MOVE(AXE, TROLL)
           	error(true)
         elseif EQUALQ(PRSO, TROLL, AXE) then 
-          TELL("You would have to get the ", PRSO, " first, and that seems unlikely.", CR)
+          TELL("You would have to get the ", D, PRSO, " first, and that seems unlikely.", CR)
           	error(true)
         end
 
         
         if VERBQ(THROW) then 
-          TELL("The troll, who is remarkably coordinated, catches the ", PRSO)
+          TELL("The troll, who is remarkably coordinated, catches the ", D, PRSO)
         elseif T then 
           TELL("The troll, who is not overly proud, graciously accepts the gift")
         end
@@ -1268,11 +1082,11 @@ TROLL_FCN = function(MODE)
           REMOVE_CAREFULLY(PRSO)
           TELL(" and eats it hungrily. Poor troll, he dies from an internal hemorrhage\nand his carcass disappears in a sinister black fog.", CR)
           REMOVE_CAREFULLY(TROLL)
-          APPLY(GETP(TROLL, "ACTION"), F_DEAD)
+          APPLY(GETP(TROLL, PQACTION), F_DEAD)
           	return APPLY(function() TROLL_FLAG = T return TROLL_FLAG end)
         elseif EQUALQ(PRSO, KNIFE, SWORD, AXE) then 
           MOVE(PRSO, HERE)
-          TELL(" and, being for the moment sated, throws it back. Fortunately, the\ntroll has poor control, and the ", PRSO, " falls to the floor. He does\nnot look pleased.", CR)
+          TELL(" and, being for the moment sated, throws it back. Fortunately, the\ntroll has poor control, and the ", D, PRSO, " falls to the floor. He does\nnot look pleased.", CR)
           	return FSET(TROLL, FIGHTBIT)
         elseif T then 
           TELL(" and not having the most discriminating tastes, gleefully eats it.", CR)
@@ -1438,7 +1252,7 @@ GRATE_FUNCTION = function()
     elseif PASS(EQUALQ(HERE, GRATING_CLEARING) and EQUALQ(PRSI, KEYS)) then 
       	return TELL("You can't reach the lock from here.", CR)
     elseif T then 
-      	return TELL("Can you unlock a grating with a ", PRSI, "?", CR)
+      	return TELL("Can you unlock a grating with a ", D, PRSI, "?", CR)
     end
 
   elseif VERBQ(PICK) then 
@@ -1473,11 +1287,11 @@ GRATE_FUNCTION = function()
 
   elseif PASS(VERBQ(PUT) and EQUALQ(PRSI, GRATE)) then 
     
-    if GQ(GETP(PRSO, "SIZE"), 20) then 
+    if GQ(GETP(PRSO, PQSIZE), 20) then 
       	return TELL("It won't fit through the grating.", CR)
     elseif T then 
       MOVE(PRSO, GRATING_ROOM)
-      	return TELL("The ", PRSO, " goes through the grating into the darkness below.", CR)
+      	return TELL("The ", D, PRSO, " goes through the grating into the darkness below.", CR)
     end
 
   end
@@ -1587,7 +1401,7 @@ MIRROR_MIRROR = function()
   if PASS(NOT(MIRROR_MUNG) and VERBQ(RUB)) then 
     
     if PASS(PRSI and NOT(EQUALQ(PRSI, HANDS))) then 
-      TELL("You feel a faint tingling transmitted through the ", PRSI, ".", CR)
+      TELL("You feel a faint tingling transmitted through the ", D, PRSI, ".", CR)
       	error(true)
     end
 
@@ -1850,7 +1664,7 @@ BOLT_F = function()
       end
 
     elseif NOT(EQUALQ(PRSI, nil, HANDS, ROOMS)) then 
-      	return TELL("The bolt won't turn using the ", PRSI, ".", CR)
+      	return TELL("The bolt won't turn using the ", D, PRSI, ".", CR)
     end
 
   elseif VERBQ(TAKE) then 
@@ -2106,7 +1920,7 @@ DAM_FUNCTION = function()
     if EQUALQ(PRSI, HANDS) then 
       	return TELL("Are you the little Dutch boy, then? Sorry, this is a big dam.", CR)
     elseif T then 
-      	return TELL("With a ", PRSI, "? Do you know how big this dam is? You could only\nstop a tiny leak with that.", CR)
+      	return TELL("With a ", D, PRSI, "? Do you know how big this dam is? You could only\nstop a tiny leak with that.", CR)
     end
 
   end
@@ -2117,7 +1931,7 @@ DAM_FUNCTION = function()
 end
 WITH_TELL = function(OBJ)
 	local __ok, __res = pcall(function()
-	return   TELL("With a ", OBJ, "?", CR)
+	return   TELL("With a ", D, OBJ, "?", CR)
 	end)
 	if __ok or type(__res) == 'boolean' then return __res
 	else error('WITH_TELL\n'..__res) end
@@ -2673,7 +2487,7 @@ APPLY(function() X = FIRSTQ(THIEF) return X end)
     APPLY(function() N = NEXTQ(X) return N end)
     
     if EQUALQ(X, STILETTO, LARGE_BAG) then 
-    elseif GQ(GETP(X, "TVALUE"), 0) then 
+    elseif GQ(GETP(X, PQTVALUE), 0) then 
       MOVE(X, RM)
       APPLY(function() FLG = T return FLG end)
       
@@ -2707,7 +2521,7 @@ APPLY(function() X = FIRSTQ(RM) return X end)
     APPLY(function() N = NEXTQ(X) return N end)
     
     if PASS(FSETQ(X, TAKEBIT) and NOT(FSETQ(X, INVISIBLE)) and PROB(40)) then 
-      TELL("You hear, off in the distance, someone saying \"My, I wonder what\nthis fine ", X, " is doing here.\"", CR)
+      TELL("You hear, off in the distance, someone saying \"My, I wonder what\nthis fine ", D, X, " is doing here.\"", CR)
       
       if PROB(60, 80) then 
         MOVE(X, THIEF)
@@ -2738,7 +2552,7 @@ ROBBER_FUNCTION = function(MODE)
     	return APPLY(function() P_CONT = nil return P_CONT end)
   elseif NOT(MODE) then 
     
-    if PASS(VERBQ(HELLO) and EQUALQ(GETP(THIEF, "LDESC"), ROBBER_U_DESC)) then 
+    if PASS(VERBQ(HELLO) and EQUALQ(GETP(THIEF, PQLDESC), ROBBER_U_DESC)) then 
       	return TELL("The thief, being temporarily incapacitated, is unable to acknowledge\nyour greeting with his usual graciousness.", CR)
     elseif PASS(EQUALQ(PRSO, KNIFE) and VERBQ(THROW) and NOT(FSETQ(THIEF, FIGHTBIT))) then 
       MOVE(PRSO, HERE)
@@ -2776,21 +2590,21 @@ ROBBER_FUNCTION = function(MODE)
 
     elseif PASS(VERBQ(THROW, GIVE) and PRSO and NOT(EQUALQ(PRSO, THIEF)) and EQUALQ(PRSI, THIEF)) then 
       
-      if LQ(GETP(THIEF, "STRENGTH"), 0) then 
-        PUTP(THIEF, "STRENGTH", SUB(GETP(THIEF, "STRENGTH")))
+      if LQ(GETP(THIEF, PQSTRENGTH), 0) then 
+        PUTP(THIEF, PQSTRENGTH, SUB(GETP(THIEF, PQSTRENGTH)))
         ENABLE(INT(I_THIEF))
         RECOVER_STILETTO()
-        PUTP(THIEF, "LDESC", ROBBER_C_DESC)
+        PUTP(THIEF, PQLDESC, ROBBER_C_DESC)
         TELL("Your proposed victim suddenly recovers consciousness.", CR)
       end
 
       MOVE(PRSO, THIEF)
       
-      if GQ(GETP(PRSO, "TVALUE"), 0) then 
+      if GQ(GETP(PRSO, PQTVALUE), 0) then 
         APPLY(function() THIEF_ENGROSSED = T return THIEF_ENGROSSED end)
-        	return TELL("The thief is taken aback by your unexpected generosity, but accepts\nthe ", PRSO, " and stops to admire its beauty.", CR)
+        	return TELL("The thief is taken aback by your unexpected generosity, but accepts\nthe ", D, PRSO, " and stops to admire its beauty.", CR)
       elseif T then 
-        	return TELL("The thief places the ", PRSO, " in his bag and thanks\nyou politely.", CR)
+        	return TELL("The thief places the ", D, PRSO, " in his bag and thanks\nyou politely.", CR)
       end
 
     elseif VERBQ(TAKE) then 
@@ -2837,7 +2651,7 @@ ROBBER_FUNCTION = function(MODE)
             TELL("As the thief dies, the power of his magic decreases, and his\ntreasures reappear:", CR)
           end
 
-          TELL("  A ", X)
+          TELL("  A ", D, X)
           
           if PASS(FIRSTQ(X) and SEE_INSIDEQ(X)) then 
             TELL(", with ")
@@ -2869,7 +2683,7 @@ ROBBER_FUNCTION = function(MODE)
     FCLEAR(THIEF, FIGHTBIT)
     MOVE(STILETTO, HERE)
     FCLEAR(STILETTO, NDESCBIT)
-    	return PUTP(THIEF, "LDESC", ROBBER_U_DESC)
+    	return PUTP(THIEF, PQLDESC, ROBBER_U_DESC)
   elseif EQUALQ(MODE, F_CONSCIOUS) then 
     
     if EQUALQ(LOC(THIEF), HERE) then 
@@ -2878,7 +2692,7 @@ ROBBER_FUNCTION = function(MODE)
     end
 
     ENABLE(INT(I_THIEF))
-    PUTP(THIEF, "LDESC", ROBBER_C_DESC)
+    PUTP(THIEF, PQLDESC, ROBBER_C_DESC)
     	return RECOVER_STILETTO()
   end
 
@@ -2893,7 +2707,7 @@ LARGE_BAG_F = function()
 
   if VERBQ(TAKE) then 
     
-    if EQUALQ(GETP(THIEF, "LDESC"), ROBBER_U_DESC) then 
+    if EQUALQ(GETP(THIEF, PQLDESC), ROBBER_U_DESC) then 
       	return TELL("Sadly for you, the robber collapsed on top of the bag. Trying to take\nit would wake him.", CR)
     elseif T then 
       	return TELL("The bag will be taken over his dead body.", CR)
@@ -2942,7 +2756,7 @@ CHALICE_FCN = function()
 
   if VERBQ(TAKE) then 
     
-    if PASS(INQ(PRSO, TREASURE_ROOM) and INQ(THIEF, TREASURE_ROOM) and FSETQ(THIEF, FIGHTBIT) and NOT(FSETQ(THIEF, INVISIBLE)) and NOT(EQUALQ(GETP(THIEF, "LDESC"), ROBBER_U_DESC))) then 
+    if PASS(INQ(PRSO, TREASURE_ROOM) and INQ(THIEF, TREASURE_ROOM) and FSETQ(THIEF, FIGHTBIT) and NOT(FSETQ(THIEF, INVISIBLE)) and NOT(EQUALQ(GETP(THIEF, PQLDESC), ROBBER_U_DESC))) then 
       	return TELL("You'd be stabbed in the back first.", CR)
     end
 
@@ -3061,8 +2875,8 @@ PAINTING_FCN = function()
 	local __ok, __res = pcall(function()
 
   if VERBQ(MUNG) then 
-    PUTP(PRSO, "TVALUE", 0)
-    PUTP(PRSO, "LDESC", "There is a worthless piece of canvas here.")
+    PUTP(PRSO, PQTVALUE, 0)
+    PUTP(PRSO, PQLDESC, "There is a worthless piece of canvas here.")
     	return TELL("Congratulations! Unlike the other vandals, who merely stole the\nartist's masterpieces, you have destroyed one.", CR)
   end
 
@@ -3257,7 +3071,7 @@ LIGHT_INT = function(OBJ, TBL, TICK)
   if PASS(HELDQ(OBJ) or INQ(OBJ, HERE)) then 
     
     if ZEROQ(TICK) then 
-      	return TELL("You'd better have more light than from the ", OBJ, ".", CR)
+      	return TELL("You'd better have more light than from the ", D, OBJ, ".", CR)
     elseif T then 
       	return TELL(GET(TBL, 1), CR)
     end
@@ -3406,7 +3220,7 @@ SWORD_FCN = function()
     	return nil
   elseif VERBQ(EXAMINE) then 
     
-    if EQUALQ(APPLY(function() G = GETP(SWORD, "TVALUE") return G end), 1) then 
+    if EQUALQ(APPLY(function() G = GETP(SWORD, PQTVALUE) return G end), 1) then 
       	return TELL("Your sword is glowing with a faint blue glow.", CR)
     elseif EQUALQ(G, 2) then 
       	return TELL("Your sword is glowing very brightly.", CR)
@@ -3432,7 +3246,7 @@ BOOM_ROOM = function(RARG)
     if PASS(PASS(HELDQ(CANDLES) and FSETQ(CANDLES, ONBIT)) or PASS(HELDQ(TORCH) and FSETQ(TORCH, ONBIT)) or PASS(HELDQ(MATCH) and FSETQ(MATCH, ONBIT))) then 
       
       if DUMMYQ then 
-        TELL("How sad for an aspiring adventurer to light a ", PRSO, " in a room which\nreeks of gas. Fortunately, there is justice in the world.", CR)
+        TELL("How sad for an aspiring adventurer to light a ", D, PRSO, " in a room which\nreeks of gas. Fortunately, there is justice in the world.", CR)
       elseif T then 
         TELL("Oh dear. It appears that the smell coming from this room was coal gas.\nI would have thought twice about carrying flaming objects in here.", CR)
       end
@@ -3576,7 +3390,7 @@ MSWITCH_FUNCTION = function()
       end
 
     elseif NOT(EQUALQ(PRSI, nil, HANDS, ROOMS)) then 
-      	return TELL("It seems that a ", PRSI, " won't do.", CR)
+      	return TELL("It seems that a ", D, PRSI, " won't do.", CR)
     end
 
   end
@@ -3788,10 +3602,10 @@ RIVER_FUNCTION = function()
         	return TELL("You should get in the boat then launch it.", CR)
       elseif FSETQ(PRSO, BURNBIT) then 
         REMOVE_CAREFULLY(PRSO)
-        	return TELL("The ", PRSO, " floats for a moment, then sinks.", CR)
+        	return TELL("The ", D, PRSO, " floats for a moment, then sinks.", CR)
       elseif T then 
         REMOVE_CAREFULLY(PRSO)
-        	return TELL("The ", PRSO, " splashes into the water and is gone forever.", CR)
+        	return TELL("The ", D, PRSO, " splashes into the water and is gone forever.", CR)
       end
 
     end
@@ -3839,11 +3653,11 @@ RBOAT_FUNCTION = function(RARG)
     
     if VERBQ(WALK) then 
       
-      if EQUALQ(PRSO, "LAND", "EAST", "WEST") then 
+      if EQUALQ(PRSO, PQLAND, PQEAST, PQWEST) then 
         	error(false)
-      elseif PASS(EQUALQ(HERE, RESERVOIR) and EQUALQ(PRSO, "NORTH", "SOUTH")) then 
+      elseif PASS(EQUALQ(HERE, RESERVOIR) and EQUALQ(PRSO, PQNORTH, PQSOUTH)) then 
         	error(false)
-      elseif PASS(EQUALQ(HERE, IN_STREAM) and EQUALQ(PRSO, "SOUTH")) then 
+      elseif PASS(EQUALQ(HERE, IN_STREAM) and EQUALQ(PRSO, PQSOUTH)) then 
         	error(false)
       elseif T then 
         TELL("Read the label for the boat's instructions.", CR)
@@ -3882,9 +3696,9 @@ RBOAT_FUNCTION = function(RARG)
       TELL("It seems that the ")
       
       if VERBQ(DROP, PUT) then 
-        TELL(PRSO)
+        TELL(D, PRSO)
       elseif T then 
-        TELL(PRSI)
+        TELL(D, PRSI)
       end
 
       TELL(" didn't agree with the boat, as evidenced\nby the loud hissing noise issuing therefrom. With a pathetic sputter, the\nboat deflates, leaving you without.", CR)
@@ -3965,7 +3779,7 @@ IBOAT_FUNCTION = function()
     elseif EQUALQ(PRSI, LUNGS) then 
       	return TELL("You don't have enough lung power to inflate it.", CR)
     elseif T then 
-      	return TELL("With a ", PRSI, "? Surely you jest!", CR)
+      	return TELL("With a ", D, PRSI, "? Surely you jest!", CR)
     end
 
   end
@@ -4038,9 +3852,9 @@ TREE_ROOM = function(RARG)
   elseif EQUALQ(RARG, M_BEG) then 
     
     if PASS(VERBQ(CLIMB_DOWN) and EQUALQ(PRSO, TREE, ROOMS)) then 
-      	return DO_WALK("DOWN")
+      	return DO_WALK(PQDOWN)
     elseif PASS(VERBQ(CLIMB_UP, CLIMB_FOO) and EQUALQ(PRSO, TREE)) then 
-      	return DO_WALK("UP")
+      	return DO_WALK(PQUP)
     elseif VERBQ(DROP) then 
       
       if NOT(IDROP()) then 
@@ -4056,7 +3870,7 @@ TREE_ROOM = function(RARG)
         	return CRLF()
       elseif NOT(EQUALQ(PRSO, WINNER, TREE)) then 
         MOVE(PRSO, PATH)
-        	return TELL("The ", PRSO, " falls to the ground.", CR)
+        	return TELL("The ", D, PRSO, " falls to the ground.", CR)
       elseif VERBQ(LEAP) then 
         	return JIGS_UP("That was just a bit too far down.")
       end
@@ -4087,9 +3901,9 @@ EGG_OBJECT = function()
       BAD_EGG()
       	return CRLF()
     elseif FSETQ(PRSO, FIGHTBIT) then 
-      	return TELL("Not to say that using the ", PRSI, " isn't original too...", CR)
+      	return TELL("Not to say that using the ", D, PRSI, " isn't original too...", CR)
     elseif T then 
-      TELL("The concept of using a ", PRSI, " is certainly original.", CR)
+      TELL("The concept of using a ", D, PRSI, " is certainly original.", CR)
       	return FSET(PRSO, FIGHTBIT)
     end
 
@@ -4116,7 +3930,7 @@ BAD_EGG = function()
 	local __ok, __res = pcall(function()
 
   if INQ(CANARY, EGG) then 
-    TELL(" ", GETP(BROKEN_CANARY, "FDESC"))
+    TELL(" ", GETP(BROKEN_CANARY, PQFDESC))
   elseif T then 
     REMOVE_CAREFULLY(BROKEN_CANARY)
   end
@@ -4189,7 +4003,7 @@ FOREST_ROOM = function(RARG)
   elseif EQUALQ(RARG, M_BEG) then 
     
     if PASS(VERBQ(CLIMB_FOO, CLIMB_UP) and EQUALQ(PRSO, TREE)) then 
-      	return DO_WALK("UP")
+      	return DO_WALK(PQUP)
     end
 
   end
@@ -4217,7 +4031,7 @@ CLIFF_OBJECT = function()
   elseif EQUALQ(PRSI, CLIMBABLE_CLIFF) then 
     
     if VERBQ(PUT, THROW_OFF) then 
-      TELL("The ", PRSO, " tumbles into the river and is seen no more.", CR)
+      TELL("The ", D, PRSO, " tumbles into the river and is seen no more.", CR)
       	return REMOVE_CAREFULLY(PRSO)
     end
 
@@ -4260,20 +4074,20 @@ ROPE_FUNCTION = function()
     end
 
   elseif PASS(VERBQ(CLIMB_DOWN) and EQUALQ(PRSO, ROPE, ROOMS) and DOME_FLAG) then 
-    	return DO_WALK("DOWN")
+    	return DO_WALK(PQDOWN)
   elseif PASS(VERBQ(TIE_UP) and EQUALQ(ROPE, PRSI)) then 
     
     if FSETQ(PRSO, ACTORBIT) then 
       
-      if LQ(GETP(PRSO, "STRENGTH"), 0) then 
-        TELL("Your attempt to tie up the ", PRSO, " awakens him.")
+      if LQ(GETP(PRSO, PQSTRENGTH), 0) then 
+        TELL("Your attempt to tie up the ", D, PRSO, " awakens him.")
         	return AWAKEN(PRSO)
       elseif T then 
-        	return TELL("The ", PRSO, " struggles and you cannot tie him up.", CR)
+        	return TELL("The ", D, PRSO, " struggles and you cannot tie him up.", CR)
       end
 
     elseif T then 
-      	return TELL("Why would you tie up a ", PRSO, "?", CR)
+      	return TELL("Why would you tie up a ", D, PRSO, "?", CR)
     end
 
   elseif VERBQ(UNTIE) then 
@@ -4320,7 +4134,7 @@ SLIDE_FUNCTION = function()
   if PASS(VERBQ(THROUGH, CLIMB_UP, CLIMB_DOWN, CLIMB_FOO) or PASS(VERBQ(PUT) and EQUALQ(PRSO, ME))) then 
     
     if EQUALQ(HERE, CELLAR) then 
-      DO_WALK("WEST")
+      DO_WALK(PQWEST)
       	error(true)
     elseif T then 
       TELL("You tumble down the slide....", CR)
@@ -4339,7 +4153,7 @@ SLIDER = function(OBJ)
 	local __ok, __res = pcall(function()
 
   if FSETQ(OBJ, TAKEBIT) then 
-    TELL("The ", OBJ, " falls into the slide and is gone.", CR)
+    TELL("The ", D, OBJ, " falls into the slide and is gone.", CR)
     
     if EQUALQ(OBJ, WATER) then 
       	return REMOVE_CAREFULLY(OBJ)
@@ -4372,7 +4186,7 @@ DEAD_FUNCTION = function(FOO)
 
   if VERBQ(WALK) then 
     
-    if PASS(EQUALQ(HERE, TIMBER_ROOM) and EQUALQ(PRSO, "WEST")) then 
+    if PASS(EQUALQ(HERE, TIMBER_ROOM) and EQUALQ(PRSO, PQWEST)) then 
       	return TELL("You cannot enter in your condition.", CR)
     end
 
@@ -4415,7 +4229,7 @@ DEAD_FUNCTION = function(FOO)
     
     if EQUALQ(HERE, SOUTH_TEMPLE) then 
       FCLEAR(LAMP, INVISIBLE)
-      PUTP(WINNER, "ACTION", 0)
+      PUTP(WINNER, PQACTION, 0)
       APPLY(function() ALWAYS_LIT = nil return ALWAYS_LIT end)
       APPLY(function() DEAD = nil return DEAD end)
       
@@ -4475,7 +4289,7 @@ CHASM_PSEUDO = function()
   elseif VERBQ(CROSS) then 
     	return TELL("It's too far to jump, and there's no bridge.", CR)
   elseif PASS(VERBQ(PUT, THROW_OFF) and EQUALQ(PRSI, PSEUDO_OBJECT)) then 
-    TELL("The ", PRSO, " drops out of sight into the chasm.", CR)
+    TELL("The ", D, PRSO, " drops out of sight into the chasm.", CR)
     	return REMOVE_CAREFULLY(PRSO)
   end
 
@@ -4498,7 +4312,7 @@ GATE_PSEUDO = function()
 	local __ok, __res = pcall(function()
 
   if VERBQ(THROUGH) then 
-    DO_WALK("IN")
+    DO_WALK(PQIN)
     	error(true)
   elseif T then 
     	return TELL("The gate is protected by an invisible force. It makes your\nteeth ache to touch it.", CR)
@@ -4514,7 +4328,7 @@ DOOR_PSEUDO = function()
   if VERBQ(OPEN, CLOSE) then 
     	return TELL("The door won't budge.", CR)
   elseif VERBQ(THROUGH) then 
-    	return DO_WALK("SOUTH")
+    	return DO_WALK(PQSOUTH)
   end
 
 	end)
@@ -4603,7 +4417,7 @@ DO_FIGHT = function(LEN)
       APPLY(function() O = GET(OO, V_VILLAIN) return O end)
       
       if NOT(FSETQ(O, FIGHTBIT)) then 
-      elseif APPLY(GETP(O, "ACTION"), F_BUSYQ) then 
+      elseif APPLY(GETP(O, PQACTION), F_BUSYQ) then 
       elseif NOT(APPLY(function() RES = VILLAIN_BLOW(OO, OUT) return RES end)) then 
         APPLY(function() RES = nil return RES end)
         return 
@@ -4676,7 +4490,7 @@ FIGHT_STRENGTH = function(ADJUSTQ)
 APPLY(function() S = ADD(STRENGTH_MIN, DIV(SCORE, DIV(SCORE_MAX, SUB(STRENGTH_MAX, STRENGTH_MIN)))) return S end)
 
   if ADJUSTQ then 
-    	return ADD(S, GETP(WINNER, "STRENGTH"))
+    	return ADD(S, GETP(WINNER, PQSTRENGTH))
   elseif T then 
     -- 	return S
   end
@@ -4690,7 +4504,7 @@ VILLAIN_STRENGTH = function(OO)
 	local OD
 	local TMP
 	local __ok, __res = pcall(function()
-APPLY(function() OD = GETP(VILLAIN, "STRENGTH") return OD end)
+APPLY(function() OD = GETP(VILLAIN, PQSTRENGTH) return OD end)
 
   if NOT(LQ(OD, 0)) then 
     
@@ -4761,7 +4575,7 @@ VILLAIN_BLOW = function(OO, OUTQ)
   FCLEAR(WINNER, STAGGERED)
 
   if FSETQ(VILLAIN, STAGGERED) then 
-    TELL("The ", VILLAIN, " slowly regains his feet.", CR)
+    TELL("The ", D, VILLAIN, " slowly regains his feet.", CR)
     FCLEAR(VILLAIN, STAGGERED)
     	error(true)
   end
@@ -4866,7 +4680,7 @@ APPLY(function() DWEAPON = FIND_WEAPON(WINNER) return DWEAPON end)
     MOVE(DWEAPON, HERE)
     
     if APPLY(function() NWEAPON = FIND_WEAPON(WINNER) return NWEAPON end) then 
-      TELL("Fortunately, you still have a ", NWEAPON, ".", CR)
+      TELL("Fortunately, you still have a ", D, NWEAPON, ".", CR)
     end
 
   end
@@ -4930,7 +4744,7 @@ APPLY(function() VILLAIN = GET(OO, V_VILLAIN) return VILLAIN end)
       return JIGS_UP("Well, you really did it that time. Is suicide painless?")
     end
 
-    TELL("Attacking the ", VILLAIN, " is pointless.", CR)
+    TELL("Attacking the ", D, VILLAIN, " is pointless.", CR)
     	error(true)
   end
 
@@ -4945,7 +4759,7 @@ APPLY(function() DWEAPON = FIND_WEAPON(VILLAIN) return DWEAPON end)
       TELL("unarmed")
     end
 
-    TELL(" ", VILLAIN, " cannot defend himself: He dies.", CR)
+    TELL(" ", D, VILLAIN, " cannot defend himself: He dies.", CR)
     APPLY(function() RES = KILLED return RES end)
   elseif T then 
     
@@ -5031,7 +4845,7 @@ APPLY(function() DWEAPON = FIND_WEAPON(VILLAIN) return DWEAPON end)
 end
 WINNER_RESULT = function(DEF, RES, OD)
 	local __ok, __res = pcall(function()
-  PUTP(WINNER, "STRENGTH", APPLY(function()
+  PUTP(WINNER, PQSTRENGTH, APPLY(function()
     if ZEROQ(DEF) then 
       -- 	return -10000
     elseif T then 
@@ -5045,7 +4859,7 @@ WINNER_RESULT = function(DEF, RES, OD)
 
 
   if NOT(GQ(FIGHT_STRENGTH(), 0)) then 
-    PUTP(WINNER, "STRENGTH", ADD(1, SUB(FIGHT_STRENGTH(nil))))
+    PUTP(WINNER, PQSTRENGTH, ADD(1, SUB(FIGHT_STRENGTH(nil))))
     JIGS_UP("It appears that that last blow was too much for you. I'm afraid you\nare dead.")
     	return nil
   elseif T then 
@@ -5058,16 +4872,16 @@ WINNER_RESULT = function(DEF, RES, OD)
 end
 VILLAIN_RESULT = function(VILLAIN, DEF, RES)
 	local __ok, __res = pcall(function()
-  PUTP(VILLAIN, "STRENGTH", DEF)
+  PUTP(VILLAIN, PQSTRENGTH, DEF)
 
   if ZEROQ(DEF) then 
     FCLEAR(VILLAIN, FIGHTBIT)
-    TELL("Almost as soon as the ", VILLAIN, " breathes his last breath, a cloud\nof sinister black fog envelops him, and when the fog lifts, the\ncarcass has disappeared.", CR)
+    TELL("Almost as soon as the ", D, VILLAIN, " breathes his last breath, a cloud\nof sinister black fog envelops him, and when the fog lifts, the\ncarcass has disappeared.", CR)
     REMOVE_CAREFULLY(VILLAIN)
-    APPLY(GETP(VILLAIN, "ACTION"), F_DEAD)
+    APPLY(GETP(VILLAIN, PQACTION), F_DEAD)
     -- 	return RES
   elseif EQUALQ(RES, UNCONSCIOUS) then 
-    APPLY(GETP(VILLAIN, "ACTION"), F_UNCONSCIOUS)
+    APPLY(GETP(VILLAIN, PQACTION), F_UNCONSCIOUS)
     -- 	return RES
   elseif T then 
     -- 	return RES
@@ -5081,7 +4895,7 @@ WINNINGQ = function(V)
 	local VS
 	local PS
 	local __ok, __res = pcall(function()
-APPLY(function() VS = GETP(V, "STRENGTH") return VS end)
+APPLY(function() VS = GETP(V, PQSTRENGTH) return VS end)
 APPLY(function() PS = SUB(VS, FIGHT_STRENGTH()) return PS end)
 
   if GQ(PS, 3) then 
@@ -5101,15 +4915,15 @@ APPLY(function() PS = SUB(VS, FIGHT_STRENGTH()) return PS end)
 	else error('WINNINGQ\n'..__res) end
 end
 I_CURE = function()
-  local S = GETP(WINNER, "STRENGTH")
+  local S = GETP(WINNER, PQSTRENGTH)
 	local __ok, __res = pcall(function()
 
   if GQ(S, 0) then 
     APPLY(function() S = 0 return S end)
-    PUTP(WINNER, "STRENGTH", S)
+    PUTP(WINNER, PQSTRENGTH, S)
   elseif LQ(S, 0) then 
     APPLY(function() S = ADD(S, 1) return S end)
-    PUTP(WINNER, "STRENGTH", S)
+    PUTP(WINNER, PQSTRENGTH, S)
   end
 
 
@@ -5307,7 +5121,7 @@ APPLY(function() CNT = 0 return CNT end)
       
       if PASS(EQUALQ(O, THIEF) and THIEF_ENGROSSED) then 
         APPLY(function() THIEF_ENGROSSED = nil return THIEF_ENGROSSED end)
-      elseif LQ(GETP(O, "STRENGTH"), 0) then 
+      elseif LQ(GETP(O, PQSTRENGTH), 0) then 
         APPLY(function() P = GET(OO, V_PROB) return P end)
         
         if PASS(NOT(ZEROQ(P)) and PROB(P)) then 
@@ -5317,14 +5131,14 @@ APPLY(function() CNT = 0 return CNT end)
           PUT(OO, V_PROB, ADD(P, 25))
         end
 
-      elseif PASS(FSETQ(O, FIGHTBIT) or APPLY(GETP(O, "ACTION"), F_FIRSTQ)) then 
+      elseif PASS(FSETQ(O, FIGHTBIT) or APPLY(GETP(O, PQACTION), F_FIRSTQ)) then 
         APPLY(function() FIGHTQ = T return FIGHTQ end)
       end
 
     elseif T then 
       
       if FSETQ(O, FIGHTBIT) then 
-        APPLY(GETP(O, "ACTION"), F_BUSYQ)
+        APPLY(GETP(O, PQACTION), F_BUSYQ)
       end
 
       
@@ -5352,12 +5166,12 @@ APPLY(function() CNT = 0 return CNT end)
 	else error('I_FIGHT\n'..__res) end
 end
 AWAKEN = function(O)
-  local S = GETP(O, "STRENGTH")
+  local S = GETP(O, PQSTRENGTH)
 	local __ok, __res = pcall(function()
 
   if LQ(S, 0) then 
-    PUTP(O, "STRENGTH", SUB(0, S))
-    APPLY(GETP(O, "ACTION"), F_CONSCIOUS)
+    PUTP(O, PQSTRENGTH, SUB(0, S))
+    APPLY(GETP(O, PQACTION), F_CONSCIOUS)
   end
 
 	return T
@@ -5367,7 +5181,7 @@ AWAKEN = function(O)
 end
 I_SWORD = function()
   local DEM = INT(I_SWORD)
-  local G = GETP(SWORD, "TVALUE")
+  local G = GETP(SWORD, PQTVALUE)
   local NG = 0
 	local P
 	local T
@@ -5416,7 +5230,7 @@ I_SWORD = function()
       TELL("Your sword is no longer glowing.", CR)
     end
 
-    PUTP(SWORD, "TVALUE", NG)
+    PUTP(SWORD, PQTVALUE, NG)
     	error(true)
   elseif T then 
     PUT(DEM, C_ENABLEDQ, 0)
@@ -5554,7 +5368,7 @@ APPLY(function() X = FIRSTQ(THIEF) return X end)
     APPLY(function() N = NEXTQ(X) return N end)
     
     if EQUALQ(X, STILETTO, LARGE_BAG) then 
-    elseif PASS(ZEROQ(GETP(X, "TVALUE")) and PROB(30, T)) then 
+    elseif PASS(ZEROQ(GETP(X, PQTVALUE)) and PROB(30, T)) then 
       FCLEAR(X, INVISIBLE)
       MOVE(X, RM)
       
@@ -5599,7 +5413,7 @@ APPLY(function() X = FIRSTQ(RM) return X end)
 
     APPLY(function() N = NEXTQ(X) return N end)
     
-    if PASS(ZEROQ(GETP(X, "TVALUE")) and FSETQ(X, TAKEBIT) and NOT(FSETQ(X, SACREDBIT)) and NOT(FSETQ(X, INVISIBLE)) and PASS(EQUALQ(X, STILETTO) or PROB(10, T))) then 
+    if PASS(ZEROQ(GETP(X, PQTVALUE)) and FSETQ(X, TAKEBIT) and NOT(FSETQ(X, SACREDBIT)) and NOT(FSETQ(X, INVISIBLE)) and PASS(EQUALQ(X, STILETTO) or PROB(10, T))) then 
       MOVE(X, THIEF)
       FSET(X, TOUCHBIT)
       FSET(X, INVISIBLE)
@@ -5610,7 +5424,7 @@ APPLY(function() X = FIRSTQ(RM) return X end)
 
       
       if EQUALQ(RM, HERE) then 
-        TELL("You suddenly notice that the ", X, " vanished.", CR)
+        TELL("You suddenly notice that the ", D, X, " vanished.", CR)
         	error(true)
       else 
         	error(false)
@@ -5642,7 +5456,7 @@ APPLY(function() X = FIRSTQ(WHAT) return X end)
 
     APPLY(function() N = NEXTQ(X) return N end)
     
-    if PASS(NOT(FSETQ(X, INVISIBLE)) and NOT(FSETQ(X, SACREDBIT)) and GQ(GETP(X, "TVALUE"), 0) and PASS(NOT(PROB) or PROB(PROB))) then 
+    if PASS(NOT(FSETQ(X, INVISIBLE)) and NOT(FSETQ(X, SACREDBIT)) and GQ(GETP(X, PQTVALUE), 0) and PASS(NOT(PROB) or PROB(PROB))) then 
       MOVE(X, WHERE)
       FSET(X, TOUCHBIT)
       
@@ -5663,7 +5477,7 @@ APPLY(function() X = FIRSTQ(WHAT) return X end)
 end
 V_DIAGNOSE = function()
   local MS = FIGHT_STRENGTH(nil)
-  local WD = GETP(WINNER, "STRENGTH")
+  local WD = GETP(WINNER, PQSTRENGTH)
   local RS = ADD(MS, WD)
 	local __ok, __res = pcall(function()
 
@@ -5807,7 +5621,7 @@ APPLY(function() WINNER = ADVENTURER return WINNER end)
         APPLY(function() DEAD = T return DEAD end)
         APPLY(function() TROLL_FLAG = T return TROLL_FLAG end)
         APPLY(function() ALWAYS_LIT = T return ALWAYS_LIT end)
-        PUTP(WINNER, "ACTION", DEAD_FUNCTION)
+        PUTP(WINNER, PQACTION, DEAD_FUNCTION)
         GOTO(ENTRANCE_TO_HADES)
       elseif T then 
         TELL("Now, let's take a look here...\nWell, you probably deserve another chance.  I can't quite fix you\nup completely, but you can't have everything.", CR, CR)
@@ -5843,7 +5657,7 @@ RANDOMIZE_OBJECTS = function()
     MOVE(COFFIN, EGYPT_ROOM)
   end
 
-  PUTP(SWORD, "TVALUE", 0)
+  PUTP(SWORD, PQTVALUE, 0)
 APPLY(function() N = FIRSTQ(WINNER) return N end)
 APPLY(function() L = GET(ABOVE_GROUND, 0) return L end)
 
@@ -5856,7 +5670,7 @@ APPLY(function() L = GET(ABOVE_GROUND, 0) return L end)
 
     APPLY(function() N = NEXTQ(F) return N end)
     
-    if GQ(GETP(F, "TVALUE"), 0) then 
+    if GQ(GETP(F, PQTVALUE), 0) then 
       
       APPLY(function() while true do
         
@@ -5924,7 +5738,7 @@ STUPID_CONTAINER = function(OBJ, STR)
   elseif VERBQ(LOOK_INSIDE, EXAMINE) then 
     	return TELL("There are lots of ", STR, " in there.", CR)
   elseif PASS(VERBQ(PUT) and EQUALQ(PRSI, OBJ)) then 
-    	return TELL("Don't be silly. It wouldn't be a ", OBJ, " anymore.", CR)
+    	return TELL("Don't be silly. It wouldn't be a ", D, OBJ, " anymore.", CR)
   end
 
 	end)
@@ -5937,7 +5751,7 @@ DUMB_CONTAINER = function()
   if VERBQ(OPEN, CLOSE, LOOK_INSIDE) then 
     	return TELL("You can't do that.", CR)
   elseif VERBQ(EXAMINE) then 
-    	return TELL("It looks pretty much like a ", PRSO, ".", CR)
+    	return TELL("It looks pretty much like a ", D, PRSO, ".", CR)
   end
 
 	end)

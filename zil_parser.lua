@@ -1,45 +1,3 @@
-PARSER = nil
-STUFF = nil
-INBUF_STUFF = nil
-INBUF_ADD = nil
-WTQ = nil
-CLAUSE = nil
-NUMBERQ = nil
-ORPHAN_MERGE = nil
-ACLAUSE_WIN = nil
-NCLAUSE_WIN = nil
-WORD_PRINT = nil
-UNKNOWN_WORD = nil
-CANT_USE = nil
-SYNTAX_CHECK = nil
-CANT_ORPHAN = nil
-ORPHAN = nil
-THING_PRINT = nil
-BUFFER_PRINT = nil
-PREP_PRINT = nil
-CLAUSE_COPY = nil
-CLAUSE_ADD = nil
-PREP_FIND = nil
-SYNTAX_FOUND = nil
-GWIM = nil
-SNARF_OBJECTS = nil
-BUT_MERGE = nil
-SNARFEM = nil
-GET_OBJECT = nil
-WHICH_PRINT = nil
-GLOBAL_CHECK = nil
-DO_SL = nil
-SEARCH_LIST = nil
-OBJ_FOUND = nil
-TAKE_CHECK = nil
-ITAKE_CHECK = nil
-MANY_CHECK = nil
-ZMEMQ = nil
-ZMEMQB = nil
-LITQ = nil
-THIS_ITQ = nil
-ACCESSIBLEQ = nil
-META_LOC = nil
 
 APPLY(function() SIBREAKS = ".,\"" return SIBREAKS end)PRSA = nil
 PRSI = nil
@@ -428,7 +386,6 @@ APPLY(function() P_LEN = GETB(P_LEXV, P_LEXWORDS) return P_LEN end)
   PUT(OOPS_TABLE, O_PTR, nil)
 
   if DIR then 
-    TELL("Walking ", VQWALK, CR)
     APPLY(function() PRSA = VQWALK return PRSA end)
     APPLY(function() PRSO = DIR return PRSO end)
     APPLY(function() P_OFLAG = nil return P_OFLAG end)
@@ -1336,12 +1293,12 @@ APPLY(function() P_SLOCBITS = LBIT return P_SLOCBITS end)
         if EQUALQ(OBJ, HANDS) then 
           TELL("your hands")
         elseif T then 
-          TELL("the ", OBJ)
+          TELL("the ", D, OBJ)
         end
 
         TELL(")", CR)
       else 
-        TELL(OBJ, ")", CR)
+        TELL(D, OBJ, ")", CR)
       end
 
       -- 	return OBJ
@@ -1723,7 +1680,7 @@ APPLY(function() RLEN = LEN return RLEN end)
   APPLY(function() while true do
     APPLY(function() TLEN = ADD(TLEN, 1) return TLEN end)
     APPLY(function() OBJ = GET(TBL, TLEN) return OBJ end)
-    TELL("the ", OBJ)
+    TELL("the ", D, OBJ)
     
     if EQUALQ(LEN, 2) then 
       
@@ -1761,7 +1718,7 @@ GLOBAL_CHECK = function(TBL)
 APPLY(function() LEN = GET(TBL, P_MATCHLEN) return LEN end)
 APPLY(function() OBITS = P_SLOCBITS return OBITS end)
 
-  if APPLY(function() RMG = GETPT(HERE, "GLOBAL") return RMG end) then 
+  if APPLY(function() RMG = GETPT(HERE, PQGLOBAL) return RMG end) then 
     APPLY(function() RMGL = SUB(PTSIZE(RMG), 1) return RMGL end)
     
     APPLY(function() while true do
@@ -1781,15 +1738,15 @@ APPLY(function() OBITS = P_SLOCBITS return OBITS end)
   end
 
 
-  if APPLY(function() RMG = GETPT(HERE, "PSEUDO") return RMG end) then 
+  if APPLY(function() RMG = GETPT(HERE, PQPSEUDO) return RMG end) then 
     APPLY(function() RMGL = SUB(DIV(PTSIZE(RMG), 4), 1) return RMGL end)
     APPLY(function() CNT = 0 return CNT end)
     
     APPLY(function() while true do
       
       if EQUALQ(P_NAM, GET(RMG, MULL(CNT, 2))) then 
-        PUTP(PSEUDO_OBJECT, "ACTION", GET(RMG, ADD(MULL(CNT, 2), 1)))
-        APPLY(function() FOO = BACK(GETPT(PSEUDO_OBJECT, "ACTION"), 5) return FOO end)
+        PUTP(PSEUDO_OBJECT, PQACTION, GET(RMG, ADD(MULL(CNT, 2), 1)))
+        APPLY(function() FOO = BACK(GETPT(PSEUDO_OBJECT, PQACTION), 5) return FOO end)
         PUT(FOO, 0, GET(P_NAM, 0))
         PUT(FOO, 1, GET(P_NAM, 1))
         OBJ_FOUND(PSEUDO_OBJECT, TBL)
@@ -1854,7 +1811,7 @@ SEARCH_LIST = function(OBJ, TBL, LVL)
     
     APPLY(function() while true do
       
-      if PASS(NOT(EQUALQ(LVL, P_SRCBOT)) and GETPT(OBJ, "SYNONYM") and THIS_ITQ(OBJ, TBL)) then 
+      if PASS(NOT(EQUALQ(LVL, P_SRCBOT)) and GETPT(OBJ, PQSYNONYM) and THIS_ITQ(OBJ, TBL)) then 
         OBJ_FOUND(OBJ, TBL)
       end
 
@@ -2115,9 +2072,9 @@ THIS_ITQ = function(OBJ, TBL)
 
   if FSETQ(OBJ, INVISIBLE) then 
     	error(false)
-  elseif PASS(P_NAM and NOT(ZMEMQ(P_NAM, APPLY(function() SYNS = GETPT(OBJ, "SYNONYM") return SYNS end), SUB(DIV(PTSIZE(SYNS), 2), 1)))) then 
+  elseif PASS(P_NAM and NOT(ZMEMQ(P_NAM, APPLY(function() SYNS = GETPT(OBJ, PQSYNONYM) return SYNS end), SUB(DIV(PTSIZE(SYNS), 2), 1)))) then 
     	error(false)
-  elseif PASS(P_ADJ and PASS(NOT(APPLY(function() SYNS = GETPT(OBJ, "ADJECTIVE") return SYNS end)) or NOT(ZMEMQB(P_ADJ, SYNS, SUB(PTSIZE(SYNS), 1))))) then 
+  elseif PASS(P_ADJ and PASS(NOT(APPLY(function() SYNS = GETPT(OBJ, PQADJECTIVE) return SYNS end)) or NOT(ZMEMQB(P_ADJ, SYNS, SUB(PTSIZE(SYNS), 1))))) then 
     	error(false)
   elseif PASS(NOT(ZEROQ(P_GWIMBIT)) and NOT(FSETQ(OBJ, P_GWIMBIT))) then 
     	error(false)

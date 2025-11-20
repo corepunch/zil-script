@@ -12,6 +12,8 @@ ZIL_ObjectFlags = {
   "LIGHTBIT", "MAZEBIT"
 }
 
+D = 0xBAADF00D
+
 OQANY=1
 
 PSQOBJECT=128
@@ -36,13 +38,14 @@ end
 VERBS   = {}
 QUEUES  = {}
 ROOMS   = {}
-_OBJECTS = {}
 PROPERTIES = {}
 PREPOSITIONS = {}
 ADJECTIVES = {}
 ACTIONS = {}
 PREACTIONS = {}
 OBJECTS = {}
+FLAGS = {}
+FUNCTIONS = {}
 _DIRECTIONS = {}
 
 _VTBL = {}
@@ -72,9 +75,15 @@ local cache = {
 	words = {},
 }
 
+local function fn(f) 
+	for n, ff in ipairs(FUNCTIONS) do if f == ff then return n end end
+	table.insert(FUNCTIONS, f)
+	return #FUNCTIONS
+end
+
 local function register(tbl, value)
 	local n = 0
-	value = value:lower()
+	if type(value) == "string" then value = value:lower() end
 	for k, v in pairs(tbl) do n = n + 1 end
 	if not tbl[value] then tbl[value] = n + 1 end
 	return tbl[value]
@@ -99,6 +108,28 @@ local function writemem(buffer, pos)
 	end
 end
 
+local function encode_fptr(n)
+  return string.format("<@F:%X>", n)
+end
+
+local function decode_fptr(s)
+    local hex = s:match("<@F:([A-Fa-f0-9]+)>")
+    return hex and tonumber(hex, 16)
+end
+
+local function writestring(str)
+	if type(str) == 'number' then str = encode_fptr(str) end
+	local len = #str
+	local ptr = writemem(string.char(len&0xff)..string.char((len>>8)&0xff)..str)
+	return string.char(ptr&0xff, (ptr>>8)&0xff)
+end
+
+local function readstring(ptr)
+	local len = mem:byte(ptr)|(mem:byte(ptr+1)<<8)
+	local str = mem:sub(ptr+2, ptr+len+1)
+	return decode_fptr(str) or str
+end
+
 local function readmem(size, pos)
 	return mem:sub(pos,pos+size-1)
 end
@@ -110,9 +141,15 @@ function VERBQ(...)
 end
 
 function TELL(...)
+	local object = false
 	for i = 1, select("#", ...) do
     local v = select(i, ...)
-    io.write(tostring(v))
+		if v == "You can't go there without a vehicle." then print(debug.traceback()) end
+		if v == D then object = true
+		elseif object then
+			object = false
+			io.write(GETP(v, _G["PQDESC"]))
+    else io.write(tostring(v)) end
   end
 end
 
@@ -124,7 +161,7 @@ function PRINTC(ch) io.write(string.char(ch)) end
 function CRLF() print() end
 
 -- Logic / bitwise
-function NOT(a) return not a end
+function NOT(a) return not a or a == 0 end
 function PASS(a) return a end
 function BAND(a, b) return a & b end
 function BOR(a, b) return a | b end
@@ -137,12 +174,12 @@ function EQUALQ(a, ...)
   end
   return false
 end
-function NEQUALQ(a, b) return a ~= b end
-function GQ(a, b) return a > b end
-function LQ(a, b) return a < b end
-function GEQ(a, b) return a >= b end
-function LEQ(a, b) return a <= b end
-function ZEROQ(a) return a == 0 end
+function NEQUALQ(a, b) return (a or 0) ~= (b or 0) end
+function GQ(a, b) return (a or 0) > (b or 0) end
+function LQ(a, b) return (a or 0) < (b or 0) end
+function GEQ(a, b) return (a or 0) >= (b or 0) end
+function LEQ(a, b) return (a or 0) <= (b or 0) end
+function ZEROQ(a) return (a or 0) == 0 end
 function ONEQ(a) return a == 1 end
 
 function SETG(var, val) _G[var] = val return val end
@@ -157,40 +194,154 @@ LESSQ = LQ
 MULL = MUL
 
 -- Object / room ops
-function LOC(obj) return obj.LOC end
-function INQ(obj, room) return obj.LOC == room end
-function MOVE(obj, dest) obj.LOC = dest end
-function REMOVE(obj) obj.LOC = nil end
+local function getobj(num) return OBJECTS[num] end
+
+function LOC(obj) return getobj(obj).LOC end
+function INQ(obj, room) return getobj(obj).LOC == room end
+function MOVE(obj, dest) getobj(obj).LOC = dest end
+function REMOVE(obj) getobj(obj).LOC = nil end
 
 function FIRSTQ(obj)
-	for _, o in ipairs(_OBJECTS) do
-		if o.LOC == obj then return o end
+	for n, o in ipairs(OBJECTS) do
+		if o.LOC == obj then return n end
 	end
 end
 
 function NEXTQ(obj)
-  local parent = obj.LOC
+  local parent = getobj(obj).LOC
   local found = false
-  for _, o in ipairs(_OBJECTS) do
+  for n, o in ipairs(OBJECTS) do
     if o.LOC == parent then
-      if found then return o end
-      if o == obj then found = true end
+      if found then return n end
+      if n == obj then found = true end
     end
   end
 end
 
-function FSET(obj, flag) obj.FLAGS = (obj.FLAGS or 0) | (1<<flag) end
-function FCLEAR(obj, flag) obj.FLAGS = (obj.FLAGS or 0) & ~(1<<flag) end
-function FSETQ(obj, flag) return obj.FLAGS and (obj.FLAGS & (1<<flag)) ~= 0 end
-function PUTP(obj, prop, val) obj[prop] = val end
-function GETP(obj, prop) return obj[prop] end
+local function learn(word, atom, value)
+	local prim = {
+		[PSQOBJECT]=P1QOBJECT,
+		[PSQVERB]=P1QVERB,
+		[PSQADJECTIVE]=P1QADJECTIVE,
+		[PSQDIRECTION]=P1QDIRECTION,
+		[PSQPREPOSITION]=P1QOBJECT,
+		[PSQBUZZ_WORD]=P1QNONE,
+	}
+	if not word then return 0 end
+	word = word:lower()
+	if type(value) == 'table' then value = register(value, word) end
+	if cache.words[word] then
+		local index = cache.words[word]
+		local ent = readmem(7, cache.words[word])
+		local new = string.char(0,0,0,0,ent:byte(5)|atom,ent:byte(6),value or OQANY)
+		writemem(new, index)
+	else
+		local enc = string.char(0,0,0,0,atom|prim[atom],value or OQANY,0)
+		local pos = writemem(enc)
+		cache.words[word] = pos
+		_G['WQ'..string.upper(word)] = enc
+	end
+	return value or cache.words[word]
+end
 
--- function GETPT(obj, prop) print(obj, prop) os.exit() end
+function FSET(obj, flag) getobj(obj).FLAGS = (getobj(obj).FLAGS or 0) | (1<<flag) end
+function FCLEAR(obj, flag) getobj(obj).FLAGS = (getobj(obj).FLAGS or 0) & ~(1<<flag) end
+function FSETQ(obj, flag) return getobj(obj).FLAGS and (getobj(obj).FLAGS & (1<<flag)) ~= 0 end
+function GETPT(obj, prop)
+	local tbl = getobj(obj).tbl
+	local l = mem:byte(tbl)+tbl+1
+	local p = mem:byte(l)
+	while p > 0 do
+		if (p&31)==prop then return l+1 end
+		l = l+(p>>5)+2
+		p = mem:byte(l)
+	end
+end
+function PTSIZE(ptr)
+	return (mem:byte(ptr-1)>>5)+1
+end
+function PUTP(obj, prop, val)
+	local ptr = GETPT(obj, prop)
+	assert(type(val) == 'number', "Only numbers are supported in PUTP")
+	assert(PTSIZE(ptr) == 1, "Number size must be 1")
+	writemem(string.char(val), ptr)
+end
+function GETP(obj, prop)
+	if not GETPT(obj, prop) then return nil end
+	local ptr = GETPT(obj, prop)
+	local ptsize = PTSIZE(ptr)
+	if ptsize == 1 then return mem:byte(ptr) end
+	if ptsize == 2 then return readstring(mem:byte(ptr)|(mem:byte(ptr+1)<<8)) end
+	assert(false, "Unsupported property to get")
+end
+
+table.concat2 = function(t, fn)
+	local tmp = {}
+	for i, s in ipairs(t) do tmp[i] = fn(s) end
+	return table.concat(tmp)
+end
+
+function DECL_OBJECT(name)
+	table.insert(OBJECTS, {NAME=name,FLAGS=0})
+	return #OBJECTS
+end
+
+function OBJECT(object)
+	local function findobj(name)
+		for _, o in ipairs(OBJECTS) do
+			if o.NAME == name then return o end
+		end
+	end
+	local function makeprop(body, name)
+		local num = register(PROPERTIES, name)
+		if not _G["PQ"..name] then _G["PQ"..name] = num end
+		return string.char(num|((#body-1)<<5))..body
+	end
+	local function makeword(val)
+		return string.char(val&0xff, (val>>8)&0xff)
+	end
+	local o = findobj(object.NAME)
+	local t = {string.char(#object.NAME), object.NAME}
+	assert(o, "Can't find object "..object.NAME)
+	for k, v in pairs(object) do
+		if k == "SYNONYM" then
+			local body = table.concat2(v, function(syn)
+				return makeword(learn(syn, PSQOBJECT, nil))
+			end)
+			table.insert(t, makeprop(body, k))
+		elseif k == "ADJECTIVE" then
+			local body = table.concat2(v, function(adj)
+				return string.char(learn(adj, PSQADJECTIVE, ADJECTIVES))
+			end)
+			table.insert(t, makeprop(body, k))
+		elseif k == "FLAGS" then
+			for _, f in ipairs(v) do
+				if not _G[f] then _G[f] = register(FLAGS, f) end
+				o.FLAGS = o.FLAGS | (1 << _G[f])
+			end
+		elseif k == "LOC" then o.LOC = v
+		elseif type(v) == 'string' then table.insert(t, makeprop(writestring(v), k))
+		elseif type(v) == 'number' then table.insert(t, makeprop(string.char(v&0xff), k))
+		elseif type(v) == 'function' then table.insert(t, makeprop(writestring(fn(v)), k))
+		elseif _DIRECTIONS[k] then
+			local str = string.char(v[1])
+			local say = v.say and writemem(v.say.."\0") or makeword(0)
+			if v.door then
+				str = str..string.char(v.door)..say..string.char(0)
+			elseif v.flag then
+				str = str..string.char(v.flag)..say
+			end
+			table.insert(t, makeprop(str, k))
+		else 
+			assert(false, "Unsupported property "..k.." of type "..type(v))
+		end
+	end
+	table.insert(t, string.char(0))
+	o.tbl = writemem(table.concat(t))
+end
 
 function REST(s, i)
 	if type(s) == 'number' then
-		-- local total = mem:byte(s)
-		-- return readmem(s+(i or 1), total-(i or 1))
 		return s+(i or 1)
 	end
 	if type(s) == 'table' then s = string.char(#s)..table.concat(s) end
@@ -198,10 +349,14 @@ function REST(s, i)
 end
 
 function APPLY(func, ...)
-	if type(func)=='number' then 
-		return end
-	return func and func(...)
+	if type(func)=='number' then
+		if func == 0 then return end
+		FUNCTIONS[func](...)
+	else
+		return func and func(...)
+	end
 end
+
 function PUT(obj, i, val)
 	i = i * 2
 	if type(obj) == 'number' then
@@ -223,7 +378,7 @@ end
 -- function GETB(t, i) return type(t) == 'table' and t[i] or 0 end
 
 function GETB(s, i) 
-	assert(type(s) == 'number' or type(s) == 'string')
+	assert(type(s) == 'number')
 	-- if type(s) == 'string' then return s[i+1] end
 	if s == 0 then return GET(s) end
 	return mem:byte(s+i)
@@ -259,11 +414,12 @@ function GET(s, i)
 	-- return GETB(s, i * 2) | (GETB(s, i * 2 + 1) << 8)
 end
 
-local buf = true
+-- local buf = true
 
 function READ(inbuf, parse)
-	if not buf then os.exit(0) end
-	local s = "walk north"--io.read()
+	-- if not buf then os.exit(0) end
+	-- local s = "walk north"
+	local s = io.read()
 	local p = {}
 	for pos, word in s:gmatch("()(%S+)") do
 		local index = cache.words[word:lower()] or 0
@@ -274,32 +430,6 @@ function READ(inbuf, parse)
 	buf = false
 end
 
-local function learn(word, atom, value)
-	local prim = {
-		[PSQOBJECT]=P1QOBJECT,
-		[PSQVERB]=P1QVERB,
-		[PSQADJECTIVE]=P1QADJECTIVE,
-		[PSQDIRECTION]=P1QDIRECTION,
-		[PSQPREPOSITION]=P1QOBJECT,
-		[PSQBUZZ_WORD]=P1QNONE,
-	}
-	if not word then return 0 end
-	word = word:lower()
-	if type(value) == 'table' then value = register(value, word) end
-	if cache.words[word] then
-		local index = cache.words[word]
-		local ent = readmem(7, cache.words[word])
-		local new = string.char(0,0,0,0,ent:byte(5)|atom,ent:byte(6),value or OQANY)
-		writemem(new, index)
-	else
-		local enc = string.char(0,0,0,0,atom|prim[atom],value or OQANY,0)
-		local pos = writemem(enc)
-		cache.words[word] = pos
-		_G['WQ'..string.upper(word)] = enc
-	end
-	return value or cache.words[word]
-end
-
 function DIRECTIONS(...)
 	for _, dir in ipairs {...} do
 		_DIRECTIONS[dir] = learn(dir, PSQDIRECTION, PROPERTIES)
@@ -307,18 +437,15 @@ function DIRECTIONS(...)
 end
 
 local function action_id(ACTIONS, action)
-	if not action then return 0 end
-	local f = _G[action]
-	for i, a in ipairs(ACTIONS) do
-		if f == a then return i end
-	end
-	table.insert(ACTIONS, f)
+	for i, a in ipairs(ACTIONS) do if action == a then return i end end
+	table.insert(ACTIONS, action)
 	return #ACTIONS
 end
 
 function SYNTAX(syn)
 	local name = syn.VERB:lower()
 	local prev = cache.verbs[name]
+	local action = action_id(ACTIONS, fn(_G[syn.ACTION]))
 	local function encode(s)
 		return string.char(
 			s.OBJECT and (s.SUBJECT and 2 or 1) or 0,
@@ -328,7 +455,7 @@ function SYNTAX(syn)
 			s.SUBJECT and s.SUBJECT.FIND or 0,
 			s.OBJECT and s.OBJECT.WHERE or 0,
 			s.SUBJECT and s.SUBJECT.WHERE or 0,
-			action_id(ACTIONS, s.ACTION)
+			action
 		)
 	end
 	if prev then
@@ -338,52 +465,8 @@ function SYNTAX(syn)
 		cache.verbs[name] = #VERBS
 		_G['ACTQ'..syn.VERB] = learn(name, PSQVERB, 255-#VERBS)
 	end
-	_G[syn.ACTION:gsub("_", "Q", 1)] = action_id(ACTIONS, syn.ACTION)
-	if syn.PREACTION then
-		_G[syn.PREACTION:gsub("_", "Q", 1)] = action_id(PREACTIONS, syn.PREACTION)
-	end
-end
-
-table.concat2 = function(t, fn)
-	local tmp = {}
-	for i, s in ipairs(t) do tmp[i] = fn(s) end
-	return table.concat(tmp)
-end
-
-function OBJECT(object)
-	local function makeprop(len, name)
-		local num = register(PROPERTIES, name)
-		return string.char(num|((len-1)<<5))
-	end
-	local function makeword(val)
-		return string.char(val&0xff, (val>>8)&0xff)
-	end
-
-	assert(_G[object.NAME], object.NAME.." must be declared before definition")
-	table.insert(_OBJECTS, _G[object.NAME])
-	for k, v in pairs(object) do _G[object.NAME][k] = v end
-
-	local info = string.char(#object.NAME)..object.NAME
-	for k, v in pairs(object) do
-		if k == "SYNONYM" then
-			local body = table.concat2(v, function(syn)
-				return makeword(learn(syn, PSQOBJECT, nil))
-			end)
-			info = info..makeprop(#body, k)..body
-		elseif k == "ADJECTIVE" then
-			local body = table.concat2(v, function(adj)
-				return string.char(learn(adj, PSQADJECTIVE, ADJECTIVES))
-			end)
-			info = info..makeprop(#body, k)..body
-		elseif type(v) == 'string' then
-			info = info..makeprop(2, k)..writemem(v.."\0")
-		elseif _DIRECTIONS[k] then
-			if v.NAME then
-			end
-		end
-	end
-
-	table.insert(OBJECTS, info)
+	_G[syn.ACTION:gsub("_", "Q", 1)] = action
+	if syn.PREACTION then PREACTIONS[action] = fn(_G[syn.PREACTION]) end
 end
 
 function BUZZ(...)
@@ -428,7 +511,7 @@ function ITABLE(size)
 end
 
 function CLOCKER()
-	print("Executing CLOCKER")
+
 end
 -- function TABLE(...)
 -- 	local contents = {}
