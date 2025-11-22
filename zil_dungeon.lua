@@ -1052,7 +1052,7 @@ OBJECT {
 	SIZE = 10,
 	ACTION = TREASURE_INSIDE,
 }
-TREASURE_INSIDE = function()
+TREASURE_INSIDE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1611,7 +1611,7 @@ ROOM {
 	FLAGS = {"RLANDBIT","ONBIT","SACREDBIT"},
 	GLOBAL = WHITE_HOUSE,
 }
-GRATING_EXIT = function()
+GRATING_EXIT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2522,7 +2522,8 @@ ROOM {
 	GLOBAL = CLIMBABLE_CLIFF,
 	ACTION = CANYON_VIEW_F,
 }
-CANYON_VIEW_F = function(RARG)
+CANYON_VIEW_F = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2712,7 +2713,7 @@ HOUSE_AROUND = LTABLE(WEST_OF_HOUSE,NORTH_OF_HOUSE,EAST_OF_HOUSE,SOUTH_OF_HOUSE,
 FOREST_AROUND = LTABLE(FOREST_1,FOREST_2,FOREST_3,PATH,CLEARING,FOREST_1)
 IN_HOUSE_AROUND = LTABLE(LIVING_ROOM,KITCHEN,ATTIC,KITCHEN)
 ABOVE_GROUND = LTABLE(WEST_OF_HOUSE,NORTH_OF_HOUSE,EAST_OF_HOUSE,SOUTH_OF_HOUSE,FOREST_1,FOREST_2,FOREST_3,PATH,CLEARING,GRATING_CLEARING,CANYON_VIEW)
-GO = function()
+GO = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   ENABLE(QUEUE(I_FIGHT, -1))

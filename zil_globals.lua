@@ -65,7 +65,7 @@ OBJECT {
 	DESC = "such thing",
 	ACTION = NOT_HERE_OBJECT_F,
 }
-NOT_HERE_OBJECT_F = function()
+NOT_HERE_OBJECT_F = function(...)
 	local TBL
   local PRSOQ = T
 	local OBJ
@@ -101,7 +101,8 @@ NOT_HERE_OBJECT_F = function()
 return __res
 	else error('NOT_HERE_OBJECT_F\n'..__res) end
 end
-NOT_HERE_PRINT = function(PRSOQ)
+NOT_HERE_PRINT = function(...)
+	local PRSOQ = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -127,7 +128,8 @@ NOT_HERE_PRINT = function(PRSOQ)
 return __res
 	else error('NOT_HERE_PRINT\n'..__res) end
 end
-NULL_F = function(A1, A2)
+NULL_F = function(...)
+	local A1, A2 = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	error(false)
@@ -154,7 +156,7 @@ OBJECT {
 	FLAGS = {"NDESCBIT","CLIMBBIT"},
 	ACTION = STAIRS_F,
 }
-STAIRS_F = function()
+STAIRS_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -175,7 +177,7 @@ OBJECT {
 	FLAGS = {"NDESCBIT"},
 	ACTION = SAILOR_FCN,
 }
-SAILOR_FCN = function()
+SAILOR_FCN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -211,7 +213,7 @@ OBJECT {
 	DESC = "ground",
 	ACTION = GROUND_FUNCTION,
 }
-GROUND_FUNCTION = function()
+GROUND_FUNCTION = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -237,7 +239,7 @@ OBJECT {
 	DESC = "lurking grue",
 	ACTION = GRUE_FUNCTION,
 }
-GRUE_FUNCTION = function()
+GRUE_FUNCTION = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -269,7 +271,7 @@ OBJECT {
 	FLAGS = {"ACTORBIT"},
 	ACTION = CRETIN_FCN,
 }
-CRETIN_FCN = function()
+CRETIN_FCN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -334,7 +336,7 @@ OBJECT {
 	FLAGS = {"NDESCBIT"},
 	ACTION = PATH_OBJECT,
 }
-PATH_OBJECT = function()
+PATH_OBJECT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -358,7 +360,7 @@ OBJECT {
 	DESC = "zorkmid",
 	ACTION = ZORKMID_FUNCTION,
 }
-ZORKMID_FUNCTION = function()
+ZORKMID_FUNCTION = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 

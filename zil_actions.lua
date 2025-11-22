@@ -1,5 +1,6 @@
 
-WEST_HOUSE = function(RARG)
+WEST_HOUSE = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -18,7 +19,8 @@ WEST_HOUSE = function(RARG)
 return __res
 	else error('WEST_HOUSE\n'..__res) end
 end
-EAST_HOUSE = function(RARG)
+EAST_HOUSE = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -39,7 +41,8 @@ EAST_HOUSE = function(RARG)
 return __res
 	else error('EAST_HOUSE\n'..__res) end
 end
-OPEN_CLOSE = function(OBJ, STROPN, STRCLS)
+OPEN_CLOSE = function(...)
+	local OBJ, STROPN, STRCLS = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -71,7 +74,7 @@ OPEN_CLOSE = function(OBJ, STROPN, STRCLS)
 return __res
 	else error('OPEN_CLOSE\n'..__res) end
 end
-BOARD_F = function()
+BOARD_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -84,7 +87,7 @@ BOARD_F = function()
 return __res
 	else error('BOARD_F\n'..__res) end
 end
-TEETH_F = function()
+TEETH_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -105,7 +108,7 @@ TEETH_F = function()
 return __res
 	else error('TEETH_F\n'..__res) end
 end
-GRANITE_WALL_F = function()
+GRANITE_WALL_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -142,7 +145,7 @@ GRANITE_WALL_F = function()
 return __res
 	else error('GRANITE_WALL_F\n'..__res) end
 end
-SONGBIRD_F = function()
+SONGBIRD_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -161,7 +164,7 @@ SONGBIRD_F = function()
 return __res
 	else error('SONGBIRD_F\n'..__res) end
 end
-WHITE_HOUSE_F = function()
+WHITE_HOUSE_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -219,7 +222,8 @@ WHITE_HOUSE_F = function()
 return __res
 	else error('WHITE_HOUSE_F\n'..__res) end
 end
-GO_NEXT = function(TBL)
+GO_NEXT = function(...)
+	local TBL = ...
 	local VAL
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -239,7 +243,7 @@ GO_NEXT = function(TBL)
 return __res
 	else error('GO_NEXT\n'..__res) end
 end
-FOREST_F = function()
+FOREST_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -263,7 +267,7 @@ FOREST_F = function()
 return __res
 	else error('FOREST_F\n'..__res) end
 end
-MOUNTAIN_RANGE_F = function()
+MOUNTAIN_RANGE_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -276,7 +280,7 @@ MOUNTAIN_RANGE_F = function()
 return __res
 	else error('MOUNTAIN_RANGE_F\n'..__res) end
 end
-WATER_F = function()
+WATER_F = function(...)
 	local AV
 	local W
 	local PIQ
@@ -395,7 +399,7 @@ return __res
 	else error('WATER_F\n'..__res) end
 end
 KITCHEN_WINDOW_FLAG = nil
-KITCHEN_WINDOW_F = function()
+KITCHEN_WINDOW_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -429,7 +433,7 @@ KITCHEN_WINDOW_F = function()
 return __res
 	else error('KITCHEN_WINDOW_F\n'..__res) end
 end
-GHOSTS_F = function()
+GHOSTS_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -450,7 +454,7 @@ return __res
 	else error('GHOSTS_F\n'..__res) end
 end
 CAGE_TOP = T
-BASKET_F = function()
+BASKET_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -495,7 +499,7 @@ BASKET_F = function()
 return __res
 	else error('BASKET_F\n'..__res) end
 end
-BAT_F = function()
+BAT_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -517,7 +521,7 @@ BAT_F = function()
 return __res
 	else error('BAT_F\n'..__res) end
 end
-FLY_ME = function()
+FLY_ME = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   FWEEP(4)
@@ -534,7 +538,8 @@ FLY_ME = function()
 return __res
 	else error('FLY_ME\n'..__res) end
 end
-FWEEP = function(N)
+FWEEP = function(...)
+	local N = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -561,7 +566,7 @@ return __res
 	else error('FWEEP\n'..__res) end
 end
 BAT_DROPS = LTABLE(0,MINE_1,MINE_2,MINE_3,MINE_4,LADDER_TOP,LADDER_BOTTOM,SQUEEKY_ROOM,MINE_ENTRANCE)
-BELL_F = function()
+BELL_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -580,7 +585,7 @@ BELL_F = function()
 return __res
 	else error('BELL_F\n'..__res) end
 end
-HOT_BELL_F = function()
+HOT_BELL_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -611,7 +616,7 @@ HOT_BELL_F = function()
 return __res
 	else error('HOT_BELL_F\n'..__res) end
 end
-BOARDED_WINDOW_FCN = function()
+BOARDED_WINDOW_FCN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -626,7 +631,7 @@ BOARDED_WINDOW_FCN = function()
 return __res
 	else error('BOARDED_WINDOW_FCN\n'..__res) end
 end
-NAILS_PSEUDO = function()
+NAILS_PSEUDO = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -639,7 +644,7 @@ NAILS_PSEUDO = function()
 return __res
 	else error('NAILS_PSEUDO\n'..__res) end
 end
-CRACK_FCN = function()
+CRACK_FCN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -652,7 +657,8 @@ CRACK_FCN = function()
 return __res
 	else error('CRACK_FCN\n'..__res) end
 end
-KITCHEN_FCN = function(RARG)
+KITCHEN_FCN = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -680,7 +686,8 @@ KITCHEN_FCN = function(RARG)
 return __res
 	else error('KITCHEN_FCN\n'..__res) end
 end
-STONE_BARROW_FCN = function(RARG)
+STONE_BARROW_FCN = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -701,7 +708,7 @@ STONE_BARROW_FCN = function(RARG)
 return __res
 	else error('STONE_BARROW_FCN\n'..__res) end
 end
-BARROW_DOOR_FCN = function()
+BARROW_DOOR_FCN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -714,7 +721,7 @@ BARROW_DOOR_FCN = function()
 return __res
 	else error('BARROW_DOOR_FCN\n'..__res) end
 end
-BARROW_FCN = function()
+BARROW_FCN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -727,7 +734,7 @@ BARROW_FCN = function()
 return __res
 	else error('BARROW_FCN\n'..__res) end
 end
-TROPHY_CASE_FCN = function()
+TROPHY_CASE_FCN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -741,7 +748,8 @@ return __res
 	else error('TROPHY_CASE_FCN\n'..__res) end
 end
 RUG_MOVED = nil
-LIVING_ROOM_FCN = function(RARG)
+LIVING_ROOM_FCN = function(...)
+	local RARG = ...
 	local RUGQ
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -790,7 +798,8 @@ LIVING_ROOM_FCN = function(RARG)
 return __res
 	else error('LIVING_ROOM_FCN\n'..__res) end
 end
-TOUCH_ALL = function(OBJ)
+TOUCH_ALL = function(...)
+	local OBJ = ...
 	local F
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -823,10 +832,11 @@ else __tmp = __res44 or true end
 return __res
 	else error('TOUCH_ALL\n'..__res) end
 end
-OTVAL_FROB = function(O)
+OTVAL_FROB = function(...)
+	local O = ...
 	local F
   local SCORE = 0
-  O = O or TROPHY_CASE
+	if select('#', ...) < 1 then O = TROPHY_CASE end
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp = APPLY(function() F = FIRSTQ(O) return F end)
@@ -857,7 +867,7 @@ else __tmp = __res45 or true end
 return __res
 	else error('OTVAL_FROB\n'..__res) end
 end
-TRAP_DOOR_FCN = function()
+TRAP_DOOR_FCN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -893,7 +903,8 @@ TRAP_DOOR_FCN = function()
 return __res
 	else error('TRAP_DOOR_FCN\n'..__res) end
 end
-CELLAR_FCN = function(RARG)
+CELLAR_FCN = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -914,7 +925,7 @@ CELLAR_FCN = function(RARG)
 return __res
 	else error('CELLAR_FCN\n'..__res) end
 end
-CHIMNEY_F = function()
+CHIMNEY_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -935,7 +946,7 @@ CHIMNEY_F = function()
 return __res
 	else error('CHIMNEY_F\n'..__res) end
 end
-UP_CHIMNEY_FUNCTION = function()
+UP_CHIMNEY_FUNCTION = function(...)
 	local F
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -960,7 +971,7 @@ UP_CHIMNEY_FUNCTION = function()
 return __res
 	else error('UP_CHIMNEY_FUNCTION\n'..__res) end
 end
-TRAP_DOOR_EXIT = function()
+TRAP_DOOR_EXIT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -984,7 +995,7 @@ TRAP_DOOR_EXIT = function()
 return __res
 	else error('TRAP_DOOR_EXIT\n'..__res) end
 end
-RUG_FCN = function()
+RUG_FCN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1027,7 +1038,7 @@ RUG_FCN = function()
 return __res
 	else error('RUG_FCN\n'..__res) end
 end
-AXE_F = function()
+AXE_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1042,7 +1053,7 @@ AXE_F = function()
 return __res
 	else error('AXE_F\n'..__res) end
 end
-STILETTO_FUNCTION = function()
+STILETTO_FUNCTION = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   WEAPON_FUNCTION(STILETTO, THIEF)
@@ -1051,7 +1062,8 @@ STILETTO_FUNCTION = function()
 return __res
 	else error('STILETTO_FUNCTION\n'..__res) end
 end
-WEAPON_FUNCTION = function(W, V)
+WEAPON_FUNCTION = function(...)
+	local W, V = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1073,8 +1085,9 @@ WEAPON_FUNCTION = function(W, V)
 return __res
 	else error('WEAPON_FUNCTION\n'..__res) end
 end
-TROLL_FCN = function(MODE)
-  MODE = MODE or nil
+TROLL_FCN = function(...)
+	local MODE = ...
+	if select('#', ...) < 1 then MODE = nil end
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1209,7 +1222,7 @@ return __res
 end
 GRATE_REVEALED = nil
 GRUNLOCK = nil
-LEAVES_APPEAR = function()
+LEAVES_APPEAR = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1231,7 +1244,7 @@ LEAVES_APPEAR = function()
 return __res
 	else error('LEAVES_APPEAR\n'..__res) end
 end
-LEAF_PILE = function()
+LEAF_PILE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1279,7 +1292,8 @@ LEAF_PILE = function()
 return __res
 	else error('LEAF_PILE\n'..__res) end
 end
-CLEARING_FCN = function(RARG)
+CLEARING_FCN = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1308,7 +1322,8 @@ CLEARING_FCN = function(RARG)
 return __res
 	else error('CLEARING_FCN\n'..__res) end
 end
-MAZE_11_FCN = function(RARG)
+MAZE_11_FCN = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1333,7 +1348,7 @@ MAZE_11_FCN = function(RARG)
 return __res
 	else error('MAZE_11_FCN\n'..__res) end
 end
-GRATE_FUNCTION = function()
+GRATE_FUNCTION = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1406,7 +1421,7 @@ GRATE_FUNCTION = function()
 return __res
 	else error('GRATE_FUNCTION\n'..__res) end
 end
-MAZE_DIODES = function()
+MAZE_DIODES = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("You won't be able to get back up to the tunnel you are going through when it gets to the next room.", CR, CR)
@@ -1426,7 +1441,7 @@ MAZE_DIODES = function()
 return __res
 	else error('MAZE_DIODES\n'..__res) end
 end
-RUSTY_KNIFE_FCN = function()
+RUSTY_KNIFE_FCN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1443,7 +1458,7 @@ RUSTY_KNIFE_FCN = function()
 return __res
 	else error('RUSTY_KNIFE_FCN\n'..__res) end
 end
-KNIFE_F = function()
+KNIFE_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1457,7 +1472,7 @@ KNIFE_F = function()
 return __res
 	else error('KNIFE_F\n'..__res) end
 end
-SKELETON = function()
+SKELETON = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1473,7 +1488,7 @@ SKELETON = function()
 return __res
 	else error('SKELETON\n'..__res) end
 end
-TORCH_OBJECT = function()
+TORCH_OBJECT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1490,7 +1505,8 @@ TORCH_OBJECT = function()
 return __res
 	else error('TORCH_OBJECT\n'..__res) end
 end
-MIRROR_ROOM = function(RARG)
+MIRROR_ROOM = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1509,7 +1525,7 @@ return __res
 	else error('MIRROR_ROOM\n'..__res) end
 end
 MIRROR_MUNG = nil
-MIRROR_MIRROR = function()
+MIRROR_MIRROR = function(...)
   local RM2 = MIRROR_ROOM_2
 	local L1
 	local L2
@@ -1597,7 +1613,8 @@ else __tmp = __res47 or true end
 return __res
 	else error('MIRROR_MIRROR\n'..__res) end
 end
-TORCH_ROOM_FCN = function(RARG)
+TORCH_ROOM_FCN = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1615,7 +1632,8 @@ TORCH_ROOM_FCN = function(RARG)
 return __res
 	else error('TORCH_ROOM_FCN\n'..__res) end
 end
-DOME_ROOM_FCN = function(RARG)
+DOME_ROOM_FCN = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1644,7 +1662,8 @@ DOME_ROOM_FCN = function(RARG)
 return __res
 	else error('DOME_ROOM_FCN\n'..__res) end
 end
-LLD_ROOM = function(RARG)
+LLD_ROOM = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1710,7 +1729,7 @@ return __res
 end
 XB = nil
 XC = nil
-I_XB = function()
+I_XB = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   PASS(XC or PASS(EQUALQ(HERE, ENTRANCE_TO_HADES) and TELL("The tension of this ceremony is broken, and the wraiths, amused but shaken at your clumsy attempt, resume their hideous jeering.", CR)))
@@ -1720,7 +1739,7 @@ I_XB = function()
 return __res
 	else error('I_XB\n'..__res) end
 end
-I_XC = function()
+I_XC = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp = APPLY(function() XC = nil return XC end)
@@ -1730,7 +1749,7 @@ I_XC = function()
 return __res
 	else error('I_XC\n'..__res) end
 end
-I_XBH = function()
+I_XBH = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   REMOVE_CAREFULLY(HOT_BELL)
@@ -1747,7 +1766,8 @@ return __res
 end
 GATE_FLAG = nil
 GATES_OPEN = nil
-DAM_ROOM_FCN = function(RARG)
+DAM_ROOM_FCN = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1778,7 +1798,7 @@ DAM_ROOM_FCN = function(RARG)
 return __res
 	else error('DAM_ROOM_FCN\n'..__res) end
 end
-BOLT_F = function()
+BOLT_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1823,7 +1843,7 @@ BOLT_F = function()
 return __res
 	else error('BOLT_F\n'..__res) end
 end
-BUBBLE_F = function()
+BUBBLE_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1836,7 +1856,7 @@ BUBBLE_F = function()
 return __res
 	else error('BUBBLE_F\n'..__res) end
 end
-INTEGRAL_PART = function()
+INTEGRAL_PART = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("It is an integral part of the control panel.", CR)
@@ -1845,7 +1865,7 @@ INTEGRAL_PART = function()
 return __res
 	else error('INTEGRAL_PART\n'..__res) end
 end
-I_RFILL = function()
+I_RFILL = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   FSET(RESERVOIR, NONLANDBIT)
@@ -1879,7 +1899,7 @@ return __res
 	else error('I_RFILL\n'..__res) end
 end
 LOUD_RUNS = LTABLE(0,DAMP_CAVE,ROUND_ROOM,DEEP_CANYON)
-I_REMPTY = function()
+I_REMPTY = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   FSET(RESERVOIR, RLANDBIT)
@@ -1905,7 +1925,7 @@ return __res
 end
 DROWNINGS = TABLE("up to your ankles.","up to your shin.","up to your knees.","up to your hips.","up to your waist.","up to your chest.","up to your neck.","over your head.","high in your lungs.")
 WATER_LEVEL = 0
-BUTTON_F = function()
+BUTTON_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1953,7 +1973,7 @@ BUTTON_F = function()
 return __res
 	else error('BUTTON_F\n'..__res) end
 end
-TOOL_CHEST_FCN = function()
+TOOL_CHEST_FCN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1971,7 +1991,7 @@ TOOL_CHEST_FCN = function()
 return __res
 	else error('TOOL_CHEST_FCN\n'..__res) end
 end
-I_MAINT_ROOM = function()
+I_MAINT_ROOM = function(...)
 	local HEREQ
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -2003,7 +2023,7 @@ I_MAINT_ROOM = function()
 return __res
 	else error('I_MAINT_ROOM\n'..__res) end
 end
-LEAK_FUNCTION = function()
+LEAK_FUNCTION = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2028,7 +2048,7 @@ LEAK_FUNCTION = function()
 return __res
 	else error('LEAK_FUNCTION\n'..__res) end
 end
-FIX_MAINT_LEAK = function()
+FIX_MAINT_LEAK = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp = APPLY(function() WATER_LEVEL = -1 return WATER_LEVEL end)
@@ -2039,7 +2059,7 @@ FIX_MAINT_LEAK = function()
 return __res
 	else error('FIX_MAINT_LEAK\n'..__res) end
 end
-PUTTY_FCN = function()
+PUTTY_FCN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2052,7 +2072,7 @@ PUTTY_FCN = function()
 return __res
 	else error('PUTTY_FCN\n'..__res) end
 end
-TUBE_FUNCTION = function()
+TUBE_FUNCTION = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2076,7 +2096,7 @@ TUBE_FUNCTION = function()
 return __res
 	else error('TUBE_FUNCTION\n'..__res) end
 end
-DAM_FUNCTION = function()
+DAM_FUNCTION = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2097,7 +2117,8 @@ DAM_FUNCTION = function()
 return __res
 	else error('DAM_FUNCTION\n'..__res) end
 end
-WITH_TELL = function(OBJ)
+WITH_TELL = function(...)
+	local OBJ = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("With a ", D, OBJ, "?", CR)
@@ -2106,7 +2127,8 @@ WITH_TELL = function(OBJ)
 return __res
 	else error('WITH_TELL\n'..__res) end
 end
-RESERVOIR_SOUTH_FCN = function(RARG)
+RESERVOIR_SOUTH_FCN = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2131,7 +2153,8 @@ RESERVOIR_SOUTH_FCN = function(RARG)
 return __res
 	else error('RESERVOIR_SOUTH_FCN\n'..__res) end
 end
-RESERVOIR_FCN = function(RARG)
+RESERVOIR_FCN = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2153,7 +2176,8 @@ RESERVOIR_FCN = function(RARG)
 return __res
 	else error('RESERVOIR_FCN\n'..__res) end
 end
-RESERVOIR_NORTH_FCN = function(RARG)
+RESERVOIR_NORTH_FCN = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2178,7 +2202,7 @@ RESERVOIR_NORTH_FCN = function(RARG)
 return __res
 	else error('RESERVOIR_NORTH_FCN\n'..__res) end
 end
-BOTTLE_FUNCTION = function()
+BOTTLE_FUNCTION = function(...)
   local EQ = nil
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -2214,7 +2238,7 @@ return __res
 	else error('BOTTLE_FUNCTION\n'..__res) end
 end
 CYCLOWRATH = 0
-CYCLOPS_FCN = function()
+CYCLOPS_FCN = function(...)
 	local COUNT
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -2309,7 +2333,7 @@ CYCLOPS_FCN = function()
 return __res
 	else error('CYCLOPS_FCN\n'..__res) end
 end
-I_CYCLOPS = function()
+I_CYCLOPS = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2344,7 +2368,8 @@ I_CYCLOPS = function()
 return __res
 	else error('I_CYCLOPS\n'..__res) end
 end
-CYCLOPS_ROOM_FCN = function(RARG)
+CYCLOPS_ROOM_FCN = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2374,7 +2399,8 @@ return __res
 end
 CYCLOMAD = TABLE("The cyclops seems somewhat agitated.","The cyclops appears to be getting more agitated.","The cyclops is moving about the room, looking for something.","The cyclops was looking for salt and pepper. No doubt they are condiments for his upcoming snack.","The cyclops is moving toward you in an unfriendly manner.","You have two choices: 1. Leave  2. Become dinner.")
 LOUD_FLAG = nil
-LOUD_ROOM_FCN = function(RARG)
+LOUD_ROOM_FCN = function(...)
+	local RARG = ...
 	local WRD
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -2476,7 +2502,8 @@ else __tmp = __res48 or true end
 return __res
 	else error('LOUD_ROOM_FCN\n'..__res) end
 end
-DEEP_CANYON_F = function(RARG)
+DEEP_CANYON_F = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2502,7 +2529,8 @@ return __res
 end
 EGG_SOLVE = nil
 THIEF_HERE = nil
-THIEF_VS_ADVENTURER = function(HEREQ)
+THIEF_VS_ADVENTURER = function(...)
+	local HEREQ = ...
 	local ROBBEDQ
   local WINNER_ROBBEDQ = nil
 	local __ok, __res = pcall(function()
@@ -2628,7 +2656,7 @@ THIEF_VS_ADVENTURER = function(HEREQ)
 return __res
 	else error('THIEF_VS_ADVENTURER\n'..__res) end
 end
-STOLE_LIGHTQ = function()
+STOLE_LIGHTQ = function(...)
 	local OLD_LIT
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -2645,7 +2673,7 @@ STOLE_LIGHTQ = function()
 return __res
 	else error('STOLE_LIGHTQ\n'..__res) end
 end
-HACK_TREASURES = function()
+HACK_TREASURES = function(...)
 	local X
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -2675,7 +2703,8 @@ else __tmp = __res49 or true end
 return __res
 	else error('HACK_TREASURES\n'..__res) end
 end
-DEPOSIT_BOOTY = function(RM)
+DEPOSIT_BOOTY = function(...)
+	local RM = ...
 	local X
 	local N
   local FLG = nil
@@ -2718,7 +2747,8 @@ else __tmp = __res50 or true end
 return __res
 	else error('DEPOSIT_BOOTY\n'..__res) end
 end
-ROB_MAZE = function(RM)
+ROB_MAZE = function(...)
+	local RM = ...
 	local X
 	local N
 	local __ok, __res = pcall(function()
@@ -2760,10 +2790,11 @@ return __res
 	else error('ROB_MAZE\n'..__res) end
 end
 THIEF_ENGROSSED = nil
-ROBBER_FUNCTION = function(MODE)
+ROBBER_FUNCTION = function(...)
+	local MODE = ...
   local FLG = nil
 	local X
-  MODE = MODE or nil
+	if select('#', ...) < 1 then MODE = nil end
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2928,7 +2959,7 @@ return __res
 end
 ROBBER_C_DESC = "There is a suspicious-looking individual, holding a bag, leaning against one wall. He is armed with a vicious-looking stiletto."
 ROBBER_U_DESC = "There is a suspicious-looking individual lying unconscious on the ground."
-LARGE_BAG_F = function()
+LARGE_BAG_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2953,7 +2984,8 @@ LARGE_BAG_F = function()
 return __res
 	else error('LARGE_BAG_F\n'..__res) end
 end
-MOVE_ALL = function(FROM, TO)
+MOVE_ALL = function(...)
+	local FROM, TO = ...
 	local X
 	local N
 	local __ok, __res = pcall(function()
@@ -2986,7 +3018,7 @@ else __tmp = __res53 or true end
 return __res
 	else error('MOVE_ALL\n'..__res) end
 end
-CHALICE_FCN = function()
+CHALICE_FCN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3007,7 +3039,8 @@ CHALICE_FCN = function()
 return __res
 	else error('CHALICE_FCN\n'..__res) end
 end
-TREASURE_ROOM_FCN = function(RARG)
+TREASURE_ROOM_FCN = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3028,7 +3061,7 @@ TREASURE_ROOM_FCN = function(RARG)
 return __res
 	else error('TREASURE_ROOM_FCN\n'..__res) end
 end
-THIEF_IN_TREASURE = function()
+THIEF_IN_TREASURE = function(...)
 	local F
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -3061,7 +3094,7 @@ else __tmp = __res54 or true end
 return __res
 	else error('THIEF_IN_TREASURE\n'..__res) end
 end
-FRONT_DOOR_FCN = function()
+FRONT_DOOR_FCN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3089,7 +3122,7 @@ FRONT_DOOR_FCN = function()
 return __res
 	else error('FRONT_DOOR_FCN\n'..__res) end
 end
-BODY_FUNCTION = function()
+BODY_FUNCTION = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3104,7 +3137,7 @@ BODY_FUNCTION = function()
 return __res
 	else error('BODY_FUNCTION\n'..__res) end
 end
-BLACK_BOOK = function()
+BLACK_BOOK = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3124,7 +3157,7 @@ BLACK_BOOK = function()
 return __res
 	else error('BLACK_BOOK\n'..__res) end
 end
-PAINTING_FCN = function()
+PAINTING_FCN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3140,7 +3173,7 @@ return __res
 	else error('PAINTING_FCN\n'..__res) end
 end
 LAMP_TABLE = TABLE(100,"The lamp appears a bit dimmer.",70,"The lamp is definitely dimmer now.",15,"The lamp is nearly out.",0)
-LANTERN = function()
+LANTERN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3186,7 +3219,7 @@ LANTERN = function()
 return __res
 	else error('LANTERN\n'..__res) end
 end
-MAILBOX_F = function()
+MAILBOX_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3200,7 +3233,7 @@ return __res
 	else error('MAILBOX_F\n'..__res) end
 end
 MATCH_COUNT = 6
-MATCH_FUNCTION = function()
+MATCH_FUNCTION = function(...)
 	local CNT
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -3277,7 +3310,7 @@ MATCH_FUNCTION = function()
 return __res
 	else error('MATCH_FUNCTION\n'..__res) end
 end
-I_MATCH = function()
+I_MATCH = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("The match has gone out.", CR)
@@ -3290,7 +3323,7 @@ I_MATCH = function()
 return __res
 	else error('I_MATCH\n'..__res) end
 end
-I_LANTERN = function()
+I_LANTERN = function(...)
 	local TICK
   local TBL = VALUE(LAMP_TABLE)
 	local __ok, __res = pcall(function()
@@ -3307,7 +3340,7 @@ I_LANTERN = function()
 return __res
 	else error('I_LANTERN\n'..__res) end
 end
-I_CANDLES = function()
+I_CANDLES = function(...)
 	local TICK
   local TBL = VALUE(CANDLE_TABLE)
 	local __ok, __res = pcall(function()
@@ -3325,7 +3358,8 @@ I_CANDLES = function()
 return __res
 	else error('I_CANDLES\n'..__res) end
 end
-LIGHT_INT = function(OBJ, TBL, TICK)
+LIGHT_INT = function(...)
+	local OBJ, TBL, TICK = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3350,7 +3384,8 @@ LIGHT_INT = function(OBJ, TBL, TICK)
 return __res
 	else error('LIGHT_INT\n'..__res) end
 end
-MIN = function(N1, N2)
+MIN = function(...)
+	local N1, N2 = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3365,7 +3400,7 @@ MIN = function(N1, N2)
 return __res
 	else error('MIN\n'..__res) end
 end
-CANDLES_FCN = function()
+CANDLES_FCN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3390,7 +3425,7 @@ CANDLES_FCN = function()
           	error(true)
         elseif T then 
           	__tmp = TELL("You should say what to light them with.", CR)
-          	__tmp = RFATAL()
+          	__tmp = 	error(2)
         end
 
       elseif PASS(EQUALQ(PRSI, MATCH) and FSETQ(MATCH, ONBIT)) then 
@@ -3460,7 +3495,8 @@ return __res
 	else error('CANDLES_FCN\n'..__res) end
 end
 CANDLE_TABLE = TABLE(20,"The candles grow shorter.",10,"The candles are becoming quite short.",5,"The candles won't last long now.",0)
-CAVE2_ROOM = function(RARG)
+CAVE2_ROOM = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3484,7 +3520,7 @@ CAVE2_ROOM = function(RARG)
 return __res
 	else error('CAVE2_ROOM\n'..__res) end
 end
-SWORD_FCN = function()
+SWORD_FCN = function(...)
 	local G
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -3507,7 +3543,8 @@ SWORD_FCN = function()
 return __res
 	else error('SWORD_FCN\n'..__res) end
 end
-BOOM_ROOM = function(RARG)
+BOOM_ROOM = function(...)
+	local RARG = ...
   local DUMMYQ = nil
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -3537,7 +3574,7 @@ BOOM_ROOM = function(RARG)
 return __res
 	else error('BOOM_ROOM\n'..__res) end
 end
-BAT_D = function()
+BAT_D = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3552,7 +3589,8 @@ BAT_D = function()
 return __res
 	else error('BAT_D\n'..__res) end
 end
-BATS_ROOM = function(RARG)
+BATS_ROOM = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3573,7 +3611,8 @@ BATS_ROOM = function(RARG)
 return __res
 	else error('BATS_ROOM\n'..__res) end
 end
-MACHINE_ROOM_FCN = function(RARG)
+MACHINE_ROOM_FCN = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3594,7 +3633,7 @@ MACHINE_ROOM_FCN = function(RARG)
 return __res
 	else error('MACHINE_ROOM_FCN\n'..__res) end
 end
-MACHINE_F = function()
+MACHINE_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3640,7 +3679,7 @@ MACHINE_F = function()
 return __res
 	else error('MACHINE_F\n'..__res) end
 end
-MSWITCH_FUNCTION = function()
+MSWITCH_FUNCTION = function(...)
 	local O
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -3691,7 +3730,7 @@ else __tmp = __res55 or true end
 return __res
 	else error('MSWITCH_FUNCTION\n'..__res) end
 end
-GUNK_FUNCTION = function()
+GUNK_FUNCTION = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   REMOVE_CAREFULLY(GUNK)
@@ -3701,7 +3740,8 @@ GUNK_FUNCTION = function()
 return __res
 	else error('GUNK_FUNCTION\n'..__res) end
 end
-NO_OBJS = function(RARG)
+NO_OBJS = function(...)
+	local RARG = ...
 	local F
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -3742,7 +3782,8 @@ else __tmp = __res56 or true end
 return __res
 	else error('NO_OBJS\n'..__res) end
 end
-SOUTH_TEMPLE_FCN = function(RARG)
+SOUTH_TEMPLE_FCN = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3757,7 +3798,8 @@ return __res
 	else error('SOUTH_TEMPLE_FCN\n'..__res) end
 end
 LIGHT_SHAFT = 13
-WHITE_CLIFFS_FUNCTION = function(RARG)
+WHITE_CLIFFS_FUNCTION = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3776,7 +3818,7 @@ WHITE_CLIFFS_FUNCTION = function(RARG)
 return __res
 	else error('WHITE_CLIFFS_FUNCTION\n'..__res) end
 end
-SCEPTRE_FUNCTION = function()
+SCEPTRE_FUNCTION = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3814,7 +3856,8 @@ SCEPTRE_FUNCTION = function()
 return __res
 	else error('SCEPTRE_FUNCTION\n'..__res) end
 end
-FALLS_ROOM = function(RARG)
+FALLS_ROOM = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3835,7 +3878,7 @@ FALLS_ROOM = function(RARG)
 return __res
 	else error('FALLS_ROOM\n'..__res) end
 end
-RAINBOW_FCN = function()
+RAINBOW_FCN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3870,7 +3913,7 @@ RAINBOW_FCN = function()
 return __res
 	else error('RAINBOW_FCN\n'..__res) end
 end
-DBOAT_FUNCTION = function()
+DBOAT_FUNCTION = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3893,7 +3936,7 @@ DBOAT_FUNCTION = function()
 return __res
 	else error('DBOAT_FUNCTION\n'..__res) end
 end
-FIX_BOAT = function()
+FIX_BOAT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("Well done. The boat is repaired.", CR)
@@ -3904,7 +3947,7 @@ FIX_BOAT = function()
 return __res
 	else error('FIX_BOAT\n'..__res) end
 end
-RIVER_FUNCTION = function()
+RIVER_FUNCTION = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3938,7 +3981,7 @@ end
 RIVER_SPEEDS = LTABLE(RIVER_1,4,RIVER_2,4,RIVER_3,3,RIVER_4,2,RIVER_5,1)
 RIVER_NEXT = LTABLE(RIVER_1,RIVER_2,RIVER_3,RIVER_4,RIVER_5)
 RIVER_LAUNCH = LTABLE(DAM_BASE,RIVER_1,WHITE_CLIFFS_NORTH,RIVER_3,WHITE_CLIFFS_SOUTH,RIVER_4,SHORE,RIVER_5,SANDY_BEACH,RIVER_4,RESERVOIR_SOUTH,RESERVOIR,RESERVOIR_NORTH,RESERVOIR,STREAM_VIEW,IN_STREAM)
-I_RIVER = function()
+I_RIVER = function(...)
 	local RM
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -3958,9 +4001,10 @@ I_RIVER = function()
 return __res
 	else error('I_RIVER\n'..__res) end
 end
-RBOAT_FUNCTION = function(RARG)
+RBOAT_FUNCTION = function(...)
+	local RARG = ...
 	local TMP
-  RARG = RARG or nil
+	if select('#', ...) < 1 then RARG = nil end
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4069,7 +4113,7 @@ RBOAT_FUNCTION = function(RARG)
 return __res
 	else error('RBOAT_FUNCTION\n'..__res) end
 end
-BREATHE = function()
+BREATHE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   PERFORM(VQINFLATE, PRSO, LUNGS)
@@ -4078,7 +4122,7 @@ BREATHE = function()
 return __res
 	else error('BREATHE\n'..__res) end
 end
-IBOAT_FUNCTION = function()
+IBOAT_FUNCTION = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4111,7 +4155,8 @@ return __res
 	else error('IBOAT_FUNCTION\n'..__res) end
 end
 BUOY_FLAG = T
-RIVR4_ROOM = function(RARG)
+RIVR4_ROOM = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4130,7 +4175,7 @@ return __res
 	else error('RIVR4_ROOM\n'..__res) end
 end
 BEACH_DIG = -1
-SAND_FUNCTION = function()
+SAND_FUNCTION = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4161,7 +4206,8 @@ return __res
 	else error('SAND_FUNCTION\n'..__res) end
 end
 BDIGS = TABLE("You seem to be digging a hole here.","The hole is getting deeper, but that's about it.","You are surrounded by a wall of sand on all sides.")
-TREE_ROOM = function(RARG)
+TREE_ROOM = function(...)
+	local RARG = ...
 	local F
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -4212,7 +4258,7 @@ TREE_ROOM = function(RARG)
 return __res
 	else error('TREE_ROOM\n'..__res) end
 end
-EGG_OBJECT = function()
+EGG_OBJECT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4255,7 +4301,7 @@ EGG_OBJECT = function()
 return __res
 	else error('EGG_OBJECT\n'..__res) end
 end
-BAD_EGG = function()
+BAD_EGG = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4274,7 +4320,7 @@ return __res
 	else error('BAD_EGG\n'..__res) end
 end
 SING_SONG = nil
-CANARY_OBJECT = function()
+CANARY_OBJECT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4307,7 +4353,7 @@ CANARY_OBJECT = function()
 return __res
 	else error('CANARY_OBJECT\n'..__res) end
 end
-FOREST_ROOMQ = function()
+FOREST_ROOMQ = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   PASS(EQUALQ(HERE, FOREST_1, FOREST_2, FOREST_3) or EQUALQ(HERE, PATH, UP_A_TREE))
@@ -4316,7 +4362,7 @@ FOREST_ROOMQ = function()
 return __res
 	else error('FOREST_ROOMQ\n'..__res) end
 end
-I_FOREST_ROOM = function()
+I_FOREST_ROOM = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4332,7 +4378,8 @@ I_FOREST_ROOM = function()
 return __res
 	else error('I_FOREST_ROOM\n'..__res) end
 end
-FOREST_ROOM = function(RARG)
+FOREST_ROOM = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4351,7 +4398,7 @@ FOREST_ROOM = function(RARG)
 return __res
 	else error('FOREST_ROOM\n'..__res) end
 end
-WCLIF_OBJECT = function()
+WCLIF_OBJECT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4364,7 +4411,7 @@ WCLIF_OBJECT = function()
 return __res
 	else error('WCLIF_OBJECT\n'..__res) end
 end
-CLIFF_OBJECT = function()
+CLIFF_OBJECT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4384,7 +4431,7 @@ CLIFF_OBJECT = function()
 return __res
 	else error('CLIFF_OBJECT\n'..__res) end
 end
-ROPE_FUNCTION = function()
+ROPE_FUNCTION = function(...)
 	local RLOC
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -4460,7 +4507,7 @@ ROPE_FUNCTION = function()
 return __res
 	else error('ROPE_FUNCTION\n'..__res) end
 end
-UNTIE_FROM = function()
+UNTIE_FROM = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4475,7 +4522,7 @@ UNTIE_FROM = function()
 return __res
 	else error('UNTIE_FROM\n'..__res) end
 end
-SLIDE_FUNCTION = function()
+SLIDE_FUNCTION = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4498,7 +4545,8 @@ SLIDE_FUNCTION = function()
 return __res
 	else error('SLIDE_FUNCTION\n'..__res) end
 end
-SLIDER = function(OBJ)
+SLIDER = function(...)
+	local OBJ = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4520,7 +4568,7 @@ SLIDER = function(OBJ)
 return __res
 	else error('SLIDER\n'..__res) end
 end
-SANDWICH_BAG_FCN = function()
+SANDWICH_BAG_FCN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4533,8 +4581,9 @@ SANDWICH_BAG_FCN = function()
 return __res
 	else error('SANDWICH_BAG_FCN\n'..__res) end
 end
-DEAD_FUNCTION = function(FOO)
-  FOO = FOO or nil
+DEAD_FUNCTION = function(...)
+	local FOO = ...
+	if select('#', ...) < 1 then FOO = nil end
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4600,7 +4649,7 @@ DEAD_FUNCTION = function(FOO)
   elseif T then 
     	__tmp = TELL("You can't even do that.", CR)
     	__tmp = APPLY(function() P_CONT = nil return P_CONT end)
-    	__tmp = RFATAL()
+    	__tmp = 	error(2)
   end
 
 	 return __tmp end)
@@ -4608,7 +4657,7 @@ DEAD_FUNCTION = function(FOO)
 return __res
 	else error('DEAD_FUNCTION\n'..__res) end
 end
-LAKE_PSEUDO = function()
+LAKE_PSEUDO = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4625,7 +4674,7 @@ LAKE_PSEUDO = function()
 return __res
 	else error('LAKE_PSEUDO\n'..__res) end
 end
-STREAM_PSEUDO = function()
+STREAM_PSEUDO = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4640,7 +4689,7 @@ STREAM_PSEUDO = function()
 return __res
 	else error('STREAM_PSEUDO\n'..__res) end
 end
-CHASM_PSEUDO = function()
+CHASM_PSEUDO = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4658,7 +4707,7 @@ CHASM_PSEUDO = function()
 return __res
 	else error('CHASM_PSEUDO\n'..__res) end
 end
-DOME_PSEUDO = function()
+DOME_PSEUDO = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4671,7 +4720,7 @@ DOME_PSEUDO = function()
 return __res
 	else error('DOME_PSEUDO\n'..__res) end
 end
-GATE_PSEUDO = function()
+GATE_PSEUDO = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4687,7 +4736,7 @@ GATE_PSEUDO = function()
 return __res
 	else error('GATE_PSEUDO\n'..__res) end
 end
-DOOR_PSEUDO = function()
+DOOR_PSEUDO = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4702,7 +4751,7 @@ DOOR_PSEUDO = function()
 return __res
 	else error('DOOR_PSEUDO\n'..__res) end
 end
-PAINT_PSEUDO = function()
+PAINT_PSEUDO = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4715,7 +4764,7 @@ PAINT_PSEUDO = function()
 return __res
 	else error('PAINT_PSEUDO\n'..__res) end
 end
-GAS_PSEUDO = function()
+GAS_PSEUDO = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -4756,7 +4805,8 @@ DEF3_RES = TABLE(DEF3A,0,DEF3B,0,DEF3C)
 STRENGTH_MAX = 7
 STRENGTH_MIN = 2
 CURE_WAIT = 30
-DO_FIGHT = function(LEN)
+DO_FIGHT = function(...)
+	local LEN = ...
 	local CNT
 	local RES
 	local O
@@ -4829,7 +4879,8 @@ else __tmp = __res57 or true end
 return __res
 	else error('DO_FIGHT\n'..__res) end
 end
-REMARK = function(REMARK, D, W)
+REMARK = function(...)
+	local REMARK, D, W = ...
   local LEN = GET(REMARK, 0)
   local CNT = 0
 	local STR
@@ -4866,9 +4917,10 @@ else __tmp = __res59 or true end
 return __res
 	else error('REMARK\n'..__res) end
 end
-FIGHT_STRENGTH = function(ADJUSTQ)
+FIGHT_STRENGTH = function(...)
+	local ADJUSTQ = ...
 	local S
-  ADJUSTQ = ADJUSTQ or T
+	if select('#', ...) < 1 then ADJUSTQ = T end
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp = APPLY(function() S = ADD(STRENGTH_MIN, DIV(SCORE, DIV(SCORE_MAX, SUB(STRENGTH_MAX, STRENGTH_MIN)))) return S end)
@@ -4884,7 +4936,8 @@ FIGHT_STRENGTH = function(ADJUSTQ)
 return __res
 	else error('FIGHT_STRENGTH\n'..__res) end
 end
-VILLAIN_STRENGTH = function(OO)
+VILLAIN_STRENGTH = function(...)
+	local OO = ...
   local VILLAIN = GET(OO, V_VILLAIN)
 	local OD
 	local TMP
@@ -4922,7 +4975,8 @@ VILLAIN_STRENGTH = function(OO)
 return __res
 	else error('VILLAIN_STRENGTH\n'..__res) end
 end
-FIND_WEAPON = function(O)
+FIND_WEAPON = function(...)
+	local O = ...
 	local W
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -4954,7 +5008,8 @@ else __tmp = __res60 or true end
 return __res
 	else error('FIND_WEAPON\n'..__res) end
 end
-VILLAIN_BLOW = function(OO, OUTQ)
+VILLAIN_BLOW = function(...)
+	local OO, OUTQ = ...
   local VILLAIN = GET(OO, V_VILLAIN)
   local REMARKS = GET(OO, V_MSGS)
 	local DWEAPON
@@ -5088,7 +5143,7 @@ VILLAIN_BLOW = function(OO, OUTQ)
 return __res
 	else error('VILLAIN_BLOW\n'..__res) end
 end
-HERO_BLOW = function()
+HERO_BLOW = function(...)
 	local OO
 	local VILLAIN
   local OUTQ = nil
@@ -5249,7 +5304,8 @@ else __tmp = __res61 or true end
 return __res
 	else error('HERO_BLOW\n'..__res) end
 end
-WINNER_RESULT = function(DEF, RES, OD)
+WINNER_RESULT = function(...)
+	local DEF, RES, OD = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   PUTP(WINNER, PQSTRENGTH, APPLY(function()
@@ -5278,7 +5334,8 @@ WINNER_RESULT = function(DEF, RES, OD)
 return __res
 	else error('WINNER_RESULT\n'..__res) end
 end
-VILLAIN_RESULT = function(VILLAIN, DEF, RES)
+VILLAIN_RESULT = function(...)
+	local VILLAIN, DEF, RES = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   PUTP(VILLAIN, PQSTRENGTH, DEF)
@@ -5301,7 +5358,8 @@ VILLAIN_RESULT = function(VILLAIN, DEF, RES)
 return __res
 	else error('VILLAIN_RESULT\n'..__res) end
 end
-WINNINGQ = function(V)
+WINNINGQ = function(...)
+	local V = ...
 	local VS
 	local PS
 	local __ok, __res = pcall(function()
@@ -5326,7 +5384,7 @@ WINNINGQ = function(V)
 return __res
 	else error('WINNINGQ\n'..__res) end
 end
-I_CURE = function()
+I_CURE = function(...)
   local S = GETP(WINNER, PQSTRENGTH)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -5369,7 +5427,7 @@ V_BEST_ADV = 2
 V_PROB = 3
 V_MSGS = 4
 VILLAINS = LTABLE(TABLE(TROLL,SWORD,1,0,TROLL_MELEE),TABLE(THIEF,KNIFE,1,0,THIEF_MELEE),TABLE(CYCLOPS,nil,0,0,CYCLOPS_MELEE))
-I_FIGHT = function()
+I_FIGHT = function(...)
   local FIGHTQ = nil
   local LEN = GET(VILLAINS, 0)
 	local CNT
@@ -5448,7 +5506,8 @@ else __tmp = __res62 or true end
 return __res
 	else error('I_FIGHT\n'..__res) end
 end
-AWAKEN = function(O)
+AWAKEN = function(...)
+	local O = ...
   local S = GETP(O, PQSTRENGTH)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -5464,7 +5523,7 @@ AWAKEN = function(O)
 return __res
 	else error('AWAKEN\n'..__res) end
 end
-I_SWORD = function()
+I_SWORD = function(...)
   local DEM = INT(I_SWORD)
   local G = GETP(SWORD, PQTVALUE)
   local NG = 0
@@ -5533,7 +5592,8 @@ else __tmp = __res63 or true end
 return __res
 	else error('I_SWORD\n'..__res) end
 end
-INFESTEDQ = function(R)
+INFESTEDQ = function(...)
+	local R = ...
   local F = FIRSTQ(R)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -5561,7 +5621,7 @@ else __tmp = __res64 or true end
 return __res
 	else error('INFESTEDQ\n'..__res) end
 end
-I_THIEF = function()
+I_THIEF = function(...)
   local RM = LOC(THIEF)
 	local HEREQ
   local ONCE = nil
@@ -5663,7 +5723,8 @@ else __tmp = __res65 or true end
 return __res
 	else error('I_THIEF\n'..__res) end
 end
-DROP_JUNK = function(RM)
+DROP_JUNK = function(...)
+	local RM = ...
 	local X
 	local N
   local FLG = nil
@@ -5706,7 +5767,7 @@ else __tmp = __res67 or true end
 return __res
 	else error('DROP_JUNK\n'..__res) end
 end
-RECOVER_STILETTO = function()
+RECOVER_STILETTO = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -5720,7 +5781,8 @@ RECOVER_STILETTO = function()
 return __res
 	else error('RECOVER_STILETTO\n'..__res) end
 end
-STEAL_JUNK = function(RM)
+STEAL_JUNK = function(...)
+	local RM = ...
 	local X
 	local N
 	local __ok, __res = pcall(function()
@@ -5768,11 +5830,12 @@ else __tmp = __res68 or true end
 return __res
 	else error('STEAL_JUNK\n'..__res) end
 end
-ROB = function(WHAT, WHERE, PROB)
+ROB = function(...)
+	local WHAT, WHERE, PROB = ...
 	local N
 	local X
   local ROBBEDQ = nil
-  PROB = PROB or nil
+	if select('#', ...) < 3 then PROB = nil end
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp = APPLY(function() X = FIRSTQ(WHAT) return X end)
@@ -5810,7 +5873,7 @@ else __tmp = __res69 or true end
 return __res
 	else error('ROB\n'..__res) end
 end
-V_DIAGNOSE = function()
+V_DIAGNOSE = function(...)
   local MS = FIGHT_STRENGTH(nil)
   local WD = GETP(WINNER, PQSTRENGTH)
   local RS = ADD(MS, WD)
@@ -5882,8 +5945,9 @@ V_DIAGNOSE = function()
 return __res
 	else error('V_DIAGNOSE\n'..__res) end
 end
-V_SCORE = function(ASKQ)
-  ASKQ = ASKQ or T
+V_SCORE = function(...)
+	local ASKQ = ...
+	if select('#', ...) < 1 then ASKQ = T end
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("Your score is ")
@@ -5925,8 +5989,9 @@ V_SCORE = function(ASKQ)
 return __res
 	else error('V_SCORE\n'..__res) end
 end
-JIGS_UP = function(DESC, PLAYERQ)
-  PLAYERQ = PLAYERQ or nil
+JIGS_UP = function(...)
+	local DESC, PLAYERQ = ...
+	if select('#', ...) < 2 then PLAYERQ = nil end
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp = APPLY(function() WINNER = ADVENTURER return WINNER end)
@@ -5972,7 +6037,7 @@ JIGS_UP = function(DESC, PLAYERQ)
       	__tmp = APPLY(function() P_CONT = nil return P_CONT end)
       	__tmp = RANDOMIZE_OBJECTS()
       	__tmp = KILL_INTERRUPTS()
-      	__tmp = RFATAL()
+      	__tmp = 	error(2)
     end
 end
 local __ok70, __res70
@@ -5986,7 +6051,7 @@ else __tmp = __res70 or true end
 return __res
 	else error('JIGS_UP\n'..__res) end
 end
-RANDOMIZE_OBJECTS = function()
+RANDOMIZE_OBJECTS = function(...)
   local R = nil
 	local F
 	local N
@@ -6057,7 +6122,7 @@ else __tmp = __res71 or true end
 return __res
 	else error('RANDOMIZE_OBJECTS\n'..__res) end
 end
-KILL_INTERRUPTS = function()
+KILL_INTERRUPTS = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   DISABLE(INT(I_XB))
@@ -6075,7 +6140,7 @@ KILL_INTERRUPTS = function()
 return __res
 	else error('KILL_INTERRUPTS\n'..__res) end
 end
-BAG_OF_COINS_F = function()
+BAG_OF_COINS_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   STUPID_CONTAINER(BAG_OF_COINS, "coins")
@@ -6084,7 +6149,7 @@ BAG_OF_COINS_F = function()
 return __res
 	else error('BAG_OF_COINS_F\n'..__res) end
 end
-TRUNK_F = function()
+TRUNK_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   STUPID_CONTAINER(TRUNK, "jewels")
@@ -6093,7 +6158,8 @@ TRUNK_F = function()
 return __res
 	else error('TRUNK_F\n'..__res) end
 end
-STUPID_CONTAINER = function(OBJ, STR)
+STUPID_CONTAINER = function(...)
+	local OBJ, STR = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -6110,7 +6176,7 @@ STUPID_CONTAINER = function(OBJ, STR)
 return __res
 	else error('STUPID_CONTAINER\n'..__res) end
 end
-DUMB_CONTAINER = function()
+DUMB_CONTAINER = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -6125,7 +6191,7 @@ DUMB_CONTAINER = function()
 return __res
 	else error('DUMB_CONTAINER\n'..__res) end
 end
-GARLIC_F = function()
+GARLIC_F = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -6139,7 +6205,7 @@ GARLIC_F = function()
 return __res
 	else error('GARLIC_F\n'..__res) end
 end
-CHAIN_PSEUDO = function()
+CHAIN_PSEUDO = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -6156,7 +6222,8 @@ CHAIN_PSEUDO = function()
 return __res
 	else error('CHAIN_PSEUDO\n'..__res) end
 end
-TROLL_ROOM_F = function(RARG)
+TROLL_ROOM_F = function(...)
+	local RARG = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 

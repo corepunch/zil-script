@@ -213,6 +213,7 @@ local function write_function_header(buf, node)
   local params = {}
   local locals = {}
   local optionals = {}
+  local mandatory = {}
   local mode = "params" -- params, locals, optional
   
   local args_node = node[2]
@@ -241,13 +242,16 @@ local function write_function_header(buf, node)
         table.insert(locals, arg)
       else
         table.insert(params, value(arg))
+        table.insert(mandatory, value(arg))
       end
     end
   end
   
   -- Write parameters
-  buf.writeln("%s)", table.concat(params, ", "))
-  
+  if #params > 0 then
+    buf.writeln("\tlocal %s = ...", table.concat(params, ", "))
+  end
+
   -- Write local declarations
   for _, local_node in ipairs(locals) do
     if local_node.type == "list" then
@@ -261,11 +265,10 @@ local function write_function_header(buf, node)
   end
   
   -- Write optional defaults
-  for _, opt in ipairs(optionals) do
-    buf.indent(1)
-    buf.write("%s = %s or ", value(opt[1]), value(opt[1]))
+  for i, opt in ipairs(optionals) do
+    buf.write("\tif select('#', ...) < %d then %s = ", #mandatory+i, value(opt[1]))
     print_node(buf, opt[2], 2)
-    buf.writeln()
+    buf.writeln(" end")
   end
 end
 
@@ -383,6 +386,11 @@ form.RFALSE = function(buf, node, indent)
   buf.write("\terror(false)")
 end
 
+-- RFATAL
+form.RFATAL = function(buf, node, indent)
+  buf.write("\terror(2)")
+end
+
 local __again = 123
 
 form.AGAIN = function(buf, node, indent)
@@ -496,28 +504,6 @@ form.SYNTAX = function(buf, node, indent)
   buf.writeln("}")
 end
 
--- TABLE/LTABLE
--- local function compile_table(buf, node, indent)
---   local start = safeget(node[1], 'type') == "list" and 2 or 1
---   buf.write("{")
---   for i = start, #node do
---     print_node(buf, node[i], 0 and i == #node)
---     if i < #node then buf.write(",") end
---   end
---   buf.writeln("}")
--- end
--- form.LTABLE = compile_table
--- form.ITABLE = compile_table
-
--- form.TABLE = function(buf, node)
---   local start = safeget(node[1], 'type') == "list" and 2 or 1
---   buf.write("TABLE(")
---   for i = start, #node do
---     print_node(buf, node[i], 0, false)
---     if i < #node then buf.write(",") end
---   end
---   buf.writeln(")")
--- end
 form.LTABLE = function(buf, node)
   local start = safeget(node[1], 'type') == "list" and 2 or 1
   buf.write("LTABLE(")
@@ -617,9 +603,9 @@ end
 local function compile_routine(decl, body, node)
   local name = value(node[1])
   -- decl.writeln("%s = nil", name)
-  body.write("%s = function(", name)
+  body.writeln("%s = function(...)", name)
   write_function_header(body, node)
-  -- body.writeln("\tprint('\t%s')", name)
+  -- body.writeln("\tprint('\t%s')", name:gsub("_", "-"))
   body.writeln("\tlocal __ok, __res = pcall(function()")
   body.writeln("\tlocal __tmp = nil")
   for i = 3, #node do
@@ -629,7 +615,7 @@ local function compile_routine(decl, body, node)
   end
   body.writeln("\t return __tmp end)")
   body.writeln("\tif __ok or (type(__res) ~= 'string' and type(__res) ~= 'nil') then")
-  -- body.writeln("print('\t\t(%s) '..tostring(__res))", name)
+  -- body.writeln("print('\t\t(%s) '..tostring(__res))", name:gsub("_", "-"))
   body.writeln("return __res")
   body.writeln(string.format("\telse error('%s\\n'..__res) end", name))
   body.writeln("end")

@@ -1,7 +1,7 @@
 
 VERBOSE = nil
 SUPER_BRIEF = nil
-V_VERBOSE = function()
+V_VERBOSE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp = APPLY(function() VERBOSE = T return VERBOSE end)
@@ -12,7 +12,7 @@ V_VERBOSE = function()
 return __res
 	else error('V_VERBOSE\n'..__res) end
 end
-V_BRIEF = function()
+V_BRIEF = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp = APPLY(function() VERBOSE = nil return VERBOSE end)
@@ -23,7 +23,7 @@ V_BRIEF = function()
 return __res
 	else error('V_BRIEF\n'..__res) end
 end
-V_SUPER_BRIEF = function()
+V_SUPER_BRIEF = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp = APPLY(function() SUPER_BRIEF = T return SUPER_BRIEF end)
@@ -33,7 +33,7 @@ V_SUPER_BRIEF = function()
 return __res
 	else error('V_SUPER_BRIEF\n'..__res) end
 end
-V_INVENTORY = function()
+V_INVENTORY = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -48,7 +48,7 @@ V_INVENTORY = function()
 return __res
 	else error('V_INVENTORY\n'..__res) end
 end
-FINISH = function()
+FINISH = function(...)
 	local WRD
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -88,7 +88,7 @@ else __tmp = __res28 or true end
 return __res
 	else error('FINISH\n'..__res) end
 end
-V_QUIT = function()
+V_QUIT = function(...)
 	local SCOR
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -106,7 +106,7 @@ V_QUIT = function()
 return __res
 	else error('V_QUIT\n'..__res) end
 end
-V_RESTART = function()
+V_RESTART = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   V_SCORE(T)
@@ -123,7 +123,7 @@ V_RESTART = function()
 return __res
 	else error('V_RESTART\n'..__res) end
 end
-V_RESTORE = function()
+V_RESTORE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -139,7 +139,7 @@ V_RESTORE = function()
 return __res
 	else error('V_RESTORE\n'..__res) end
 end
-V_SAVE = function()
+V_SAVE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -154,7 +154,7 @@ V_SAVE = function()
 return __res
 	else error('V_SAVE\n'..__res) end
 end
-V_SCRIPT = function()
+V_SCRIPT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   PUT(0, 8, BOR(GET(0, 8), 1))
@@ -166,7 +166,7 @@ V_SCRIPT = function()
 return __res
 	else error('V_SCRIPT\n'..__res) end
 end
-V_UNSCRIPT = function()
+V_UNSCRIPT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("Here ends a transcript of interaction with", CR)
@@ -178,7 +178,7 @@ V_UNSCRIPT = function()
 return __res
 	else error('V_UNSCRIPT\n'..__res) end
 end
-V_VERSION = function()
+V_VERSION = function(...)
   local CNT = 17
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -210,7 +210,7 @@ else __tmp = __res29 or true end
 return __res
 	else error('V_VERSION\n'..__res) end
 end
-V_VERIFY = function()
+V_VERIFY = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("Verifying disk...", CR)
@@ -226,7 +226,7 @@ V_VERIFY = function()
 return __res
 	else error('V_VERIFY\n'..__res) end
 end
-V_COMMAND_FILE = function()
+V_COMMAND_FILE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   DIRIN(1)
@@ -236,7 +236,7 @@ V_COMMAND_FILE = function()
 return __res
 	else error('V_COMMAND_FILE\n'..__res) end
 end
-V_RANDOM = function()
+V_RANDOM = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -252,7 +252,7 @@ V_RANDOM = function()
 return __res
 	else error('V_RANDOM\n'..__res) end
 end
-V_RECORD = function()
+V_RECORD = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   DIROUT(4)
@@ -262,7 +262,7 @@ V_RECORD = function()
 return __res
 	else error('V_RECORD\n'..__res) end
 end
-V_UNRECORD = function()
+V_UNRECORD = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   DIROUT(-4)
@@ -272,7 +272,7 @@ V_UNRECORD = function()
 return __res
 	else error('V_UNRECORD\n'..__res) end
 end
-V_ADVENT = function()
+V_ADVENT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("A hollow voice says \"Fool.\"", CR)
@@ -281,7 +281,7 @@ V_ADVENT = function()
 return __res
 	else error('V_ADVENT\n'..__res) end
 end
-V_ALARM = function()
+V_ALARM = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -303,7 +303,7 @@ V_ALARM = function()
 return __res
 	else error('V_ALARM\n'..__res) end
 end
-V_ANSWER = function()
+V_ANSWER = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("Nobody seems to be awaiting your answer.", CR)
@@ -315,7 +315,7 @@ V_ANSWER = function()
 return __res
 	else error('V_ANSWER\n'..__res) end
 end
-V_ATTACK = function()
+V_ATTACK = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -336,7 +336,7 @@ V_ATTACK = function()
 return __res
 	else error('V_ATTACK\n'..__res) end
 end
-V_BACK = function()
+V_BACK = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("Sorry, my memory is poor. Please give a direction.", CR)
@@ -345,7 +345,7 @@ V_BACK = function()
 return __res
 	else error('V_BACK\n'..__res) end
 end
-V_BLAST = function()
+V_BLAST = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("You can't blast anything by using words.", CR)
@@ -354,7 +354,7 @@ V_BLAST = function()
 return __res
 	else error('V_BLAST\n'..__res) end
 end
-PRE_BOARD = function()
+PRE_BOARD = function(...)
 	local AV
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -379,13 +379,13 @@ PRE_BOARD = function()
     	__tmp = TELL("You have a theory on how to board a ", D, PRSO, ", perhaps?", CR)
   end
 
-	__tmp =   RFATAL()
+	__tmp = 	error(2)
 	 return __tmp end)
 	if __ok or (type(__res) ~= 'string' and type(__res) ~= 'nil') then
 return __res
 	else error('PRE_BOARD\n'..__res) end
 end
-V_BOARD = function()
+V_BOARD = function(...)
 	local AV
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -398,7 +398,7 @@ V_BOARD = function()
 return __res
 	else error('V_BOARD\n'..__res) end
 end
-V_BREATHE = function()
+V_BREATHE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   PERFORM(VQINFLATE, PRSO, LUNGS)
@@ -407,7 +407,7 @@ V_BREATHE = function()
 return __res
 	else error('V_BREATHE\n'..__res) end
 end
-V_BRUSH = function()
+V_BRUSH = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("If you wish, but heaven only knows why.", CR)
@@ -416,7 +416,7 @@ V_BRUSH = function()
 return __res
 	else error('V_BRUSH\n'..__res) end
 end
-V_BUG = function()
+V_BUG = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("Bug? Not in a flawless program like this! (Cough, cough).", CR)
@@ -425,7 +425,7 @@ V_BUG = function()
 return __res
 	else error('V_BUG\n'..__res) end
 end
-TELL_NO_PRSI = function()
+TELL_NO_PRSI = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("You didn't say with what!", CR)
@@ -434,7 +434,7 @@ TELL_NO_PRSI = function()
 return __res
 	else error('TELL_NO_PRSI\n'..__res) end
 end
-PRE_BURN = function()
+PRE_BURN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -451,7 +451,7 @@ PRE_BURN = function()
 return __res
 	else error('PRE_BURN\n'..__res) end
 end
-V_BURN = function()
+V_BURN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -485,7 +485,7 @@ V_BURN = function()
 return __res
 	else error('V_BURN\n'..__res) end
 end
-V_CHOMP = function()
+V_CHOMP = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("Preposterous!", CR)
@@ -494,7 +494,7 @@ V_CHOMP = function()
 return __res
 	else error('V_CHOMP\n'..__res) end
 end
-V_CLIMB_DOWN = function()
+V_CLIMB_DOWN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   V_CLIMB_UP(PQDOWN, PRSO)
@@ -503,7 +503,7 @@ V_CLIMB_DOWN = function()
 return __res
 	else error('V_CLIMB_DOWN\n'..__res) end
 end
-V_CLIMB_FOO = function()
+V_CLIMB_FOO = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   V_CLIMB_UP(PQUP, PRSO)
@@ -512,7 +512,7 @@ V_CLIMB_FOO = function()
 return __res
 	else error('V_CLIMB_FOO\n'..__res) end
 end
-V_CLIMB_ON = function()
+V_CLIMB_ON = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -528,11 +528,12 @@ V_CLIMB_ON = function()
 return __res
 	else error('V_CLIMB_ON\n'..__res) end
 end
-V_CLIMB_UP = function(DIR, OBJ)
+V_CLIMB_UP = function(...)
+	local DIR, OBJ = ...
 	local X
 	local TX
-  DIR = DIR or PQUP
-  OBJ = OBJ or nil
+	if select('#', ...) < 1 then DIR = PQUP end
+	if select('#', ...) < 2 then OBJ = nil end
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -585,7 +586,7 @@ V_CLIMB_UP = function(DIR, OBJ)
 return __res
 	else error('V_CLIMB_UP\n'..__res) end
 end
-V_CLOSE = function()
+V_CLOSE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -624,7 +625,7 @@ V_CLOSE = function()
 return __res
 	else error('V_CLOSE\n'..__res) end
 end
-V_COMMAND = function()
+V_COMMAND = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -639,7 +640,7 @@ V_COMMAND = function()
 return __res
 	else error('V_COMMAND\n'..__res) end
 end
-V_COUNT = function()
+V_COUNT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -654,7 +655,7 @@ V_COUNT = function()
 return __res
 	else error('V_COUNT\n'..__res) end
 end
-V_CROSS = function()
+V_CROSS = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("You can't cross that!", CR)
@@ -663,7 +664,7 @@ V_CROSS = function()
 return __res
 	else error('V_CROSS\n'..__res) end
 end
-V_CURSES = function()
+V_CURSES = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -684,7 +685,7 @@ V_CURSES = function()
 return __res
 	else error('V_CURSES\n'..__res) end
 end
-V_CUT = function()
+V_CUT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -710,7 +711,7 @@ V_CUT = function()
 return __res
 	else error('V_CUT\n'..__res) end
 end
-V_DEFLATE = function()
+V_DEFLATE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("Come on, now!", CR)
@@ -719,7 +720,7 @@ V_DEFLATE = function()
 return __res
 	else error('V_DEFLATE\n'..__res) end
 end
-V_DIG = function()
+V_DIG = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -745,7 +746,7 @@ V_DIG = function()
 return __res
 	else error('V_DIG\n'..__res) end
 end
-V_DISEMBARK = function()
+V_DISEMBARK = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -754,13 +755,13 @@ V_DISEMBARK = function()
     	error(true)
   elseif NOT(EQUALQ(LOC(WINNER), PRSO)) then 
     	__tmp = TELL("You're not in that!", CR)
-    	__tmp = RFATAL()
+    	__tmp = 	error(2)
   elseif FSETQ(HERE, RLANDBIT) then 
     	__tmp = TELL("You are on your own feet again.", CR)
     	__tmp = MOVE(WINNER, HERE)
   elseif T then 
     	__tmp = TELL("You realize that getting out here would be fatal.", CR)
-    	__tmp = RFATAL()
+    	__tmp = 	error(2)
   end
 
 	 return __tmp end)
@@ -768,7 +769,7 @@ V_DISEMBARK = function()
 return __res
 	else error('V_DISEMBARK\n'..__res) end
 end
-V_DISENCHANT = function()
+V_DISENCHANT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("Nothing happens.", CR)
@@ -777,7 +778,7 @@ V_DISENCHANT = function()
 return __res
 	else error('V_DISENCHANT\n'..__res) end
 end
-V_DRINK = function()
+V_DRINK = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   V_EAT()
@@ -786,7 +787,7 @@ V_DRINK = function()
 return __res
 	else error('V_DRINK\n'..__res) end
 end
-V_DRINK_FROM = function()
+V_DRINK_FROM = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("How peculiar!", CR)
@@ -795,7 +796,7 @@ V_DRINK_FROM = function()
 return __res
 	else error('V_DRINK_FROM\n'..__res) end
 end
-PRE_DROP = function()
+PRE_DROP = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -809,7 +810,7 @@ PRE_DROP = function()
 return __res
 	else error('PRE_DROP\n'..__res) end
 end
-V_DROP = function()
+V_DROP = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -822,7 +823,7 @@ V_DROP = function()
 return __res
 	else error('V_DROP\n'..__res) end
 end
-V_EAT = function()
+V_EAT = function(...)
   local EATQ = nil
   local DRINKQ = nil
   local NOBJ = nil
@@ -866,7 +867,7 @@ V_EAT = function()
 return __res
 	else error('V_EAT\n'..__res) end
 end
-HIT_SPOT = function()
+HIT_SPOT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -880,7 +881,7 @@ HIT_SPOT = function()
 return __res
 	else error('HIT_SPOT\n'..__res) end
 end
-V_ECHO = function()
+V_ECHO = function(...)
 	local LST
 	local MAX
   local ECH = 0
@@ -936,7 +937,7 @@ else __tmp = __res30 or true end
 return __res
 	else error('V_ECHO\n'..__res) end
 end
-V_ENCHANT = function()
+V_ENCHANT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   NULL_F()
@@ -946,7 +947,8 @@ V_ENCHANT = function()
 return __res
 	else error('V_ENCHANT\n'..__res) end
 end
-REMOVE_CAREFULLY = function(OBJ)
+REMOVE_CAREFULLY = function(...)
+	local OBJ = ...
 	local OLIT
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -969,7 +971,7 @@ REMOVE_CAREFULLY = function(OBJ)
 return __res
 	else error('REMOVE_CAREFULLY\n'..__res) end
 end
-V_ENTER = function()
+V_ENTER = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   DO_WALK(PQIN)
@@ -978,7 +980,7 @@ V_ENTER = function()
 return __res
 	else error('V_ENTER\n'..__res) end
 end
-V_EXAMINE = function()
+V_EXAMINE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -995,7 +997,7 @@ V_EXAMINE = function()
 return __res
 	else error('V_EXAMINE\n'..__res) end
 end
-V_EXIT = function()
+V_EXIT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1014,7 +1016,7 @@ V_EXIT = function()
 return __res
 	else error('V_EXIT\n'..__res) end
 end
-V_EXORCISE = function()
+V_EXORCISE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("What a bizarre concept!", CR)
@@ -1023,7 +1025,7 @@ V_EXORCISE = function()
 return __res
 	else error('V_EXORCISE\n'..__res) end
 end
-PRE_FILL = function()
+PRE_FILL = function(...)
 	local TX
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -1057,7 +1059,7 @@ PRE_FILL = function()
 return __res
 	else error('PRE_FILL\n'..__res) end
 end
-V_FILL = function()
+V_FILL = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1082,7 +1084,7 @@ V_FILL = function()
 return __res
 	else error('V_FILL\n'..__res) end
 end
-V_FIND = function()
+V_FIND = function(...)
   local L = LOC(PRSO)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -1112,7 +1114,7 @@ V_FIND = function()
 return __res
 	else error('V_FIND\n'..__res) end
 end
-V_FOLLOW = function()
+V_FOLLOW = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("You're nuts!", CR)
@@ -1121,7 +1123,7 @@ V_FOLLOW = function()
 return __res
 	else error('V_FOLLOW\n'..__res) end
 end
-V_FROBOZZ = function()
+V_FROBOZZ = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("The FROBOZZ Corporation created, owns, and operates this dungeon.", CR)
@@ -1130,7 +1132,7 @@ V_FROBOZZ = function()
 return __res
 	else error('V_FROBOZZ\n'..__res) end
 end
-PRE_GIVE = function()
+PRE_GIVE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1143,7 +1145,7 @@ PRE_GIVE = function()
 return __res
 	else error('PRE_GIVE\n'..__res) end
 end
-V_GIVE = function()
+V_GIVE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1158,7 +1160,7 @@ V_GIVE = function()
 return __res
 	else error('V_GIVE\n'..__res) end
 end
-V_HATCH = function()
+V_HATCH = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("Bizarre!", CR)
@@ -1168,7 +1170,7 @@ return __res
 	else error('V_HATCH\n'..__res) end
 end
 HS = 0
-V_HELLO = function()
+V_HELLO = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1189,7 +1191,7 @@ V_HELLO = function()
 return __res
 	else error('V_HELLO\n'..__res) end
 end
-V_INCANT = function()
+V_INCANT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("The incantation echoes back faintly, but nothing else happens.", CR)
@@ -1201,7 +1203,7 @@ V_INCANT = function()
 return __res
 	else error('V_INCANT\n'..__res) end
 end
-V_INFLATE = function()
+V_INFLATE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("How can you inflate that?", CR)
@@ -1210,7 +1212,7 @@ V_INFLATE = function()
 return __res
 	else error('V_INFLATE\n'..__res) end
 end
-V_KICK = function()
+V_KICK = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   HACK_HACK("Kicking the ")
@@ -1219,7 +1221,7 @@ V_KICK = function()
 return __res
 	else error('V_KICK\n'..__res) end
 end
-V_KISS = function()
+V_KISS = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("I'd sooner kiss a pig.", CR)
@@ -1228,7 +1230,7 @@ V_KISS = function()
 return __res
 	else error('V_KISS\n'..__res) end
 end
-V_KNOCK = function()
+V_KNOCK = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1243,7 +1245,7 @@ V_KNOCK = function()
 return __res
 	else error('V_KNOCK\n'..__res) end
 end
-V_LAMP_OFF = function()
+V_LAMP_OFF = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1276,7 +1278,7 @@ V_LAMP_OFF = function()
 return __res
 	else error('V_LAMP_OFF\n'..__res) end
 end
-V_LAMP_ON = function()
+V_LAMP_ON = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1308,7 +1310,7 @@ V_LAMP_ON = function()
 return __res
 	else error('V_LAMP_ON\n'..__res) end
 end
-V_LAUNCH = function()
+V_LAUNCH = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1323,7 +1325,7 @@ V_LAUNCH = function()
 return __res
 	else error('V_LAUNCH\n'..__res) end
 end
-V_LEAN_ON = function()
+V_LEAN_ON = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("Getting tired?", CR)
@@ -1332,7 +1334,7 @@ V_LEAN_ON = function()
 return __res
 	else error('V_LEAN_ON\n'..__res) end
 end
-V_LEAP = function()
+V_LEAP = function(...)
 	local TX
 	local S
 	local __ok, __res = pcall(function()
@@ -1376,7 +1378,7 @@ return __res
 	else error('V_LEAP\n'..__res) end
 end
 JUMPLOSS = LTABLE(0,"You should have looked before you leaped.","In the movies, your life would be passing before your eyes.","Geronimo...")
-V_LEAVE = function()
+V_LEAVE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   DO_WALK(PQOUT)
@@ -1385,7 +1387,7 @@ V_LEAVE = function()
 return __res
 	else error('V_LEAVE\n'..__res) end
 end
-V_LISTEN = function()
+V_LISTEN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("The ", D, PRSO, " makes no sound.", CR)
@@ -1394,7 +1396,7 @@ V_LISTEN = function()
 return __res
 	else error('V_LISTEN\n'..__res) end
 end
-V_LOCK = function()
+V_LOCK = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("It doesn't seem to work.", CR)
@@ -1403,7 +1405,7 @@ V_LOCK = function()
 return __res
 	else error('V_LOCK\n'..__res) end
 end
-V_LOOK = function()
+V_LOOK = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1416,7 +1418,7 @@ V_LOOK = function()
 return __res
 	else error('V_LOOK\n'..__res) end
 end
-V_LOOK_BEHIND = function()
+V_LOOK_BEHIND = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("There is nothing behind the ", D, PRSO, ".", CR)
@@ -1425,7 +1427,7 @@ V_LOOK_BEHIND = function()
 return __res
 	else error('V_LOOK_BEHIND\n'..__res) end
 end
-V_LOOK_INSIDE = function()
+V_LOOK_INSIDE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1465,7 +1467,7 @@ V_LOOK_INSIDE = function()
 return __res
 	else error('V_LOOK_INSIDE\n'..__res) end
 end
-V_LOOK_ON = function()
+V_LOOK_ON = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1481,7 +1483,7 @@ V_LOOK_ON = function()
 return __res
 	else error('V_LOOK_ON\n'..__res) end
 end
-V_LOOK_UNDER = function()
+V_LOOK_UNDER = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("There is nothing but dust there.", CR)
@@ -1490,7 +1492,7 @@ V_LOOK_UNDER = function()
 return __res
 	else error('V_LOOK_UNDER\n'..__res) end
 end
-V_LOWER = function()
+V_LOWER = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   HACK_HACK("Playing in this way with the ")
@@ -1499,7 +1501,7 @@ V_LOWER = function()
 return __res
 	else error('V_LOWER\n'..__res) end
 end
-V_MAKE = function()
+V_MAKE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("You can't do that.", CR)
@@ -1508,7 +1510,7 @@ V_MAKE = function()
 return __res
 	else error('V_MAKE\n'..__res) end
 end
-V_MELT = function()
+V_MELT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("It's not clear that a ", D, PRSO, " can be melted.", CR)
@@ -1517,7 +1519,7 @@ V_MELT = function()
 return __res
 	else error('V_MELT\n'..__res) end
 end
-PRE_MOVE = function()
+PRE_MOVE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1530,7 +1532,7 @@ PRE_MOVE = function()
 return __res
 	else error('PRE_MOVE\n'..__res) end
 end
-V_MOVE = function()
+V_MOVE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1545,7 +1547,7 @@ V_MOVE = function()
 return __res
 	else error('V_MOVE\n'..__res) end
 end
-V_MUMBLE = function()
+V_MUMBLE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("You'll have to speak up if you expect me to hear you!", CR)
@@ -1554,7 +1556,7 @@ V_MUMBLE = function()
 return __res
 	else error('V_MUMBLE\n'..__res) end
 end
-PRE_MUNG = function()
+PRE_MUNG = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1577,7 +1579,7 @@ PRE_MUNG = function()
 return __res
 	else error('PRE_MUNG\n'..__res) end
 end
-V_MUNG = function()
+V_MUNG = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1593,7 +1595,7 @@ V_MUNG = function()
 return __res
 	else error('V_MUNG\n'..__res) end
 end
-V_ODYSSEUS = function()
+V_ODYSSEUS = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1613,7 +1615,7 @@ V_ODYSSEUS = function()
 return __res
 	else error('V_ODYSSEUS\n'..__res) end
 end
-V_OIL = function()
+V_OIL = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("You probably put spinach in your gas tank, too.", CR)
@@ -1622,7 +1624,7 @@ V_OIL = function()
 return __res
 	else error('V_OIL\n'..__res) end
 end
-V_OPEN = function()
+V_OPEN = function(...)
 	local F
 	local STR
 	local __ok, __res = pcall(function()
@@ -1667,7 +1669,7 @@ V_OPEN = function()
 return __res
 	else error('V_OPEN\n'..__res) end
 end
-V_OVERBOARD = function()
+V_OVERBOARD = function(...)
 	local LOCN
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -1693,7 +1695,7 @@ V_OVERBOARD = function()
 return __res
 	else error('V_OVERBOARD\n'..__res) end
 end
-V_PICK = function()
+V_PICK = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("You can't pick that.", CR)
@@ -1702,7 +1704,7 @@ V_PICK = function()
 return __res
 	else error('V_PICK\n'..__res) end
 end
-V_PLAY = function()
+V_PLAY = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1718,7 +1720,7 @@ V_PLAY = function()
 return __res
 	else error('V_PLAY\n'..__res) end
 end
-V_PLUG = function()
+V_PLUG = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("This has no effect.", CR)
@@ -1727,7 +1729,7 @@ V_PLUG = function()
 return __res
 	else error('V_PLUG\n'..__res) end
 end
-V_POUR_ON = function()
+V_POUR_ON = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1754,7 +1756,7 @@ V_POUR_ON = function()
 return __res
 	else error('V_POUR_ON\n'..__res) end
 end
-V_PRAY = function()
+V_PRAY = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1769,7 +1771,7 @@ V_PRAY = function()
 return __res
 	else error('V_PRAY\n'..__res) end
 end
-V_PUMP = function()
+V_PUMP = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1786,7 +1788,7 @@ V_PUMP = function()
 return __res
 	else error('V_PUMP\n'..__res) end
 end
-V_PUSH = function()
+V_PUSH = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   HACK_HACK("Pushing the ")
@@ -1795,7 +1797,7 @@ V_PUSH = function()
 return __res
 	else error('V_PUSH\n'..__res) end
 end
-V_PUSH_TO = function()
+V_PUSH_TO = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("You can't push things to that.", CR)
@@ -1804,7 +1806,7 @@ V_PUSH_TO = function()
 return __res
 	else error('V_PUSH_TO\n'..__res) end
 end
-PRE_PUT = function()
+PRE_PUT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1819,7 +1821,7 @@ PRE_PUT = function()
 return __res
 	else error('PRE_PUT\n'..__res) end
 end
-V_PUT = function()
+V_PUT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1857,7 +1859,7 @@ V_PUT = function()
 return __res
 	else error('V_PUT\n'..__res) end
 end
-V_PUT_BEHIND = function()
+V_PUT_BEHIND = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("That hiding place is too obvious.", CR)
@@ -1866,7 +1868,7 @@ V_PUT_BEHIND = function()
 return __res
 	else error('V_PUT_BEHIND\n'..__res) end
 end
-V_PUT_ON = function()
+V_PUT_ON = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1884,7 +1886,7 @@ V_PUT_ON = function()
 return __res
 	else error('V_PUT_ON\n'..__res) end
 end
-V_PUT_UNDER = function()
+V_PUT_UNDER = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("You can't do that.", CR)
@@ -1893,7 +1895,7 @@ V_PUT_UNDER = function()
 return __res
 	else error('V_PUT_UNDER\n'..__res) end
 end
-V_RAISE = function()
+V_RAISE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   V_LOWER()
@@ -1902,7 +1904,7 @@ V_RAISE = function()
 return __res
 	else error('V_RAISE\n'..__res) end
 end
-V_RAPE = function()
+V_RAPE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("What a (ahem!) strange idea.", CR)
@@ -1911,7 +1913,7 @@ V_RAPE = function()
 return __res
 	else error('V_RAPE\n'..__res) end
 end
-PRE_READ = function()
+PRE_READ = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1926,7 +1928,7 @@ PRE_READ = function()
 return __res
 	else error('PRE_READ\n'..__res) end
 end
-V_READ = function()
+V_READ = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -1941,7 +1943,7 @@ V_READ = function()
 return __res
 	else error('V_READ\n'..__res) end
 end
-V_READ_PAGE = function()
+V_READ_PAGE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   PERFORM(VQREAD, PRSO)
@@ -1951,7 +1953,7 @@ V_READ_PAGE = function()
 return __res
 	else error('V_READ_PAGE\n'..__res) end
 end
-V_REPENT = function()
+V_REPENT = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("It could very well be too late!", CR)
@@ -1960,7 +1962,7 @@ V_REPENT = function()
 return __res
 	else error('V_REPENT\n'..__res) end
 end
-V_REPLY = function()
+V_REPLY = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("It is hardly likely that the ", D, PRSO, " is interested.", CR)
@@ -1972,7 +1974,7 @@ V_REPLY = function()
 return __res
 	else error('V_REPLY\n'..__res) end
 end
-V_RING = function()
+V_RING = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("How, exactly, can you ring that?", CR)
@@ -1981,7 +1983,7 @@ V_RING = function()
 return __res
 	else error('V_RING\n'..__res) end
 end
-V_RUB = function()
+V_RUB = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   HACK_HACK("Fiddling with the ")
@@ -1990,7 +1992,7 @@ V_RUB = function()
 return __res
 	else error('V_RUB\n'..__res) end
 end
-V_SAY = function()
+V_SAY = function(...)
 	local V
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -2016,7 +2018,7 @@ V_SAY = function()
 return __res
 	else error('V_SAY\n'..__res) end
 end
-V_SEARCH = function()
+V_SEARCH = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("You find nothing unusual.", CR)
@@ -2025,7 +2027,7 @@ V_SEARCH = function()
 return __res
 	else error('V_SEARCH\n'..__res) end
 end
-V_SEND = function()
+V_SEND = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2040,7 +2042,7 @@ V_SEND = function()
 return __res
 	else error('V_SEND\n'..__res) end
 end
-PRE_SGIVE = function()
+PRE_SGIVE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   PERFORM(VQGIVE, PRSI, PRSO)
@@ -2050,7 +2052,7 @@ PRE_SGIVE = function()
 return __res
 	else error('PRE_SGIVE\n'..__res) end
 end
-V_SGIVE = function()
+V_SGIVE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("Foo!", CR)
@@ -2059,7 +2061,7 @@ V_SGIVE = function()
 return __res
 	else error('V_SGIVE\n'..__res) end
 end
-V_SHAKE = function()
+V_SHAKE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2105,7 +2107,7 @@ V_SHAKE = function()
 return __res
 	else error('V_SHAKE\n'..__res) end
 end
-SHAKE_LOOP = function()
+SHAKE_LOOP = function(...)
 	local X
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -2140,7 +2142,7 @@ else __tmp = __res32 or true end
 return __res
 	else error('SHAKE_LOOP\n'..__res) end
 end
-V_SKIP = function()
+V_SKIP = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL(PICK_ONE(WHEEEEE), CR)
@@ -2150,7 +2152,7 @@ return __res
 	else error('V_SKIP\n'..__res) end
 end
 WHEEEEE = LTABLE(0,"Very good. Now you can go to the second grade.","Are you enjoying yourself?","Wheeeeeeeeee!!!!!","Do you expect me to applaud?")
-V_SMELL = function()
+V_SMELL = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("It smells like a ", D, PRSO, ".", CR)
@@ -2159,7 +2161,7 @@ V_SMELL = function()
 return __res
 	else error('V_SMELL\n'..__res) end
 end
-V_SPIN = function()
+V_SPIN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("You can't spin that!", CR)
@@ -2168,7 +2170,7 @@ V_SPIN = function()
 return __res
 	else error('V_SPIN\n'..__res) end
 end
-V_SPRAY = function()
+V_SPRAY = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   V_SQUEEZE()
@@ -2177,7 +2179,7 @@ V_SPRAY = function()
 return __res
 	else error('V_SPRAY\n'..__res) end
 end
-V_SQUEEZE = function()
+V_SQUEEZE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2193,7 +2195,7 @@ V_SQUEEZE = function()
 return __res
 	else error('V_SQUEEZE\n'..__res) end
 end
-V_SSPRAY = function()
+V_SSPRAY = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   PERFORM(VQSPRAY, PRSI, PRSO)
@@ -2202,7 +2204,7 @@ V_SSPRAY = function()
 return __res
 	else error('V_SSPRAY\n'..__res) end
 end
-V_STAB = function()
+V_STAB = function(...)
 	local W
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -2219,7 +2221,7 @@ V_STAB = function()
 return __res
 	else error('V_STAB\n'..__res) end
 end
-V_STAND = function()
+V_STAND = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2235,7 +2237,7 @@ V_STAND = function()
 return __res
 	else error('V_STAND\n'..__res) end
 end
-V_STAY = function()
+V_STAY = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("You will be lost without me!", CR)
@@ -2244,7 +2246,7 @@ V_STAY = function()
 return __res
 	else error('V_STAY\n'..__res) end
 end
-V_STRIKE = function()
+V_STRIKE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2260,7 +2262,7 @@ V_STRIKE = function()
 return __res
 	else error('V_STRIKE\n'..__res) end
 end
-V_SWIM = function()
+V_SWIM = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2277,7 +2279,7 @@ V_SWIM = function()
 return __res
 	else error('V_SWIM\n'..__res) end
 end
-V_SWING = function()
+V_SWING = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2292,7 +2294,7 @@ V_SWING = function()
 return __res
 	else error('V_SWING\n'..__res) end
 end
-PRE_TAKE = function()
+PRE_TAKE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2332,7 +2334,7 @@ PRE_TAKE = function()
 return __res
 	else error('PRE_TAKE\n'..__res) end
 end
-V_TAKE = function()
+V_TAKE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2351,7 +2353,7 @@ V_TAKE = function()
 return __res
 	else error('V_TAKE\n'..__res) end
 end
-V_TELL = function()
+V_TELL = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2368,7 +2370,7 @@ V_TELL = function()
     	__tmp = TELL("You can't talk to the ", D, PRSO, "!", CR)
     	__tmp = APPLY(function() QUOTE_FLAG = nil return QUOTE_FLAG end)
     	__tmp = APPLY(function() P_CONT = nil return P_CONT end)
-    	__tmp = RFATAL()
+    	__tmp = 	error(2)
   end
 
 	 return __tmp end)
@@ -2376,9 +2378,10 @@ V_TELL = function()
 return __res
 	else error('V_TELL\n'..__res) end
 end
-V_THROUGH = function(OBJ)
+V_THROUGH = function(...)
+	local OBJ = ...
 	local M
-  OBJ = OBJ or nil
+	if select('#', ...) < 1 then OBJ = nil end
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2402,7 +2405,7 @@ V_THROUGH = function(OBJ)
 return __res
 	else error('V_THROUGH\n'..__res) end
 end
-V_THROW = function()
+V_THROW = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2427,7 +2430,7 @@ V_THROW = function()
 return __res
 	else error('V_THROW\n'..__res) end
 end
-V_THROW_OFF = function()
+V_THROW_OFF = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("You can't throw anything off of that!", CR)
@@ -2436,7 +2439,7 @@ V_THROW_OFF = function()
 return __res
 	else error('V_THROW_OFF\n'..__res) end
 end
-V_TIE = function()
+V_TIE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2451,7 +2454,7 @@ V_TIE = function()
 return __res
 	else error('V_TIE\n'..__res) end
 end
-V_TIE_UP = function()
+V_TIE_UP = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("You could certainly never tie it with that!", CR)
@@ -2460,7 +2463,7 @@ V_TIE_UP = function()
 return __res
 	else error('V_TIE_UP\n'..__res) end
 end
-V_TREASURE = function()
+V_TREASURE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2477,7 +2480,7 @@ V_TREASURE = function()
 return __res
 	else error('V_TREASURE\n'..__res) end
 end
-PRE_TURN = function()
+PRE_TURN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2493,7 +2496,7 @@ PRE_TURN = function()
 return __res
 	else error('PRE_TURN\n'..__res) end
 end
-V_TURN = function()
+V_TURN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("This has no effect.", CR)
@@ -2502,7 +2505,7 @@ V_TURN = function()
 return __res
 	else error('V_TURN\n'..__res) end
 end
-V_UNLOCK = function()
+V_UNLOCK = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   V_LOCK()
@@ -2511,7 +2514,7 @@ V_UNLOCK = function()
 return __res
 	else error('V_UNLOCK\n'..__res) end
 end
-V_UNTIE = function()
+V_UNTIE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("This cannot be tied, so it cannot be untied!", CR)
@@ -2520,8 +2523,9 @@ V_UNTIE = function()
 return __res
 	else error('V_UNTIE\n'..__res) end
 end
-V_WAIT = function(NUM)
-  NUM = NUM or 3
+V_WAIT = function(...)
+	local NUM = ...
+	if select('#', ...) < 1 then NUM = 3 end
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("Time passes...", CR)
@@ -2548,7 +2552,7 @@ else __tmp = __res33 or true end
 return __res
 	else error('V_WAIT\n'..__res) end
 end
-V_WALK = function()
+V_WALK = function(...)
 	local PT
 	local PTS
 	local STR
@@ -2566,7 +2570,7 @@ V_WALK = function()
       	__tmp = GOTO(GETB(PT, REXIT))
     elseif EQUALQ(PTS, NEXIT) then 
       	__tmp = TELL(GET(PT, NEXITSTR), CR)
-      	__tmp = RFATAL()
+      	__tmp = 	error(2)
     elseif EQUALQ(PTS, FEXIT) then 
       
       if APPLY(function() RM = APPLY(GET(PT, FEXITFCN)) return RM end) then 
@@ -2574,7 +2578,7 @@ V_WALK = function()
       elseif NULL_F() then 
         	error(false)
       elseif T then 
-        	__tmp = RFATAL()
+        	__tmp = 	error(2)
       end
 
     elseif EQUALQ(PTS, CEXIT) then 
@@ -2583,10 +2587,10 @@ V_WALK = function()
         	__tmp = GOTO(GETB(PT, REXIT))
       elseif APPLY(function() STR = GET(PT, CEXITSTR) return STR end) then 
         	__tmp = TELL(STR, CR)
-        	__tmp = RFATAL()
+        	__tmp = 	error(2)
       elseif T then 
         	__tmp = TELL("You can't go that way.", CR)
-        	__tmp = RFATAL()
+        	__tmp = 	error(2)
       end
 
     elseif EQUALQ(PTS, DEXIT) then 
@@ -2595,11 +2599,11 @@ V_WALK = function()
         	__tmp = GOTO(GETB(PT, REXIT))
       elseif APPLY(function() STR = GET(PT, DEXITSTR) return STR end) then 
         	__tmp = TELL(STR, CR)
-        	__tmp = RFATAL()
+        	__tmp = 	error(2)
       elseif T then 
         	__tmp = TELL("The ", D, OBJ, " is closed.", CR)
         	__tmp = THIS_IS_IT(OBJ)
-        	__tmp = RFATAL()
+        	__tmp = 	error(2)
       end
 
     end
@@ -2608,7 +2612,7 @@ V_WALK = function()
     
     if SPRAYEDQ then 
       	__tmp = TELL("There are odd noises in the darkness, and there is no exit in that direction.", CR)
-      	__tmp = RFATAL()
+      	__tmp = 	error(2)
     elseif NULL_F() then 
       	error(false)
     elseif T then 
@@ -2617,7 +2621,7 @@ V_WALK = function()
 
   elseif T then 
     	__tmp = TELL("You can't go that way.", CR)
-    	__tmp = RFATAL()
+    	__tmp = 	error(2)
   end
 
 	 return __tmp end)
@@ -2625,7 +2629,7 @@ V_WALK = function()
 return __res
 	else error('V_WALK\n'..__res) end
 end
-V_WALK_AROUND = function()
+V_WALK_AROUND = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("Use compass directions for movement.", CR)
@@ -2634,7 +2638,7 @@ V_WALK_AROUND = function()
 return __res
 	else error('V_WALK_AROUND\n'..__res) end
 end
-V_WALK_TO = function()
+V_WALK_TO = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2649,7 +2653,7 @@ V_WALK_TO = function()
 return __res
 	else error('V_WALK_TO\n'..__res) end
 end
-V_WAVE = function()
+V_WAVE = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   HACK_HACK("Waving the ")
@@ -2658,7 +2662,7 @@ V_WAVE = function()
 return __res
 	else error('V_WAVE\n'..__res) end
 end
-V_WEAR = function()
+V_WEAR = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2674,7 +2678,7 @@ V_WEAR = function()
 return __res
 	else error('V_WEAR\n'..__res) end
 end
-V_WIN = function()
+V_WIN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("Naturally!", CR)
@@ -2683,7 +2687,7 @@ V_WIN = function()
 return __res
 	else error('V_WIN\n'..__res) end
 end
-V_WIND = function()
+V_WIND = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("You cannot wind up a ", D, PRSO, ".", CR)
@@ -2692,7 +2696,7 @@ V_WIND = function()
 return __res
 	else error('V_WIND\n'..__res) end
 end
-V_WISH = function()
+V_WISH = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("With luck, your wish will come true.", CR)
@@ -2701,7 +2705,7 @@ V_WISH = function()
 return __res
 	else error('V_WISH\n'..__res) end
 end
-V_YELL = function()
+V_YELL = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("Aaaarrrrgggghhhh!", CR)
@@ -2710,7 +2714,7 @@ V_YELL = function()
 return __res
 	else error('V_YELL\n'..__res) end
 end
-V_ZORK = function()
+V_ZORK = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   TELL("At your service!", CR)
@@ -2721,7 +2725,7 @@ return __res
 end
 LIT = nil
 SPRAYEDQ = nil
-V_FIRST_LOOK = function()
+V_FIRST_LOOK = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2738,11 +2742,12 @@ V_FIRST_LOOK = function()
 return __res
 	else error('V_FIRST_LOOK\n'..__res) end
 end
-DESCRIBE_ROOM = function(LOOKQ)
+DESCRIBE_ROOM = function(...)
+	local LOOKQ = ...
 	local VQ
 	local STR
 	local AV
-  LOOKQ = LOOKQ or nil
+	if select('#', ...) < 1 then LOOKQ = nil end
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp = APPLY(function() VQ = PASS(LOOKQ or VERBOSE) return VQ end)
@@ -2806,8 +2811,9 @@ DESCRIBE_ROOM = function(LOOKQ)
 return __res
 	else error('DESCRIBE_ROOM\n'..__res) end
 end
-DESCRIBE_OBJECTS = function(VQ)
-  VQ = VQ or nil
+DESCRIBE_OBJECTS = function(...)
+	local VQ = ...
+	if select('#', ...) < 1 then VQ = nil end
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -2827,7 +2833,8 @@ return __res
 	else error('DESCRIBE_OBJECTS\n'..__res) end
 end
 DESC_OBJECT = nil
-DESCRIBE_OBJECT = function(OBJ, VQ, LEVEL)
+DESCRIBE_OBJECT = function(...)
+	local OBJ, VQ, LEVEL = ...
   local STR = nil
 	local AV
 	local __ok, __res = pcall(function()
@@ -2875,7 +2882,8 @@ DESCRIBE_OBJECT = function(OBJ, VQ, LEVEL)
 return __res
 	else error('DESCRIBE_OBJECT\n'..__res) end
 end
-PRINT_CONTENTS = function(OBJ)
+PRINT_CONTENTS = function(...)
+	local OBJ = ...
 	local F
 	local N
   local bSTQ = T
@@ -2935,7 +2943,8 @@ else __tmp = __res34 or true end
 return __res
 	else error('PRINT_CONTENTS\n'..__res) end
 end
-PRINT_CONT = function(OBJ, VQ, LEVEL)
+PRINT_CONT = function(...)
+	local OBJ, VQ, LEVEL = ...
 	local Y
 	local bSTQ
 	local SHIT
@@ -2943,8 +2952,8 @@ PRINT_CONT = function(OBJ, VQ, LEVEL)
 	local STR
   local PVQ = nil
   local INVQ = nil
-  VQ = VQ or nil
-  LEVEL = LEVEL or 0
+	if select('#', ...) < 2 then VQ = nil end
+	if select('#', ...) < 3 then LEVEL = 0 end
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3070,7 +3079,8 @@ else __tmp = __res36 or true end
 return __res
 	else error('PRINT_CONT\n'..__res) end
 end
-FIRSTER = function(OBJ, LEVEL)
+FIRSTER = function(...)
+	local OBJ, LEVEL = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3100,7 +3110,8 @@ FIRSTER = function(OBJ, LEVEL)
 return __res
 	else error('FIRSTER\n'..__res) end
 end
-SEE_INSIDEQ = function(OBJ)
+SEE_INSIDEQ = function(...)
+	local OBJ = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   PASS(NOT(FSETQ(OBJ, INVISIBLE)) and PASS(FSETQ(OBJ, TRANSBIT) or FSETQ(OBJ, OPENBIT)))
@@ -3113,7 +3124,8 @@ MOVES = 0
 SCORE = 0
 BASE_SCORE = 0
 WON_FLAG = nil
-SCORE_UPD = function(NUM)
+SCORE_UPD = function(...)
+	local NUM = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp = APPLY(function() BASE_SCORE = ADD(BASE_SCORE, NUM) return BASE_SCORE end)
@@ -3132,7 +3144,8 @@ SCORE_UPD = function(NUM)
 return __res
 	else error('SCORE_UPD\n'..__res) end
 end
-SCORE_OBJ = function(OBJ)
+SCORE_OBJ = function(...)
+	local OBJ = ...
 	local TEMP
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -3147,7 +3160,7 @@ SCORE_OBJ = function(OBJ)
 return __res
 	else error('SCORE_OBJ\n'..__res) end
 end
-YESQ = function()
+YESQ = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp =   PRINTI(">")
@@ -3169,10 +3182,11 @@ DEATHS = 0
 LUCKY = 1
 FUMBLE_NUMBER = 7
 FUMBLE_PROB = 8
-ITAKE = function(VB)
+ITAKE = function(...)
+	local VB = ...
 	local CNT
 	local OBJ
-  VB = VB or T
+	if select('#', ...) < 1 then VB = T end
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3208,7 +3222,7 @@ ITAKE = function(VB)
       	__tmp = CRLF()
     end
 
-    	__tmp = RFATAL()
+    	__tmp = 	error(2)
   elseif PASS(VERBQ(TAKE) and GQ(APPLY(function() CNT = CCOUNT(WINNER) return CNT end), FUMBLE_NUMBER) and PROB(MULL(CNT, FUMBLE_PROB))) then 
     	__tmp = TELL("You're holding too many things already!", CR)
     	error(false)
@@ -3226,7 +3240,7 @@ ITAKE = function(VB)
 return __res
 	else error('ITAKE\n'..__res) end
 end
-IDROP = function()
+IDROP = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3246,7 +3260,8 @@ IDROP = function()
 return __res
 	else error('IDROP\n'..__res) end
 end
-CCOUNT = function(OBJ)
+CCOUNT = function(...)
+	local OBJ = ...
   local CNT = 0
 	local X
 	local __ok, __res = pcall(function()
@@ -3281,7 +3296,8 @@ else __tmp = __res37 or true end
 return __res
 	else error('CCOUNT\n'..__res) end
 end
-WEIGHT = function(OBJ)
+WEIGHT = function(...)
+	local OBJ = ...
 	local CONT
   local WT = 0
 	local __ok, __res = pcall(function()
@@ -3331,7 +3347,8 @@ CEXITSTR = 1
 DEXITOBJ = 1
 DEXITSTR = 1
 INDENTS = TABLE("","  ","    ","      ","        ","          ")
-HACK_HACK = function(STR)
+HACK_HACK = function(...)
+	local STR = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3347,7 +3364,8 @@ return __res
 	else error('HACK_HACK\n'..__res) end
 end
 HO_HUM = LTABLE(0," doesn't seem to work."," isn't notably helpful."," has no effect.")
-NO_GO_TELL = function(AV, WLOC)
+NO_GO_TELL = function(...)
+	local AV, WLOC = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3363,13 +3381,14 @@ NO_GO_TELL = function(AV, WLOC)
 return __res
 	else error('NO_GO_TELL\n'..__res) end
 end
-GOTO = function(RM, VQ)
+GOTO = function(...)
+	local RM, VQ = ...
   local LB = FSETQ(RM, RLANDBIT)
   local WLOC = LOC(WINNER)
   local AV = nil
 	local OLIT
 	local OHERE
-  VQ = VQ or T
+	if select('#', ...) < 2 then VQ = T end
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp = APPLY(function() OLIT = LIT return OLIT end)
@@ -3456,7 +3475,8 @@ GOTO = function(RM, VQ)
 return __res
 	else error('GOTO\n'..__res) end
 end
-LKP = function(ITM, TBL)
+LKP = function(...)
+	local ITM, TBL = ...
   local CNT = 0
   local LEN = GET(TBL, 0)
 	local __ok, __res = pcall(function()
@@ -3489,7 +3509,8 @@ else __tmp = __res39 or true end
 return __res
 	else error('LKP\n'..__res) end
 end
-DO_WALK = function(DIR)
+DO_WALK = function(...)
+	local DIR = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp = APPLY(function() P_WALK_DIR = DIR return P_WALK_DIR end)
@@ -3499,7 +3520,8 @@ DO_WALK = function(DIR)
 return __res
 	else error('DO_WALK\n'..__res) end
 end
-GLOBAL_INQ = function(OBJ1, OBJ2)
+GLOBAL_INQ = function(...)
+	local OBJ1, OBJ2 = ...
 	local TX
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -3513,7 +3535,8 @@ GLOBAL_INQ = function(OBJ1, OBJ2)
 return __res
 	else error('GLOBAL_INQ\n'..__res) end
 end
-FIND_IN = function(WHERE, WHAT)
+FIND_IN = function(...)
+	local WHERE, WHAT = ...
 	local W
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -3545,7 +3568,8 @@ else __tmp = __res40 or true end
 return __res
 	else error('FIND_IN\n'..__res) end
 end
-HELDQ = function(CAN)
+HELDQ = function(...)
+	local CAN = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3571,7 +3595,8 @@ else __tmp = __res41 or true end
 return __res
 	else error('HELDQ\n'..__res) end
 end
-OTHER_SIDE = function(DOBJ)
+OTHER_SIDE = function(...)
+	local DOBJ = ...
   local P = 0
 	local TX
 	local __ok, __res = pcall(function()
@@ -3603,7 +3628,8 @@ else __tmp = __res42 or true end
 return __res
 	else error('OTHER_SIDE\n'..__res) end
 end
-MUNG_ROOM = function(RM, STR)
+MUNG_ROOM = function(...)
+	local RM, STR = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
@@ -3614,7 +3640,8 @@ MUNG_ROOM = function(RM, STR)
 return __res
 	else error('MUNG_ROOM\n'..__res) end
 end
-THIS_IS_IT = function(OBJ)
+THIS_IS_IT = function(...)
+	local OBJ = ...
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp = APPLY(function() P_IT_OBJECT = OBJ return P_IT_OBJECT end)

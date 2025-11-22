@@ -12,7 +12,7 @@ M_ENTER = 2
 M_LOOK = 3
 M_FLASH = 4
 M_OBJDESC = 5
-MAIN_LOOP = function()
+MAIN_LOOP = function(...)
 	local TRASH
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -32,7 +32,7 @@ else __tmp = __res73 or true end
 return __res
 	else error('MAIN_LOOP\n'..__res) end
 end
-MAIN_LOOP_1 = function()
+MAIN_LOOP_1 = function(...)
 	local ICNT
 	local OCNT
 	local NUM
@@ -293,13 +293,14 @@ return __res
 end
 P_MULT = nil
 P_NOT_HERE = 0
-PERFORM = function(A, O, I)
+PERFORM = function(...)
+	local A, O, I = ...
 	local V
 	local OA
 	local OO
 	local OI
-  O = O or nil
-  I = I or nil
+	if select('#', ...) < 2 then O = nil end
+	if select('#', ...) < 3 then I = nil end
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 	__tmp = APPLY(function() OA = PRSA return OA end)
@@ -308,7 +309,7 @@ PERFORM = function(A, O, I)
 
   if PASS(EQUALQ(IT, I, O) and NOT(ACCESSIBLEQ(P_IT_OBJECT))) then 
     	__tmp = TELL("I don't see what you are referring to.", CR)
-    	__tmp = RFATAL()
+    	__tmp = 	error(2)
   end
 
 

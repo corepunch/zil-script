@@ -27,6 +27,7 @@ local game = {
 	assert = assert,
 	debug = debug,
 	select = select,
+	math = math,
 }
 
 local function execute(string, name)

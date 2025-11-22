@@ -68,8 +68,6 @@ M_LOOK = 3
 M_FLASH = 4
 M_OBJDESC = 5
 
-local strings = {}
-
 local function encode_fptr(n)
   return string.format("<@F:%X>", n)
 end
@@ -154,6 +152,12 @@ end
 
 function VERBQ(...)
 	return EQUALQ(VERB, ...)
+end
+
+function PICK_ONE(table)
+	local num = mem:word(table)/2
+	local sel = math.random(2, num)
+	return mem:word(table+sel*2)
 end
 
 function TELL(...)
@@ -316,8 +320,8 @@ end
 
 function OBJECT(object)
 	local function findobj(name)
-		for _, o in ipairs(OBJECTS) do
-			if o.NAME == name then return o end
+		for n, o in ipairs(OBJECTS) do
+			if o.NAME == name then return o, n end
 		end
 	end
 	local function makeprop(body, name)
@@ -325,7 +329,7 @@ function OBJECT(object)
 		if not _G["PQ"..name] then _G["PQ"..name] = num end
 		return string.char(num,#body)..body
 	end
-	local o = findobj(object.NAME)
+	local o, n = findobj(object.NAME)
 	local t = {string.char(#object.NAME), object.NAME}
 	assert(o, "Can't find object "..object.NAME)
 	for k, v in pairs(object) do
@@ -362,7 +366,7 @@ function OBJECT(object)
 			assert(false, "Unsupported property "..k.." of type "..type(v))
 		end
 	end
-	table.insert(t, string.char(0))
+	table.insert(t, string.char(0,0))
 	o.tbl = mem:write(table.concat(t))
 end
 
@@ -437,6 +441,8 @@ function GET(s, i)
 end
 
 local test = {
+	"walk north",
+	"walk south",
 	"open mailbox",
 	"take leaflet",
 	"read"
@@ -552,8 +558,17 @@ function TABLE(...)
 end
 
 function LTABLE(...)
+	local tbl = {}
+	for i = 1, select("#", ...) do
+    local v = select(i, ...)
+		if type(v) == 'string' then table.insert(tbl, makeword(mem:writestring2(v)))
+		elseif type(v) == 'number' then table.insert(tbl, makeword(v))
+		elseif type(v) == 'nil' then table.insert(tbl, makeword(0))
+		else error("LTABLE: Unsupported type "..type(v))
+		end
+	end
 	local address = mem:write_word((#{...})*2)
-	TABLE(...)
+	mem:write(table.concat(tbl))
 	return address
 end
 
