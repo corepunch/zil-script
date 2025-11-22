@@ -1046,7 +1046,6 @@ SYNTAX_CHECK = function(...)
       if PASS(EQUALQ(NUM, 2) and EQUALQ(P_NCN, 1)) then 
         	__tmp = APPLY(function() DRIVE2 = SYN return DRIVE2 end)
       elseif EQUALQ(GETB(SYN, P_SPREP2), GET(P_ITBL, P_PREP2)) then 
-        	__tmp = TELL("step", CR)
         	__tmp = SYNTAX_FOUND(SYN)
         	error(true)
       end
