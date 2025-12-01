@@ -33,11 +33,17 @@ end
 
 for line in file:lines() do 
   local word, code = line:match("^(.-)\x2a(.*)$")
+  -- if code and code:sub(1,3):match("^([A-Z])%1%.$") then
+    if code and code:sub(1,3) == 'ZV.' then
+  -- if code and code:find('/',1,true) then-- and code:find(' ',1,true) then
   -- if code and code:find(';',1,true) then
-  -- if word=='with' then
-    -- print(utils.decode(line, false))
-  -- end
-  load.lingua(en_ru, line)
+  -- if word=='try back' then
+    -- print(utils.decode(line:gsub("%b{}", ""):gsub("%.", ""), false))
+  end
+  load.lingua(en_ru, line:
+    gsub("%b{}", ""):
+    gsub("%.", ""):
+    gsub("%*([A-Z])%1", "*%1"))
 end
 for line in file2:lines() do 
   -- parse_lingua(base, line
@@ -66,14 +72,19 @@ file2:close()
 
 -- print(tohex(base["есть"]))
 -- print(tohex(base["выключить"]))
--- print(utils.debug(en_ru.with.__lex))
+-- print(utils.debug(en_ru['and']))
 -- print(utils.debug(en_ru.restore))
 
 local s, e = parser.collect(--"{subject} {verb} {object}", 
 -- utils.tokenize("You restore my bright light", en_ru))
 -- utils.tokenize("You need to turn off bright light with the aid of a switch", en_ru))
   -- utils.tokenize("You are standing in an open field west of a white house, with a boarded front door.", en_ru))
-  utils.tokenize("with a boarded front door", en_ru))
+  -- utils.tokenize("with a boarded front door", en_ru))
+
+  -- utils.tokenize("WELCOME TO ZORK!", en_ru))
+  utils.tokenize("ZORK is a game of adventure, danger, and low cunning.", en_ru))
+  -- utils.tokenize("In it you will explore some of the most amazing territory ever seen by mortals.", en_ru))
+  -- utils.tokenize("No computer should be without one!", en_ru))
 
 if e then print(e) end
 

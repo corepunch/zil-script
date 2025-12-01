@@ -47,13 +47,19 @@ end
 function utils.tokenize(s, en_ru)
   print("Input: "..s)
   local prev, tbl, words, last, i = nil, {}, {}, 0, 1
-  for w in s:gmatch("%w+") do table.insert(words, w) end
+  for w in s:gmatch("%w+[,%!%.;:]?") do table.insert(words, w) end
   while i <= #words do
-    local word = words[i]:lower()
+    local word, punct = words[i]:match("(%w+)([,%!%.;:]?)")
+    word = word:lower()
     if not prev then
       table.insert(tbl, en_ru[word] and en_ru[word].__lex or {word})
       prev, last = en_ru[word], i
-    elseif not prev[word] then
+      if punct ~= "" then
+        table.insert(tbl, {punct})
+      else
+        prev, last = en_ru[word], i
+      end
+    elseif not prev[word] or punct then
       i, prev = last, nil
     elseif prev[word].__lex then
       tbl[#tbl], last = prev[word].__lex, i
@@ -62,15 +68,8 @@ function utils.tokenize(s, en_ru)
     end
     i = i + 1
   end
-  local flat = {}
-  for _, w in ipairs(tbl) do
-    if type(w) == 'table' and w.phrase then
-      for _, u in ipairs(w) do table.insert(flat, {u}) end
-    else
-      table.insert(flat, w)
-    end
-  end
-  return flat
+
+  return tbl
 end
 
 

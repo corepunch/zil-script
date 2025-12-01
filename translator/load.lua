@@ -5,28 +5,18 @@ local function split(self, sep)
   return self:match("^(.-)" .. sep .. "(.*)$")
 end
 
-local function extract_phrase(input)
-  local result = { phrase = true }
-  for word in input:gmatch("([%a ][0-9]*[\127-\255]+)") do
-    table.insert(result, word)
-  end
-  return result
+local function extract_phrase(prefix, input, out)
+  -- local result = { phrase = true }
+  -- for word in input:gmatch("([%a ][0-9]*[\127-\255]+)") do
+  --   table.insert(result, word)
+  -- end
+  out[prefix ~= '' and prefix:sub(1,1) or "N"] = input
 end
 
-local function extract_pronoun(input)
-  local result = {}
-  for word in input:gmatch("([%a][0-9]*[\127-\255]+)") do
-    table.insert(result, word)
+local function extract_translation(input, result)
+  for word in input:gmatch("([%a+][0-9]*[\127-\255; ]+)") do
+    result[word:sub(1,1)] = word
   end
-  return result
-end
-
-local function extract_variants(input)
-  local result = { variants = true }
-  for pre, word in input:gmatch("([%a])%.([\127-\255]+)") do
-    table.insert(result, pre..word)
-  end
-  return result
 end
 
 function load.lingua(entries, line)
@@ -36,31 +26,32 @@ function load.lingua(entries, line)
   -- }
   -- Skip "LTech DIC File 2.00\x1aERS\x00"
 
-  local function add(tbl, key, value)
+  local function add(tbl, key, value, type)
 		-- if value:sub(1,1) == 'U' then print(key, utils.decode(value)) end
     local verb, particle = split(key, ' ')
+    -- local tmp = value
     if particle then
       tbl[verb] = tbl[verb] or {}
       add(tbl[verb], particle, value)
     else
       tbl[key] = tbl[key] or {}
-      if value:sub(1,1) == 'W' then
-        tbl[key].__lex = extract_phrase(value)
-      elseif value:sub(1,1) == 'R' or value:sub(1,1) == 'Z' or value:sub(1,1) == 'P' then
-        tbl[key].__lex = extract_pronoun(value)
-      elseif value:sub(1,3) == 'ZV.' then
-      -- else
-        tbl[key].__lex = extract_variants(value)
-      else
-        tbl[key].__lex = {value}
+      tbl[key].__lex = tbl[key].__lex or {}
+      for prefix, phrase in value:gmatch("([a-zA-Z]*)(W[^/]*)") do
+        value = value:gsub("([a-zA-Z]*)(W[^/]*)/?", "")
+        -- print(key, utils.decode(value), prefix, utils.decode(phrase), utils.decode(cl))
+        extract_phrase(prefix, phrase, tbl[key].__lex)
       end
+      extract_translation(value, tbl[key].__lex)
+      -- if key == "wondering" then
+      --   print(utils.decode(tmp))
+      --   print(utils.debug(tbl[key]))
+      -- end
     end
   end
   local key, value = split(line, '\x2a')
   if value then
     -- local _, count = line:gsub(" ", "")  -- replaces spaces with nothing, returns count
     -- if count > 2 then print(utils.decode(line)) end
-
     -- if utils.decode(value):find("уступать") then print(key, utils.decode(value)) end
     -- if value:find("turns") then print(key, utils.decode(value)) end
     -- if value:sub(1,1) == 'R' then print(key, utils.decode(value)) end

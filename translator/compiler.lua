@@ -54,7 +54,6 @@ local printers = {
   end,
   N = function(t, e) 
     local d = utils.decode(t, true)
-    print(utils.decode(t))
     local b = compiler.base[d]
     e.gender = get_gender(t)
     e.plural = e.plural and (b:byte(3)&0x4) == 0
@@ -88,7 +87,9 @@ local printers = {
   end,
   T = function() return "" end,
   X = function() return "" end,
-  [" "] = function (t, _) return utils.decode(t, true) end
+  [" "] = function (t, _) return utils.decode(t, true) end,
+  C = function (t, _) return utils.decode(t, true) end,
+  D = function (t, _) return utils.decode(t:sub(2), false) end,
 }
 
 printers.V = printers.Z
@@ -97,13 +98,21 @@ printers.G = printers.Z
 function compiler.compile(s)
   local e = { plural = false, gender = 1, person = 3, form = 1, imperative = false }
   local c = {}
+
+  -- for i, w in ipairs(s) do print(utils.decode(w)) end
+
   for i, w in ipairs(s) do
-    local func = printers[w:sub(1,1)]
-    local ok, res = pcall(func, w, e, s, i)
-    local s = ok and res or utils.decode(w, true)..'*'
-    if #s > 0 then table.insert(c, s) end
-    if not ok then print(res) end
-    -- print(res)
+    -- print(w)
+    if w:match"[,%!%.;:]" then
+      if #c > 0 then c[#c] = c[#c]..w
+      else table.insert(c, w) end
+    else
+      local func = printers[w:sub(1,1)]
+      local ok, res = pcall(func, w, e, s, i)
+      local s = ok and res or utils.decode(w, true)..'*'
+      if #s > 0 then table.insert(c, s) end
+      if not ok then print(res) end
+    end
   end
   print("")
   print(table.concat(c, " "))
