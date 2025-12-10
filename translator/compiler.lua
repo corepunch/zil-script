@@ -77,6 +77,10 @@ local printers = {
   end,
   Z = function(t, e)
     local d = utils.decode(t, true)
+    if e.word == 1 then
+      t = compiler.base[d]:sub(6)
+      d = utils.decode(t)
+    end
     if e.imperative and (compiler.base[d]:byte(2)&2)~=2 then
       t = compiler.base[d]:sub(6)
       d = utils.decode(t)
@@ -119,7 +123,7 @@ end
 
 
 function compiler.compile(s)
-  local e = { plural = false, gender = 1, person = 3, form = 1, imperative = false }
+  local e = { plural = false, gender = 1, person = 3, form = 1, imperative = false, word = 1 }
   local c = {}
 
   -- for i, w in ipairs(s) do print(utils.decode(w)) end
@@ -134,6 +138,7 @@ function compiler.compile(s)
       local s = ok and res or utils.decode(w, true)..'*'
       if #s > 0 then table.insert(c, s:find('#') and s:sub(2,#s-1) or s) end
       if not ok then print(string.format("%s: %s", utils.decode(w), res)) end
+      e.word = e.word + 1
     end
   end
   print("")
