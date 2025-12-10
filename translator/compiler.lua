@@ -37,14 +37,21 @@ local function find(s, n, t)
   end
 end
 
+local function adj(a)
+    local d = utils.decode(a:sub(1, #a-2), true)
+    local b = compiler.base[d]
+    if b then
+      return (b:byte(2)==0x80 and b:byte(3) or b:byte(4))&~0x80
+    else
+      return paradigms.find_adjective(utils.decode(a))
+    end
+end
+
 local printers = {
   A = function(a, e, s, i)
-    local _a = utils.extract(a)
-    local d = utils.decode(_a:sub(1, #_a-2), true) 
-    local b = compiler.base[d]
-    local code = (b:byte(2)==0x80 and b:byte(3) or b:byte(4))&~0x80
-    e.gender = get_gender(find(s, i, 'N'))
-    return paradigms.adjective(a, code, e)
+    local n = find(s, i, 'N')
+    if n then e.gender = get_gender(n) end
+    return paradigms.adjective(a, adj(utils.extract(a)), e)
   end,
   R = function(t, e)
     local num1, num2 = t:match("R(%d)(%d)")

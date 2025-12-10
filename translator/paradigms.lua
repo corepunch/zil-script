@@ -413,4 +413,11 @@ function paradigms.verb(base, table_id, e)
   end
 end
 
+function paradigms.find_adjective(adj)
+  for i, t in ipairs(paradigms.adjectives[2]) do
+    local w = word_at(t, 1)
+    if t and adj:sub(-#w) == w then return i end
+  end
+end
+
 return paradigms

@@ -18,11 +18,11 @@ local function extract_phrase(prefix, input, out)
 end
 
 local function extract_translation(key, input, result)
-  for word in input:gmatch("([A-Z])") do
-    result[word:sub(1,1)] = word
-  end
-  for word in input:gmatch("([%a+][0-9]*[\127-\255; -]*)") do
-    -- if word:sub(1,1) == 'j' then print(key, utils.decode(input)) end
+  local a, _ = input:match("^(.-)\\(.*)$")
+  a = a or input
+  for word in a:gmatch("([A-Z])") do result[word:sub(1,1)] = word end
+  for word in a:gmatch("([%a+][0-9]*[\127-\255; -]*)") do
+    -- if word:sub(1,1) == 'D' then print(key, utils.decode(a)) end
     result[word:sub(1,1)] = word
   end
 end

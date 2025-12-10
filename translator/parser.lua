@@ -28,13 +28,11 @@ local function is(word, class)
 	end
 end
 
-local function find(t, s) 
+local function find(t, s)
 	if not t then return false end
-	if type(t) == 'string' then
-		for i = 1, #s do if t:sub(1,1) == s:sub(i,i) then return t end end
-	else
-		for i = 1, #s do if t[s:sub(i,i)] then return t[s:sub(i,i)] end end
-	end
+	if type(t) == 'string' then t = { [t:sub(1,1)] = t } end
+	for i = 1, #s do if t[s:sub(i,i)] then return t[s:sub(i,i)] end end
+	if s:find('F') then return find(t, 'A') end
 end
 
 local choose
@@ -112,7 +110,7 @@ end
 local function replacement_tokens(r)
   local i = 1
   return function()
-    if i > #r then return nil end
+    if not r or i > #r then return nil end
     local c = r:sub(i, i)
     if c == '`' then
       local close = r:find('`', i + 1)
@@ -127,49 +125,39 @@ local function replacement_tokens(r)
   end
 end
 
-local function pop(r)
-	if not r or #r == 0 then return nil, r end
-	if r:sub(1,1) == "`" then
-		local close = r:find("`", 2)  -- find second backtick
-		if close then return r:sub(close + 1), r:sub(2, close - 1) end
-	end
-	return r:sub(2), r:sub(1, 1)
-end
-
-local function eat(r, value)
-	local s, c = pop(r)
+local function eat(value, _, c)
 	assert(not c or c == value)
-	return s
 end
 
-local function replace(ts, j, r, m)
-	local _r, t = pop(r)
-	if t == ' ' then ts[j] = ' ' end
-	if m:find'*' and (j >= ts or j == 1) then return _r, j+1 end
-	ts[j] = t and #t > 1 and t or (t == '@' and find(ts[j], m) or (t and find(ts[j], t) or ts[j]))
-	return _r, j+1
+local function replace(ts, j, m, t, s)
+	if s == ' ' then ts[j] = ' '
+	elseif m:find'*' and (j >= ts or j == 1) then
+	elseif t == 'literal' then ts[j] = s
+	elseif s == '@' then ts[j] = find(ts[j], m)
+	elseif s then ts[j] = find(ts[j], s) end
+	return j+1
 end
 
 local function try_match_pattern(ts, m, j, r)
+	local f = replacement_tokens(r)
 	for t, v in pattern_tokens(m) do
 		if t == 'wildcard' then
-			if j ~= 1 and j ~= #ts then return false end
-			r = eat(r, '@')
+			if j > 1 and j <= #ts then return false end
+			eat('@', f())
 		elseif t == 'select' then
-			if find(ts[j],v) then r,j=replace(ts,j,r,v)
+			if find(ts[j],v) then j=replace(ts,j,v,f())
 			else return false end
 		elseif t == 'any' then
 			for n = j, #ts do
-				j = n
-				if find(ts[n], v) then
-				else break end
+				if find(ts[n], v) then j=replace(ts,j,v,nil,r and '@')
+				else j=n break end
 			end
-			r = eat(r, '$')
+			eat('$', f())
 		elseif t == 'literal' then
-			if ts[j].__word == v then r,j=replace(ts,j,r,v)
+			if ts[j].__word == v then j=replace(ts,j,v,f())
 			else return false end
 		elseif t == 'char' and (v == 'Z' and find(ts[j], "VNA") or find(ts[j], v)) then
-			j=j+1
+			j=replace(ts,j,v,f())
 		elseif t == 'rest' then
 			-- local rest = m:sub(i+1)
 			-- for k = j+1, #ts do
@@ -195,7 +183,9 @@ local function match_pattern(ts, m, r)
 end
 
 local function loop(ts)
-	if match_pattern(ts, "*<TAO>[NV]`ever`", "@$@`Dкогда-либо`") then
+	-- if match_pattern(ts, "*<TAO>[NV]`ever`", "@$@`Dкогда-либо`") then
+	-- if match_pattern(ts, "*`no`,RXK*", "@y    ") then
+	if match_pattern(ts, "V<TAO>NG", "@$NF") then
 		echo('green', '*cool*') else echo('red', '*not cool*')
 	end
 	-- for _, r in ipairs(rules.basic) do
@@ -207,9 +197,7 @@ end
 
 function parser.collect(ts)
 	loop(ts)
-	for _, n in ipairs(ts) do
-		echo('blue', "%s", n)
-	end
+	for _, n in ipairs(ts) do echo('blue', "%s", utils.decode(n)) end
 	return ts
   -- local out, prev = {}, nil
   -- for i = 1, #ts do
