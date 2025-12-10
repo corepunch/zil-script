@@ -40,7 +40,7 @@ end
 local printers = {
   A = function(a, e, s, i)
     local _a = utils.extract(a)
-    local d = utils.decode(_a:sub(1, #_a-2), true)
+    local d = utils.decode(_a:sub(1, #_a-2), true) 
     local b = compiler.base[d]
     local code = (b:byte(2)==0x80 and b:byte(3) or b:byte(4))&~0x80
     e.gender = get_gender(find(s, i, 'N'))
@@ -125,9 +125,7 @@ function compiler.compile(s)
       local func = printers[w:sub(1,1)]
       local ok, res = pcall(func, w, e, s, i)
       local s = ok and res or utils.decode(w, true)..'*'
-      if #s > 0 then 
-        table.insert(c, s:find("~") and s:sub(2,#s-1) or s) 
-      end
+      if #s > 0 then table.insert(c, s:find('#') and s:sub(2,#s-1) or s) end
       if not ok then print(string.format("%s: %s", utils.decode(w), res)) end
     end
   end

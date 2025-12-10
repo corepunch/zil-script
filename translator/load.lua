@@ -17,8 +17,12 @@ local function extract_phrase(prefix, input, out)
   -- end  
 end
 
-local function extract_translation(input, result)
-  for word in input:gmatch("([%a+][0-9]*[\127-\255; ]+)") do
+local function extract_translation(key, input, result)
+  for word in input:gmatch("([A-Z])") do
+    result[word:sub(1,1)] = word
+  end
+  for word in input:gmatch("([%a+][0-9]*[\127-\255; -]*)") do
+    -- if word:sub(1,1) == 'j' then print(key, utils.decode(input)) end
     result[word:sub(1,1)] = word
   end
 end
@@ -31,21 +35,18 @@ function load.lingua(entries, line)
   -- Skip "LTech DIC File 2.00\x1aERS\x00"
 
   local function add(tbl, key, value, type)
-		-- if value:sub(1,1) == 'U' then print(key, utils.decode(value)) end
     local verb, particle = split(key, ' ')
-    -- local tmp = value
     if particle then
       tbl[verb] = tbl[verb] or {}
       add(tbl[verb], particle, value)
     else
       tbl[key] = tbl[key] or {}
-      tbl[key].__lex = tbl[key].__lex or {}
+      tbl[key].__lex = tbl[key].__lex or { __word = key }
       for prefix, phrase in value:gmatch("([a-zA-Z]*)(W[^/]*)") do
         value = value:gsub("([a-zA-Z]*)(W[^/]*)/?", "")
-        -- print(key, utils.decode(value), prefix, utils.decode(phrase), utils.decode(cl))
         extract_phrase(prefix, phrase, tbl[key].__lex)
       end
-      extract_translation(value, tbl[key].__lex)
+      extract_translation(key, value, tbl[key].__lex)
       -- if key == "wondering" then
       --   print(utils.decode(tmp))
       --   print(utils.debug(tbl[key]))
