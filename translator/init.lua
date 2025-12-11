@@ -70,11 +70,11 @@ file2:close()
 --   return nil
 -- end
 
-print(tohex(base["перспектива"]))
+-- print(tohex(base["перспектива"]))
 -- print(utils.decode(base["перспектива"]))
 
 -- print(utils.debug(en_ru.during))
-print(utils.debug(en_ru['promising'].__lex))
+print(utils.debug(en_ru['then'].__lex))
 -- print(utils.debug(en_ru.ever))
 
 local s, e = parser.collect(--"{subject} {verb} {object}", 
@@ -90,7 +90,8 @@ local s, e = parser.collect(--"{subject} {verb} {object}",
   -- utils.tokenize("A battery-powered brass lantern is on the trophy case.", en_ru))
   -- utils.tokenize("the most amazing territory ever seen by mortals", en_ru))
   -- utils.tokenize("No, I am not", en_ru))
-  utils.tokenize("Make thing promising", en_ru))
+  -- utils.tokenize("Make thing promising", en_ru))
+  utils.tokenize("However, if true then", en_ru))
 
 if e then print(e) end
 

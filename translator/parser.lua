@@ -75,44 +75,47 @@ choose = function(t, p, i)
 end
 
 local function pattern_tokens(m)
-  local i = 1
+  local i, n = 1, false
   return function()
+		n = false
+		::restart::
     if i > #m then return nil end
     local c = m:sub(i, i)
     if c == '[' then
       local j, close = i + 1, m:find(']', i)
       if not close then error("Unclosed [") end
       i = close + 1
-      return 'select', m:sub(j, close - 1)  -- content between [ ]
+      return 'select', m:sub(j, close - 1), n  -- content between [ ]
     elseif c == '<' then
       local j, close = i + 1, m:find('>', i)
       if not close then error("Unclosed <") end
       i = close + 1
-      return 'any', m:sub(j, close - 1)  -- content between < >
+      return 'any', m:sub(j, close - 1), n  -- content between < >
     elseif c == '`' then
       local j, close = i + 1, m:find('`', i + 1)
       if not close then error("Unclosed `") end
       i = close + 1
-      return 'literal', m:sub(j, close - 1)  -- content between ` `
+      return 'literal', m:sub(j, close - 1), n  -- content between ` `
     elseif c == '*' then
       i = i + 1
-      return 'wildcard', '*'
+      return 'wildcard', '*', n
     elseif c == '~' then
       i = i + 1
-      return 'rest', '~'
+			n = true
+			goto restart
     else
       i = i + 1
-      return 'char', c
+      return 'char', c, n
     end
   end
 end
 
 local function replacement_tokens(r)
-  local i = 1
+	local i = 1
   return function()
     if not r or i > #r then return nil end
     local c = r:sub(i, i)
-    if c == '`' then
+		if c == '`' then
       local close = r:find('`', i + 1)
       if not close then error("Unclosed `") end
       local content = r:sub(i + 1, close - 1)
@@ -125,9 +128,8 @@ local function replacement_tokens(r)
   end
 end
 
-local function eat(value, _, c)
-	assert(not c or c == value)
-end
+local function eat(value, _, c) assert(not c or c == value) end
+local function xor(a, b) return (a and not b) or (b and not a) end
 
 local function replace(ts, j, m, t, s)
 	if s == ' ' then ts[j] = ' '
@@ -140,32 +142,28 @@ end
 
 local function try_match_pattern(ts, m, j, r)
 	local f = replacement_tokens(r)
-	for t, v in pattern_tokens(m) do
-		if t == 'wildcard' then
-			if j > 1 and j <= #ts then return false end
+	for t, v, i in pattern_tokens(m) do
+		if not ts[j] then
+			return false
+		elseif t == 'wildcard' then
+			if xor(i, j > 1 and j <= #ts) then return false end
 			eat('@', f())
 		elseif t == 'select' then
-			if find(ts[j],v) then j=replace(ts,j,v,f())
+			if xor(i, find(ts[j],v)) then j=replace(ts,j,v,f())
 			else return false end
 		elseif t == 'any' then
+			local k = j
 			for n = j, #ts do
-				if find(ts[n], v) then j=replace(ts,j,v,nil,r and '@')
+				if xor(i, find(ts[n], v)) then print('done') j=replace(ts,j,v,nil,r and '@')
 				else j=n break end
 			end
 			eat('$', f())
+			print(k, j)
 		elseif t == 'literal' then
-			if ts[j].__word == v then j=replace(ts,j,v,f())
+			if xor(i, ts[j].__word == v) then j=replace(ts,j,v,f())
 			else return false end
-		elseif t == 'char' and (v == 'Z' and find(ts[j], "VNA") or find(ts[j], v)) then
+		elseif t == 'char' and xor(i, v == 'Z' and find(ts[j], "VNA") or find(ts[j], v)) then
 			j=replace(ts,j,v,f())
-		elseif t == 'rest' then
-			-- local rest = m:sub(i+1)
-			-- for k = j+1, #ts do
-			-- 	if match_pattern(table.sub(ts,k), rest) then
-			-- 		return true
-			-- 	end
-			-- end
-			-- return false
 		else
 			return false
 		end
@@ -185,7 +183,8 @@ end
 local function loop(ts)
 	-- if match_pattern(ts, "*<TAO>[NV]`ever`", "@$@`Dкогда-либо`") then
 	-- if match_pattern(ts, "*`no`,RXK*", "@y    ") then
-	if match_pattern(ts, "V<TAO>NG", "@$NF") then
+	-- if match_pattern(ts, "V<TAO>NG", "@$NF") then
+	if match_pattern(ts, "*<dD,>`if`~<,>`then`", "@$J$j") then
 		echo('green', '*cool*') else echo('red', '*not cool*')
 	end
 	-- for _, r in ipairs(rules.basic) do

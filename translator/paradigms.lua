@@ -400,16 +400,16 @@ function paradigms.verb(base, table_id, e)
   local extracted = utils.extract(base)
   local len, str = table.unpack(paradigms.verbs[table_id+1])
   local index = (e.plural and 3 or 0) + e.person
-  if e.past then
-    if e.passive then
-      local p = cut(extracted, len)..word_at(str, 13)
-      return paradigms.adjective(p, 0, e, true)
-      -- return utils.decode(cut(extracted, len), true)..word_at(str, 13)
-    else
-      return utils.decode(cut(extracted, len), true)..word_at(str, 8)..past_verb[index+1]
-    end
-  else
+  if e.imperative then
+    return utils.decode(cut(extracted, len), true)..word_at(str, 7)
+  elseif not e.past then
     return utils.decode(cut(extracted, len), true)..word_at(str, index)
+  elseif e.passive then
+    local p = cut(extracted, len)..word_at(str, 13)
+    return paradigms.adjective(p, 0, e, true)
+    -- return utils.decode(cut(extracted, len), true)..word_at(str, 13)
+  else
+    return utils.decode(cut(extracted, len), true)..word_at(str, 8)..past_verb[index+1]
   end
 end
 
