@@ -39,7 +39,7 @@ function utils.debug(w, t, i)
   for k, v in pairs(w) do 
     table.insert(t, string.rep(" ",i)..k..": ") 
     utils.debug(type(v) == 'table' and v or tostring(v), t, i+1)
-    table.insert(t, "\n")
+    -- table.insert(t, "\n")
   end
   return table.concat(t, " ")
 end

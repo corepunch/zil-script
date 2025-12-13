@@ -70,11 +70,11 @@ file2:close()
 --   return nil
 -- end
 
--- print(tohex(base["перспектива"]))
+-- print(tohex(base["если"]))
 -- print(utils.decode(base["перспектива"]))
 
 -- print(utils.debug(en_ru.during))
-print(utils.debug(en_ru['then'].__lex))
+-- print(utils.debug(en_ru['cost'].__lex))
 -- print(utils.debug(en_ru.ever))
 
 local s, e = parser.collect(--"{subject} {verb} {object}", 

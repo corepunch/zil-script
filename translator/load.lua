@@ -22,7 +22,7 @@ local function extract_translation(key, input, result)
   a = a or input
   for word in a:gmatch("([A-Z])") do result[word:sub(1,1)] = word end
   for word in a:gmatch("([%a+][0-9]*[\127-\255; -]*)") do
-    -- if word:sub(1,1) == 'D' then print(key, utils.decode(a)) end
+    -- if word:sub(1,1) == 'Z' then print(key, utils.decode(a)) end
     result[word:sub(1,1)] = word
   end
 end
