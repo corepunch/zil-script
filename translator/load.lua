@@ -45,12 +45,14 @@ function load.lingua(entries, line)
       add(tbl[verb], particle, value)
     else
       tbl[key] = tbl[key] or {}
-      tbl[key].__lex = tbl[key].__lex or { __word = key }
-      for prefix, phrase in value:gmatch("([a-zA-Z]*)(W[^/]*)") do
-        value = value:gsub("([a-zA-Z]*)(W[^/]*)/?", "")
-        extract_phrase(prefix, phrase, tbl[key].__lex)
-      end
-      extract_translation(key, value, tbl[key].__lex)
+      tbl[key].__lex = value
+      -- if value:find'Z' and value:find'D' then print(key, utils.decode(value)) end
+      -- tbl[key].__lex = tbl[key].__lex or { __word = key, __lexeme = value }
+      -- for prefix, phrase in value:gmatch("([a-zA-Z]*)(W[^/]*)") do
+      --   value = value:gsub("([a-zA-Z]*)(W[^/]*)/?", "")
+      --   extract_phrase(prefix, phrase, tbl[key].__lex)
+      -- end
+      -- extract_translation(key, value, tbl[key].__lex)
       -- if key == "wondering" then
       --   print(utils.decode(tmp))
       --   print(utils.debug(tbl[key]))

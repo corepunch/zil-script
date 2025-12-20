@@ -52,11 +52,8 @@ function utils.tokenize(s, en_ru)
     local word, punct = words[i]:match("(%w+)([,%!%.;:]?)")
     word = word:lower()
     if not prev then
-      if en_ru[word] then
-        table.insert(tbl, en_ru[word].__lex)
-      -- elseif word:sub(#word) == "s" and en_ru[word:sub(1,#word-1)] then
-      --   table.insert(tbl, en_ru[word:sub(1,#word-1)].__lex)
-      else table.insert(tbl, {['#']='#'..word}) end
+      if en_ru[word] then table.insert(tbl, en_ru[word].__lex)
+      else table.insert(tbl, '#'..word) end
       prev, last = en_ru[word], i
       if punct ~= "" then table.insert(tbl, punct)
       else prev, last = en_ru[word], i end
@@ -69,7 +66,7 @@ function utils.tokenize(s, en_ru)
     end
     i = i + 1
   end
-
+  -- for k, v in pairs(tbl) do print(v) end
   return tbl
 end
 

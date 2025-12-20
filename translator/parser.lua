@@ -17,6 +17,8 @@ local function echo(color, s, ...)
 	print(colors[color]..f..colors.reset)
 end
 
+local en_ru = {}
+
 local function eat(value, _, c) assert(not c or c == value) return c end
 local function xor(a, b) return (a and not b) or (b and not a) end
 
@@ -31,22 +33,53 @@ local function is(word, class)
 	end
 end
 
-local function find(t, s, neg)
-	if not t then return false end
-	if type(t) == 'string' then t = { [t:sub(1,1)] = t } end
-	local ret = nil
-	for i = 1, #s do
-		if s:sub(i,i) == 'Z' then ret = find(t,'N') and find(t,'V')
-		elseif t[s:sub(i,i)] then ret = t[s:sub(i,i)] end
-	end
-	if s:find'F' then ret = find(t, 'A') end
-	return ret
+local function extract_pharses(s)
+    local c = {}
+    return s:gsub("(W[^/]*)/", function(m)
+			table.insert(c,m) return "$"..#c
+		end), c
 end
 
-local function find_and_replace(ts, j, s, neg)
-	print(s, utils.debug(ts[j]) or utils.decode(ts[j]))
-	if find(ts[j], s, neg) then 
-		ts[j] = find(ts[j], s, neg) 
+local function iter(t)
+	local d, c, i = {}, {}, 1
+	t,c = extract_pharses(t)
+	for pos, w in t:gmatch("()(%a+[%d%$/; \127-\255]+)") do
+    table.insert(d, { w, t:sub(pos) })
+	end
+  -- for w in t:gmatch("(%a+[%d%$/; \127-\255]+)") do table.insert(d, w) end
+  local function resolve(p)
+    if not p then return end
+    local a, b = p:match("(%a+)%$(%d+)")
+    return b and a .. c[tonumber(b)] or p
+  end
+  local function chomp(prefix)
+		if not d[i] then return end
+		local word, _ = table.unpack(d[i])
+    if word:sub(1,1) == prefix then i = i + 1 return resolve(word) end
+  end
+  return function()
+		if not d[i] then return end
+		local word, rest = table.unpack(d[i])
+    local p = resolve(word)
+    i = i + 1
+		if not p then return
+		elseif p:sub(1,1) == 'Z' then return 'Z', p .. (chomp'N' or '') .. (chomp'A' or '')
+		else return p:sub(1,1), rest end
+  end
+end
+
+local function find(t, s)
+	for p, d in iter(t) do if s:find(p) then return d end end
+end
+
+local function find_and_replace(ts, j, s)
+	local z = find(ts[j], 'Z')
+	-- print('--', utils.decode(ts[j]), s, z and utils.decode(z))
+	if z and string.find('VNA', s) then
+		local tmp = z:gsub('^.','V')
+		if find(tmp, s) then ts[j] = find(tmp, s) end
+	elseif find(ts[j], s) then
+		ts[j] = find(ts[j], s)
 	end
 end
 
@@ -147,10 +180,11 @@ local function replace(ts, j, m, t, s)
 	if s == ' ' then ts[j] = ' '
 	elseif m:find'*' and (j >= #ts or j == 1) then
 	elseif t == 'literal' then ts[j] = s
-	elseif s == '.' then
-	elseif (s == '@' or s == '$') then find_and_replace(ts, j, m)
+	elseif s == '.' or s == '$' then
+	elseif s == '@' then find_and_replace(ts, j, m)
 	elseif s then find_and_replace(ts, j, s)
-	else find_and_replace(ts, j, m) end
+	-- else find_and_replace(ts, j, m) 		
+	end
 	return j+1
 end
 
@@ -168,9 +202,13 @@ local function try_match_pattern(ts, m, j, f, replace)
 		elseif t == 'any' then
 			local d = eat('$', f())
 			fallback = function(n)
-				if xor(i, find(ts[n], v)) then j = replace(ts,n,v,nil,d) return true end
+				if xor(i, find(ts[n], v)) then
+					-- j = replace(ts,n,v,nil,d)
+					j = nop(ts,n,v,nil,d)
+					return true
+				end
 			end
-		elseif t == 'literal' and xor(i, ts[j].__word == v) then j=replace(ts,j,v,f())
+		elseif t == 'literal' and xor(i, ts[j] == en_ru[v]) then j=replace(ts,j,v,f())
 		elseif t == 'char' and xor(i, find(ts[j], v)) then j=replace(ts,j,v,f())
 		elseif fallback and fallback(j) then goto restart
 		else return false end
@@ -181,9 +219,9 @@ end
 local function match_pattern(ts, m, r)
 	for i = 1, #ts do
 		if try_match_pattern(ts, pattern_tokens(m), i, replacement_tokens(r), nop) then
-			print("Applying rule "..m, r)
+			print("Applying "..m, r)
 			try_match_pattern(ts, pattern_tokens(m), i, replacement_tokens(r), replace)
-			return true
+			-- return true
 		end
 	end
 end
@@ -203,12 +241,10 @@ local function loop(ts)
 	end
 end
 
-function parser.collect(ts)
+function parser.collect(dic, ts)
+	en_ru = dic
 	loop(ts)
-	for i, n in ipairs(ts) do
-		if type(n) == 'table' then
-			for k, v in pairs(n) do if k ~= "__word" then ts[i] = v n = v break end end
-		end
+	for _, n in ipairs(ts) do
 		echo('blue', "%s", type(n)=='table' and utils.debug(n) or utils.decode(n))
 	end
 	return ts

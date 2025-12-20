@@ -43,7 +43,8 @@ for line in file:lines() do
   load.lingua(en_ru, line:
     gsub("%b{}", ""):
     gsub("%.", ""):
-    gsub("%*([A-Z])%1", "*%1"))
+    -- gsub("%*([A-Z])%1", "*%1"))
+    gsub("%*([A-Z])%1W", "*W"))
 end
 for line in file2:lines() do 
   -- parse_lingua(base, line
@@ -74,17 +75,19 @@ file2:close()
 -- print(utils.decode(base["перспектива"]))
 
 -- print(utils.debug(en_ru.during))
--- print(utils.debug(en_ru['is'].__lex))
+print(utils.decode(en_ru.fine.__lex))
 -- print(utils.debug(en_ru.ever))
 
-local s, e = parser.collect(--"{subject} {verb} {object}", 
+local s, e = parser.collect(en_ru, --"{subject} {verb} {object}", 
 -- utils.tokenize("You restore my bright light", en_ru))
 -- utils.tokenize("You need to turn off bright light with the aid of a switch", en_ru))
-  -- utils.tokenize("You are standing in an open field west of a white house, with a boarded front door.", en_ru))
+  utils.tokenize("You are standing in an open field west of a white house, with a boarded front door.", en_ru))
   -- utils.tokenize("with a boarded front door", en_ru))
 
   -- utils.tokenize("WELCOME TO ZORK!", en_ru))
-  utils.tokenize("ZORK is a game of adventure, danger, and low cunning.", en_ru))
+  -- utils.tokenize("ZORK is a game of adventure, danger, and low cunning.", en_ru))
+  -- utils.tokenize("and low cunning", en_ru))
+  -- utils.tokenize("fine fine", en_ru))
   -- utils.tokenize("In it you will explore some of the most amazing territory ever seen by mortals.", en_ru))
   -- utils.tokenize("No computer should be without one!", en_ru))
   -- utils.tokenize("A battery-powered brass lantern is on the trophy case.", en_ru))

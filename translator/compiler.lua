@@ -123,7 +123,6 @@ printers.X = function(t, e)
   end
 end
 
-
 function compiler.compile(s)
   local e = {
     plural = false,
@@ -139,7 +138,8 @@ function compiler.compile(s)
   -- for i, w in ipairs(s) do print(utils.decode(w)) end
 
   for i, w in ipairs(s) do
-    if w:match"[,%!%.;:]" then
+    -- if w:match"[,%!%.;:]" then
+    if w:match"[,%!%.:]" then
       if #c > 0 then c[#c] = c[#c]..w
       else table.insert(c, w) end
     else
