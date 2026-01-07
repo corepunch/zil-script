@@ -17,21 +17,23 @@ MAIN_LOOP = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
 
-  local __prog73 = function()
+  local __prog43 = function()
     APPLY(function() TRASH = MAIN_LOOP_1() return TRASH end)
 
 error(123) end
-local __ok73, __res73
-repeat __ok73, __res73 = pcall(__prog73)
-until __ok73 or __res73 ~= 123
-if not __ok73 then error(__res73)
-else __tmp = __res73 or true end
+local __ok43, __res43
+repeat __ok43, __res43 = pcall(__prog43)
+until __ok43 or __res43 ~= 123
+if not __ok43 then error(__res43)
+else __tmp = __res43 or true end
 
 	 return __tmp end)
 	if __ok or (type(__res) ~= 'string' and type(__res) ~= 'nil') then
 return __res
 	else error('MAIN_LOOP\n'..__res) end
 end
+_MAIN_LOOP = {
+}
 MAIN_LOOP_1 = function(...)
 	local ICNT
 	local OCNT
@@ -58,7 +60,7 @@ MAIN_LOOP_1 = function(...)
     if APPLY(function() __tmp = PASS(P_IT_OBJECT and ACCESSIBLEQ(P_IT_OBJECT)) return __tmp end) then 
       	__tmp = APPLY(function() TMP = nil return TMP end)
       
-      local __prog74 = function()
+      local __prog44 = function()
         
         if APPLY(function() __tmp = GQ(APPLY(function() CNT = ADD(CNT, 1) return CNT end), ICNT) return __tmp end) then 
           return true
@@ -74,17 +76,17 @@ MAIN_LOOP_1 = function(...)
 
 
 error(123) end
-local __ok74, __res74
-repeat __ok74, __res74 = pcall(__prog74)
-until __ok74 or __res74 ~= 123
-if not __ok74 then error(__res74)
-else __tmp = __res74 or true end
+local __ok44, __res44
+repeat __ok44, __res44 = pcall(__prog44)
+until __ok44 or __res44 ~= 123
+if not __ok44 then error(__res44)
+else __tmp = __res44 or true end
 
       
       if APPLY(function() __tmp = NOT(TMP) return __tmp end) then 
         	__tmp = APPLY(function() CNT = 0 return CNT end)
         
-        local __prog75 = function()
+        local __prog45 = function()
           
           if APPLY(function() __tmp = GQ(APPLY(function() CNT = ADD(CNT, 1) return CNT end), OCNT) return __tmp end) then 
             return true
@@ -99,11 +101,11 @@ else __tmp = __res74 or true end
 
 
 error(123) end
-local __ok75, __res75
-repeat __ok75, __res75 = pcall(__prog75)
-until __ok75 or __res75 ~= 123
-if not __ok75 then error(__res75)
-else __tmp = __res75 or true end
+local __ok45, __res45
+repeat __ok45, __res45 = pcall(__prog45)
+until __ok45 or __res45 ~= 123
+if not __ok45 then error(__res45)
+else __tmp = __res45 or true end
 
       end
 
@@ -162,7 +164,7 @@ else __tmp = __res75 or true end
 
       	__tmp = APPLY(function() TMP = nil return TMP end)
       
-      local __prog76 = function()
+      local __prog46 = function()
         
         if APPLY(function() __tmp = GQ(APPLY(function() CNT = ADD(CNT, 1) return CNT end), NUM) return __tmp end) then 
           
@@ -252,11 +254,11 @@ else __tmp = __res75 or true end
 
 
 error(123) end
-local __ok76, __res76
-repeat __ok76, __res76 = pcall(__prog76)
-until __ok76 or __res76 ~= 123
-if not __ok76 then error(__res76)
-else __tmp = __res76 or true end
+local __ok46, __res46
+repeat __ok46, __res46 = pcall(__prog46)
+until __ok46 or __res46 ~= 123
+if not __ok46 then error(__res46)
+else __tmp = __res46 or true end
 
     end
 
@@ -291,6 +293,11 @@ else __tmp = __res76 or true end
 return __res
 	else error('MAIN_LOOP_1\n'..__res) end
 end
+_MAIN_LOOP_1 = {
+	'TAKE',
+	'TAKE',
+	'TELL',
+}
 P_MULT = nil
 P_NOT_HERE = 0
 PERFORM = function(...)
@@ -364,3 +371,6 @@ PERFORM = function(...)
 return __res
 	else error('PERFORM\n'..__res) end
 end
+_PERFORM = {
+	'WALK',
+}

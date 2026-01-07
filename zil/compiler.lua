@@ -3,6 +3,7 @@ local Compiler = {
   flags = {},
   current_flag = 1,
   current_decl = nil,
+  current_verbs = {},
   prog = 1
 }
 
@@ -579,6 +580,7 @@ function print_node(buf, node, indent)
         ["0?"] = "ZEROQ",
         ["1?"] = "ONEQ",
       }
+      if node.name == 'VERB?' then table.insert(Compiler.current_verbs, node[1].value) end
       buf.write("%s(", ops[node.name] or node.name:gsub("%-", "_"):gsub("%?", "Q"))
       for i = 1, #node do
         if is_cond(node[i]) then
@@ -604,6 +606,7 @@ end
 -- Top-level compilation functions
 local function compile_routine(decl, body, node)
   local name = value(node[1])
+  Compiler.current_verbs = {}
   -- decl.writeln("%s = nil", name)
   body.writeln("%s = function(...)", name)
   write_function_header(body, node)
@@ -624,10 +627,17 @@ local function compile_routine(decl, body, node)
   body.writeln("return __res")
   body.writeln(string.format("\telse error('%s\\n'..__res) end", name))
   body.writeln("end")
+
+  body.writeln("_%s = {", name)
+  for _, v in ipairs(Compiler.current_verbs) do
+   body.writeln("\t'%s',", v)
+  end
+  body.writeln("}")
 end
 
 local function compile_object(decl, body, node)
   local name = value(node[1])
+
   -- decl.writeln('%s = setmetatable({}, { __tostring = function(self) return self.DESC or "%s" end })', name, name)
   decl.writeln('%s = DECL_OBJECT("%s")', name, name)
   body.writeln("%s {", node.name)
@@ -642,6 +652,7 @@ local function compile_object(decl, body, node)
       else
         local prop = value(field[1])
         if prop == "IN" then prop = "LOC" end
+        if prop == "LOCATION" then prop = "LOC" end
         body.write("\t%s = ", prop)
         write_field(body, field, field[1].value)
         body.writeln(",")

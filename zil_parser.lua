@@ -421,6 +421,9 @@ else __tmp = __res3 or true end
 return __res
 	else error('PARSER\n'..__res) end
 end
+_PARSER = {
+	'SAY',
+}
 P_ACT = nil
 P_WALK_DIR = nil
 AGAIN_DIR = nil
@@ -460,6 +463,8 @@ else __tmp = __res4 or true end
 return __res
 	else error('STUFF\n'..__res) end
 end
+_STUFF = {
+}
 INBUF_STUFF = function(...)
 	local SRC, DEST = ...
 	local CNT
@@ -487,6 +492,8 @@ else __tmp = __res5 or true end
 return __res
 	else error('INBUF_STUFF\n'..__res) end
 end
+_INBUF_STUFF = {
+}
 INBUF_ADD = function(...)
 	local LEN, BEG, SLOT = ...
 	local DBEG
@@ -526,6 +533,8 @@ else __tmp = __res6 or true end
 return __res
 	else error('INBUF_ADD\n'..__res) end
 end
+_INBUF_ADD = {
+}
 WTQ = function(...)
 	local PTR, BIT, B1 = ...
   local OFFS = P_P1OFF
@@ -555,6 +564,8 @@ WTQ = function(...)
 return __res
 	else error('WTQ\n'..__res) end
 end
+_WTQ = {
+}
 CLAUSE = function(...)
 	local PTR, VAL, WRD = ...
 	local OFF
@@ -663,6 +674,8 @@ else __tmp = __res7 or true end
 return __res
 	else error('CLAUSE\n'..__res) end
 end
+_CLAUSE = {
+}
 NUMBERQ = function(...)
 	local PTR = ...
 	local CNT
@@ -726,6 +739,8 @@ else __tmp = __res8 or true end
 return __res
 	else error('NUMBERQ\n'..__res) end
 end
+_NUMBERQ = {
+}
 P_NUMBER = 0
 P_DIRECTION = 0
 ORPHAN_MERGE = function(...)
@@ -894,6 +909,8 @@ else __tmp = __res10 or true end
 return __res
 	else error('ORPHAN_MERGE\n'..__res) end
 end
+_ORPHAN_MERGE = {
+}
 ACLAUSE_WIN = function(...)
 	local ADJ = ...
 	local __ok, __res = pcall(function()
@@ -912,6 +929,8 @@ ACLAUSE_WIN = function(...)
 return __res
 	else error('ACLAUSE_WIN\n'..__res) end
 end
+_ACLAUSE_WIN = {
+}
 NCLAUSE_WIN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -928,6 +947,8 @@ NCLAUSE_WIN = function(...)
 return __res
 	else error('NCLAUSE_WIN\n'..__res) end
 end
+_NCLAUSE_WIN = {
+}
 WORD_PRINT = function(...)
 	local CNT, BUF = ...
 	local __ok, __res = pcall(function()
@@ -955,6 +976,8 @@ else __tmp = __res11 or true end
 return __res
 	else error('WORD_PRINT\n'..__res) end
 end
+_WORD_PRINT = {
+}
 UNKNOWN_WORD = function(...)
 	local PTR = ...
 	local BUF
@@ -977,6 +1000,9 @@ UNKNOWN_WORD = function(...)
 return __res
 	else error('UNKNOWN_WORD\n'..__res) end
 end
+_UNKNOWN_WORD = {
+	'SAY',
+}
 CANT_USE = function(...)
 	local PTR = ...
 	local BUF
@@ -998,6 +1024,9 @@ CANT_USE = function(...)
 return __res
 	else error('CANT_USE\n'..__res) end
 end
+_CANT_USE = {
+	'SAY',
+}
 P_SLOCBITS = 0
 P_SYNLEN = 8
 P_SBITS = 0
@@ -1122,6 +1151,8 @@ else __tmp = __res12 or true end
 return __res
 	else error('SYNTAX_CHECK\n'..__res) end
 end
+_SYNTAX_CHECK = {
+}
 CANT_ORPHAN = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -1132,6 +1163,8 @@ CANT_ORPHAN = function(...)
 return __res
 	else error('CANT_ORPHAN\n'..__res) end
 end
+_CANT_ORPHAN = {
+}
 ORPHAN = function(...)
 	local D1, D2 = ...
   local CNT = -1
@@ -1194,6 +1227,8 @@ else __tmp = __res13 or true end
 return __res
 	else error('ORPHAN\n'..__res) end
 end
+_ORPHAN = {
+}
 THING_PRINT = function(...)
 	local PRSOQ, THEQ = ...
 	local BEG
@@ -1216,6 +1251,8 @@ THING_PRINT = function(...)
 return __res
 	else error('THING_PRINT\n'..__res) end
 end
+_THING_PRINT = {
+}
 BUFFER_PRINT = function(...)
 	local BEG, END, CP = ...
   local NOSP = T
@@ -1284,6 +1321,8 @@ else __tmp = __res14 or true end
 return __res
 	else error('BUFFER_PRINT\n'..__res) end
 end
+_BUFFER_PRINT = {
+}
 PREP_PRINT = function(...)
 	local PREP = ...
 	local WRD
@@ -1305,6 +1344,8 @@ PREP_PRINT = function(...)
 return __res
 	else error('PREP_PRINT\n'..__res) end
 end
+_PREP_PRINT = {
+}
 CLAUSE_COPY = function(...)
 	local SRC, DEST, INSRT = ...
 	local BEG
@@ -1344,6 +1385,8 @@ else __tmp = __res15 or true end
 return __res
 	else error('CLAUSE_COPY\n'..__res) end
 end
+_CLAUSE_COPY = {
+}
 CLAUSE_ADD = function(...)
 	local WRD = ...
 	local PTR
@@ -1358,6 +1401,8 @@ CLAUSE_ADD = function(...)
 return __res
 	else error('CLAUSE_ADD\n'..__res) end
 end
+_CLAUSE_ADD = {
+}
 PREP_FIND = function(...)
 	local PREP = ...
   local CNT = 0
@@ -1387,6 +1432,8 @@ else __tmp = __res16 or true end
 return __res
 	else error('PREP_FIND\n'..__res) end
 end
+_PREP_FIND = {
+}
 SYNTAX_FOUND = function(...)
 	local SYN = ...
 	local __ok, __res = pcall(function()
@@ -1398,6 +1445,8 @@ SYNTAX_FOUND = function(...)
 return __res
 	else error('SYNTAX_FOUND\n'..__res) end
 end
+_SYNTAX_FOUND = {
+}
 P_GWIMBIT = 0
 GWIM = function(...)
 	local GBIT, LBIT, PREP = ...
@@ -1453,6 +1502,8 @@ GWIM = function(...)
 return __res
 	else error('GWIM\n'..__res) end
 end
+_GWIM = {
+}
 SNARF_OBJECTS = function(...)
 	local OPTR
 	local IPTR
@@ -1493,6 +1544,8 @@ SNARF_OBJECTS = function(...)
 return __res
 	else error('SNARF_OBJECTS\n'..__res) end
 end
+_SNARF_OBJECTS = {
+}
 BUT_MERGE = function(...)
 	local TBL = ...
 	local LEN
@@ -1534,6 +1587,8 @@ else __tmp = __res17 or true end
 return __res
 	else error('BUT_MERGE\n'..__res) end
 end
+_BUT_MERGE = {
+}
 P_NAM = nil
 P_ADJ = nil
 P_ADVERB = nil
@@ -1655,6 +1710,8 @@ else __tmp = __res18 or true end
 return __res
 	else error('SNARFEM\n'..__res) end
 end
+_SNARFEM = {
+}
 SH = 128
 SC = 64
 SIR = 32
@@ -1816,6 +1873,9 @@ else __tmp = __res19 or true end
 return __res
 	else error('GET_OBJECT\n'..__res) end
 end
+_GET_OBJECT = {
+	'TELL',
+}
 P_XNAM = nil
 P_XADJ = nil
 P_XADJN = nil
@@ -1879,6 +1939,8 @@ else __tmp = __res20 or true end
 return __res
 	else error('WHICH_PRINT\n'..__res) end
 end
+_WHICH_PRINT = {
+}
 GLOBAL_CHECK = function(...)
 	local TBL = ...
 	local LEN
@@ -1963,6 +2025,8 @@ else __tmp = __res22 or true end
 return __res
 	else error('GLOBAL_CHECK\n'..__res) end
 end
+_GLOBAL_CHECK = {
+}
 DO_SL = function(...)
 	local OBJ, BIT1, BIT2 = ...
 	local BTS
@@ -1988,6 +2052,8 @@ DO_SL = function(...)
 return __res
 	else error('DO_SL\n'..__res) end
 end
+_DO_SL = {
+}
 P_SRCBOT = 2
 P_SRCTOP = 0
 P_SRCALL = 1
@@ -2040,6 +2106,8 @@ else __tmp = __res23 or true end
 return __res
 	else error('SEARCH_LIST\n'..__res) end
 end
+_SEARCH_LIST = {
+}
 OBJ_FOUND = function(...)
 	local OBJ, TBL = ...
 	local PTR
@@ -2053,6 +2121,8 @@ OBJ_FOUND = function(...)
 return __res
 	else error('OBJ_FOUND\n'..__res) end
 end
+_OBJ_FOUND = {
+}
 TAKE_CHECK = function(...)
 	local __ok, __res = pcall(function()
 	local __tmp = nil
@@ -2062,6 +2132,8 @@ TAKE_CHECK = function(...)
 return __res
 	else error('TAKE_CHECK\n'..__res) end
 end
+_TAKE_CHECK = {
+}
 ITAKE_CHECK = function(...)
 	local TBL, IBITS = ...
 	local PTR
@@ -2141,6 +2213,8 @@ else __tmp = __res24 or true end
 return __res
 	else error('ITAKE_CHECK\n'..__res) end
 end
+_ITAKE_CHECK = {
+}
 MANY_CHECK = function(...)
   local LOSS = nil
 	local TMP
@@ -2182,6 +2256,8 @@ MANY_CHECK = function(...)
 return __res
 	else error('MANY_CHECK\n'..__res) end
 end
+_MANY_CHECK = {
+}
 ZMEMQ = function(...)
 	local ITM, TBL, SIZE = ...
   local CNT = 1
@@ -2222,6 +2298,8 @@ else __tmp = __res25 or true end
 return __res
 	else error('ZMEMQ\n'..__res) end
 end
+_ZMEMQ = {
+}
 ZMEMQB = function(...)
 	local ITM, TBL, SIZE = ...
   local CNT = 0
@@ -2249,6 +2327,8 @@ else __tmp = __res26 or true end
 return __res
 	else error('ZMEMQB\n'..__res) end
 end
+_ZMEMQB = {
+}
 ALWAYS_LIT = nil
 LITQ = function(...)
 	local RM, RMBIT = ...
@@ -2298,6 +2378,8 @@ LITQ = function(...)
 return __res
 	else error('LITQ\n'..__res) end
 end
+_LITQ = {
+}
 THIS_ITQ = function(...)
 	local OBJ, TBL = ...
 	local SYNS
@@ -2320,6 +2402,8 @@ THIS_ITQ = function(...)
 return __res
 	else error('THIS_ITQ\n'..__res) end
 end
+_THIS_ITQ = {
+}
 ACCESSIBLEQ = function(...)
 	local OBJ = ...
   local L = LOC(OBJ)
@@ -2349,6 +2433,8 @@ ACCESSIBLEQ = function(...)
 return __res
 	else error('ACCESSIBLEQ\n'..__res) end
 end
+_ACCESSIBLEQ = {
+}
 META_LOC = function(...)
 	local OBJ = ...
 	local __ok, __res = pcall(function()
@@ -2382,3 +2468,5 @@ else __tmp = __res27 or true end
 return __res
 	else error('META_LOC\n'..__res) end
 end
+_META_LOC = {
+}

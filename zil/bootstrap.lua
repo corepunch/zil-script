@@ -604,24 +604,71 @@ end
 
 -- LTABLE = TABLE
 
+local function objects_in_room(room, adventurer)
+	local i = 0
+	return function()
+		while true do
+			i = i + 1
+			local o = OBJECTS[i]
+			if not o then return nil end
+			if i ~= adventurer and o.LOC == room then return i, o end
+		end
+	end
+end
+
+local function connected_exits(room)
+    local i, keys = 0, {}
+    for d in pairs(_DIRECTIONS) do keys[#keys+1]=d end
+    return function()
+        while i<#keys do
+            i=i+1; local d=_DIRECTIONS[keys[i]]; local pp=GETPT(room,d)
+            if pp then return keys[i], pp end
+        end
+    end
+end
+
+local suggestions = {
+	TAKEBIT = "TAKE",
+	CONTBIT = "OPEN",
+	DOORBIT = "OPEN",
+}
+
 function GM_NOTES(room)
 	local num = 1
-	print("\nItems:")
-	for i, o in ipairs(OBJECTS) do
-		if i ~= ADVENTURER and o.LOC == room then
-			print(string.format("  %d. %s", num, GETP(i, PQDESC):upper()))
-			PRINT_CONT(i, nil, 2)
+	if objects_in_room(room, ADVENTURER)() then
+		print("\nItems:")
+		for obj in objects_in_room(room, ADVENTURER) do
+			local verbs = {}
+			local action = GETP(obj, PQACTION)
+			if action then
+				local func = FUNCTIONS[tonumber(action)]
+				for k, v in pairs(_G) do if v == func then verbs = _G['_'..k] break end end
+			end
+			local fnd = function(name, array) 
+				for _, n in ipairs(array) do if n == name then return true end end
+			end
+			for k, v in pairs(suggestions) do
+				if FSETQ(obj, _G[k]) and not fnd(v, verbs) then
+					table.insert(verbs, v)
+				end
+			end
+			if #verbs > 0 then
+				print(string.format("  %d. %s (%s)", num, GETP(obj, PQDESC):upper(), table.concat(verbs, ', ')))
+			else
+				print(string.format("  %d. %s", num, GETP(obj, PQDESC):upper()))
+			end
+			PRINT_CONT(obj, nil, 2)
 			num = num + 1
 		end
 	end
-	print("\nExits:")
-	for d, p in pairs(_DIRECTIONS) do
-		local pp = GETPT(room, p)
-		if not pp then
-		elseif PTSIZE(pp) == 1 then
-			print(string.format("  %s -> %s", d, GETP(GETB(pp, 0), PQDESC)))
-		elseif PTSIZE(pp) == 2 then
-			print(string.format("  %s -> \"%s\"", d, mem:string(GET(pp, 0))))
+	if connected_exits(room)() then
+		print("\nExits:")
+		for d, pp in connected_exits(room) do
+			if PTSIZE(pp) == 1 then
+				print(string.format("  %s -> %s", d, GETP(GETB(pp, 0), PQDESC)))
+			elseif PTSIZE(pp) == 2 then
+				print(string.format("  %s -> \"%s\"", d, mem:string(GET(pp, 0))))
+			end
 		end
 	end
 end

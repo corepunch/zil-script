@@ -1066,6 +1066,9 @@ TREASURE_INSIDE = function(...)
 return __res
 	else error('TREASURE_INSIDE\n'..__res) end
 end
+_TREASURE_INSIDE = {
+	'OPEN',
+}
 OBJECT {
 	NAME = "ROPE",
 	LOC = ATTIC,
@@ -1635,6 +1638,8 @@ GRATING_EXIT = function(...)
 return __res
 	else error('GRATING_EXIT\n'..__res) end
 end
+_GRATING_EXIT = {
+}
 ROOM {
 	NAME = "CLEARING",
 	LOC = ROOMS,
@@ -2537,6 +2542,9 @@ CANYON_VIEW_F = function(...)
 return __res
 	else error('CANYON_VIEW_F\n'..__res) end
 end
+_CANYON_VIEW_F = {
+	'LEAP',
+}
 ROOM {
 	NAME = "MINE_ENTRANCE",
 	LOC = ROOMS,
@@ -2748,3 +2756,5 @@ GO = function(...)
 return __res
 	else error('GO\n'..__res) end
 end
+_GO = {
+}

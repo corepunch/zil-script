@@ -101,6 +101,8 @@ NOT_HERE_OBJECT_F = function(...)
 return __res
 	else error('NOT_HERE_OBJECT_F\n'..__res) end
 end
+_NOT_HERE_OBJECT_F = {
+}
 NOT_HERE_PRINT = function(...)
 	local PRSOQ = ...
 	local __ok, __res = pcall(function()
@@ -128,6 +130,8 @@ NOT_HERE_PRINT = function(...)
 return __res
 	else error('NOT_HERE_PRINT\n'..__res) end
 end
+_NOT_HERE_PRINT = {
+}
 NULL_F = function(...)
 	local A1, A2 = ...
 	local __ok, __res = pcall(function()
@@ -138,6 +142,8 @@ NULL_F = function(...)
 return __res
 	else error('NULL_F\n'..__res) end
 end
+_NULL_F = {
+}
 LOAD_MAX = 100
 LOAD_ALLOWED = 100
 OBJECT {
@@ -169,6 +175,9 @@ STAIRS_F = function(...)
 return __res
 	else error('STAIRS_F\n'..__res) end
 end
+_STAIRS_F = {
+	'THROUGH',
+}
 OBJECT {
 	NAME = "SAILOR",
 	LOC = GLOBAL_OBJECTS,
@@ -206,6 +215,11 @@ SAILOR_FCN = function(...)
 return __res
 	else error('SAILOR_FCN\n'..__res) end
 end
+_SAILOR_FCN = {
+	'TELL',
+	'EXAMINE',
+	'HELLO',
+}
 OBJECT {
 	NAME = "GROUND",
 	LOC = GLOBAL_OBJECTS,
@@ -231,6 +245,10 @@ GROUND_FUNCTION = function(...)
 return __res
 	else error('GROUND_FUNCTION\n'..__res) end
 end
+_GROUND_FUNCTION = {
+	'PUT',
+	'DIG',
+}
 OBJECT {
 	NAME = "GRUE",
 	LOC = GLOBAL_OBJECTS,
@@ -256,6 +274,11 @@ GRUE_FUNCTION = function(...)
 return __res
 	else error('GRUE_FUNCTION\n'..__res) end
 end
+_GRUE_FUNCTION = {
+	'EXAMINE',
+	'FIND',
+	'LISTEN',
+}
 OBJECT {
 	NAME = "LUNGS",
 	LOC = GLOBAL_OBJECTS,
@@ -319,6 +342,17 @@ CRETIN_FCN = function(...)
 return __res
 	else error('CRETIN_FCN\n'..__res) end
 end
+_CRETIN_FCN = {
+	'TELL',
+	'GIVE',
+	'MAKE',
+	'DISEMBARK',
+	'EAT',
+	'ATTACK',
+	'THROW',
+	'TAKE',
+	'EXAMINE',
+}
 OBJECT {
 	NAME = "ADVENTURER",
 	SYNONYM = {"ADVENTURER"},
@@ -353,6 +387,11 @@ PATH_OBJECT = function(...)
 return __res
 	else error('PATH_OBJECT\n'..__res) end
 end
+_PATH_OBJECT = {
+	'TAKE',
+	'FIND',
+	'DIG',
+}
 OBJECT {
 	NAME = "ZORKMID",
 	LOC = GLOBAL_OBJECTS,
@@ -375,6 +414,10 @@ ZORKMID_FUNCTION = function(...)
 return __res
 	else error('ZORKMID_FUNCTION\n'..__res) end
 end
+_ZORKMID_FUNCTION = {
+	'EXAMINE',
+	'FIND',
+}
 OBJECT {
 	NAME = "HANDS",
 	LOC = GLOBAL_OBJECTS,
