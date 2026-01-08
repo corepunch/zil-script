@@ -1,5 +1,4 @@
-local parser = require 'zil.parser'
-local compiler = require 'zil.compiler'
+local runtime = require 'zil.runtime'
 
 local files = {
   "zork1/globals.zil",
@@ -12,65 +11,23 @@ local files = {
   "zork1/main.zil",
 }
 
-local game = { 
-	print = print, 
-	io = io, 
-	os = os,
-	setmetatable = setmetatable,
-	ipairs = ipairs,
-	pairs = pairs,
-	table = table,
-	tostring = tostring,
-	tonumber = tonumber,
-	type = type,
-	string = string,
-	pcall = pcall,
-	error = error,
-	assert = assert,
-	debug = debug,
-	select = select,
-	math = math,
-	next = next,
-}
+-- Create game environment
+local game = runtime.create_game_env()
 
-local function execute(string, name)
-	game._G = game
-	local chunk, err = load(string, '@'..name, 't', game)
-	if not chunk then
-		print(err)
-	else
-		local ok, run_err = pcall(chunk, function(e)
-        return debug.traceback(tostring(e), 2)
-    end)
-		if not ok then
-			print(run_err)
-			os.exit(1)
-		else
-			print("Loaded "..name)
-			return true
-		end
-	end
+-- Load bootstrap
+if not runtime.load_bootstrap(game) then
+	os.exit(1)
 end
 
--- require "translator"
-
-local file = assert(io.open("zil/bootstrap.lua", "r"))
-execute(file:read("*a"), 'bootstrap')
-file:close()
-
-for _, f in ipairs(files) do
-	local ast = parser.parse_file(f)
-	local result = compiler.compile(ast)
-	local basename = 'zil_'..(f:match("^.+[/\\](.+)$") or f):gsub(".zil", ".lua")
-	local file = io.open(basename, "w")
-	if file then
-		file:write(result.combined)
-		file:close()
-	end
-	execute(result.combined, basename)
+-- Load ZIL files (save compiled .lua files to disk)
+if not runtime.load_zil_files(files, game, {save_lua = true}) then
+	os.exit(1)
 end
 
-execute("GO()", 'main')
+-- Start the game
+if not runtime.start_game(game) then
+	os.exit(1)
+end
 
 -- local ast = parser.parse_file "zork1/actions.zil"
 -- local result = compiler.compile(ast)

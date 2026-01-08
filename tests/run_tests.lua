@@ -2,25 +2,7 @@
 -- Test runner for ZIL runtime
 -- Usage: lua tests/run_tests.lua [test_file]
 
-local parser = require 'zil.parser'
-local compiler = require 'zil.compiler'
-
-local function execute(string, name, env)
-	env._G = env
-	local chunk, err = load(string, '@'..name, 't', env)
-	if not chunk then
-		print("Error: " .. err)
-		return false
-	end
-	
-	local ok, run_err = pcall(chunk)
-	if not ok then
-		print("Runtime error: " .. run_err)
-		return false
-	end
-	
-	return true
-end
+local runtime = require 'zil.runtime'
 
 local function run_test_file(test_file_path)
 	print("=== Running test: " .. test_file_path .. " ===\n")
@@ -30,26 +12,7 @@ local function run_test_file(test_file_path)
 	print("Test suite: " .. test_config.name .. "\n")
 	
 	-- Create game environment
-	local game = { 
-		print = print, 
-		io = io, 
-		setmetatable = setmetatable,
-		ipairs = ipairs,
-		pairs = pairs,
-		table = table,
-		tostring = tostring,
-		tonumber = tonumber,
-		type = type,
-		string = string,
-		pcall = pcall,
-		error = error,
-		assert = assert,
-		debug = debug,
-		select = select,
-		math = math,
-		next = next,
-		os = os,
-	}
+	local game = runtime.create_game_env()
 	
 	-- Prepare test commands
 	local commands = {}
@@ -65,16 +28,12 @@ local function run_test_file(test_file_path)
 	end
 	
 	-- Load bootstrap
-	local file = assert(io.open("zil/bootstrap.lua", "r"))
-	local bootstrap_code = file:read("*a")
-	file:close()
-	
-	if not execute(bootstrap_code, 'bootstrap', game) then
+	if not runtime.load_bootstrap(game, true) then
 		print("Failed to load bootstrap")
 		return false
 	end
 	
-	-- Load ZIL files
+	-- Load ZIL files (use defaults or custom list from test config)
 	local files = test_config.files or {
 		"zork1/globals.zil",
 		"zork1/parser.zil",
@@ -84,19 +43,13 @@ local function run_test_file(test_file_path)
 		"zork1/main.zil",
 	}
 	
-	for _, f in ipairs(files) do
-		local ast = parser.parse_file(f)
-		local result = compiler.compile(ast)
-		local basename = 'zil_'..(f:match("^.+[/\\](.+)$") or f):gsub(".zil", ".lua")
-		
-		if not execute(result.combined, basename, game) then
-			print("Failed to load " .. f)
-			return false
-		end
+	if not runtime.load_zil_files(files, game, {silent = true}) then
+		print("Failed to load ZIL files")
+		return false
 	end
 	
 	-- Run the game with test commands
-	if not execute("GO()", 'main', game) then
+	if not runtime.start_game(game, true) then
 		print("Failed to start game")
 		return false
 	end
