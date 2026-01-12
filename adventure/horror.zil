@@ -319,7 +319,7 @@
          <COND (<VERB? EXAMINE>
                 <TELL "A human-shaped bundle wrapped in stained canvas. The fabric is rotted and discolored. You'd rather not investigate further, though part of you wonders if this is Patient 237." CR>
                 <RTRUE>)
-               (<VERB? OPEN UNWRAP>
+               (<VERB? OPEN>
                 <TELL "You have no desire to see what lies within. Some mysteries are better left undisturbed." CR>
                 <RTRUE>)
                (<VERB? TAKE>
