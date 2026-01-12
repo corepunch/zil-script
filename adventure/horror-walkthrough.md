@@ -154,7 +154,7 @@ This is a complete walkthrough for the horror.zil adventure game - an expansion 
 98. `examine pews` - Strange carved symbols
 99. `examine candles` - Unnatural green flames
 100. `examine patient` or `examine figure` - Patient 189, Dr. Mordecai's greatest achievement and horror
-101. `hello` or `talk to patient` - **Win condition!** Patient 189 speaks, thanks you for freeing it, and crumbles to ash. The experiment is finally over.
+101. `hello` - **Win condition!** Patient 189 speaks, thanks you for freeing it, and crumbles to ash. The experiment is finally over.
 
 ## Puzzle Elements
 
