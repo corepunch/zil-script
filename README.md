@@ -43,6 +43,14 @@ lua tests/run_tests.lua tests/zork1_extended.lua
 - `tests/zork1_basic.lua` - Basic game interaction tests
 - `tests/zork1_extended.lua` - Extended command sequence tests
 
+#### Parser/Runtime Tests (Inspired by ZILF)
+
+- `tests/test-directions.lua` - Direction and movement parsing
+- `tests/test-take.lua` - TAKE command functionality  
+- `tests/test-containers.lua` - Container interactions
+- `tests/test-light.lua` - Light source mechanics
+- `tests/test-pronouns.lua` - Basic object interactions
+
 See `tests/README.md` for detailed information on writing and running tests.
 
 ## Project Structure

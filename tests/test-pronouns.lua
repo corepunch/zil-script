@@ -17,28 +17,32 @@ return {
 			description = "Look at starting room"
 		},
 		{
-			input = "take all",
-			description = "Take all items in room"
-		},
-		{
 			input = "inventory",
-			description = "Check inventory"
-		},
-		{
-			input = "drop them",
-			description = "Drop items using 'them' pronoun"
-		},
-		{
-			input = "inventory",
-			description = "Check inventory is now empty"
+			description = "Check starting inventory"
 		},
 		{
 			input = "take apple",
 			description = "Take the apple"
 		},
 		{
-			input = "examine it",
-			description = "Examine the apple using 'it' pronoun"
+			input = "take nail",
+			description = "Take the nail"
+		},
+		{
+			input = "inventory",
+			description = "Check inventory has both items"
+		},
+		{
+			input = "examine apple",
+			description = "Examine the apple"
+		},
+		{
+			input = "drop apple",
+			description = "Drop the apple"
+		},
+		{
+			input = "drop nail",
+			description = "Drop the nail"
 		},
 		{
 			input = "drop wallet",
@@ -49,8 +53,8 @@ return {
 			description = "Move to hallway"
 		},
 		{
-			input = "examine it",
-			description = "Try to examine 'it' in another room (should fail or give message)"
+			input = "look",
+			description = "Look in hallway"
 		},
 	}
 }
