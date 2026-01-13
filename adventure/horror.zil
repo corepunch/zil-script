@@ -5,7 +5,7 @@
 <ROOM SANITARIUM-GATE
       (IN ROOMS)
       (DESC "Sanitarium Gate")
-      (LDESC "You stand before the rusted iron gates of an abandoned sanitarium. The structure looms against the darkening sky, its windows like hollow eye sockets. Weeds choke the gravel path leading north to the entrance. A corroded brass plaque hangs askew on the gate.")
+      (LDESC "You stand before the rusted iron gates of an abandoned sanitarium. The structure looms against the darkening sky, its windows like hollow eye sockets. Weeds choke the gravel path leading north to the entrance. A corroded BRASS PLAQUE hangs askew on the gate.")
       (NORTH TO SANITARIUM-ENTRANCE)
       (FLAGS LIGHTBIT)>
 
@@ -28,7 +28,7 @@
 <ROOM SANITARIUM-ENTRANCE
       (IN ROOMS)
       (DESC "Sanitarium Entrance Hall")
-      (LDESC "The entrance hall reeks of mildew and decay. Peeling wallpaper reveals water-stained plaster beneath. A grand staircase ascends to darkness in the east. To the west, a doorway leads to what might have been a reception area. North, you can make out an operating theater through a half-open door. A narrow staircase descends into the basement.")
+      (LDESC "The entrance hall reeks of mildew and decay. Peeling WALLPAPER reveals water-stained plaster beneath. A grand staircase ascends to darkness in the east. To the west, a doorway leads to what might have been a reception area. North, you can make out an operating theater through a half-open door. A narrow staircase descends into the basement.")
       (SOUTH TO SANITARIUM-GATE)
       (WEST TO RECEPTION-ROOM)
       (NORTH TO OPERATING-THEATER)
@@ -53,7 +53,7 @@
 <ROOM RECEPTION-ROOM
       (IN ROOMS)
       (DESC "Reception Room")
-      (LDESC "This cramped room once served as the sanitarium's reception. A heavy oak desk sits against one wall, its surface thick with dust. Filing cabinets line the opposite wall, their drawers hanging open like gaping mouths. Something glints among the papers scattered on the floor.")
+      (LDESC "This cramped room once served as the sanitarium's reception. A heavy OAK DESK sits against one wall, its surface thick with dust. Filing cabinets line the opposite wall, their drawers hanging open like gaping mouths. Something glints among the papers scattered on the floor.")
       (EAST TO SANITARIUM-ENTRANCE)
       (FLAGS LIGHTBIT)>
 
@@ -68,7 +68,7 @@
 
 <ROUTINE DESK-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE>
-                <TELL "The desk has three drawers. The top two are broken and empty. The bottom drawer appears intact but is locked tight." CR>
+                <TELL "The desk has three drawers. The top two are broken and empty. The BOTTOM DRAWER appears intact but is locked tight." CR>
                 <RTRUE>)>>
 
 <OBJECT BOTTOM-DRAWER
@@ -84,17 +84,17 @@
 <ROUTINE DRAWER-F ()
          <COND (<AND <VERB? OPEN>
                      <FSET? ,BOTTOM-DRAWER ,OPENBIT>>
-                <TELL "The drawer is already open." CR>
+                <TELL "The DRAWER is already open." CR>
                 <RTRUE>)
                (<AND <VERB? OPEN UNLOCK>
                      <NOT <FSET? ,BOTTOM-DRAWER ,OPENBIT>>
                      <NOT <IN? ,BRASS-KEY ,WINNER>>>
-                <TELL "The drawer is locked. You need a key." CR>
+                <TELL "The DRAWER is locked. You need a key." CR>
                 <RTRUE>)
                (<AND <VERB? OPEN UNLOCK>
                      <NOT <FSET? ,BOTTOM-DRAWER ,OPENBIT>>
                      <IN? ,BRASS-KEY ,WINNER>>
-                <TELL "You unlock the " D ,BOTTOM-DRAWER " with the " D ,BRASS-KEY ". It slides open with a groan, revealing a leather-bound ledger inside." CR>
+                <TELL "You unlock the " D ,BOTTOM-DRAWER " with the " D ,BRASS-KEY ". It slides open with a groan, revealing a leather-bound LEDGER inside." CR>
                 <FCLEAR ,BOTTOM-DRAWER ,NDESCBIT>
                 <FSET ,BOTTOM-DRAWER ,OPENBIT>
                 <RTRUE>)>>
@@ -111,7 +111,7 @@
 
 <ROUTINE BRASSKEY-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "A small brass key with the number '3' engraved on its head. It's ice cold despite being indoors." CR>
+                <TELL "A small BRASS KEY with the number '3' engraved on its head. It's ice cold despite being indoors." CR>
                 <RTRUE>)>>
 
 <OBJECT PATIENT-LEDGER
@@ -127,13 +127,13 @@
 
 <ROUTINE LEDGER-F ()
          <COND (<VERB? READ EXAMINE>
-                <TELL "The ledger contains patient records spanning decades. The entries become more disturbing toward the end. The final entry reads: 'Patient 237 - Treatment discontinued. Subject expired during procedure. Dr. Mordecai. May God have mercy on us all.'" CR>
+                <TELL "The LEDGER contains patient records spanning decades. The entries become more disturbing toward the end. The final entry reads: 'Patient 237 - Treatment discontinued. Subject expired during procedure. Dr. Mordecai. May God have mercy on us all.'" CR>
                 <RTRUE>)>>
 
 <ROOM OPERATING-THEATER
       (IN ROOMS)
       (DESC "Operating Theater")
-      (LDESC "The circular theater is dominated by a stained operating table in the center. Rusty surgical instruments lie scattered about. Rising tiers of benches circle the table, where students once observed procedures. A metal cabinet stands in the shadows, its door slightly ajar. The air here is thick with an oppressive dread.")
+      (LDESC "The circular theater is dominated by a stained OPERATING TABLE in the center. Rusty surgical instruments lie scattered about. Rising tiers of benches circle the table, where students once observed procedures. A metal CABINET stands in the shadows, its door slightly ajar. The air here is thick with an oppressive dread.")
       (SOUTH TO SANITARIUM-ENTRANCE)
       (FLAGS LIGHTBIT)>
 
@@ -148,7 +148,7 @@
 
 <ROUTINE OPTABLE-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE>
-                <TELL "The operating table is covered in dark brown stains that you hope are just rust. Leather restraints dangle from all four corners. Deep gouges mar the metal surface, as if someone struggled violently against the bindings." CR>
+                <TELL "The OPERATING TABLE is covered in dark brown stains that you hope are just rust. Leather restraints dangle from all four corners. Deep gouges mar the metal surface, as if someone struggled violently against the bindings." CR>
                 <RTRUE>)>>
 
 <OBJECT METAL-CABINET
@@ -162,7 +162,7 @@
 
 <ROUTINE CABINET-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE>
-                <TELL "The cabinet's glass doors are cracked but still intact. Inside, you can see various medical instruments, including a scalpel and a bottle." CR>
+                <TELL "The CABINET's glass doors are cracked but still intact. Inside, you can see various medical instruments, including a SCALPEL and a bottle." CR>
                 <RTRUE>)>>
 
 <OBJECT SCALPEL
@@ -177,7 +177,7 @@
 
 <ROUTINE SCALPEL-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "The scalpel's blade is rusty but still razor-sharp along one edge. The handle is stained with something dark." CR>
+                <TELL "The SCALPEL's blade is rusty but still razor-sharp along one edge. The handle is stained with something dark." CR>
                 <RTRUE>)>>
 
 <OBJECT ETHER-BOTTLE
@@ -192,7 +192,7 @@
 
 <ROUTINE ETHER-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "A glass bottle with a faded label reading 'Ether - Handle with Care'. About a quarter of the liquid remains." CR>
+                <TELL "A glass BOTTLE with a faded label reading 'Ether - Handle with Care'. About a quarter of the liquid remains." CR>
                 <RTRUE>)
                (<VERB? DRINK>
                 <TELL "That would be an extremely bad idea." CR>
@@ -201,7 +201,7 @@
 <ROOM PATIENT-WARD
       (IN ROOMS)
       (DESC "Patient Ward")
-      (LDESC "A long corridor lined with rusted bed frames. Tattered curtains hang between them, offering the ghost of privacy. At the far end, a heavy door sealed with chains blocks further passage. Scratches cover the door's surface, as if made by desperate fingers. The floor is littered with patient records and broken glass.")
+      (LDESC "A long corridor lined with rusted BED FRAMES. Tattered curtains hang between them, offering the ghost of privacy. At the far end, a heavy DOOR sealed with CHAINS blocks further passage. Scratches cover the door's surface, as if made by desperate fingers. The floor is littered with patient records and broken glass.")
       (WEST TO SANITARIUM-ENTRANCE)
       (NORTH TO MORGUE IF CHAINS-CUT-FLAG)
       (FLAGS LIGHTBIT)>
@@ -217,7 +217,7 @@
 
 <ROUTINE BEDS-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE>
-                <TELL "Dozens of bed frames line the walls. The mattresses have rotted away, leaving only rusted springs and metal frames. Some still have restraint straps attached." CR>
+                <TELL "Dozens of BED FRAMES line the walls. The mattresses have rotted away, leaving only rusted springs and metal frames. Some still have restraint straps attached." CR>
                 <RTRUE>)>>
 
 <OBJECT HEAVY-DOOR
@@ -232,15 +232,15 @@
 <ROUTINE HEAVYDOOR-F ()
          <COND (<AND <VERB? EXAMINE>
                      <NOT ,CHAINS-CUT-FLAG>>
-                <TELL "The heavy door is secured with thick chains and a rusted padlock. Deep scratches cover its surface, made by fingernails. A tarnished plaque reads 'MORGUE'." CR>
+                <TELL "The heavy DOOR is secured with thick CHAINS and a rusted padlock. Deep scratches cover its surface, made by fingernails. A tarnished PLAQUE reads 'MORGUE'." CR>
                 <RTRUE>)
                (<AND <VERB? EXAMINE>
                      ,CHAINS-CUT-FLAG>
-                <TELL "The door stands open, chains lying in a heap on the floor. Beyond lies darkness." CR>
+                <TELL "The DOOR stands open, CHAINS lying in a heap on the floor. Beyond lies darkness." CR>
                 <RTRUE>)
                (<AND <VERB? OPEN>
                      <NOT ,CHAINS-CUT-FLAG>>
-                <TELL "The door is secured with heavy chains. You need to cut through them." CR>
+                <TELL "The DOOR is secured with heavy CHAINS. You need to cut through them." CR>
                 <RTRUE>)>>
 
 <OBJECT CHAINS
@@ -255,17 +255,17 @@
 <ROUTINE CHAINS-F ()
          <COND (<AND <VERB? EXAMINE>
                      <NOT ,CHAINS-CUT-FLAG>>
-                <TELL "Thick iron chains wrap around the door handles, secured with a massive rusted padlock. The chains look old but still strong." CR>
+                <TELL "Thick iron CHAINS wrap around the door handles, secured with a massive rusted padlock. The CHAINS look old but still strong." CR>
                 <RTRUE>)
                (<AND <VERB? ATTACK>
                      <NOT ,CHAINS-CUT-FLAG>
                      <NOT <IN? ,SCALPEL ,WINNER>>>
-                <TELL "The chains are too strong to break with your bare hands. You need a sharp tool." CR>
+                <TELL "The CHAINS are too strong to break with your bare hands. You need a sharp tool." CR>
                 <RTRUE>)
                (<AND <VERB? ATTACK>
                      <NOT ,CHAINS-CUT-FLAG>
                      <IN? ,SCALPEL ,WINNER>>
-                <TELL "You saw through the rusty chains with the " D ,SCALPEL ". It takes several minutes of effort, but finally they fall away with a crash. The heavy door creaks open, revealing a passage north into darkness." CR>
+                <TELL "You saw through the rusty CHAINS with the " D ,SCALPEL ". It takes several minutes of effort, but finally they fall away with a crash. The heavy DOOR creaks open, revealing a passage north into darkness." CR>
                 <SETG CHAINS-CUT-FLAG T>
                 <REMOVE ,CHAINS>
                 <RTRUE>)>>
@@ -273,7 +273,7 @@
 <ROOM MORGUE
       (IN ROOMS)
       (DESC "Morgue")
-      (LDESC "The temperature drops as you enter the morgue. Refrigerated drawers line both walls. In the center, a dissection table holds what appears to be a canvas-wrapped bundle. Medical instruments hang on the wall. A journal rests on a small desk in the corner. This place feels wrong, as though something lingers here still.")
+      (LDESC "The temperature drops as you enter the morgue. Refrigerated DRAWERS line both walls. In the center, a DISSECTION TABLE holds what appears to be a canvas-wrapped BUNDLE. Medical instruments hang on the wall. A JOURNAL rests on a small desk in the corner. This place feels wrong, as though something lingers here still.")
       (SOUTH TO PATIENT-WARD)
       (FLAGS LIGHTBIT)>
 
@@ -288,7 +288,7 @@
 
 <ROUTINE DRAWERS-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE>
-                <TELL "The refrigeration units line both walls. Most drawers are empty or contain only bones. One drawer is slightly ajar, a faint luminescent glow emanating from within." CR>
+                <TELL "The refrigeration units line both walls. Most DRAWERS are empty or contain only bones. One DRAWER is slightly ajar, a faint luminescent glow emanating from within." CR>
                 <RTRUE>)>>
 
 <OBJECT DISSECTION-TABLE
@@ -302,7 +302,7 @@
 
 <ROUTINE DISTABLE-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE>
-                <TELL "The dissection table is made of stainless steel with drainage channels carved into its surface. Dark stains pool in the grooves. A canvas-wrapped bundle lies upon it." CR>
+                <TELL "The DISSECTION TABLE is made of stainless steel with drainage channels carved into its surface. Dark stains pool in the grooves. A canvas-wrapped BUNDLE lies upon it." CR>
                 <RTRUE>)>>
 
 <OBJECT CANVAS-BUNDLE
@@ -317,7 +317,7 @@
 
 <ROUTINE BUNDLE-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "A human-shaped bundle wrapped in stained canvas. The fabric is rotted and discolored. You'd rather not investigate further, though part of you wonders if this is Patient 237." CR>
+                <TELL "A human-shaped BUNDLE wrapped in stained canvas. The fabric is rotted and discolored. You'd rather not investigate further, though part of you wonders if this is Patient 237." CR>
                 <RTRUE>)
                (<VERB? OPEN>
                 <TELL "You have no desire to see what lies within. Some mysteries are better left undisturbed." CR>
@@ -339,7 +339,7 @@
 
 <ROUTINE JOURNAL-F ()
          <COND (<VERB? READ EXAMINE>
-                <TELL "Dr. Mordecai's personal journal. The final entry is dated October 31, 1952. The handwriting becomes increasingly erratic: 'The subject showed remarkable resilience. But the serum... it changed something fundamental. Patient 237 died on the table, yet I swear I saw movement hours later. The eyes... the eyes opened. I have made a terrible mistake. God forgive me, I must seal this place.'" CR>
+                <TELL "Dr. Mordecai's personal JOURNAL. The final entry is dated October 31, 1952. The handwriting becomes increasingly erratic: 'The subject showed remarkable resilience. But the serum... it changed something fundamental. Patient 237 died on the table, yet I swear I saw movement hours later. The eyes... the eyes opened. I have made a terrible mistake. God forgive me, I must seal this place.'" CR>
                 <RTRUE>)>>
 
 <OBJECT STRANGE-SERUM
@@ -354,10 +354,10 @@
 
 <ROUTINE SERUM-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "A glass vial containing a faintly glowing liquid. The label reads 'Compound 237 - DO NOT USE'. The serum pulses with an unnatural light." CR>
+                <TELL "A glass VIAL containing a faintly glowing liquid. The label reads 'Compound 237 - DO NOT USE'. The SERUM pulses with an unnatural light." CR>
                 <RTRUE>)
                (<VERB? DRINK>
-                <TELL "You bring the vial to your lips but your survival instinct stops you. This substance killed Patient 237. You lower the vial, hands trembling." CR>
+                <TELL "You bring the VIAL to your lips but your survival instinct stops you. This substance killed Patient 237. You lower the VIAL, hands trembling." CR>
                 <RTRUE>)>>
 
 <ROOM BASEMENT-STAIRS
@@ -371,7 +371,7 @@
 <ROOM BASEMENT-CORRIDOR
       (IN ROOMS)
       (DESC "Basement Corridor")
-      (LDESC "The basement corridor stretches into shadow. Water pools on the cracked floor. Pipes run along the ceiling, rusted and dripping. A heavy door to the east is marked 'BOILER ROOM'. To the west, another passage leads deeper into the basement. The stairs ascend to darkness above.")
+      (LDESC "The basement corridor stretches into shadow. Water pools on the cracked floor. PIPES run along the ceiling, rusted and dripping. A heavy DOOR to the east is marked 'BOILER ROOM'. To the west, another passage leads deeper into the basement. The stairs ascend to darkness above.")
       (UP TO BASEMENT-STAIRS)
       (EAST TO BOILER-ROOM)
       (WEST TO STORAGE-ROOM)
@@ -389,7 +389,7 @@
 
 <ROUTINE PIPES-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "The pipes are ancient and corroded. Water drips steadily from cracks in the metal. One pipe has a valve." CR>
+                <TELL "The PIPES are ancient and corroded. Water drips steadily from cracks in the metal. One PIPE has a VALVE." CR>
                 <RTRUE>)>>
 
 <OBJECT VALVE
@@ -412,13 +412,13 @@
                 <TELL "The " D ,VALVE " is already open. Steam continues to hiss somewhere in the basement." CR>
                 <RTRUE>)
                (<VERB? EXAMINE>
-                <TELL "A large wheel valve covered in rust and grime." CR>
+                <TELL "A large wheel VALVE covered in rust and grime." CR>
                 <RTRUE>)>>
 
 <ROOM BOILER-ROOM
       (IN ROOMS)
       (DESC "Boiler Room")
-      (LDESC "The boiler room is dominated by a massive iron boiler, cold and silent. Coal dust covers everything. A workbench sits against the far wall, covered with ancient tools. The room radiates a sense of dormant power, waiting to awaken.")
+      (LDESC "The boiler room is dominated by a massive iron BOILER, cold and silent. Coal dust covers everything. A WORKBENCH sits against the far wall, covered with ancient tools. The room radiates a sense of dormant power, waiting to awaken.")
       (WEST TO BASEMENT-CORRIDOR)
       (FLAGS LIGHTBIT)>
 
@@ -433,7 +433,7 @@
 
 <ROUTINE BOILER-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE>
-                <TELL "The boiler is a hulking iron beast. Its door hangs open, revealing a chamber black with ancient soot. Inside, something gleams faintly." CR>
+                <TELL "The BOILER is a hulking iron beast. Its door hangs open, revealing a chamber black with ancient soot. Inside, something gleams faintly." CR>
                 <RTRUE>)>>
 
 <OBJECT COAL-SHOVEL
@@ -448,7 +448,7 @@
 
 <ROUTINE SHOVEL-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "A heavy coal shovel with a wooden handle. The blade is caked with ancient coal dust." CR>
+                <TELL "A heavy coal SHOVEL with a wooden handle. The blade is caked with ancient coal dust." CR>
                 <RTRUE>)>>
 
 <OBJECT WORKBENCH
@@ -462,7 +462,7 @@
 
 <ROUTINE WORKBENCH-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE>
-                <TELL "The workbench is covered with ancient tools: hammers, wrenches, screwdrivers. Most are rusted solid. A flashlight lies among them." CR>
+                <TELL "The WORKBENCH is covered with ancient tools: hammers, wrenches, screwdrivers. Most are rusted solid. A FLASHLIGHT lies among them." CR>
                 <RTRUE>)>>
 
 <OBJECT FLASHLIGHT
@@ -477,16 +477,16 @@
 
 <ROUTINE FLASHLIGHT-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "A heavy metal flashlight. The switch clicks but produces no light. The batteries are long dead." CR>
+                <TELL "A heavy metal FLASHLIGHT. The switch clicks but produces no light. The batteries are long dead." CR>
                 <RTRUE>)
                (<VERB? LAMP-ON>
-                <TELL "The batteries are dead. The flashlight doesn't work." CR>
+                <TELL "The batteries are dead. The FLASHLIGHT doesn't work." CR>
                 <RTRUE>)>>
 
 <ROOM STORAGE-ROOM
       (IN ROOMS)
       (DESC "Storage Room")
-      (LDESC "Shelves line the walls, sagging under the weight of moldering supplies. Old linens, rusted equipment, and unidentifiable containers fill every space. A sour smell permeates the air. The exit lies to the east.")
+      (LDESC "SHELVES line the walls, sagging under the weight of moldering supplies. Old linens, rusted equipment, and unidentifiable containers fill every space. A sour smell permeates the air. The exit lies to the east.")
       (EAST TO BASEMENT-CORRIDOR)
       (FLAGS LIGHTBIT)>
 
@@ -501,7 +501,7 @@
 
 <ROUTINE SHELVES-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE SEARCH>
-                <TELL "You search through the shelves. Most items are ruined by time and moisture. Among the debris, you find a lantern and some old medical records." CR>
+                <TELL "You search through the SHELVES. Most items are ruined by time and moisture. Among the debris, you find a LANTERN and some old medical records." CR>
                 <RTRUE>)>>
 
 <OBJECT OIL-LANTERN
@@ -532,7 +532,7 @@
                 <FCLEAR ,OIL-LANTERN ,ONBIT>
                 <RTRUE>)
                (<VERB? EXAMINE>
-                <TELL "A brass oil lantern with a glass chimney. It still contains fuel." CR>
+                <TELL "A brass oil LANTERN with a glass chimney. It still contains fuel." CR>
                 <RTRUE>)>>
 
 <OBJECT MEDICAL-RECORDS
@@ -548,13 +548,13 @@
 
 <ROUTINE RECORDS-F ()
          <COND (<VERB? READ EXAMINE>
-                <TELL "You flip through the water-damaged records. Most are illegible, but one file remains clear: 'Patient 189 - Subject shows unusual resistance to sedation. Violent episodes increasing. Transferred to isolation ward for observation. Dr. Mordecai supervising.'" CR>
+                <TELL "You flip through the water-damaged RECORDS. Most are illegible, but one file remains clear: 'Patient 189 - Subject shows unusual resistance to sedation. Violent episodes increasing. Transferred to isolation ward for observation. Dr. Mordecai supervising.'" CR>
                 <RTRUE>)>>
 
 <ROOM FLOODING-CHAMBER
       (IN ROOMS)
       (DESC "Flooded Chamber")
-      (LDESC "Water covers the floor to ankle depth. The chamber is vast and dark, with arched stone ceilings disappearing into shadow. The source of the water is unclear. To the north, a passage leads deeper into the complex. A door to the east is sealed shut.")
+      (LDESC "Water covers the floor to ankle depth. The chamber is vast and dark, with arched stone ceilings disappearing into shadow. The source of the water is unclear. To the north, a passage leads deeper into the complex. A DOOR to the east is sealed shut.")
       (SOUTH TO BASEMENT-CORRIDOR)
       (NORTH TO ISOLATION-WARD)
       (EAST TO HYDROTHERAPY-ROOM IF STEAM-DOOR-OPEN)
@@ -571,10 +571,10 @@
 
 <ROUTINE STANDING-WATER-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "The water is cold and murky. You can't see the bottom through the darkness." CR>
+                <TELL "The WATER is cold and murky. You can't see the bottom through the darkness." CR>
                 <RTRUE>)
                (<VERB? DRINK>
-                <TELL "The water smells foul. You decide against it." CR>
+                <TELL "The WATER smells foul. You decide against it." CR>
                 <RTRUE>)>>
 
 <OBJECT SEALED-DOOR
@@ -610,7 +610,7 @@
 <ROOM HYDROTHERAPY-ROOM
       (IN ROOMS)
       (DESC "Hydrotherapy Room")
-      (LDESC "Large porcelain tubs line the walls, each fitted with restraints. Rubber hoses dangle from fixtures overhead. The tiles are cracked and stained. A cabinet stands in the corner, its door hanging loose.")
+      (LDESC "Large porcelain TUBS line the walls, each fitted with restraints. Rubber hoses dangle from fixtures overhead. The tiles are cracked and stained. A CABINET stands in the corner, its door hanging loose.")
       (WEST TO FLOODING-CHAMBER)
       (FLAGS LIGHTBIT)>
 
@@ -625,7 +625,7 @@
 
 <ROUTINE TUBS-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE>
-                <TELL "The tubs are large enough to immerse a full-grown person. Leather restraints are bolted to the sides. Dark stains ring the waterline. One tub contains a soggy notebook." CR>
+                <TELL "The TUBS are large enough to immerse a full-grown person. Leather restraints are bolted to the sides. Dark stains ring the waterline. One TUB contains a soggy NOTEBOOK." CR>
                 <RTRUE>)>>
 
 <OBJECT SOGGY-NOTEBOOK
@@ -641,7 +641,7 @@
 
 <ROUTINE SOGGY-NOTEBOOK-F ()
          <COND (<VERB? READ EXAMINE>
-                <TELL "The notebook is badly water-damaged. You can make out fragments: '...water treatment...patients submerged for hours...screaming finally stopped...Dr. M approved extended sessions...'" CR>
+                <TELL "The NOTEBOOK is badly water-damaged. You can make out fragments: '...water treatment...patients submerged for hours...screaming finally stopped...Dr. M approved extended sessions...'" CR>
                 <RTRUE>)>>
 
 <OBJECT MEDICINE-CABINET
@@ -655,7 +655,7 @@
 
 <ROUTINE MEDICINE-CABINET-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE>
-                <TELL "The cabinet contains old medical supplies. Most are ruined, but a syringe and bandages remain usable." CR>
+                <TELL "The CABINET contains old medical supplies. Most are ruined, but a SYRINGE and bandages remain usable." CR>
                 <RTRUE>)>>
 
 <OBJECT SYRINGE
@@ -670,13 +670,13 @@
 
 <ROUTINE SYRINGE-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "A medical syringe with a sharp steel needle. The glass chamber is empty." CR>
+                <TELL "A medical SYRINGE with a sharp steel needle. The glass chamber is empty." CR>
                 <RTRUE>)>>
 
 <ROOM ISOLATION-WARD
       (IN ROOMS)
       (DESC "Isolation Ward")
-      (LDESC "Small cells line both sides of a narrow corridor. Heavy doors with barred windows stand open, revealing bare concrete rooms within. Scratches cover the walls—thousands of them, as if someone counted the days. The corridor continues north to the electroshock theater.")
+      (LDESC "Small cells line both sides of a narrow corridor. Heavy DOORS with barred windows stand open, revealing bare concrete rooms within. Scratches cover the walls—thousands of them, as if someone counted the days. The corridor continues north to the electroshock theater.")
       (SOUTH TO FLOODING-CHAMBER)
       (NORTH TO ELECTROSHOCK-THEATER)
       (FLAGS LIGHTBIT)>
@@ -692,7 +692,7 @@
 
 <ROUTINE CELL-DOORS-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE>
-                <TELL "Each door is solid metal with a small barred window. The cells beyond are empty save for scratches covering every surface. Someone marked time here, day after agonizing day." CR>
+                <TELL "Each DOOR is solid metal with a small barred window. The cells beyond are empty save for scratches covering every surface. Someone marked time here, day after agonizing day." CR>
                 <RTRUE>)>>
 
 <OBJECT WALL-SCRATCHES
@@ -706,13 +706,13 @@
 
 <ROUTINE WALL-SCRATCHES-F ()
          <COND (<VERB? EXAMINE COUNT>
-                <TELL "The scratches are too numerous to count. They cover every inch of the cell walls. Some form words: 'HELP ME' 'NO MORE' 'PLEASE'. One message is larger than the rest: 'PATIENT 189 STILL ALIVE IN THE CHAPEL'." CR>
+                <TELL "The SCRATCHES are too numerous to count. They cover every inch of the cell walls. Some form words: 'HELP ME' 'NO MORE' 'PLEASE'. One message is larger than the rest: 'PATIENT 189 STILL ALIVE IN THE CHAPEL'." CR>
                 <RTRUE>)>>
 
 <ROOM ELECTROSHOCK-THEATER
       (IN ROOMS)
       (DESC "Electroshock Theater")
-      (LDESC "A concrete room with a chair bolted to the floor in the center. Electrodes dangle from a machine beside it. The walls are scorched in places. A viewing window overlooks the room from above. To the east, a stairway leads up. West lies a padded cell.")
+      (LDESC "A concrete room with a CHAIR bolted to the floor in the center. Electrodes dangle from a MACHINE beside it. The walls are scorched in places. A viewing window overlooks the room from above. To the east, a stairway leads up. West lies a padded cell.")
       (SOUTH TO ISOLATION-WARD)
       (EAST TO OBSERVATION-DECK)
       (WEST TO PADDED-CELL)
@@ -729,7 +729,7 @@
 
 <ROUTINE SHOCK-CHAIR-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "The chair is bolted to the floor. Leather restraints hang from the arms and legs. Electrodes are positioned where they would contact a victim's temples. You feel sick looking at it." CR>
+                <TELL "The CHAIR is bolted to the floor. Leather restraints hang from the arms and legs. Electrodes are positioned where they would contact a victim's temples. You feel sick looking at it." CR>
                 <RTRUE>)
                (<VERB? BOARD>
                 <TELL "You have no desire to sit in that terrible chair." CR>
@@ -746,13 +746,13 @@
 
 <ROUTINE SHOCK-MACHINE-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "The machine has various dials and switches. Labels indicate voltage levels up to dangerous levels. The electrodes are stained dark." CR>
+                <TELL "The MACHINE has various dials and switches. Labels indicate voltage levels up to dangerous levels. The electrodes are stained dark." CR>
                 <RTRUE>)>>
 
 <ROOM PADDED-CELL
       (IN ROOMS)
       (DESC "Padded Cell")
-      (LDESC "Every surface is covered in rotting padding, now torn and hanging in strips. The small room reeks of decay. A straitjacket lies in the corner. Something has been written on the padding in what looks like dried blood.")
+      (LDESC "Every surface is covered in rotting PADDING, now torn and hanging in strips. The small room reeks of decay. A STRAITJACKET lies in the corner. Something has been written on the PADDING in what looks like dried blood.")
       (EAST TO ELECTROSHOCK-THEATER)
       (FLAGS LIGHTBIT)>
 
@@ -767,7 +767,7 @@
 
 <ROUTINE PADDING-F ()
          <COND (<VERB? EXAMINE READ>
-                <TELL "The padding is torn and moldering. On one wall, written in what appears to be dried blood, are the words: 'THE CHAPEL BEYOND THE GARDEN. HE WAITS THERE. PATIENT 189.'." CR>
+                <TELL "The PADDING is torn and moldering. On one wall, written in what appears to be dried blood, are the words: 'THE CHAPEL BEYOND THE GARDEN. HE WAITS THERE. PATIENT 189.'." CR>
                 <RTRUE>)>>
 
 <OBJECT STRAITJACKET
@@ -782,7 +782,7 @@
 
 <ROUTINE STRAITJACKET-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "A heavy canvas straitjacket with multiple leather buckles and straps. Dark stains cover the fabric." CR>
+                <TELL "A heavy canvas STRAITJACKET with multiple leather buckles and straps. Dark stains cover the fabric." CR>
                 <RTRUE>)
                (<VERB? WEAR>
                 <TELL "You'd rather not." CR>
@@ -791,7 +791,7 @@
 <ROOM OBSERVATION-DECK
       (IN ROOMS)
       (DESC "Observation Deck")
-      (LDESC "A small room overlooking the electroshock theater through a one-way mirror. Chairs face the window. A logbook rests on a desk. This is where doctors watched their experiments. Stairs lead down to the west, and a door to the north opens to the administrative wing.")
+      (LDESC "A small room overlooking the electroshock theater through a one-way MIRROR. Chairs face the window. A LOGBOOK rests on a desk. This is where doctors watched their experiments. Stairs lead down to the west, and a door to the north opens to the administrative wing.")
       (WEST TO ELECTROSHOCK-THEATER)
       (NORTH TO ADMINISTRATIVE-WING)
       (FLAGS LIGHTBIT)>
@@ -807,7 +807,7 @@
 
 <ROUTINE MIRROR-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE>
-                <TELL "Through the mirror, you can see the electroshock theater below. The shock chair sits in the center like a throne of suffering." CR>
+                <TELL "Through the MIRROR, you can see the electroshock theater below. The SHOCK CHAIR sits in the center like a throne of suffering." CR>
                 <RTRUE>)>>
 
 <OBJECT OBSERVATION-LOGBOOK
@@ -823,13 +823,13 @@
 
 <ROUTINE OBSERVATION-LOGBOOK-F ()
          <COND (<VERB? READ EXAMINE>
-                <TELL "The logbook contains clinical observations of treatments. One entry stands out: 'Session 47 - Patient 189. Subject required maximum voltage. Seizure lasted 4 minutes. Memory loss total. Subject claims to be someone else now. Dr. Mordecai pleased with results. Proceeding to next phase.'" CR>
+                <TELL "The LOGBOOK contains clinical observations of treatments. One entry stands out: 'Session 47 - Patient 189. Subject required maximum voltage. Seizure lasted 4 minutes. Memory loss total. Subject claims to be someone else now. Dr. Mordecai pleased with results. Proceeding to next phase.'" CR>
                 <RTRUE>)>>
 
 <ROOM ADMINISTRATIVE-WING
       (IN ROOMS)
       (DESC "Administrative Wing")
-      (LDESC "Offices line a carpeted corridor. Most doors hang open, revealing ransacked rooms. Filing cabinets are overturned, papers scattered everywhere. To the east lies the director's office. North leads to the staff quarters. South returns to the observation deck.")
+      (LDESC "Offices line a carpeted corridor. Most doors hang open, revealing ransacked rooms. Filing cabinets are overturned, PAPERS scattered everywhere. To the east lies the director's office. North leads to the staff quarters. South returns to the observation deck.")
       (SOUTH TO OBSERVATION-DECK)
       (EAST TO DIRECTORS-OFFICE)
       (NORTH TO STAFF-QUARTERS)
@@ -846,13 +846,13 @@
 
 <ROUTINE SCATTERED-PAPERS-F ()
          <COND (<VERB? EXAMINE READ SEARCH>
-                <TELL "You sort through the papers. Most are mundane: supply orders, staff schedules, building maintenance. One memo catches your eye: 'All staff reminded - Subject 189 is NOT to be released under any circumstances. Chapel is OFF LIMITS.'." CR>
+                <TELL "You sort through the PAPERS. Most are mundane: supply orders, staff schedules, building maintenance. One memo catches your eye: 'All staff reminded - Subject 189 is NOT to be released under any circumstances. Chapel is OFF LIMITS.'." CR>
                 <RTRUE>)>>
 
 <ROOM DIRECTORS-OFFICE
       (IN ROOMS)
       (DESC "Director's Office")
-      (LDESC "A large office with wood paneling and a massive desk. Bookshelves line the walls, filled with medical texts and journals. A portrait of Dr. Mordecai hangs above the desk, his stern eyes seeming to follow you. A safe is visible behind a moved painting.")
+      (LDESC "A large office with wood paneling and a massive DESK. Bookshelves line the walls, filled with medical texts and journals. A PORTRAIT of Dr. Mordecai hangs above the DESK, his stern eyes seeming to follow you. A SAFE is visible behind a moved painting.")
       (WEST TO ADMINISTRATIVE-WING)
       (FLAGS LIGHTBIT)>
 
@@ -867,7 +867,7 @@
 
 <ROUTINE MASSIVE-DESK-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE>
-                <TELL "The desk is made of dark wood, highly polished. The drawers contain mostly empty folders and pens. A hidden compartment in the top drawer holds a key." CR>
+                <TELL "The DESK is made of dark wood, highly polished. The drawers contain mostly empty folders and pens. A hidden compartment in the top drawer holds a KEY." CR>
                 <RTRUE>)>>
 
 <OBJECT SAFE-KEY
@@ -882,7 +882,7 @@
 
 <ROUTINE SAFE-KEY-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "A small brass key with a tag reading 'S-001'. It looks like a safe key." CR>
+                <TELL "A small brass KEY with a tag reading 'S-001'. It looks like a safe key." CR>
                 <RTRUE>)>>
 
 <OBJECT MORDECAI-PORTRAIT
@@ -896,7 +896,7 @@
 
 <ROUTINE PORTRAIT-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "The portrait shows Dr. Mordecai, a gaunt man with piercing eyes and a cruel mouth. The nameplate reads: 'Dr. Heinrich Mordecai - Director 1935-1952'. His eyes seem to follow you around the room." CR>
+                <TELL "The PORTRAIT shows Dr. Mordecai, a gaunt man with piercing eyes and a cruel mouth. The nameplate reads: 'Dr. Heinrich Mordecai - Director 1935-1952'. His eyes seem to follow you around the room." CR>
                 <RTRUE>)>>
 
 <OBJECT WALL-SAFE
@@ -911,25 +911,25 @@
 <ROUTINE WALL-SAFE-F ()
          <COND (<AND <VERB? EXAMINE>
                      <FSET? ,WALL-SAFE ,OPENBIT>>
-                <TELL "The safe is open. Inside you can see its contents." CR>
+                <TELL "The SAFE is open. Inside you can see its contents." CR>
                 <RTRUE>)
                (<AND <VERB? EXAMINE>
                      <NOT <FSET? ,WALL-SAFE ,OPENBIT>>>
-                <TELL "The safe is locked. It requires a key." CR>
+                <TELL "The SAFE is locked. It requires a key." CR>
                 <RTRUE>)
                (<AND <VERB? OPEN UNLOCK>
                      <FSET? ,WALL-SAFE ,OPENBIT>>
-                <TELL "The safe is already open." CR>
+                <TELL "The SAFE is already open." CR>
                 <RTRUE>)
                (<AND <VERB? OPEN UNLOCK>
                      <NOT <FSET? ,WALL-SAFE ,OPENBIT>>
                      <NOT <IN? ,SAFE-KEY ,WINNER>>>
-                <TELL "The safe is locked. You need the key." CR>
+                <TELL "The SAFE is locked. You need the key." CR>
                 <RTRUE>)
                (<AND <VERB? OPEN UNLOCK>
                      <NOT <FSET? ,WALL-SAFE ,OPENBIT>>
                      <IN? ,SAFE-KEY ,WINNER>>
-                <TELL "You unlock the " D ,WALL-SAFE " with the " D ,SAFE-KEY ". Inside are Dr. Mordecai's private notes and a " D ,CHAPEL-KEY "." CR>
+                <TELL "You unlock the " D ,WALL-SAFE " with the " D ,SAFE-KEY ". Inside are Dr. Mordecai's private NOTES and a " D ,CHAPEL-KEY "." CR>
                 <FSET ,WALL-SAFE ,OPENBIT>
                 <RTRUE>)>>
 
@@ -946,7 +946,7 @@
 
 <ROUTINE MORDECAI-NOTES-F ()
          <COND (<VERB? READ EXAMINE>
-                <TELL "The notes are written in a shaking hand: 'October 30, 1952 - The experiment succeeded beyond my wildest expectations. Patient 189 has transcended death itself. But the cost... the screaming never stops. I hear it in my sleep. The others want to shut down the sanitarium. Fools! They don't understand what we've achieved. The chapel must remain locked. What I've created must never escape.'" CR>
+                <TELL "The NOTES are written in a shaking hand: 'October 30, 1952 - The experiment succeeded beyond my wildest expectations. Patient 189 has transcended death itself. But the cost... the screaming never stops. I hear it in my sleep. The others want to shut down the sanitarium. Fools! They don't understand what we've achieved. The chapel must remain locked. What I've created must never escape.'" CR>
                 <RTRUE>)>>
 
 <OBJECT CHAPEL-KEY
@@ -961,13 +961,13 @@
 
 <ROUTINE CHAPEL-KEY-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "A heavy iron key with a cross engraved on its head. The key feels unnaturally cold." CR>
+                <TELL "A heavy iron KEY with a cross engraved on its head. The KEY feels unnaturally cold." CR>
                 <RTRUE>)>>
 
 <ROOM STAFF-QUARTERS
       (IN ROOMS)
       (DESC "Staff Quarters")
-      (LDESC "A dormitory with rows of narrow beds. Lockers line one wall. Most are open and empty, their contents long gone. The air smells of mildew and abandonment. To the west is the cafeteria. South returns to the administrative wing.")
+      (LDESC "A dormitory with rows of narrow beds. LOCKERS line one wall. Most are open and empty, their contents long gone. The air smells of mildew and abandonment. To the west is the cafeteria. South returns to the administrative wing.")
       (SOUTH TO ADMINISTRATIVE-WING)
       (WEST TO CAFETERIA)
       (FLAGS LIGHTBIT)>
@@ -983,7 +983,7 @@
 
 <ROUTINE LOCKERS-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE SEARCH>
-                <TELL "Most lockers are empty or contain rotted clothing. One locker holds a nurse's uniform and a photograph." CR>
+                <TELL "Most LOCKERS are empty or contain rotted clothing. One LOCKER holds a nurse's uniform and a PHOTOGRAPH." CR>
                 <RTRUE>)>>
 
 <OBJECT PHOTOGRAPH
@@ -998,13 +998,13 @@
 
 <ROUTINE PHOTOGRAPH-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "The photograph shows the sanitarium staff posed outside the building. Dr. Mordecai stands in the center, unsmiling. Written on the back: 'Staff photo 1950. Two years before they closed us down. Two years before everything went wrong.'" CR>
+                <TELL "The PHOTOGRAPH shows the sanitarium staff posed outside the building. Dr. Mordecai stands in the center, unsmiling. Written on the back: 'Staff photo 1950. Two years before they closed us down. Two years before everything went wrong.'" CR>
                 <RTRUE>)>>
 
 <ROOM CAFETERIA
       (IN ROOMS)
       (DESC "Cafeteria")
-      (LDESC "Long tables with attached benches fill the room. A serving counter separates the dining area from the kitchen beyond. Trays and plates lie scattered about, covered in dust. A door to the north leads to the garden. East returns to the staff quarters.")
+      (LDESC "Long tables with attached benches fill the room. A serving COUNTER separates the dining area from the kitchen beyond. Trays and plates lie scattered about, covered in dust. A door to the north leads to the garden. East returns to the staff quarters.")
       (EAST TO STAFF-QUARTERS)
       (NORTH TO OVERGROWN-GARDEN)
       (FLAGS LIGHTBIT)>
@@ -1020,7 +1020,7 @@
 
 <ROUTINE COUNTER-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE>
-                <TELL "The serving counter is thick with dust. Old menus are still posted on the wall: 'Monday - Mystery Meat'. A bell for summoning kitchen staff sits on the counter." CR>
+                <TELL "The serving COUNTER is thick with dust. Old menus are still posted on the wall: 'Monday - Mystery Meat'. A BELL for summoning kitchen staff sits on the COUNTER." CR>
                 <RTRUE>)>>
 
 <OBJECT BELL
@@ -1035,16 +1035,16 @@
 
 <ROUTINE BELL-F ()
          <COND (<VERB? RING>
-                <TELL "You ring the bell. The tinny sound echoes through the empty cafeteria. No one comes." CR>
+                <TELL "You ring the BELL. The tinny sound echoes through the empty cafeteria. No one comes." CR>
                 <RTRUE>)
                (<VERB? EXAMINE>
-                <TELL "A small brass bell with a button on top. It still works." CR>
+                <TELL "A small brass BELL with a button on top. It still works." CR>
                 <RTRUE>)>>
 
 <ROOM OVERGROWN-GARDEN
       (IN ROOMS)
       (DESC "Overgrown Garden")
-      (LDESC "What was once a therapeutic garden is now a wild tangle of weeds and dead plants. Broken benches lie among the overgrowth. A stone path, barely visible, leads to a small chapel to the north. The chapel door is secured with a heavy lock. South returns to the cafeteria.")
+      (LDESC "What was once a therapeutic GARDEN is now a wild tangle of weeds and dead plants. Broken benches lie among the overgrowth. A stone path, barely visible, leads to a small chapel to the north. The CHAPEL DOOR is secured with a heavy lock. South returns to the cafeteria.")
       (SOUTH TO CAFETERIA)
       (NORTH TO CHAPEL IF CHAPEL-UNLOCKED)
       (FLAGS LIGHTBIT)>
@@ -1060,7 +1060,7 @@
 
 <ROUTINE DEAD-GARDEN-F ()
          <COND (<VERB? EXAMINE SEARCH>
-                <TELL "The garden has been dead for decades. Thorny vines choke what remains of flower beds. Among the weeds, you can see broken stone benches and a crumbling fountain." CR>
+                <TELL "The GARDEN has been dead for decades. Thorny vines choke what remains of flower beds. Among the weeds, you can see broken stone benches and a crumbling fountain." CR>
                 <RTRUE>)>>
 
 <OBJECT CHAPEL-DOOR
@@ -1075,31 +1075,31 @@
 <ROUTINE CHAPEL-DOOR-F ()
          <COND (<AND <VERB? EXAMINE>
                      <NOT ,CHAPEL-UNLOCKED>>
-                <TELL "The door is made of thick oak bound with iron straps. A large iron lock secures it. Above the door, carved words read: 'HE WHO ENTERS ABANDONS HOPE'." CR>
+                <TELL "The DOOR is made of thick oak bound with iron straps. A large iron lock secures it. Above the DOOR, carved words read: 'HE WHO ENTERS ABANDONS HOPE'." CR>
                 <RTRUE>)
                (<AND <VERB? EXAMINE>
                      ,CHAPEL-UNLOCKED>
-                <TELL "The door stands open, darkness visible beyond." CR>
+                <TELL "The DOOR stands open, darkness visible beyond." CR>
                 <RTRUE>)
                (<AND <VERB? OPEN UNLOCK>
                      <NOT ,CHAPEL-UNLOCKED>
                      <NOT <IN? ,CHAPEL-KEY ,WINNER>>>
-                <TELL "The door is locked. You need the " D ,CHAPEL-KEY "." CR>
+                <TELL "The DOOR is locked. You need the " D ,CHAPEL-KEY "." CR>
                 <RTRUE>)
                (<AND <VERB? OPEN UNLOCK>
                      <NOT ,CHAPEL-UNLOCKED>
                      <IN? ,CHAPEL-KEY ,WINNER>>
-                <TELL "You insert the " D ,CHAPEL-KEY " into the lock. It turns with a heavy CLUNK. The door swings open slowly, revealing darkness beyond. A foul wind rushes out, carrying the scent of decay." CR>
+                <TELL "You insert the " D ,CHAPEL-KEY " into the lock. It turns with a heavy CLUNK. The DOOR swings open slowly, revealing darkness beyond. A foul wind rushes out, carrying the scent of decay." CR>
                 <SETG CHAPEL-UNLOCKED T>
                 <RTRUE>)
                (<VERB? READ>
-                <TELL "The words carved above the door read: 'HE WHO ENTERS ABANDONS HOPE'." CR>
+                <TELL "The words carved above the DOOR read: 'HE WHO ENTERS ABANDONS HOPE'." CR>
                 <RTRUE>)>>
 
 <ROOM CHAPEL
       (IN ROOMS)
       (DESC "Chapel")
-      (LDESC "The chapel is small and dark. Pews face an altar where a figure stands motionless. The air is thick and cold. Candles burn with an unnatural green flame. The figure at the altar turns to face you—its eyes glow faintly in the darkness. This is Patient 189, if you can still call it that. South lies the exit.")
+      (LDESC "The chapel is small and dark. PEWS face an altar where a figure stands motionless. The air is thick and cold. CANDLES burn with an unnatural green flame. The figure at the altar turns to face you—its eyes glow faintly in the darkness. This is PATIENT 189, if you can still call it that. South lies the exit.")
       (SOUTH TO OVERGROWN-GARDEN)
       (FLAGS LIGHTBIT)>
 
@@ -1114,7 +1114,7 @@
 
 <ROUTINE PEWS-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "The pews are ancient and rotting. Strange symbols are carved into the wood—symbols that hurt to look at." CR>
+                <TELL "The PEWS are ancient and rotting. Strange symbols are carved into the wood—symbols that hurt to look at." CR>
                 <RTRUE>)>>
 
 <OBJECT GREEN-CANDLES
@@ -1128,7 +1128,7 @@
 
 <ROUTINE GREEN-CANDLES-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "The candles burn with green flames that give off no heat. The light makes everything look diseased." CR>
+                <TELL "The CANDLES burn with green flames that give off no heat. The light makes everything look diseased." CR>
                 <RTRUE>)>>
 
 <OBJECT PATIENT-189
@@ -1142,7 +1142,7 @@
 
 <ROUTINE PATIENT-189-F ()
          <COND (<VERB? EXAMINE>
-                <TELL "Patient 189 stands impossibly still. Its skin is pale as death, its eyes glowing faintly green. It watches you with an intelligence that is distinctly not human. Dr. Mordecai's greatest achievement—and greatest horror." CR>
+                <TELL "PATIENT 189 stands impossibly still. Its skin is pale as death, its eyes glowing faintly green. It watches you with an intelligence that is distinctly not human. Dr. Mordecai's greatest achievement—and greatest horror." CR>
                 <RTRUE>)
                (<VERB? ATTACK KILL>
                 <TELL "You cannot bring yourself to approach it. Some primal instinct holds you back." CR>
