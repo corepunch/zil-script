@@ -22,17 +22,33 @@ This will compile the ZIL files specified in `main.lua` and start the interactiv
 
 ## Testing
 
-The project includes a test framework for automated testing of ZIL programs.
+The project includes both unit tests for individual components and integration tests for the full game runtime.
 
-### Running Tests
+### Running Unit Tests
 
-To run the default test suite:
+To run all unit tests:
+
+```bash
+lua tests/unit/run_all.lua
+```
+
+To run tests for a specific component:
+
+```bash
+lua tests/unit/test_parser.lua    # Parser tests
+lua tests/unit/test_compiler.lua  # Compiler tests
+lua tests/unit/test_runtime.lua   # Runtime tests
+```
+
+### Running Integration Tests
+
+To run the default integration test suite:
 
 ```bash
 lua tests/run_tests.lua
 ```
 
-To run a specific test file:
+To run a specific integration test file:
 
 ```bash
 lua tests/run_tests.lua tests/zork1_extended.lua
@@ -40,8 +56,22 @@ lua tests/run_tests.lua tests/zork1_extended.lua
 
 ### Available Test Files
 
-- `tests/zork1_basic.lua` - Basic game interaction tests
-- `tests/zork1_extended.lua` - Extended command sequence tests
+**Unit Tests** (in `tests/unit/`):
+- `test_parser.lua` - Parser module tests
+- `test_compiler.lua` - Compiler module tests
+- `test_runtime.lua` - Runtime module tests
+
+**Integration Tests** (in `tests/`):
+- `zork1_basic.lua` - Basic game interaction tests
+- `zork1_extended.lua` - Extended command sequence tests
+
+#### Parser/Runtime Tests (Inspired by ZILF)
+
+- `tests/test-directions.lua` - Direction and movement parsing
+- `tests/test-take.lua` - TAKE command functionality  
+- `tests/test-containers.lua` - Container interactions
+- `tests/test-light.lua` - Light source mechanics
+- `tests/test-pronouns.lua` - Basic object interactions
 
 #### Parser/Runtime Tests (Inspired by ZILF)
 
@@ -62,9 +92,15 @@ See `tests/README.md` for detailed information on writing and running tests.
   - `compiler.lua` - ZIL to Lua compiler
   - `evaluate.lua` - Expression evaluator
 - `tests/` - Test framework and test files
-  - `run_tests.lua` - Test runner
-  - `zork1_basic.lua` - Basic tests
-  - `zork1_extended.lua` - Extended tests
+  - `run_tests.lua` - Integration test runner
+  - `zork1_basic.lua` - Basic integration tests
+  - `zork1_extended.lua` - Extended integration tests
+  - `unit/` - Unit tests directory
+    - `test_framework.lua` - Unit testing framework
+    - `test_parser.lua` - Parser unit tests
+    - `test_compiler.lua` - Compiler unit tests
+    - `test_runtime.lua` - Runtime unit tests
+    - `run_all.lua` - Unit test runner
 - `zork1/` - Zork 1 game files (git submodule)
 - `adventure/` - Additional adventure files
 
@@ -86,6 +122,15 @@ local files = {
 You can modify this list to load different ZIL files or create your own adventure.
 
 ## Development
+
+### Code Quality
+
+The ZIL runtime codebase is structured for testability and maintainability:
+
+- **Modular Design**: Parser, compiler, and runtime are separate modules with clear interfaces
+- **Unit Testing**: 120+ unit tests cover core functionality
+- **Integration Testing**: Full end-to-end tests validate game execution
+- **Error Handling**: Proper error reporting for parsing, compilation, and runtime errors
 
 ### Adding New Tests
 
