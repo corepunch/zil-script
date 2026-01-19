@@ -160,6 +160,12 @@ function PICK_ONE(table)
 	return mem:word(table+sel*2)
 end
 
+function PROB(base)
+	return math.random(100) <= base
+end
+
+ZPROB = PROB
+
 function TELL(...)
 	local object = false
 	for i = 1, select("#", ...) do
