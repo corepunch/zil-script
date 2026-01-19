@@ -7,7 +7,7 @@
       (DESC "Sanitarium Gate")
       (LDESC "You stand before the rusted iron gates of an abandoned sanitarium. The structure looms against the darkening sky, its windows like hollow eye sockets. Weeds choke the gravel path leading north to the entrance. A corroded BRASS PLAQUE hangs askew on the gate.")
       (NORTH TO SANITARIUM-ENTRANCE)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT ONBIT)>
 
 <ROUTINE PLAQUE-F ()
          <COND (<VERB? READ EXAMINE>
@@ -34,7 +34,7 @@
       (NORTH TO OPERATING-THEATER)
       (EAST TO PATIENT-WARD)
       (DOWN TO BASEMENT-STAIRS)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT ONBIT)>
 
 <OBJECT WALLPAPER
         (IN SANITARIUM-ENTRANCE)
@@ -55,7 +55,7 @@
       (DESC "Reception Room")
       (LDESC "This cramped room once served as the sanitarium's reception. A heavy OAK DESK sits against one wall, its surface thick with dust. Filing cabinets line the opposite wall, their drawers hanging open like gaping mouths. Something glints among the papers scattered on the floor.")
       (EAST TO SANITARIUM-ENTRANCE)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT ONBIT)>
 
 <OBJECT OAK-DESK
         (IN RECEPTION-ROOM)
@@ -135,7 +135,7 @@
       (DESC "Operating Theater")
       (LDESC "The circular theater is dominated by a stained OPERATING TABLE in the center. Rusty surgical instruments lie scattered about. Rising tiers of benches circle the table, where students once observed procedures. A metal CABINET stands in the shadows, its door slightly ajar. The air here is thick with an oppressive dread.")
       (SOUTH TO SANITARIUM-ENTRANCE)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT ONBIT)>
 
 <OBJECT OPERATING-TABLE
         (IN OPERATING-THEATER)
@@ -204,7 +204,7 @@
       (LDESC "A long corridor lined with rusted BED FRAMES. Tattered curtains hang between them, offering the ghost of privacy. At the far end, a heavy DOOR sealed with CHAINS blocks further passage. Scratches cover the door's surface, as if made by desperate fingers. The floor is littered with patient records and broken glass.")
       (WEST TO SANITARIUM-ENTRANCE)
       (NORTH TO MORGUE IF CHAINS-CUT-FLAG)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT ONBIT)>
 
 <OBJECT BED-FRAMES
         (IN PATIENT-WARD)
@@ -275,7 +275,7 @@
       (DESC "Morgue")
       (LDESC "The temperature drops as you enter the morgue. Refrigerated DRAWERS line both walls. In the center, a DISSECTION TABLE holds what appears to be a canvas-wrapped BUNDLE. Medical instruments hang on the wall. A JOURNAL rests on a small desk in the corner. This place feels wrong, as though something lingers here still.")
       (SOUTH TO PATIENT-WARD)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT)>
 
 <OBJECT REFRIGERATED-DRAWERS
         (IN MORGUE)
@@ -366,7 +366,7 @@
       (LDESC "A narrow stone staircase descends into darkness. The air grows colder with each step. Moisture drips from the ceiling, and the walls are slick with condensation. The stairs lead down into the basement, while the entrance hall lies to the south.")
       (UP TO SANITARIUM-ENTRANCE)
       (DOWN TO BASEMENT-CORRIDOR)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT)>
 
 <ROOM BASEMENT-CORRIDOR
       (IN ROOMS)
@@ -376,7 +376,7 @@
       (EAST TO BOILER-ROOM)
       (WEST TO STORAGE-ROOM)
       (NORTH TO FLOODING-CHAMBER)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT)>
 
 <OBJECT PIPES
         (IN BASEMENT-CORRIDOR)
@@ -420,7 +420,7 @@
       (DESC "Boiler Room")
       (LDESC "The boiler room is dominated by a massive iron BOILER, cold and silent. Coal dust covers everything. A WORKBENCH sits against the far wall, covered with ancient tools. The room radiates a sense of dormant power, waiting to awaken.")
       (WEST TO BASEMENT-CORRIDOR)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT)>
 
 <OBJECT IRON-BOILER
         (IN BOILER-ROOM)
@@ -488,7 +488,7 @@
       (DESC "Storage Room")
       (LDESC "SHELVES line the walls, sagging under the weight of moldering supplies. Old linens, rusted equipment, and unidentifiable containers fill every space. A sour smell permeates the air. The exit lies to the east.")
       (EAST TO BASEMENT-CORRIDOR)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT)>
 
 <OBJECT SHELVES
         (IN STORAGE-ROOM)
@@ -558,7 +558,7 @@
       (SOUTH TO BASEMENT-CORRIDOR)
       (NORTH TO ISOLATION-WARD)
       (EAST TO HYDROTHERAPY-ROOM IF STEAM-DOOR-OPEN)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT)>
 
 <OBJECT STANDING-WATER
         (IN FLOODING-CHAMBER)
@@ -612,7 +612,7 @@
       (DESC "Hydrotherapy Room")
       (LDESC "Large porcelain TUBS line the walls, each fitted with restraints. Rubber hoses dangle from fixtures overhead. The tiles are cracked and stained. A CABINET stands in the corner, its door hanging loose.")
       (WEST TO FLOODING-CHAMBER)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT)>
 
 <OBJECT PORCELAIN-TUBS
         (IN HYDROTHERAPY-ROOM)
@@ -679,7 +679,7 @@
       (LDESC "Small cells line both sides of a narrow corridor. Heavy DOORS with barred windows stand open, revealing bare concrete rooms within. Scratches cover the walls—thousands of them, as if someone counted the days. The corridor continues north to the electroshock theater.")
       (SOUTH TO FLOODING-CHAMBER)
       (NORTH TO ELECTROSHOCK-THEATER)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT)>
 
 <OBJECT CELL-DOORS
         (IN ISOLATION-WARD)
@@ -716,7 +716,7 @@
       (SOUTH TO ISOLATION-WARD)
       (EAST TO OBSERVATION-DECK)
       (WEST TO PADDED-CELL)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT)>
 
 <OBJECT SHOCK-CHAIR
         (IN ELECTROSHOCK-THEATER)
@@ -754,7 +754,7 @@
       (DESC "Padded Cell")
       (LDESC "Every surface is covered in rotting PADDING, now torn and hanging in strips. The small room reeks of decay. A STRAITJACKET lies in the corner. Something has been written on the PADDING in what looks like dried blood.")
       (EAST TO ELECTROSHOCK-THEATER)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT)>
 
 <OBJECT PADDING
         (IN PADDED-CELL)
@@ -794,7 +794,7 @@
       (LDESC "A small room overlooking the electroshock theater through a one-way MIRROR. Chairs face the window. A LOGBOOK rests on a desk. This is where doctors watched their experiments. Stairs lead down to the west, and a door to the north opens to the administrative wing.")
       (WEST TO ELECTROSHOCK-THEATER)
       (NORTH TO ADMINISTRATIVE-WING)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT ONBIT)>
 
 <OBJECT ONE-WAY-MIRROR
         (IN OBSERVATION-DECK)
@@ -833,7 +833,7 @@
       (SOUTH TO OBSERVATION-DECK)
       (EAST TO DIRECTORS-OFFICE)
       (NORTH TO STAFF-QUARTERS)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT ONBIT)>
 
 <OBJECT SCATTERED-PAPERS
         (IN ADMINISTRATIVE-WING)
@@ -854,7 +854,7 @@
       (DESC "Director's Office")
       (LDESC "A large office with wood paneling and a massive DESK. Bookshelves line the walls, filled with medical texts and journals. A PORTRAIT of Dr. Mordecai hangs above the DESK, his stern eyes seeming to follow you. A SAFE is visible behind a moved painting.")
       (WEST TO ADMINISTRATIVE-WING)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT ONBIT)>
 
 <OBJECT MASSIVE-DESK
         (IN DIRECTORS-OFFICE)
@@ -970,7 +970,7 @@
       (LDESC "A dormitory with rows of narrow beds. LOCKERS line one wall. Most are open and empty, their contents long gone. The air smells of mildew and abandonment. To the west is the cafeteria. South returns to the administrative wing.")
       (SOUTH TO ADMINISTRATIVE-WING)
       (WEST TO CAFETERIA)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT ONBIT)>
 
 <OBJECT LOCKERS
         (IN STAFF-QUARTERS)
@@ -1007,7 +1007,7 @@
       (LDESC "Long tables with attached benches fill the room. A serving COUNTER separates the dining area from the kitchen beyond. Trays and plates lie scattered about, covered in dust. A door to the north leads to the garden. East returns to the staff quarters.")
       (EAST TO STAFF-QUARTERS)
       (NORTH TO OVERGROWN-GARDEN)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT ONBIT)>
 
 <OBJECT SERVING-COUNTER
         (IN CAFETERIA)
@@ -1047,7 +1047,7 @@
       (LDESC "What was once a therapeutic GARDEN is now a wild tangle of weeds and dead plants. Broken benches lie among the overgrowth. A stone path, barely visible, leads to a small chapel to the north. The CHAPEL DOOR is secured with a heavy lock. South returns to the cafeteria.")
       (SOUTH TO CAFETERIA)
       (NORTH TO CHAPEL IF CHAPEL-UNLOCKED)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT ONBIT)>
 
 <OBJECT DEAD-GARDEN
         (IN OVERGROWN-GARDEN)
@@ -1101,7 +1101,7 @@
       (DESC "Chapel")
       (LDESC "The chapel is small and dark. PEWS face an altar where a figure stands motionless. The air is thick and cold. CANDLES burn with an unnatural green flame. The figure at the altar turns to face you—its eyes glow faintly in the darkness. This is PATIENT 189, if you can still call it that. South lies the exit.")
       (SOUTH TO OVERGROWN-GARDEN)
-      (FLAGS RLANDBIT ONBIT LIGHTBIT)>
+      (FLAGS RLANDBIT ONBIT)>
 
 <OBJECT PEWS
         (IN CHAPEL)
