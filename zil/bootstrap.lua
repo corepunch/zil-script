@@ -642,6 +642,7 @@ local function connected_exits(room)
 end
 
 local suggestions = {
+	READBIT = "READ",
 	TAKEBIT = "TAKE",
 	CONTBIT = "OPEN",
 	DOORBIT = "OPEN",
@@ -656,11 +657,13 @@ function GM_NOTES(room)
 		for obj in objects_in_room(room, ADVENTURER) do
 			local verbs = {}
 			local action = GETP(obj, PQACTION)
+			local text = GETP(obj, PQTEXT) and not FSETQ(obj, READBIT)
 			local item = GETP(obj, PQDESC) or ""
 			if action then
 				local func = FUNCTIONS[tonumber(action)]
 				for k, v in pairs(_G) do if v == func then verbs = _G['_'..k] break end end
 			end
+			if text then table.insert(verbs, "EXAMINE") end
 			local fnd = function(name, array) 
 				for _, n in ipairs(array) do if n == name then return true end end
 			end
