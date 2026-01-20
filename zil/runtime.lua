@@ -12,6 +12,7 @@ function M.create_game_env()
 		print = print, 
 		io = io, 
 		os = os,
+		coroutine = coroutine,
 		setmetatable = setmetatable,
 		ipairs = ipairs,
 		pairs = pairs,
@@ -124,6 +125,25 @@ end
 -- Returns true on success, false on failure
 function M.start_game(env, silent)
 	return M.execute("GO()", 'main', env, silent)
+end
+
+-- Create a coroutine for the game that yields on input
+-- Returns a coroutine object
+function M.create_game_coroutine(env, silent)
+	return coroutine.create(function()
+		M.execute("GO()", 'main', env, silent)
+	end)
+end
+
+-- Resume the game coroutine with input
+-- Returns: status (boolean), result (any value or error message)
+function M.resume_game(coro, input)
+	return coroutine.resume(coro, input)
+end
+
+-- Check if the coroutine is still running
+function M.is_running(coro)
+	return coroutine.status(coro) ~= "dead"
 end
 
 return M

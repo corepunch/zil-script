@@ -14,19 +14,6 @@ local function run_test_file(test_file_path)
 	-- Create game environment
 	local game = runtime.create_game_env()
 	
-	-- Prepare test commands
-	local commands = {}
-	for _, cmd in ipairs(test_config.commands) do
-		table.insert(commands, cmd.input)
-	end
-	
-	-- Set up test mode
-	game.TEST_COMMANDS = commands
-	game.ON_TEST_COMPLETE = function()
-		print("\n=== Test commands completed ===")
-		os.exit(0)
-	end
-	
 	-- Load bootstrap
 	if not runtime.load_bootstrap(game, true) then
 		print("Failed to load bootstrap")
@@ -48,12 +35,32 @@ local function run_test_file(test_file_path)
 		return false
 	end
 	
-	-- Run the game with test commands
-	if not runtime.start_game(game, true) then
-		print("Failed to start game")
+	-- Create game as a coroutine
+	local game_coro = runtime.create_game_coroutine(game, true)
+	
+	-- Start the game (first resume to initialize - no input needed yet)
+	local status, result = runtime.resume_game(game_coro)
+	if not status then
+		print("Failed to start game: " .. tostring(result))
 		return false
 	end
 	
+	-- Feed test commands to the coroutine
+	for i, cmd in ipairs(test_config.commands) do
+		if not runtime.is_running(game_coro) then
+			print("\nGame ended unexpectedly after command " .. (i-1))
+			break
+		end
+		
+		print("> " .. cmd.input)
+		status, result = runtime.resume_game(game_coro, cmd.input)
+		if not status then
+			print("Error executing command '" .. cmd.input .. "': " .. tostring(result))
+			return false
+		end
+	end
+	
+	print("\n=== Test commands completed ===")
 	return true
 end
 
