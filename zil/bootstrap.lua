@@ -121,6 +121,22 @@ local mem = setmetatable({size=0},{__index={
 	end
 }})
 
+-- Output buffer management
+local output_buffer = {}
+
+local function write_output(...)
+	for i = 1, select("#", ...) do
+		local v = select(i, ...)
+		table.insert(output_buffer, tostring(v))
+	end
+end
+
+local function flush_output()
+	local output = table.concat(output_buffer)
+	output_buffer = {}
+	return output
+end
+
 local cache = {
 	verbs = {},
 	words = {},
@@ -171,24 +187,24 @@ function TELL(...)
 	for i = 1, select("#", ...) do
     local v = select(i, ...)
 		if v == D then object = true
-		elseif object then object = false io.write(GETP(v, _G["PQDESC"]))
-		elseif type(v) == "number" then io.write(mem:string(v))
-    else io.write(tostring(v)) end
+		elseif object then object = false write_output(GETP(v, _G["PQDESC"]))
+		elseif type(v) == "number" then write_output(mem:string(v))
+    else write_output(tostring(v)) end
   end
 end
 
-function PRINT(str) print(str) end
-function PRINTD(ptr) io.write(GETP(ptr, _G["PQDESC"])) end
-function PRINTR(ptr) io.write(GETP(ptr, _G["PQLDESC"])) end
+function PRINT(str) write_output(str) write_output("\n") end
+function PRINTD(ptr) write_output(GETP(ptr, _G["PQDESC"])) end
+function PRINTR(ptr) write_output(GETP(ptr, _G["PQLDESC"])) end
 function PRINTB(ptr) 
 	for word, index in pairs(cache.words) do
-		if index == ptr then io.write(word) end
+		if index == ptr then write_output(word) end
 	end
 end
 PRINTI = PRINT
 PRINTN = PRINT
-function PRINTC(ch) io.write(string.char(ch)) end
-function CRLF() print() end
+function PRINTC(ch) write_output(string.char(ch)) end
+function CRLF() write_output("\n") end
 
 -- Logic / bitwise
 function NOT(a) return not a or a == 0 end
@@ -448,7 +464,7 @@ end
 
 function READ(inbuf, parse)
 	-- Yield to get input from the caller (coroutine)
-	local s = coroutine.yield()
+	local s = coroutine.yield(flush_output())
 	
 	-- Handle nil input (e.g., EOF)
 	if not s then
@@ -631,7 +647,7 @@ local suggestions = {
 function GM_NOTES(room)
 	local num = 1
 	if objects_in_room(room, ADVENTURER)() then
-		print("\nItems:")
+		write_output("\nItems:\n")
 		for obj in objects_in_room(room, ADVENTURER) do
 			local verbs = {}
 			local action = GETP(obj, PQACTION)
@@ -648,21 +664,21 @@ function GM_NOTES(room)
 				end
 			end
 			if #verbs > 0 then
-				print(string.format("  %d. %s (%s)", num, GETP(obj, PQDESC):upper(), table.concat(verbs, ', ')))
+				write_output(string.format("  %d. %s (%s)\n", num, GETP(obj, PQDESC):upper(), table.concat(verbs, ', ')))
 			else
-				print(string.format("  %d. %s", num, GETP(obj, PQDESC):upper()))
+				write_output(string.format("  %d. %s\n", num, GETP(obj, PQDESC):upper()))
 			end
 			PRINT_CONT(obj, nil, 2)
 			num = num + 1
 		end
 	end
 	if connected_exits(room)() then
-		print("\nExits:")
+		write_output("\nExits:\n")
 		for d, pp in connected_exits(room) do
 			if PTSIZE(pp) == 1 then
-				print(string.format("  %s -> %s", d, GETP(GETB(pp, 0), PQDESC)))
+				write_output(string.format("  %s -> %s\n", d, GETP(GETB(pp, 0), PQDESC)))
 			elseif PTSIZE(pp) == 2 then
-				print(string.format("  %s -> \"%s\"", d, mem:string(GET(pp, 0))))
+				write_output(string.format("  %s -> \"%s\"\n", d, mem:string(GET(pp, 0))))
 			end
 		end
 	end

@@ -28,10 +28,15 @@ end
 local game_coro = runtime.create_game_coroutine(game)
 
 -- Start the game (first resume to initialize - no input needed yet)
-local status, result = runtime.resume_game(game_coro)
+local status, output = runtime.resume_game(game_coro)
 if not status then
-	print("Error starting game: " .. tostring(result))
+	print("Error starting game: " .. tostring(output))
 	os.exit(1)
+end
+
+-- Print initial output if any
+if output and output ~= "" then
+	io.write(output)
 end
 
 -- Main game loop - resume with input from io.read()
@@ -42,10 +47,15 @@ while runtime.is_running(game_coro) do
 		os.exit(0)
 	end
 	
-	status, result = runtime.resume_game(game_coro, input)
+	status, output = runtime.resume_game(game_coro, input)
 	if not status then
-		print("Error in game: " .. tostring(result))
+		print("Error in game: " .. tostring(output))
 		os.exit(1)
+	end
+	
+	-- Print output if any
+	if output and output ~= "" then
+		io.write(output)
 	end
 end
 
