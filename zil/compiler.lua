@@ -49,7 +49,7 @@ local function value(node)
   
   -- Strings
   if node.type == "string" then
-    val = val:gsub("\\", "/"):gsub("\n", " "):gsub("|", "\\n"):gsub("\"", "\\\"")
+    val = val:gsub("\\", "/"):gsub("|\n", "\\n"):gsub("\n", " "):gsub("|", "\\n"):gsub("\"", "\\\"")
     return string.format("\"%s\"", val)
   end
     

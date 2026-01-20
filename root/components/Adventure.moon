@@ -75,13 +75,20 @@ class Adventure extends ui.Form
 		-- 	select = -> @addChild p class: 'm-1', choice
 		-- 	ui.Button class: 'm-1 py-1 px-2 text-blue-300 bg-muted hover:bg-primary hover:text-blue-100', onClick: select, choice
 		
+		action = 'm-1 py-1 px-2 text-blue-300 bg-muted hover:bg-primary hover:text-blue-100'
 		ok, res = runtime.resume_game(game, input)
 		if ok
 			for line in res.scene\gmatch "[^\n]+" do
+				if line == '>' then continue
 				p class: 'm-2', line
 			for key, verbs in pairs res.items do
-				p class: 'm-2', key..": "..table.concat(verbs, ", ")
+				stack ->
+					p class: 'm-2', key
+					for _, verb in pairs verbs do
+						button class: action, onClick: select, verb\lower!						
 			for dir, room in pairs res.exits do
-				p class: 'm-2', dir.." -> "..room
+				stack ->
+					p class: 'm-2', room
+					button class: action, onClick: select, dir\lower!
 		else
 			p class: 'm-2', res

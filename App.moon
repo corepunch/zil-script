@@ -1,5 +1,7 @@
-require "html"
+-- package.path = ''
+package.moonpath = '' -- force loading from Orca filesystem
 
+html = require "html"
 routing = require "routing"
 ui = require "orca.ui"
 loc = require "orca.localization"

@@ -1,5 +1,5 @@
 local network = require "orca.network"
-local openai_key = require "lib.openai_key"
+local openai_key = require "lib.appwrite.openai_key"
 local projectId = "6793939300106a97df4f"
 local databaseId = "679bb7320003ab334979"
 local endpoint = "https://cloud.appwrite.io/v1"

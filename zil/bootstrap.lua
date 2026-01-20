@@ -195,7 +195,7 @@ function TELL(...)
 	end
 end
 
-function PRINT(str) io_write(str, "\n") end
+function PRINT(str) io_write(str) end
 function PRINTD(ptr) io_write(GETP(ptr, _G["PQDESC"])) end
 function PRINTR(ptr) io_write(GETP(ptr, _G["PQLDESC"])) end
 function PRINTB(ptr) 
@@ -203,8 +203,8 @@ function PRINTB(ptr)
 		if index == ptr then io_write(word) end
 	end
 end
-PRINTI = PRINT
-PRINTN = PRINT
+function PRINTI(n) io_write(tostring(n)) end
+function PRINTN(n) io_write(tostring(n)) end
 function PRINTC(ch) io_write(string.char(ch)) end
 function CRLF() io_write("\n") end
 
@@ -656,6 +656,7 @@ function GM_NOTES(room)
 		for obj in objects_in_room(room, ADVENTURER) do
 			local verbs = {}
 			local action = GETP(obj, PQACTION)
+			local item = GETP(obj, PQDESC) or ""
 			if action then
 				local func = FUNCTIONS[tonumber(action)]
 				for k, v in pairs(_G) do if v == func then verbs = _G['_'..k] break end end
@@ -668,7 +669,11 @@ function GM_NOTES(room)
 					table.insert(verbs, v)
 				end
 			end
-			ROOM_ITEMS[GETP(obj, PQDESC)] = verbs
+			local words = {}
+			for word in item:gmatch("%S+") do
+				table.insert(words, word:sub(1,1):upper() .. word:sub(2):lower())
+			end
+			ROOM_ITEMS[table.concat(words, " ")] = verbs
 			PRINT_CONT(obj, nil, 2)
 			num = num + 1
 		end
