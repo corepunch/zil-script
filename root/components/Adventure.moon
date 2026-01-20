@@ -3,7 +3,7 @@ package.path = package.path..";"..PROJECTDIR.."/zil/?.lua"
 ui = require "orca.ui"
 appwrite = require "appwrite.functions"
 json = require "orca.parsers.json"
--- zil = require "main"
+runtime = require 'zil.runtime'
 
 system = "You are the Dungeon Master in a text-based Dungeons & Dragons adventure. Describe scenes vividly, present choices naturally, and react dynamically to player actions. Keep descriptions immersive but concise."
 user = "Let's begin a new D&D adventure. Describe what my character sees as I awaken in a mysterious forest clearing, and ask me what I want to do next."
@@ -18,6 +18,13 @@ files = {
   "adventure/horror.zil",
   "zork1/main.zil",
 }
+
+env = runtime.create_game_env()
+
+assert(runtime.load_bootstrap(env))
+assert(runtime.load_zil_files(files, env, {save_lua: true}))
+
+game, input = runtime.create_game_coroutine(env), nil
 
 class Adventure extends ui.Form
 	title: "Adventure"
@@ -61,10 +68,20 @@ class Adventure extends ui.Form
 			service_tier: "default"
 			system_fingerprint: "fp_560af6e559"
 		}
-		desc = json.parse(respose.choices[1].message.content)
-		text = desc.scene
-		text = string.gsub text, "\\n", "\n"
-		p class: 'm-2', text
-		for choice in *desc.choices
-			select = -> @addChild p class: 'm-1', choice
-			ui.Button class: 'm-1 py-1 px-2 text-blue-300 bg-muted hover:bg-primary hover:text-blue-100', onClick: select, choice
+		-- desc = json.parse(respose.choices[1].message.content)
+		-- text = string.gsub(desc.scene, "\\n", "\n")
+		-- p class: 'm-2', text
+		-- for choice in *desc.choices
+		-- 	select = -> @addChild p class: 'm-1', choice
+		-- 	ui.Button class: 'm-1 py-1 px-2 text-blue-300 bg-muted hover:bg-primary hover:text-blue-100', onClick: select, choice
+		
+		ok, res = runtime.resume_game(game, input)
+		if ok
+			for line in res.scene\gmatch "[^\n]+" do
+				p class: 'm-2', line
+			for key, verbs in pairs res.items do
+				p class: 'm-2', key..": "..table.concat(verbs, ", ")
+			for dir, room in pairs res.exits do
+				p class: 'm-2', dir.." -> "..room
+		else
+			p class: 'm-2', res

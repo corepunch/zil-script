@@ -29,10 +29,9 @@ local game, input = runtime.create_game_coroutine(env), nil
 repeat
 	local ok, res = runtime.resume_game(game, input)
 	if not ok then
-		print("Error: " .. tostring(res))
-		os.exit(1)
+		error("Error: " .. tostring(res))
   else
-    io.write(res.text)
+    io.write(res.scene)
     if res.items then
       print("\nItems:")
       for item, verbs in pairs(res.items) do

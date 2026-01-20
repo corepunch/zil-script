@@ -211,7 +211,7 @@ function CRLF() io_write("\n") end
 -- Modified READ to yield with output
 function READ(inbuf, parse)
 	-- Yield with accumulated output, get input back
-	local s = coroutine.yield({text=io_flush(),items=ROOM_ITEMS,exits=ROOM_EXITS})
+	local s = coroutine.yield({scene=io_flush(),items=ROOM_ITEMS,exits=ROOM_EXITS})
 	
 	-- Handle nil input (e.g., EOF)
 	if not s then
