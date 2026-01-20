@@ -42,7 +42,6 @@
         (ADJECTIVE PEELING)
         (DESC "peeling wallpaper")
         (LDESC "Peeling wallpaper reveals water-stained plaster beneath.")
-        (FLAGS NDESCBIT)
         (ACTION WALLPAPER-F)>
 
 <ROUTINE WALLPAPER-F ()
@@ -63,7 +62,7 @@
         (ADJECTIVE HEAVY OAK)
         (DESC "oak desk")
         (LDESC "A heavy oak desk sits against one wall, its surface thick with dust.")
-        (FLAGS NDESCBIT CONTBIT OPENBIT SURFACEBIT)
+        (FLAGS CONTBIT OPENBIT SURFACEBIT)
         (ACTION DESK-F)>
 
 <ROUTINE DESK-F ()
@@ -143,7 +142,7 @@
         (ADJECTIVE OPERATING STAINED)
         (DESC "operating table")
         (LDESC "A stained operating table dominates the center of the room.")
-        (FLAGS NDESCBIT SURFACEBIT)
+        (FLAGS SURFACEBIT)
         (ACTION OPTABLE-F)>
 
 <ROUTINE OPTABLE-F ()
@@ -157,7 +156,7 @@
         (ADJECTIVE METAL MEDICAL)
         (DESC "metal cabinet")
         (LDESC "A metal cabinet stands in the shadows, its door slightly ajar.")
-        (FLAGS NDESCBIT CONTBIT OPENBIT TRANSBIT)
+        (FLAGS CONTBIT OPENBIT TRANSBIT)
         (ACTION CABINET-F)>
 
 <ROUTINE CABINET-F ()
@@ -212,7 +211,6 @@
         (ADJECTIVE RUSTED)
         (DESC "bed frames")
         (LDESC "Rusted bed frames line the corridor.")
-        (FLAGS NDESCBIT)
         (ACTION BEDS-F)>
 
 <ROUTINE BEDS-F ()
@@ -226,7 +224,6 @@
         (ADJECTIVE HEAVY SEALED LOCKED MORGUE)
         (DESC "heavy door")
         (LDESC "At the far end, a heavy door sealed with chains blocks further passage. Scratches cover the door's surface, as if made by desperate fingers.")
-        (FLAGS NDESCBIT)
         (ACTION HEAVYDOOR-F)>
 
 <ROUTINE HEAVYDOOR-F ()
@@ -249,7 +246,6 @@
         (ADJECTIVE THICK)
         (DESC "chains")
         (LDESC "Thick chains secure the heavy door.")
-        (FLAGS NDESCBIT)
         (ACTION CHAINS-F)>
 
 <ROUTINE CHAINS-F ()
@@ -283,7 +279,7 @@
         (ADJECTIVE REFRIGERATED METAL)
         (DESC "refrigerated drawers")
         (LDESC "Refrigerated drawers line both walls.")
-        (FLAGS NDESCBIT CONTBIT OPENBIT)
+        (FLAGS CONTBIT OPENBIT)
         (ACTION DRAWERS-F)>
 
 <ROUTINE DRAWERS-F ()
@@ -297,7 +293,7 @@
         (ADJECTIVE DISSECTION AUTOPSY)
         (DESC "dissection table")
         (LDESC "In the center, a dissection table holds what appears to be a canvas-wrapped bundle.")
-        (FLAGS NDESCBIT SURFACEBIT)
+        (FLAGS SURFACEBIT)
         (ACTION DISTABLE-F)>
 
 <ROUTINE DISTABLE-F ()
@@ -384,7 +380,6 @@
         (ADJECTIVE RUSTED DRIPPING)
         (DESC "rusty pipes")
         (LDESC "Pipes run along the ceiling, rusted and dripping.")
-        (FLAGS NDESCBIT)
         (ACTION PIPES-F)>
 
 <ROUTINE PIPES-F ()
@@ -398,7 +393,6 @@
         (ADJECTIVE PIPE METAL)
         (DESC "metal valve")
         (LDESC "A wheel valve on one of the pipes, crusted with rust.")
-        (FLAGS NDESCBIT)
         (ACTION VALVE-F)>
 
 <ROUTINE VALVE-F ()
@@ -428,7 +422,7 @@
         (ADJECTIVE IRON MASSIVE)
         (DESC "iron boiler")
         (LDESC "A massive iron boiler dominates the room, cold and silent.")
-        (FLAGS NDESCBIT CONTBIT OPENBIT)
+        (FLAGS CONTBIT OPENBIT)
         (ACTION BOILER-F)>
 
 <ROUTINE BOILER-F ()
@@ -457,7 +451,7 @@
         (ADJECTIVE WORK)
         (DESC "workbench")
         (LDESC "A workbench sits against the far wall, covered with ancient tools.")
-        (FLAGS NDESCBIT SURFACEBIT)
+        (FLAGS SURFACEBIT)
         (ACTION WORKBENCH-F)>
 
 <ROUTINE WORKBENCH-F ()
@@ -496,7 +490,7 @@
         (ADJECTIVE SAGGING)
         (DESC "shelves")
         (LDESC "Shelves line the walls, sagging under the weight of moldering supplies.")
-        (FLAGS NDESCBIT CONTBIT OPENBIT)
+        (FLAGS CONTBIT OPENBIT)
         (ACTION SHELVES-F)>
 
 <ROUTINE SHELVES-F ()
@@ -566,7 +560,6 @@
         (ADJECTIVE STANDING ANKLE)
         (DESC "standing water")
         (LDESC "Cold water covering the floor.")
-        (FLAGS NDESCBIT)
         (ACTION STANDING-WATER-F)>
 
 <ROUTINE STANDING-WATER-F ()
@@ -583,7 +576,6 @@
         (ADJECTIVE SEALED EAST METAL)
         (DESC "sealed door")
         (LDESC "A door to the east is sealed shut.")
-        (FLAGS NDESCBIT)
         (ACTION SEALED-DOOR-F)>
 
 <ROUTINE SEALED-DOOR-F ()
@@ -620,7 +612,7 @@
         (ADJECTIVE PORCELAIN)
         (DESC "porcelain tubs")
         (LDESC "Large porcelain tubs line the walls, each fitted with restraints.")
-        (FLAGS NDESCBIT CONTBIT OPENBIT)
+        (FLAGS CONTBIT OPENBIT)
         (ACTION TUBS-F)>
 
 <ROUTINE TUBS-F ()
@@ -650,7 +642,7 @@
         (ADJECTIVE MEDICINE MEDICAL)
         (DESC "medicine cabinet")
         (LDESC "A cabinet stands in the corner, its door hanging loose.")
-        (FLAGS NDESCBIT CONTBIT OPENBIT)
+        (FLAGS CONTBIT OPENBIT)
         (ACTION MEDICINE-CABINET-F)>
 
 <ROUTINE MEDICINE-CABINET-F ()
@@ -687,7 +679,6 @@
         (ADJECTIVE CELL HEAVY BARRED)
         (DESC "cell doors")
         (LDESC "Heavy doors with barred windows stand open, revealing bare concrete rooms within.")
-        (FLAGS NDESCBIT)
         (ACTION CELL-DOORS-F)>
 
 <ROUTINE CELL-DOORS-F ()
@@ -701,7 +692,6 @@
         (ADJECTIVE WALL)
         (DESC "wall scratches")
         (LDESC "Thousands of scratch marks covering the cell walls.")
-        (FLAGS NDESCBIT)
         (ACTION WALL-SCRATCHES-F)>
 
 <ROUTINE WALL-SCRATCHES-F ()
@@ -724,7 +714,6 @@
         (ADJECTIVE SHOCK ELECTRIC METAL)
         (DESC "electroshock chair")
         (LDESC "A chair is bolted to the floor in the center of the room.")
-        (FLAGS NDESCBIT)
         (ACTION SHOCK-CHAIR-F)>
 
 <ROUTINE SHOCK-CHAIR-F ()
@@ -741,7 +730,6 @@
         (ADJECTIVE SHOCK ELECTRIC)
         (DESC "shock machine")
         (LDESC "Electrodes dangle from a machine beside the chair.")
-        (FLAGS NDESCBIT)
         (ACTION SHOCK-MACHINE-F)>
 
 <ROUTINE SHOCK-MACHINE-F ()
@@ -762,7 +750,6 @@
         (ADJECTIVE ROTTING TORN)
         (DESC "padded walls")
         (LDESC "Every surface is covered in rotting padding, now torn and hanging in strips.")
-        (FLAGS NDESCBIT)
         (ACTION PADDING-F)>
 
 <ROUTINE PADDING-F ()
@@ -802,7 +789,6 @@
         (ADJECTIVE ONE-WAY)
         (DESC "one-way mirror")
         (LDESC "A one-way mirror overlooks the electroshock theater.")
-        (FLAGS NDESCBIT)
         (ACTION MIRROR-F)>
 
 <ROUTINE MIRROR-F ()
@@ -841,7 +827,6 @@
         (ADJECTIVE SCATTERED)
         (DESC "scattered papers")
         (LDESC "Papers are scattered everywhere.")
-        (FLAGS NDESCBIT)
         (ACTION SCATTERED-PAPERS-F)>
 
 <ROUTINE SCATTERED-PAPERS-F ()
@@ -862,7 +847,7 @@
         (ADJECTIVE MASSIVE WOOD)
         (DESC "massive desk")
         (LDESC "A massive desk dominates the room.")
-        (FLAGS NDESCBIT CONTBIT OPENBIT SURFACEBIT)
+        (FLAGS CONTBIT OPENBIT SURFACEBIT)
         (ACTION MASSIVE-DESK-F)>
 
 <ROUTINE MASSIVE-DESK-F ()
@@ -891,7 +876,6 @@
         (ADJECTIVE MORDECAI)
         (DESC "portrait of Dr. Mordecai")
         (LDESC "A portrait of Dr. Mordecai hangs on the wall, his stern eyes seeming to follow you.")
-        (FLAGS NDESCBIT)
         (ACTION PORTRAIT-F)>
 
 <ROUTINE PORTRAIT-F ()
@@ -905,7 +889,7 @@
         (ADJECTIVE WALL METAL)
         (DESC "wall safe")
         (LDESC "A safe is visible behind a moved painting.")
-        (FLAGS NDESCBIT CONTBIT)
+        (FLAGS CONTBIT)
         (ACTION WALL-SAFE-F)>
 
 <ROUTINE WALL-SAFE-F ()
@@ -978,7 +962,7 @@
         (ADJECTIVE METAL)
         (DESC "lockers")
         (LDESC "Lockers line one wall. Most are open and empty, their contents long gone.")
-        (FLAGS NDESCBIT CONTBIT OPENBIT)
+        (FLAGS CONTBIT OPENBIT)
         (ACTION LOCKERS-F)>
 
 <ROUTINE LOCKERS-F ()
@@ -1015,7 +999,7 @@
         (ADJECTIVE SERVING)
         (DESC "serving counter")
         (LDESC "A serving counter separates the dining area from the kitchen beyond.")
-        (FLAGS NDESCBIT SURFACEBIT)
+        (FLAGS SURFACEBIT)
         (ACTION COUNTER-F)>
 
 <ROUTINE COUNTER-F ()
@@ -1055,7 +1039,6 @@
         (ADJECTIVE DEAD OVERGROWN)
         (DESC "dead garden")
         (LDESC "What was once a therapeutic garden is now a wild tangle of weeds and dead plants.")
-        (FLAGS NDESCBIT)
         (ACTION DEAD-GARDEN-F)>
 
 <ROUTINE DEAD-GARDEN-F ()
@@ -1069,7 +1052,6 @@
         (ADJECTIVE CHAPEL HEAVY LOCKED)
         (DESC "chapel door")
         (LDESC "The chapel door is secured with a heavy lock.")
-        (FLAGS NDESCBIT)
         (ACTION CHAPEL-DOOR-F)>
 
 <ROUTINE CHAPEL-DOOR-F ()
@@ -1109,7 +1091,6 @@
         (ADJECTIVE WOODEN)
         (DESC "wooden pews")
         (LDESC "Pews face an altar.")
-        (FLAGS NDESCBIT)
         (ACTION PEWS-F)>
 
 <ROUTINE PEWS-F ()
@@ -1123,7 +1104,6 @@
         (ADJECTIVE GREEN UNNATURAL)
         (DESC "green candles")
         (LDESC "Candles burn with an unnatural green flame.")
-        (FLAGS NDESCBIT)
         (ACTION GREEN-CANDLES-F)>
 
 <ROUTINE GREEN-CANDLES-F ()
@@ -1137,7 +1117,7 @@
         (ADJECTIVE PATIENT 189)
         (DESC "Patient 189")
         (LDESC "A figure stands motionless at the altar. It turns to face you—its eyes glow faintly in the darkness. This is Patient 189, if you can still call it that.")
-        (FLAGS NDESCBIT ACTORBIT)
+        (FLAGS ACTORBIT)
         (ACTION PATIENT-189-F)>
 
 <ROUTINE PATIENT-189-F ()
