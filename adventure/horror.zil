@@ -8,10 +8,6 @@
       (LDESC "You stand before the rusted iron gates of an abandoned sanitarium. The structure looms against the darkening sky, its windows like hollow eye sockets. Weeds choke the gravel path leading north to the entrance.")
       (NORTH TO SANITARIUM-ENTRANCE)
       (FLAGS RLANDBIT ONBIT)>
-<ROUTINE PLAQUE-F ()
-         <COND (<VERB? READ EXAMINE>
-                <TELL "The plaque reads: 'Blackwood Sanitarium - Est. 1898 - Closed by Order 1952'" CR>
-                <RTRUE>)>>
 <OBJECT BRASS-PLAQUE
         (IN SANITARIUM-GATE)
         (SYNONYM PLAQUE BRASS SIGN)
@@ -19,9 +15,8 @@
         (DESC "brass plaque")
         (LDESC "A corroded brass plaque hangs askew on the gate.")
         (FLAGS READBIT TAKEBIT)
-        (TEXT "Blackwood Sanitarium - Est. 1898 - Closed by Order 1952")
-        (SIZE 5)
-        (ACTION PLAQUE-F)>
+        (TEXT "The plaque reads: 'Blackwood Sanitarium - Est. 1898 - Closed by Order 1952'")
+        (SIZE 5)>
 <ROOM SANITARIUM-ENTRANCE
       (IN ROOMS)
       (DESC "Sanitarium Entrance Hall")
@@ -32,17 +27,13 @@
       (EAST TO PATIENT-WARD)
       (DOWN TO BASEMENT-STAIRS)
       (FLAGS RLANDBIT ONBIT)>
-<ROUTINE WALLPAPER-F ()
-         <COND (<VERB? EXAMINE LOOK-INSIDE>
-                <TELL "Victorian-era wallpaper depicting pastoral scenes, now grotesquely warped by moisture and black mold." CR>
-                <RTRUE>)>>
 <OBJECT WALLPAPER
         (IN SANITARIUM-ENTRANCE)
         (SYNONYM WALLPAPER PAPER PLASTER)
         (ADJECTIVE PEELING)
         (DESC "peeling wallpaper")
         (LDESC "Peeling wallpaper reveals water-stained plaster beneath.")
-        (ACTION WALLPAPER-F)>
+        (TEXT "Victorian-era wallpaper depicting pastoral scenes, now grotesquely warped by moisture and black mold.")>
 <ROOM RECEPTION-ROOM
       (IN ROOMS)
       (DESC "Reception Room")
@@ -61,10 +52,6 @@
         (LDESC "A heavy oak desk sits against one wall, its surface thick with dust.")
         (FLAGS CONTBIT OPENBIT SURFACEBIT)
         (ACTION DESK-F)>
-<ROUTINE BRASSKEY-F ()
-         <COND (<VERB? EXAMINE>
-                <TELL "A small BRASS KEY with the number '3' engraved on its head. It's ice cold despite being indoors." CR>
-                <RTRUE>)>>
 <OBJECT BRASS-KEY
         (IN RECEPTION-ROOM)
         (SYNONYM KEY)
@@ -73,17 +60,14 @@
         (LDESC "A small brass key, cold to the touch.")
         (FLAGS TAKEBIT)
         (SIZE 2)
-        (ACTION BRASSKEY-F)>
+        (TEXT "A small BRASS KEY with the number '3' engraved on its head. It's ice cold despite being indoors.")>
 <ROOM OPERATING-THEATER
       (IN ROOMS)
       (DESC "Operating Theater")
       (LDESC "The circular theater has rusty surgical instruments scattered about. Rising tiers of benches circle the area, where students once observed procedures. The air here is thick with an oppressive dread.")
       (SOUTH TO SANITARIUM-ENTRANCE)
       (FLAGS RLANDBIT)>
-<ROUTINE OPTABLE-F ()
-         <COND (<VERB? EXAMINE LOOK-INSIDE>
-                <TELL "The OPERATING TABLE is covered in dark brown stains that you hope are just rust. Leather restraints dangle from all four corners. Deep gouges mar the metal surface, as if someone struggled violently against the bindings." CR>
-                <RTRUE>)>>
+
 <OBJECT OPERATING-TABLE
         (IN OPERATING-THEATER)
         (SYNONYM TABLE)
@@ -91,7 +75,7 @@
         (DESC "operating table")
         (LDESC "A stained operating table dominates the center of the room.")
         (FLAGS SURFACEBIT)
-        (ACTION OPTABLE-F)>
+        (TEXT "The OPERATING TABLE is covered in dark brown stains that you hope are just rust. Leather restraints dangle from all four corners. Deep gouges mar the metal surface, as if someone struggled violently against the bindings.")>
 <ROUTINE CABINET-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE>
                 <TELL "The CABINET's glass doors are cracked but still intact. Inside, you can see various medical instruments, including a SCALPEL and a bottle." CR>
@@ -111,17 +95,13 @@
       (WEST TO SANITARIUM-ENTRANCE)
       (NORTH TO MORGUE IF CHAINS-CUT-FLAG)
       (FLAGS RLANDBIT)>
-<ROUTINE BEDS-F ()
-         <COND (<VERB? EXAMINE LOOK-INSIDE>
-                <TELL "Dozens of BED FRAMES line the walls. The mattresses have rotted away, leaving only rusted springs and metal frames. Some still have restraint straps attached." CR>
-                <RTRUE>)>>
 <OBJECT BED-FRAMES
         (IN PATIENT-WARD)
         (SYNONYM BEDS FRAMES BED FRAME)
         (ADJECTIVE RUSTED)
         (DESC "bed frames")
         (LDESC "Rusted bed frames line the corridor.")
-        (ACTION BEDS-F)>
+        (TEXT "Dozens of BED FRAMES line the walls. The mattresses have rotted away, leaving only rusted springs and metal frames. Some still have restraint straps attached.")>
 <ROUTINE HEAVYDOOR-F ()
          <COND (<AND <VERB? EXAMINE>
                      <NOT ,CHAINS-CUT-FLAG>>
