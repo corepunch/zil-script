@@ -5,3 +5,4 @@ DerivedData/
 **/xcuserdata/
 zil_*.lua
 
+lib/openai_key.lua

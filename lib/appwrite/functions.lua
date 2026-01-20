@@ -1,5 +1,5 @@
 local network = require "orca.network"
-
+local openai_key = require "lib.openai_key"
 local projectId = "6793939300106a97df4f"
 local databaseId = "679bb7320003ab334979"
 local endpoint = "https://cloud.appwrite.io/v1"
@@ -156,7 +156,7 @@ function appwrite.test_openai(system, user)
 		body = encode_json(data),
 		headers = {
 			["Content-Type"] = "application/json; charset=utf-8",
-			["Authorization"] = "Bearer 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",
+			["Authorization"] = openai_key,
 		},
 		nocookies = true
 	})
