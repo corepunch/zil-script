@@ -653,7 +653,6 @@ function GM_NOTES(room)
 	local num = 1
 	
 	if objects_in_room(room, ADVENTURER)() then
-		-- print("\nItems:")
 		for obj in objects_in_room(room, ADVENTURER) do
 			local verbs = {}
 			local action = GETP(obj, PQACTION)
@@ -670,11 +669,6 @@ function GM_NOTES(room)
 				end
 			end
 			ROOM_ITEMS[GETP(obj, PQDESC)] = verbs
-			-- if #verbs > 0 then
-			-- 	print(string.format("  %d. %s (%s)", num, GETP(obj, PQDESC):upper(), table.concat(verbs, ', ')))
-			-- else
-			-- 	print(string.format("  %d. %s", num, GETP(obj, PQDESC):upper()))
-			-- end
 			PRINT_CONT(obj, nil, 2)
 			num = num + 1
 		end
@@ -685,13 +679,8 @@ function GM_NOTES(room)
 			if PTSIZE(pp) == 1 then
 				ROOM_EXITS[d] = GETP(GETB(pp, 0), PQDESC)
 			elseif PTSIZE(pp) == 2 then
-				ROOM_EXITS[d] = string.format("\"%s\"", mem:string(GET(pp, 0)))				
+				ROOM_EXITS[d] = string.format("\"%s\"", mem:string(GET(pp, 0)))
 			end
-			-- if PTSIZE(pp) == 1 then
-			-- 	print(string.format("  %s -> %s", d, GETP(GETB(pp, 0), PQDESC)))
-			-- elseif PTSIZE(pp) == 2 then
-			-- 	print(string.format("  %s -> \"%s\"", d, mem:string(GET(pp, 0))))
-			-- end
 		end
 	end
 end
