@@ -12,22 +12,22 @@ local files = {
 }
 
 -- Create game environment
-local game = runtime.create_game_env()
+local env = runtime.create_game_env()
 
 -- Load bootstrap
-if not runtime.load_bootstrap(game) then
+if not runtime.load_bootstrap(env) then
 	os.exit(1)
 end
 
 -- Load ZIL files (save compiled .lua files to disk)
-if not runtime.load_zil_files(files, game, {save_lua = true}) then
+if not runtime.load_zil_files(files, env, {save_lua = true}) then
 	os.exit(1)
 end
 
--- Create game as a coroutine
-local game_coro, input = runtime.create_game_coroutine(game), nil
+-- Create env as a coroutine
+local game, input = runtime.create_game_coroutine(env), nil
 repeat
-	local ok, res = runtime.resume_game(game_coro, input)
+	local ok, res = runtime.resume_game(game, input)
 	if not ok then
 		print("Error: " .. tostring(res))
 		os.exit(1)
@@ -51,7 +51,7 @@ repeat
     end
     input = io.read()
 	end
-until not input or not runtime.is_running(game_coro)
+until not input or not runtime.is_running(game)
 
 -- local ast = parser.parse_file "zork1/actions.zil"
 -- local res = compiler.compile(ast)
