@@ -63,7 +63,7 @@
       (DESC "Operating Theater")
       (LDESC "The circular theater has rusty surgical instruments scattered about. Rising tiers of benches circle the area, where students once observed procedures. The air here is thick with an oppressive dread.")
       (SOUTH TO SANITARIUM-ENTRANCE)
-      (FLAGS RLANDBIT)>
+      (FLAGS RLANDBIT ONBIT)>
 
 <OBJECT OPERATING-TABLE
         (IN OPERATING-THEATER)
@@ -91,7 +91,7 @@
       (LDESC "A long corridor with tattered curtains hanging between areas, offering the ghost of privacy. The floor is littered with patient records and broken glass.")
       (WEST TO SANITARIUM-ENTRANCE)
       (NORTH TO MORGUE IF CHAINS-CUT-FLAG)
-      (FLAGS RLANDBIT)>
+      (FLAGS RLANDBIT ONBIT)>
 <OBJECT BED-FRAMES
         (IN PATIENT-WARD)
         (SYNONYM BEDS FRAMES BED FRAME)
