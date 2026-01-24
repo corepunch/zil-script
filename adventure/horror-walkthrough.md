@@ -51,111 +51,110 @@ This is a complete walkthrough for the horror.zil adventure game - an expansion 
 4. `examine wallpaper` - Notice the Victorian-era decay
 5. `west` - Go to Reception Room
 6. `take key` (brass key) - Find it among scattered papers
-7. `examine desk` - Notice the desk drawers
-8. `examine drawer` - Notice the bottom drawer is locked
-9. `unlock drawer` or `open drawer` (while holding brass key) - Unlock bottom drawer
-10. `take ledger` - Take patient ledger from drawer
-11. `read ledger` - Learn about Patient 237 and Dr. Mordecai
-12. `east` - Return to Entrance Hall
-13. `north` - Go to Operating Theater
-14. `examine table` - See the gruesome operating table with restraints
-15. `examine cabinet` - Notice the medical cabinet
-16. `take scalpel` - Important tool for later
-17. `take bottle` (ether bottle) - Medical supplies
-18. `south` - Return to Entrance Hall
-19. `east` - Go to Patient Ward
-20. `examine beds` - See the deteriorated ward
-21. `examine door` - Notice it's chained shut with "MORGUE" plaque
-22. `attack chains` (while holding scalpel) - Cut through the chains!
-23. `north` - Enter Morgue
-24. `examine drawers` - Find glowing contents
-25. `take serum` (strange glowing serum - Compound 237)
-26. `examine bundle` - See the canvas-wrapped body (Patient 237?)
-27. `take journal` (Dr. Mordecai's journal)
-28. `read journal` - Learn about the terrible experiment
+7. `examine desk` - Notice the bottom drawer is locked
+8. `unlock drawer` or `open drawer` (while holding brass key) - Unlock bottom drawer
+9. `take ledger` - Take patient ledger from drawer
+10. `read ledger` - Learn about Patient 237 and Dr. Mordecai
+11. `east` - Return to Entrance Hall
+12. `north` - Go to Operating Theater
+13. `examine table` - See the gruesome operating table with restraints
+14. `examine cabinet` - Notice the medical cabinet
+15. `take scalpel` - Important tool for later
+16. `take bottle` (ether bottle) - Medical supplies
+17. `south` - Return to Entrance Hall
+18. `east` - Go to Patient Ward
+19. `examine beds` - See the deteriorated ward
+20. `examine door` - Notice it's chained shut with "MORGUE" plaque
+21. `attack chains` (while holding scalpel) - Cut through the chains!
+22. `north` - Enter Morgue
+23. `examine drawers` - Find glowing contents
+24. `take serum` (strange glowing serum - Compound 237)
+25. `examine bundle` - See the canvas-wrapped body (Patient 237?)
+26. `take journal` (Dr. Mordecai's journal)
+27. `read journal` - Learn about the terrible experiment
 
 ### Act 2: Basement Exploration
 
-29. `south` - Return to Patient Ward
-30. `west` - Return to Entrance Hall
-31. `down` - Descend to Basement Stairs
-32. `down` - Continue to Basement Corridor
-33. `examine pipes` - Notice the valve
-34. `turn valve` - Release steam (important for later!)
-35. `east` - Enter Boiler Room
-36. `examine boiler` - See the massive iron furnace
-37. `look in boiler` or `open boiler` - Find contents
-38. `take shovel` (coal shovel)
-39. `examine workbench` - Find tools
-40. `take flashlight` (though batteries are dead)
-41. `west` - Return to Basement Corridor
-42. `west` - Enter Storage Room
-43. `examine shelves` or `search shelves` - Find supplies
-44. `take lantern` (oil lantern - this one works!)
-45. `light lantern` or `turn on lantern` - Illuminate the darkness
-46. `take records` (medical records)
-47. `read records` - Learn about Patient 189
-48. `east` - Return to Basement Corridor
-49. `north` - Enter Flooding Chamber
-50. `examine water` - Cold ankle-deep water
-51. `examine door` (sealed door to east) - Needs steam to open
-52. `open door` - Steam from valve has loosened it! Access Hydrotherapy Room
-53. `east` - Enter Hydrotherapy Room
-54. `examine tubs` - See the restraint-equipped tubs
-55. `look in tubs` - Find notebook
-56. `take notebook` (soggy notebook)
-57. `read notebook` - Learn about water torture treatments
-58. `examine cabinet` (medicine cabinet)
-59. `take syringe`
-60. `west` - Return to Flooding Chamber
-61. `north` - Enter Isolation Ward
-62. `examine doors` or `examine cells` - See the cell doors
-63. `examine scratches` or `count scratches` - Critical clue: "PATIENT 189 STILL ALIVE IN THE CHAPEL"
-64. `north` - Enter Electroshock Theater
-65. `examine chair` - The terrible shock chair
-66. `examine machine` - Electroshock equipment
-67. `west` - Enter Padded Cell
-68. `examine padding` or `read padding` - Blood message: "THE CHAPEL BEYOND THE GARDEN. HE WAITS THERE. PATIENT 189."
-69. `take jacket` (straitjacket - optional)
-70. `east` - Return to Electroshock Theater
+28. `south` - Return to Patient Ward
+29. `west` - Return to Entrance Hall
+30. `down` - Descend to Basement Stairs
+31. `down` - Continue to Basement Corridor
+32. `examine pipes` - Notice the valve
+33. `turn valve` - Release steam (important for later!)
+34. `east` - Enter Boiler Room
+35. `examine boiler` - See the massive iron furnace
+36. `look in boiler` or `open boiler` - Find contents
+37. `take shovel` (coal shovel)
+38. `examine workbench` - Find tools
+39. `take flashlight` (though batteries are dead)
+40. `west` - Return to Basement Corridor
+41. `west` - Enter Storage Room
+42. `examine shelves` or `search shelves` - Find supplies
+43. `take lantern` (oil lantern - this one works!)
+44. `light lantern` or `turn on lantern` - Illuminate the darkness
+45. `take records` (medical records)
+46. `read records` - Learn about Patient 189
+47. `east` - Return to Basement Corridor
+48. `north` - Enter Flooding Chamber
+49. `examine water` - Cold ankle-deep water
+50. `examine door` (sealed door to east) - Needs steam to open
+51. `open door` - Steam from valve has loosened it! Access Hydrotherapy Room
+52. `east` - Enter Hydrotherapy Room
+53. `examine tubs` - See the restraint-equipped tubs
+54. `look in tubs` - Find notebook
+55. `take notebook` (soggy notebook)
+56. `read notebook` - Learn about water torture treatments
+57. `examine cabinet` (medicine cabinet)
+58. `take syringe`
+59. `west` - Return to Flooding Chamber
+60. `north` - Enter Isolation Ward
+61. `examine doors` or `examine cells` - See the cell doors
+62. `examine scratches` or `count scratches` - Critical clue: "PATIENT 189 STILL ALIVE IN THE CHAPEL"
+63. `north` - Enter Electroshock Theater
+64. `examine chair` - The terrible shock chair
+65. `examine machine` - Electroshock equipment
+66. `west` - Enter Padded Cell
+67. `examine padding` or `read padding` - Blood message: "THE CHAPEL BEYOND THE GARDEN. HE WAITS THERE. PATIENT 189."
+68. `take jacket` (straitjacket - optional)
+69. `east` - Return to Electroshock Theater
 
 ### Act 3: Administrative Wing and Final Confrontation
 
-71. `east` - Climb to Observation Deck
-72. `examine mirror` - One-way mirror overlooking theater
-73. `take logbook` (observation logbook)
-74. `read logbook` - Learn about Patient 189's treatment (Session 47)
-75. `north` - Enter Administrative Wing
-76. `examine papers` or `search papers` - Find memo about Patient 189 and chapel
-77. `east` - Enter Director's Office
-78. `examine portrait` - See Dr. Heinrich Mordecai's portrait
-79. `examine desk` - Find hidden compartment
-80. `take key` (safe key)
-81. `examine safe` - Notice wall safe behind painting
-82. `unlock safe` or `open safe` (with safe key) - Access contents
-83. `take notes` (Dr. Mordecai's private notes)
-84. `read notes` - Learn Patient 189 "transcended death itself"
-85. `take key` (chapel key - iron key with cross)
-86. `west` - Return to Administrative Wing
-87. `north` - Enter Staff Quarters
-88. `examine lockers` or `search lockers` - Find personal items
-89. `take photograph` - Staff photo from 1950
-90. `examine photograph` - See the sanitarium staff
-91. `west` - Enter Cafeteria
-92. `examine counter` - Old service area
-93. `take bell` (service bell - optional)
-94. `north` - Enter Overgrown Garden
-95. `examine garden` - Wild tangle of dead plants
-96. `examine door` (chapel door) - Reads "HE WHO ENTERS ABANDONS HOPE"
-97. `unlock door` or `open door` (with chapel key) - Final area accessible!
-98. `north` - Enter Chapel (Final Location)
+70. `east` - Climb to Observation Deck
+71. `examine mirror` - One-way mirror overlooking theater
+72. `take logbook` (observation logbook)
+73. `read logbook` - Learn about Patient 189's treatment (Session 47)
+74. `north` - Enter Administrative Wing
+75. `examine papers` or `search papers` - Find memo about Patient 189 and chapel
+76. `east` - Enter Director's Office
+77. `examine portrait` - See Dr. Heinrich Mordecai's portrait
+78. `examine desk` - Find hidden compartment
+79. `take key` (safe key)
+80. `examine safe` - Notice wall safe behind painting
+81. `unlock safe` or `open safe` (with safe key) - Access contents
+82. `take notes` (Dr. Mordecai's private notes)
+83. `read notes` - Learn Patient 189 "transcended death itself"
+84. `take key` (chapel key - iron key with cross)
+85. `west` - Return to Administrative Wing
+86. `north` - Enter Staff Quarters
+87. `examine lockers` or `search lockers` - Find personal items
+88. `take photograph` - Staff photo from 1950
+89. `examine photograph` - See the sanitarium staff
+90. `west` - Enter Cafeteria
+91. `examine counter` - Old service area
+92. `take bell` (service bell - optional)
+93. `north` - Enter Overgrown Garden
+94. `examine garden` - Wild tangle of dead plants
+95. `examine door` (chapel door) - Reads "HE WHO ENTERS ABANDONS HOPE"
+96. `unlock door` or `open door` (with chapel key) - Final area accessible!
+97. `north` - Enter Chapel (Final Location)
 
 ### Final Confrontation
 
-99. `examine pews` - Strange carved symbols
-100. `examine candles` - Unnatural green flames
-101. `examine patient` or `examine figure` - Patient 189, Dr. Mordecai's greatest achievement and horror
-102. `hello` - **Win condition!** Patient 189 speaks, thanks you for freeing it, and crumbles to ash. The experiment is finally over.
+98. `examine pews` - Strange carved symbols
+99. `examine candles` - Unnatural green flames
+100. `examine patient` or `examine figure` - Patient 189, Dr. Mordecai's greatest achievement and horror
+101. `hello` - **Win condition!** Patient 189 speaks, thanks you for freeing it, and crumbles to ash. The experiment is finally over.
 
 ## Puzzle Elements
 

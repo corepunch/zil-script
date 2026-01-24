@@ -40,17 +40,14 @@
       (LDESC "This cramped room once served as the sanitarium's reception. Filing cabinets line the opposite wall, their drawers hanging open like gaping mouths. Something glints among the papers scattered on the floor.")
       (EAST TO SANITARIUM-ENTRANCE)
       (FLAGS RLANDBIT ONBIT)>
-<ROUTINE DESK-F ()
-         <COND (<VERB? EXAMINE LOOK-INSIDE>
-                <TELL "The desk has three drawers. The top two are broken and empty. They hang open uselessly. The bottom drawer has been pulled out and sits on the floor nearby." CR>
-                <RTRUE>)>>
 <OBJECT OAK-DESK
         (IN RECEPTION-ROOM)
         (SYNONYM DESK)
         (ADJECTIVE HEAVY OAK)
         (DESC "oak desk")
         (LDESC "A heavy oak desk sits against one wall, its surface thick with dust.")
-        (FLAGS SURFACEBIT)
+        (FLAGS CONTBIT OPENBIT SURFACEBIT)
+        (TEXT "The desk has three drawers. The top two are broken and empty. The BOTTOM DRAWER appears intact but is locked tight.")
         (ACTION DESK-F)>
 <OBJECT BRASS-KEY
         (IN RECEPTION-ROOM)
@@ -722,11 +719,11 @@
                 <FSET ,BOTTOM-DRAWER ,OPENBIT>
                 <RTRUE>)>>
 <OBJECT BOTTOM-DRAWER
-        (IN RECEPTION-ROOM)
+        (IN OAK-DESK)
         (SYNONYM DRAWER)
         (ADJECTIVE BOTTOM)
         (DESC "bottom drawer")
-        (LDESC "The bottom drawer from the desk sits on the floor, locked tight.")
+        (LDESC "A sturdy drawer that seems to be locked.")
         (FLAGS CONTBIT NDESCBIT)
         (CAPACITY 10)
         (ACTION DRAWER-F)>
