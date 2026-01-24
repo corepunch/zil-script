@@ -48,6 +48,9 @@ FLAGS = {}
 FUNCTIONS = {}
 _DIRECTIONS = {}
 
+DESCS = {}
+DIRS = {}
+
 _VTBL = {}
 _OTBL = {}
 
@@ -460,6 +463,10 @@ function OBJECT(object)
 		if not _G["PQ"..name] then _G["PQ"..name] = num end
 		return string.char(num,#body)..body
 	end
+	if object.DESC then
+		table.insert(DESCS, object.DESC)
+		table.insert(DESCS, object.DESC:lower())
+	end
 	local o, n = findobj(object.NAME)
 	local t = {string.char(#object.NAME), object.NAME}
 	assert(o, "Can't find object "..object.NAME)
@@ -574,6 +581,9 @@ end
 function DIRECTIONS(...)
 	for _, dir in ipairs {...} do
 		_DIRECTIONS[dir] = learn(dir, PSQDIRECTION, PROPERTIES)
+		if dir ~= "IN" and dir ~= "OUT" then
+			table.insert(DIRS, dir:lower())
+		end
 	end
 end
 

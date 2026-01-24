@@ -24,11 +24,30 @@ if not runtime.load_zil_files(files, env, {save_lua = true}) then
 	os.exit(1)
 end
 
+local esc = "\27["
+
+local function highlight(text)
+  for _, dir in ipairs(env.DESCS) do
+    local fmt = esc .. "1;32m%s" .. esc .. "0m"
+    local cap = dir:sub(1,1):upper() .. dir:sub(2)
+    text = text:gsub("(%f[%a]" .. dir .. "%f[%A])", function(m) return fmt:format(m) end)
+    text = text:gsub("(%f[%a]" .. cap .. "%f[%A])", function(m) return fmt:format(m) end)
+  end
+  for _, dir in ipairs(env.DIRS) do
+    local fmt = esc .. "1;36m%s" .. esc .. "0m"
+    local cap = dir:sub(1,1):upper() .. dir:sub(2)
+    text = text:gsub("(%f[%a]" .. dir .. "%f[%A])", function(m) return fmt:format(m) end)
+    text = text:gsub("(%f[%a]" .. cap .. "%f[%A])", function(m) return fmt:format(m) end)
+  end
+  return text
+end
+
 -- Create env as a coroutine
 local game, input = runtime.create_game(env), nil
 repeat
 	local res = game:resume(input)
-  io.write(res)
+  
+  io.write(highlight(res))
   -- if res.items then
   --   print("\nItems:")
   --   for item, verbs in pairs(res.items) do

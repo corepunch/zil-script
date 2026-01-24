@@ -122,16 +122,12 @@ function M.load_zil_files(files, env, options)
 	return true
 end
 
--- Start the game by calling GO()
--- Returns true on success, false on failure
-function M.start_game(env, silent)
-	return M.execute("GO()", 'main', env, silent)
-end
-
 -- Create a coroutine for the game that yields on input
 -- Returns a coroutine object
 function M.create_game(env, silent)
 	return {
+		-- Start the game by calling GO()
+		-- Returns true on success, false on failure
 		coroutine = coroutine.create(function() M.execute("GO()", 'main', env, silent) end),
 		-- Resume the game coroutine with input
 		-- Returns: status (boolean), result (any value or error message)
