@@ -122,25 +122,28 @@ test.describe("Runtime - ZIL File Loading", function(t)
 end)
 
 test.describe("Runtime - Game Startup", function(t)
-	t.it("should handle start_game when GO not defined", function(assert)
+	t.it("should handle game creation when GO not defined", function(assert)
 		local env = runtime.create_game_env()
 		
 		-- Don't load bootstrap, so GO() is not defined
-		local success = runtime.start_game(env, true)
+		local game = runtime.create_game(env, true)
 		
+		-- Try to resume - should fail because GO is not defined
+		local success = pcall(function() game:resume() end)
 		assert.assert_false(success)
 	end)
 	
 	t.it("should call GO function if defined", function(assert)
 		local env = runtime.create_game_env()
 		
-		-- Define a simple GO function
+		-- Define a simple GO function that yields
 		env.GO = function() 
 			env.game_started = true
-			return true
+			coroutine.yield("Game started")
 		end
 		
-		runtime.start_game(env, true)
+		local game = runtime.create_game(env, true)
+		game:resume()
 		
 		assert.assert_equal(env.game_started, true)
 	end)

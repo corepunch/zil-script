@@ -28,24 +28,31 @@ print("✓ Game environments are isolated")
 print()
 
 -- Create coroutines for both games (if they had GO functions)
+-- These GO functions need to yield to allow multiple resumes
 game1.GO = function()
-game1.call_count = (game1.call_count or 0) + 1
-print("Game 1 GO called, count:", game1.call_count)
+	while true do
+		game1.call_count = (game1.call_count or 0) + 1
+		print("Game 1 GO called, count:", game1.call_count)
+		coroutine.yield()
+	end
 end
 
 game2.GO = function()
-game2.call_count = (game2.call_count or 0) + 1
-print("Game 2 GO called, count:", game2.call_count)
+	while true do
+		game2.call_count = (game2.call_count or 0) + 1
+		print("Game 2 GO called, count:", game2.call_count)
+		coroutine.yield()
+	end
 end
 
 -- Create coroutines
-local coro1 = runtime.create_game_coroutine(game1, true)
-local coro2 = runtime.create_game_coroutine(game2, true)
+local coro1 = runtime.create_game(game1, true)
+local coro2 = runtime.create_game(game2, true)
 
 -- Run them
-runtime.resume_game(coro1)
-runtime.resume_game(coro2)
-runtime.resume_game(coro1)
+coro1:resume()
+coro2:resume()
+coro1:resume()
 
 -- Verify isolation
 print("\nAfter running:")
