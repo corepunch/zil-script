@@ -134,7 +134,10 @@ function M.create_game(env, silent)
 		-- resume = function (self, input) return coroutine.resume(self.coroutine, input) end,
 		resume = function (self, input) 
 			local ok, response = coroutine.resume(self.coroutine, input)
-			return ok and response or error(response)
+			if not ok then
+				error(response)
+			end
+			return response
 		end,
 		-- Check if the coroutine is still running
 		is_running = function(self) return coroutine.status(self.coroutine) ~= "dead" end,
