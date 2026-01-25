@@ -197,7 +197,7 @@
 <ROOM BASEMENT-CORRIDOR
       (IN ROOMS)
       (DESC "Basement Corridor")
-      (LDESC "The basement corridor stretches into shadow. Water pools on the cracked floor. Stone stairs climb upward into darkness. Passages branch off in three directions—one leads toward the sound of dripping water, another to what might have been storage, and a third descends deeper into the complex.")
+      (LDESC "The basement corridor stretches into shadow. Water pools on the cracked floor. Stone stairs climb upward into darkness. Passages branch off in three directions—one leads toward the sound of dripping water, another to what might have been storage, and a third toward deeper chambers.")
       (UP TO BASEMENT-STAIRS)
       (EAST TO BOILER-ROOM)
       (WEST TO STORAGE-ROOM)
@@ -393,7 +393,7 @@
 <ROOM ELECTROSHOCK-THEATER
       (IN ROOMS)
       (DESC "Electroshock Theater")
-      (LDESC "A concrete room. The walls are scorched in places. A viewing window overlooks the room from above. A stairway climbs upward to the east, while to the west a heavy door stands ajar, revealing a padded cell beyond. Behind you, the corridor continues back through the isolation ward.")
+      (LDESC "A concrete room. The walls are scorched in places. A viewing window overlooks the room from above. A stairway climbs upward to the east, while to the west a heavy door stands ajar, revealing a padded cell beyond. A passage leads out to the isolation ward.")
       (SOUTH TO ISOLATION-WARD)
       (EAST TO OBSERVATION-DECK)
       (WEST TO PADDED-CELL)
