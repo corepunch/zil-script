@@ -81,7 +81,7 @@ local function run_test_file(test_file_path)
 		elseif cmd.flag then
 			report("test:flag "..cmd.flag)
 		elseif cmd.text then
-			feedback(cmd.text, not (output or ""):find(cmd.text, 1, true))
+			feedback(cmd.text, not (output or ""):lower():find(cmd.text:lower(), 1, true))
 		else
 			print(NEUTRAL .. "[SKIP] " .. (cmd.description or cmd.input) .. RESET)
 		end

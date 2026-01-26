@@ -171,7 +171,7 @@
         (ADJECTIVE DISSECTION AUTOPSY)
         (DESC "dissection table")
         (LDESC "In the center, a dissection table holds what appears to be a canvas-wrapped bundle.")
-        (FLAGS SURFACEBIT)
+        (FLAGS SURFACEBIT CONTBIT OPENBIT)
         (ACTION DISTABLE-F)>
 <ROUTINE JOURNAL-F ()
          <COND (<VERB? READ EXAMINE>
