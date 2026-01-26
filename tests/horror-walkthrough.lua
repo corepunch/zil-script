@@ -25,110 +25,101 @@ return {
 		{input="examine desk",description="Notice the bottom drawer is locked"},
 		{input="open drawer",flag="BOTTOM-DRAWER OPENBIT",description="Unlock bottom drawer with brass key"},
 		{input="take ledger",inventory="PATIENT-LEDGER",description="Take patient ledger from drawer"},
-		{input="read ledger",description="Learn about Patient 237 and Dr. Mordecai"}
-		-- "east", -- "Return to Entrance Hall"
-		-- "north", -- "Go to Operating Theater"
-		-- "examine table", -- "See the gruesome operating table"
-		-- "examine cabinet", -- "Notice the medical cabinet"
-		-- "take scalpel", -- "Take scalpel - important tool"
-		-- "test:inventory SCALPEL", -- "Verify scalpel in inventory"
-		-- "take bottle", -- "Take ether bottle"
-		-- "south", -- "Return to Entrance Hall"
-		-- "east", -- "Go to Patient Ward"
-		-- "examine beds", -- "See the deteriorated ward"
-		-- "examine door", -- "Notice chains blocking morgue"
-		-- "attack chains", -- "Cut through chains with scalpel"
-		-- "north", -- "Enter Morgue"
-		-- "test:location", -- "Verify at morgue"
-		-- "examine drawers", -- "Find glowing contents"
-		-- "take serum", -- "Take strange glowing serum (Compound 237)"
-		-- "test:inventory GLOWING-SERUM", -- "Verify serum in inventory"
-		-- "examine bundle", -- "See canvas-wrapped body"
-		-- "take journal", -- "Take Dr. Mordecai's journal"
-		-- "read journal", -- "Learn about the terrible experiment"
+		{input="read ledger",text="Patient 237",description="Learn about Patient 237 and Dr. Mordecai"},
+		{input="east",description="Return to Entrance Hall"},
+		{input="north",here="OPERATING-THEATER",description="Go to Operating Theater"},
+		{input="examine table",description="See the gruesome operating table"},
+		{input="examine cabinet",description="Notice the medical cabinet"},
+		{input="take scalpel",inventory="SCALPEL",description="Take scalpel - important tool"},
+		{input="take bottle",inventory="ETHER-BOTTLE",description="Take ether bottle"},
+		{input="south",description="Return to Entrance Hall"},
+		{input="east",here="PATIENT-WARD",description="Go to Patient Ward"},
+		{input="examine beds",description="See the deteriorated ward"},
+		{input="examine door",description="Notice chains blocking morgue"},
+		{input="attack chains",description="Cut through chains with scalpel"},
+		{input="north",here="MORGUE",description="Enter Morgue"},
+		{input="examine drawers",description="Find glowing contents"},
+		{input="take serum",inventory="GLOWING-SERUM",description="Take strange glowing serum (Compound 237)"},
+		{input="examine bundle",description="See canvas-wrapped body"},
+		{input="take journal",inventory="MORDECAIS-JOURNAL",description="Take Dr. Mordecai's journal"},
+		{input="read journal",text="experiment",description="Learn about the terrible experiment"},
 		
-		-- -- Act 2: Basement Exploration
-		-- "south", -- "Return to Patient Ward"
-		-- "west", -- "Return to Entrance Hall"
-		-- "down", -- "Descend to Basement Stairs"
-		-- "down", -- "Continue to Basement Corridor"
-		-- "examine pipes", -- "Notice the valve"
-		-- "turn valve", -- "Release steam - important for later"
-		-- "east", -- "Enter Boiler Room"
-		-- "examine boiler", -- "See the massive iron furnace"
-		-- "open boiler", -- "Open the boiler"
-		-- "take shovel", -- "Take coal shovel"
-		-- "examine workbench", -- "Find tools"
-		-- "take flashlight", -- "Take flashlight (dead batteries)"
-		-- "west", -- "Return to Basement Corridor"
-		-- "west", -- "Enter Storage Room"
-		-- "examine shelves", -- "Find supplies"
-		-- "take lantern", -- "Take oil lantern - working light"
-		-- "test:inventory OIL-LANTERN", -- "Verify lantern in inventory"
-		-- "light lantern", -- "Illuminate the darkness"
-		-- "test:flag OIL-LANTERN ONBIT", -- "Verify lantern is lit"
-		-- "take records", -- "Take medical records"
-		-- "read records", -- "Learn about Patient 189"
-		-- "east", -- "Return to Basement Corridor"
-		-- "north", -- "Enter Flooding Chamber"
-		-- "examine water", -- "Cold ankle-deep water"
-		-- "examine door", -- "Sealed door to east - needs steam"
-		-- "open door", -- "Steam has loosened it - access Hydrotherapy"
-		-- "east", -- "Enter Hydrotherapy Room"
-		-- "examine tubs", -- "See restraint-equipped tubs"
-		-- "look in tubs", -- "Find notebook"
-		-- "take notebook", -- "Take soggy notebook"
-		-- "read notebook", -- "Learn about water torture"
-		-- "examine cabinet", -- "Medicine cabinet"
-		-- "take syringe", -- "Take syringe"
-		-- "west", -- "Return to Flooding Chamber"
-		-- "north", -- "Enter Isolation Ward"
-		-- "examine doors", -- "See the cell doors"
-		-- "examine scratches", -- "Critical clue: PATIENT 189 STILL ALIVE IN THE CHAPEL"
-		-- "north", -- "Enter Electroshock Theater"
-		-- "examine chair", -- "The terrible shock chair"
-		-- "examine machine", -- "Electroshock equipment"
-		-- "west", -- "Enter Padded Cell"
-		-- "examine padding", -- "Blood message about chapel and Patient 189"
-		-- "take jacket", -- "Take straitjacket (optional)"
-		-- "east", -- "Return to Electroshock Theater"
+		-- Act 2: Basement Exploration
+		{input="south",description="Return to Patient Ward"},
+		{input="west",description="Return to Entrance Hall"},
+		{input="down",description="Descend to Basement Stairs"},
+		{input="down",here="BASEMENT-CORRIDOR",description="Continue to Basement Corridor"},
+		{input="examine pipes",description="Notice the valve"},
+		{input="turn valve",description="Release steam - important for later"},
+		{input="east",here="BOILER-ROOM",description="Enter Boiler Room"},
+		{input="examine boiler",description="See the massive iron furnace"},
+		{input="open boiler",description="Open the boiler"},
+		{input="take shovel",inventory="COAL-SHOVEL",description="Take coal shovel"},
+		{input="examine workbench",description="Find tools"},
+		{input="take flashlight",inventory="FLASHLIGHT",description="Take flashlight (dead batteries)"},
+		{input="west",description="Return to Basement Corridor"},
+		{input="west",here="STORAGE-ROOM",description="Enter Storage Room"},
+		{input="examine shelves",description="Find supplies"},
+		{input="take lantern",inventory="OIL-LANTERN",description="Take oil lantern - working light"},
+		{input="light lantern",flag="OIL-LANTERN ONBIT",description="Illuminate the darkness"},
+		{input="take records",inventory="MEDICAL-RECORDS",description="Take medical records"},
+		{input="read records",text="Patient 189",description="Learn about Patient 189"},
+		{input="east",description="Return to Basement Corridor"},
+		{input="north",here="FLOODING-CHAMBER",description="Enter Flooding Chamber"},
+		{input="examine water",description="Cold ankle-deep water"},
+		{input="examine door",description="Sealed door to east - needs steam"},
+		{input="open door",description="Steam has loosened it - access Hydrotherapy"},
+		{input="east",here="HYDROTHERAPY-ROOM",description="Enter Hydrotherapy Room"},
+		{input="examine tubs",description="See restraint-equipped tubs"},
+		{input="look in tubs",description="Find notebook"},
+		{input="take notebook",inventory="SOGGY-NOTEBOOK",description="Take soggy notebook"},
+		{input="read notebook",text="water",description="Learn about water torture"},
+		{input="examine cabinet",description="Medicine cabinet"},
+		{input="take syringe",inventory="SYRINGE",description="Take syringe"},
+		{input="west",description="Return to Flooding Chamber"},
+		{input="north",here="ISOLATION-WARD",description="Enter Isolation Ward"},
+		{input="examine doors",description="See the cell doors"},
+		{input="examine scratches",text="CHAPEL",description="Critical clue: PATIENT 189 STILL ALIVE IN THE CHAPEL"},
+		{input="north",here="ELECTROSHOCK-THEATER",description="Enter Electroshock Theater"},
+		{input="examine chair",description="The terrible shock chair"},
+		{input="examine machine",description="Electroshock equipment"},
+		{input="west",here="PADDED-CELL",description="Enter Padded Cell"},
+		{input="examine padding",text="189",description="Blood message about chapel and Patient 189"},
+		{input="take jacket",inventory="STRAITJACKET",description="Take straitjacket (optional)"},
+		{input="east",description="Return to Electroshock Theater"},
 		
-		-- -- Act 3: Administrative Wing and Final Confrontation
-		-- "east", -- "Climb to Observation Deck"
-		-- "examine mirror", -- "One-way mirror overlooking theater"
-		-- "take logbook", -- "Take observation logbook"
-		-- "read logbook", -- "Learn about Patient 189's treatment"
-		-- "north", -- "Enter Administrative Wing"
-		-- "examine papers", -- "Find memo about Patient 189 and chapel"
-		-- "east", -- "Enter Director's Office"
-		-- "examine portrait", -- "See Dr. Heinrich Mordecai's portrait"
-		-- "examine desk", -- "Find hidden compartment"
-		-- "take key", -- "Take safe key"
-		-- "test:inventory SAFE-KEY", -- "Verify safe key in inventory"
-		-- "examine safe", -- "Notice wall safe"
-		-- "unlock safe", -- "Open safe with safe key"
-		-- "test:flag WALL-SAFE OPENBIT", -- "Verify safe is open"
-		-- "take notes", -- "Take Dr. Mordecai's private notes"
-		-- "read notes", -- "Learn Patient 189 transcended death"
-		-- "take key", -- "Take chapel key (iron key with cross)"
-		-- "test:inventory CHAPEL-KEY", -- "Verify chapel key in inventory"
-		-- "west", -- "Return to Administrative Wing"
-		-- "north", -- "Enter Staff Quarters"
-		-- "examine lockers", -- "Find personal items"
-		-- "take photograph", -- "Take staff photo from 1950"
-		-- "examine photograph", -- "See the sanitarium staff"
-		-- "west", -- "Enter Cafeteria"
-		-- "examine counter", -- "Old service area"
-		-- "take bell", -- "Take service bell (optional)"
-		-- "north", -- "Enter Overgrown Garden"
-		-- "examine garden", -- "Wild tangle of dead plants"
-		-- "examine door", -- "Chapel door with ominous message"
-		-- "unlock door", -- "Use chapel key to unlock final area"
-		-- "north", -- "Enter Chapel - Final Location"
-		-- "test:location", -- "Verify at chapel - final location"
-		-- "examine pews", -- "Strange carved symbols"
-		-- "examine candles", -- "Unnatural green flames"
-		-- "examine patient", -- "Patient 189 - Dr. Mordecai's achievement"
-		-- "hello", -- "WIN CONDITION - Patient 189 speaks and crumbles to ash"
+		-- Act 3: Administrative Wing and Final Confrontation
+		{input="east",here="OBSERVATION-DECK",description="Climb to Observation Deck"},
+		{input="examine mirror",description="One-way mirror overlooking theater"},
+		{input="take logbook",inventory="OBSERVATION-LOGBOOK",description="Take observation logbook"},
+		{input="read logbook",text="189",description="Learn about Patient 189's treatment"},
+		{input="north",here="ADMINISTRATIVE-WING",description="Enter Administrative Wing"},
+		{input="examine papers",description="Find memo about Patient 189 and chapel"},
+		{input="east",here="DIRECTORS-OFFICE",description="Enter Director's Office"},
+		{input="examine portrait",description="See Dr. Heinrich Mordecai's portrait"},
+		{input="examine desk",description="Find hidden compartment"},
+		{input="take key",inventory="SAFE-KEY",description="Take safe key"},
+		{input="examine safe",description="Notice wall safe"},
+		{input="unlock safe",flag="WALL-SAFE OPENBIT",description="Open safe with safe key"},
+		{input="take notes",inventory="PRIVATE-NOTES",description="Take Dr. Mordecai's private notes"},
+		{input="read notes",text="transcended",description="Learn Patient 189 transcended death"},
+		{input="take key",inventory="CHAPEL-KEY",description="Take chapel key (iron key with cross)"},
+		{input="west",description="Return to Administrative Wing"},
+		{input="north",here="STAFF-QUARTERS",description="Enter Staff Quarters"},
+		{input="examine lockers",description="Find personal items"},
+		{input="take photograph",inventory="STAFF-PHOTOGRAPH",description="Take staff photo from 1950"},
+		{input="examine photograph",description="See the sanitarium staff"},
+		{input="west",here="CAFETERIA",description="Enter Cafeteria"},
+		{input="examine counter",description="Old service area"},
+		{input="take bell",inventory="SERVICE-BELL",description="Take service bell (optional)"},
+		{input="north",here="OVERGROWN-GARDEN",description="Enter Overgrown Garden"},
+		{input="examine garden",description="Wild tangle of dead plants"},
+		{input="examine door",description="Chapel door with ominous message"},
+		{input="unlock door",description="Use chapel key to unlock final area"},
+		{input="north",here="CHAPEL",description="Enter Chapel - Final Location"},
+		{input="examine pews",description="Strange carved symbols"},
+		{input="examine candles",description="Unnatural green flames"},
+		{input="examine patient",description="Patient 189 - Dr. Mordecai's achievement"},
+		{input="hello",description="WIN CONDITION - Patient 189 speaks and crumbles to ash"}
 	}
 }

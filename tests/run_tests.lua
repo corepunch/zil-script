@@ -53,8 +53,8 @@ local function run_test_file(test_file_path)
 		end
 		
 		-- print("> " .. cmd.input)
-		-- print(game_coro:resume(cmd.input))
-		game_coro:resume(cmd.input)
+		-- Capture the output from the game
+		local output = game_coro:resume(cmd.input)
 
 		local GREEN = "\27[1;32m"
 		local RED = "\27[1;31m"
@@ -76,6 +76,14 @@ local function run_test_file(test_file_path)
 			report("test:inventory "..cmd.inventory)
 		elseif cmd.flag then
 			report("test:flag "..cmd.flag)
+		elseif cmd.text then
+			-- Check if expected text is present in the output
+			if output and output:find(cmd.text, 1, true) then
+				print(GREEN .. "[PASS] " .. (cmd.description or ("Text present: " .. cmd.text)) .. RESET)
+			else
+				print(RED .. "[FAIL] " .. (cmd.description or ("Text not found: " .. cmd.text)) .. RESET)
+				print(RED .. "Expected text: " .. cmd.text .. RESET)
+			end
 		end
 	end
 	
