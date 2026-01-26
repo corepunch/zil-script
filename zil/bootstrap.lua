@@ -290,6 +290,127 @@ function JIGS_UP(msg)
 	-- os.exit(1)
 end
 
+-- === Test Helper Functions ===
+-- These functions can be called from tests to verify game state
+
+-- Helper function to find an object by name
+local function find_object_by_name(obj_name)
+	for n, o in ipairs(OBJECTS) do
+		if o.NAME == obj_name then
+			return n, o
+		end
+	end
+	return nil, nil
+end
+
+-- Check if an object has a specific flag set
+local function check_flag(obj_name, flag_name)
+	local obj_num, obj = find_object_by_name(obj_name)
+	if not obj_num then
+		return {status = "error", message = "Object not found: " .. obj_name}
+	end
+	
+	local flag = _G[flag_name]
+	if not flag then
+		return {status = "error", message = "Unknown flag: " .. flag_name}
+	end
+	
+	local is_set = FSETQ(obj_num, flag)
+	return {
+		status = "ok",
+		object = obj_name,
+		flag = flag_name,
+		is_set = is_set,
+		message = string.format("%s %s %s", 
+			obj_name, 
+			is_set and "has" or "does not have", 
+			flag_name)
+	}
+end
+
+-- Check if an object is in a specific location (room or container)
+local function check_location(obj_name, location_name)
+	local obj_num, obj = find_object_by_name(obj_name)
+	if not obj_num then
+		return {status = "error", message = "Object not found: " .. obj_name}
+	end
+	
+	local loc_num, loc = find_object_by_name(location_name)
+	if not loc_num then
+		return {status = "error", message = "Location not found: " .. location_name}
+	end
+	
+	local obj_loc = LOC(obj_num)
+	local is_at_location = (obj_loc == loc_num)
+	return {
+		status = "ok",
+		object = obj_name,
+		location = location_name,
+		is_at_location = is_at_location,
+		message = string.format("%s is %s %s", 
+			obj_name,
+			is_at_location and "at" or "not at",
+			location_name)
+	}
+end
+
+-- Check player's inventory for an object
+local function check_inventory(obj_name)
+	local obj_num, obj = find_object_by_name(obj_name)
+	if not obj_num then
+		return {status = "error", message = "Object not found: " .. obj_name}
+	end
+	
+	-- Check if object is held by player (ADVENTURER is typically object 1)
+	local in_inventory = INQ(obj_num, ADVENTURER)
+	return {
+		status = "ok",
+		object = obj_name,
+		in_inventory = in_inventory,
+		message = string.format("%s is %s player's inventory", 
+			obj_name,
+			in_inventory and "in" or "not in")
+	}
+end
+
+-- Get current location name
+local function get_location()
+	local here_name = "unknown"
+	if HERE then
+		for n, o in ipairs(OBJECTS) do
+			if n == HERE then
+				here_name = o.NAME or "unknown"
+				break
+			end
+		end
+	end
+	return {
+		status = "ok",
+		location = here_name,
+		message = "Current location: " .. here_name
+	}
+end
+
+-- Parse test command and execute appropriate check
+local function handle_test_command(cmd)
+	local parts = {}
+	for part in cmd:gmatch("%S+") do
+		table.insert(parts, part)
+	end
+	
+	if parts[1] == "check-flag" and #parts >= 3 then
+		return check_flag(parts[2], parts[3])
+	elseif parts[1] == "check-location" and #parts >= 3 then
+		return check_location(parts[2], parts[3])
+	elseif parts[1] == "check-inventory" and #parts >= 2 then
+		return check_inventory(parts[2])
+	elseif parts[1] == "get-location" then
+		return get_location()
+	else
+		return {status = "error", message = "Unknown test command: " .. cmd}
+	end
+end
+
 local routes = {
 	['room-items'] = add_items,
 	['room-exits'] = add_exits,
@@ -302,6 +423,13 @@ function READ(inbuf, parse)
 	::restart_read::
 	if routes[s] then
 		s = coroutine.yield(routes[s](HERE))
+		goto restart_read
+	end
+	-- Handle test commands (starting with "test:")
+	if s and s:match("^test:") then
+		local test_cmd = s:sub(6) -- Remove "test:" prefix
+		local result = handle_test_command(test_cmd)
+		s = coroutine.yield(result)
 		goto restart_read
 	end
 	-- Handle nil input (e.g., EOF)

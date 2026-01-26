@@ -40,6 +40,9 @@ local function run_test_file(test_file_path)
 	
 	-- Start the game (first resume to initialize - no input needed yet)
 	local result = game_coro:resume()
+	if result then
+		print(result)
+	end
 	
 	-- Feed test commands to the coroutine
 	for i, cmd in ipairs(test_config.commands) do
@@ -50,6 +53,14 @@ local function run_test_file(test_file_path)
 		
 		print("> " .. cmd.input)
 		result = game_coro:resume(cmd.input)
+		if result then
+			-- Check if result is a test response (table with status)
+			if type(result) == "table" and result.status then
+				print(string.format("[TEST] %s: %s", result.status, result.message))
+			else
+				print(result)
+			end
+		end
 	end
 	
 	print("\n=== Test commands completed ===")

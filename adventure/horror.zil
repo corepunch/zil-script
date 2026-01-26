@@ -54,7 +54,7 @@
         (SYNONYM KEY)
         (ADJECTIVE BRASS SMALL)
         (DESC "brass key")
-        (LDESC "A small brass key, cold to the touch.")
+        (LDESC "A small brass key lies among the scattered papers on the floor, cold to the touch.")
         (FLAGS TAKEBIT)
         (SIZE 2)
         (TEXT "A small BRASS KEY with the number '3' engraved on its head. It's ice cold despite being indoors.")>
