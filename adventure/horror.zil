@@ -17,10 +17,39 @@
         (FLAGS READBIT TAKEBIT)
         (TEXT "The plaque reads: 'Blackwood Sanitarium - Est. 1898 - Closed by Order 1952'")
         (SIZE 5)>
+<ROUTINE WORKING-FLASHLIGHT-F ()
+         <COND (<AND <VERB? LAMP-ON>
+                     <NOT ,WORKING-FLASHLIGHT-LIT-FLAG>>
+                <TELL "You turn on the flashlight. A bright beam cuts through the darkness." CR>
+                <SETG WORKING-FLASHLIGHT-LIT-FLAG T>
+                <FSET ,WORKING-FLASHLIGHT ,ONBIT>
+                <RTRUE>)
+               (<AND <VERB? LAMP-ON>
+                     ,WORKING-FLASHLIGHT-LIT-FLAG>
+                <TELL "The flashlight is already on." CR>
+                <RTRUE>)
+               (<AND <VERB? LAMP-OFF>
+                     ,WORKING-FLASHLIGHT-LIT-FLAG>
+                <TELL "You turn off the flashlight." CR>
+                <SETG WORKING-FLASHLIGHT-LIT-FLAG <>>
+                <FCLEAR ,WORKING-FLASHLIGHT ,ONBIT>
+                <RTRUE>)
+               (<VERB? EXAMINE>
+                <TELL "A sturdy metal flashlight with fresh batteries. It looks like it was recently dropped here." CR>
+                <RTRUE>)>>
+<OBJECT WORKING-FLASHLIGHT
+        (IN SANITARIUM-ENTRANCE)
+        (SYNONYM FLASHLIGHT LIGHT TORCH LAMP)
+        (ADJECTIVE METAL WORKING)
+        (DESC "flashlight")
+        (LDESC "A sturdy flashlight lies on the ground.")
+        (FLAGS TAKEBIT LIGHTBIT)
+        (SIZE 5)
+        (ACTION WORKING-FLASHLIGHT-F)>
 <ROOM SANITARIUM-ENTRANCE
       (IN ROOMS)
       (DESC "Sanitarium Entrance Hall")
-      (LDESC "The entrance hall reeks of mildew and decay. A grand staircase ascends to darkness in the east. To the west, a doorway leads to what might have been a reception area. North, you can make out an operating theater through a half-open door. A narrow staircase descends into the basement.")
+      (LDESC "The entrance hall reeks of mildew and decay. A grand staircase ascends to darkness in the east. To the west, a doorway leads to what might have been a reception area. North, you can make out an operating theater through a half-open door. A narrow staircase descends into the basement. A flashlight lies abandoned on the dusty floor.")
       (SOUTH TO SANITARIUM-GATE)
       (WEST TO RECEPTION-ROOM)
       (NORTH TO OPERATING-THEATER)
@@ -197,7 +226,7 @@
 <ROOM BASEMENT-CORRIDOR
       (IN ROOMS)
       (DESC "Basement Corridor")
-      (LDESC "The basement corridor stretches into shadow. Water pools on the cracked floor. Stone stairs climb upward into darkness. To the east, a passage leads toward the sound of dripping water. West lies what might have been storage. North, another corridor descends toward deeper chambers.")
+      (LDESC "The basement corridor is pitch black, stretching into shadow. Water pools on the cracked floor. Stone stairs climb upward into darkness. To the east, a passage leads toward the sound of dripping water. West lies what might have been storage. North, another corridor descends toward deeper chambers.")
       (UP TO BASEMENT-STAIRS)
       (EAST TO BOILER-ROOM)
       (WEST TO STORAGE-ROOM)
@@ -237,7 +266,7 @@
 <ROOM BOILER-ROOM
       (IN ROOMS)
       (DESC "Boiler Room")
-      (LDESC "Coal dust covers everything. The room radiates a sense of dormant power, waiting to awaken. A narrow doorway to the west leads back out to the corridor.")
+      (LDESC "This dark room is thick with coal dust that covers everything. The room radiates a sense of dormant power, waiting to awaken. A narrow doorway to the west leads back out to the corridor.")
       (WEST TO BASEMENT-CORRIDOR)
       (FLAGS RLANDBIT)>
 <ROUTINE BOILER-F ()
@@ -267,7 +296,7 @@
 <ROOM STORAGE-ROOM
       (IN ROOMS)
       (DESC "Storage Room")
-      (LDESC "Old linens, rusted equipment, and unidentifiable containers fill every space. A sour smell permeates the air. The exit lies to the east.")
+      (LDESC "This dark storage room is filled with old linens, rusted equipment, and unidentifiable containers in every space. A sour smell permeates the air. The exit lies to the east.")
       (EAST TO BASEMENT-CORRIDOR)
       (FLAGS RLANDBIT)>
 <ROUTINE SHELVES-F ()
@@ -986,5 +1015,6 @@
 <GLOBAL VALVE-TURNED-FLAG <>>
 <GLOBAL STEAM-DOOR-OPEN <>>
 <GLOBAL LANTERN-LIT-FLAG <>>
+<GLOBAL WORKING-FLASHLIGHT-LIT-FLAG <>>
 <GLOBAL CHAPEL-UNLOCKED <>>
 <GLOBAL CHAINS-CUT-FLAG <>>
