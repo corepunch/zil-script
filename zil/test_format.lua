@@ -4,11 +4,13 @@
 local M = {}
 
 -- ANSI color codes for test status
+-- Note: ok/pass and fail/error use the same colors respectively,
+-- but are kept separate for semantic clarity and future flexibility
 M.colors = {
-	ok = "\27[1;32m",    -- Green for ok/pass
-	pass = "\27[1;32m",  -- Green for pass
-	fail = "\27[1;31m",  -- Red for fail
-	error = "\27[1;31m", -- Red for error
+	ok = "\27[1;32m",    -- Green for ok (check commands)
+	pass = "\27[1;32m",  -- Green for pass (assert commands)
+	fail = "\27[1;31m",  -- Red for fail (test assertions)
+	error = "\27[1;31m", -- Red for error (command errors)
 }
 
 M.reset = "\27[0m"
