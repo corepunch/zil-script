@@ -293,53 +293,49 @@ end
 -- === Test Helper Functions ===
 -- These functions can be called from tests to verify game state
 
--- Check if an object has a specific flag set
-local function check_flag(obj_name, flag_name)
-	-- Find object by name
+-- Helper function to find an object by name
+local function find_object_by_name(obj_name)
 	for n, o in ipairs(OBJECTS) do
 		if o.NAME == obj_name then
-			local flag = _G[flag_name]
-			if not flag then
-				return {status = "error", message = "Unknown flag: " .. flag_name}
-			end
-			local is_set = FSETQ(n, flag)
-			return {
-				status = "ok",
-				object = obj_name,
-				flag = flag_name,
-				is_set = is_set,
-				message = string.format("%s %s %s", 
-					obj_name, 
-					is_set and "has" or "does not have", 
-					flag_name)
-			}
+			return n, o
 		end
 	end
-	return {status = "error", message = "Object not found: " .. obj_name}
+	return nil, nil
 end
 
--- Check if an object is in a specific location (room or container)
-local function check_location(obj_name, location_name)
-	-- Find object by name
-	local obj_num = nil
-	for n, o in ipairs(OBJECTS) do
-		if o.NAME == obj_name then
-			obj_num = n
-			break
-		end
-	end
+-- Check if an object has a specific flag set
+local function check_flag(obj_name, flag_name)
+	local obj_num, obj = find_object_by_name(obj_name)
 	if not obj_num then
 		return {status = "error", message = "Object not found: " .. obj_name}
 	end
 	
-	-- Find location by name
-	local loc_num = nil
-	for n, o in ipairs(OBJECTS) do
-		if o.NAME == location_name then
-			loc_num = n
-			break
-		end
+	local flag = _G[flag_name]
+	if not flag then
+		return {status = "error", message = "Unknown flag: " .. flag_name}
 	end
+	
+	local is_set = FSETQ(obj_num, flag)
+	return {
+		status = "ok",
+		object = obj_name,
+		flag = flag_name,
+		is_set = is_set,
+		message = string.format("%s %s %s", 
+			obj_name, 
+			is_set and "has" or "does not have", 
+			flag_name)
+	}
+end
+
+-- Check if an object is in a specific location (room or container)
+local function check_location(obj_name, location_name)
+	local obj_num, obj = find_object_by_name(obj_name)
+	if not obj_num then
+		return {status = "error", message = "Object not found: " .. obj_name}
+	end
+	
+	local loc_num, loc = find_object_by_name(location_name)
 	if not loc_num then
 		return {status = "error", message = "Location not found: " .. location_name}
 	end
@@ -360,14 +356,7 @@ end
 
 -- Check player's inventory for an object
 local function check_inventory(obj_name)
-	-- Find object by name
-	local obj_num = nil
-	for n, o in ipairs(OBJECTS) do
-		if o.NAME == obj_name then
-			obj_num = n
-			break
-		end
-	end
+	local obj_num, obj = find_object_by_name(obj_name)
 	if not obj_num then
 		return {status = "error", message = "Object not found: " .. obj_name}
 	end

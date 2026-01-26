@@ -14,6 +14,8 @@ return {
 	},
 	commands = {
 		-- Test starting area and basic interactions
+		-- Note: Object names use underscores (e.g., BRASS_PLAQUE) because ZIL hyphens
+		-- are converted to underscores during Lua compilation
 		{
 			input = "look",
 			description = "Start at Sanitarium Gate"
