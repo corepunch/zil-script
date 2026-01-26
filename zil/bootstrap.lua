@@ -330,6 +330,14 @@ local function assert_inventory(obj_name)
 	assert_location(obj_name, "ADVENTURER")
 end
 
+local function assert_lose(obj_name)
+	local obj_num = find_object_by_name(obj_name)
+	local loc_num = find_object_by_name("ADVENTURER")
+	assert(obj_num, "Object not found: " .. obj_name)	
+	assert(loc_num, "Location not found: " .. "ADVENTURER")
+	assert(LOC(obj_num) ~= loc_num, obj_name .. " is still in inventory")
+end
+
 local function assert_here(location_name)
 	assert_location("ADVENTURER", location_name)
 end
@@ -342,8 +350,9 @@ local test_cmds = {
 	["test:flag"] = { assert_flag, 3 },
 	["test:here"] = { assert_here, 2 },
 	["test:location"] = { assert_location, 3 },
-	["test:inventory"] = { assert_inventory, 2 },
+	["test:take"] = { assert_inventory, 2 },
 	["test:global"] = { assert_global, 2 },
+	["test:lose"] = { assert_lose, 2 },
 }
 
 local routes = {

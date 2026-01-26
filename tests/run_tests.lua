@@ -80,8 +80,10 @@ local function run_test_file(test_file_path)
 
 		if cmd.here then
 			report("test:here "..cmd.here)
-		elseif cmd.inventory then
-			report("test:inventory "..cmd.inventory)
+		elseif cmd.take then
+			report("test:take "..cmd.take)
+		elseif cmd.lose then
+			report("test:lose "..cmd.lose)
 		elseif cmd.flag then
 			report("test:flag "..cmd.flag)
 		elseif cmd.global then
