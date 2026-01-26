@@ -25,7 +25,7 @@
         (IN STARTROOM)
         (SYNONYM DESK TABLE)
         (DESC "desk")
-        (FLAGS SURFACEBIT)>
+        (FLAGS SURFACEBIT CONTBIT OPENBIT)>
 
 <OBJECT BUCKET
         (IN STARTROOM)

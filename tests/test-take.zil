@@ -31,7 +31,7 @@
         (ADJECTIVE WOODEN)
         (DESC "wooden desk")
         (LDESC "A sturdy wooden desk.")
-        (FLAGS SURFACEBIT)>
+        (FLAGS SURFACEBIT CONTBIT OPENBIT)>
 
 <OBJECT BUCKET
         (IN STARTROOM)

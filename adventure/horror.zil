@@ -71,7 +71,7 @@
         (ADJECTIVE OPERATING STAINED)
         (DESC "operating table")
         (LDESC "A stained operating table dominates the center of the room.")
-        (FLAGS SURFACEBIT)
+        (FLAGS SURFACEBIT CONTBIT OPENBIT)
         (TEXT "The operating table is covered in dark brown stains that you hope are just rust. Leather restraints dangle from all four corners. Deep gouges mar the metal surface, as if someone struggled violently against the bindings.")>
 <ROUTINE CABINET-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE>
@@ -262,7 +262,7 @@
         (ADJECTIVE WORK)
         (DESC "workbench")
         (LDESC "A workbench sits against the far wall, covered with ancient tools.")
-        (FLAGS SURFACEBIT)
+        (FLAGS SURFACEBIT CONTBIT OPENBIT)
         (ACTION WORKBENCH-F)>
 <ROOM STORAGE-ROOM
       (IN ROOMS)
@@ -604,7 +604,7 @@
         (ADJECTIVE SERVING)
         (DESC "serving counter")
         (LDESC "A serving counter separates the dining area from the kitchen beyond.")
-        (FLAGS SURFACEBIT)
+        (FLAGS SURFACEBIT CONTBIT OPENBIT)
         (ACTION COUNTER-F)>
 <ROOM OVERGROWN-GARDEN
       (IN ROOMS)
