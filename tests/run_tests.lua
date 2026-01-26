@@ -64,6 +64,7 @@ local function run_test_file(test_file_path)
 		local function feedback(test, err)
 			if err then
 				print(RED .. "[FAIL] " .. (cmd.description or test) .. RESET)
+				print(RED .. output .. RESET)
 				if type(err) == "string" then print(RED .. err .. RESET) end
 			else
 				print(GREEN .. "[PASS] " .. (cmd.description or test) .. RESET)
@@ -84,7 +85,7 @@ local function run_test_file(test_file_path)
 		else
 			print(NEUTRAL .. "[SKIP] " .. (cmd.description or cmd.input) .. RESET)
 		end
-		print(output)
+		-- print(output)
 	end
 	
 	print("\n=== Test commands completed ===")
