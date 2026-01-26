@@ -50,7 +50,6 @@ This is a complete walkthrough for the horror.zil adventure game - an expansion 
 3. `examine plaque` - Learn about Blackwood Sanitarium (Est. 1898, Closed 1952)
 4. `take plaque`
 5. `north` - Enter Sanitarium Entrance Hall
-5. `north` - Enter Sanitarium Entrance Hall
 6. `examine wallpaper` - Notice the Victorian-era decay
 7. `west` - Go to Reception Room
 8. `take key` (brass key) - Find it among scattered papers
