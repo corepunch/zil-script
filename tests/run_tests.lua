@@ -63,7 +63,7 @@ local function run_test_file(test_file_path)
 
 		local function feedback(test, err)
 			if err then
-				print(RED .. "[FAIL] " .. (cmd.description or test) .. RESET)
+				print(RED .. "[FAIL] " .. (cmd.description or test) .. RESET .. " (" .. cmd.input .. ")")
 				print(RED .. output .. RESET)
 				if output and output:find("too many things") then
 					print(RED .. game_coro:resume("inventory") .. RESET)
@@ -71,7 +71,7 @@ local function run_test_file(test_file_path)
 					print(RED .. err .. RESET)
 				end
 			else
-				print(GREEN .. "[PASS] " .. (cmd.description or test) .. RESET)
+				print(GREEN .. "[PASS] " .. (cmd.description or test) .. RESET .. " (" .. cmd.input .. ")")
 			end
 		end
 		local function report(test) 
