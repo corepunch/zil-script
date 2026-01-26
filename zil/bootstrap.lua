@@ -391,6 +391,109 @@ local function get_location()
 	}
 end
 
+-- Helper to convert string to boolean
+local function to_boolean(str)
+	if type(str) == "boolean" then return str end
+	if type(str) ~= "string" then return nil end
+	local lower = str:lower()
+	if lower == "true" or lower == "yes" or lower == "1" then
+		return true
+	elseif lower == "false" or lower == "no" or lower == "0" then
+		return false
+	end
+	return nil
+end
+
+-- Assert that an object has (or doesn't have) a specific flag
+local function assert_flag(obj_name, flag_name, expected)
+	local obj_num, obj = find_object_by_name(obj_name)
+	if not obj_num then
+		return {status = "error", message = "Object not found: " .. obj_name}
+	end
+	
+	local flag = _G[flag_name]
+	if not flag then
+		return {status = "error", message = "Unknown flag: " .. flag_name}
+	end
+	
+	local expected_bool = to_boolean(expected)
+	if expected_bool == nil then
+		return {status = "error", message = "Invalid expected value: " .. tostring(expected) .. " (use true/false)"}
+	end
+	
+	local is_set = FSETQ(obj_num, flag)
+	local passed = (is_set == expected_bool)
+	
+	return {
+		status = passed and "pass" or "fail",
+		object = obj_name,
+		flag = flag_name,
+		expected = expected_bool,
+		actual = is_set,
+		message = string.format("%s %s %s (expected: %s)", 
+			obj_name, 
+			is_set and "has" or "does not have", 
+			flag_name,
+			expected_bool and "has" or "does not have")
+	}
+end
+
+-- Assert that an object is (or isn't) in player's inventory
+local function assert_inventory(obj_name, expected)
+	local obj_num, obj = find_object_by_name(obj_name)
+	if not obj_num then
+		return {status = "error", message = "Object not found: " .. obj_name}
+	end
+	
+	local expected_bool = to_boolean(expected)
+	if expected_bool == nil then
+		return {status = "error", message = "Invalid expected value: " .. tostring(expected) .. " (use true/false)"}
+	end
+	
+	local in_inventory = INQ(obj_num, ADVENTURER)
+	local passed = (in_inventory == expected_bool)
+	
+	return {
+		status = passed and "pass" or "fail",
+		object = obj_name,
+		expected = expected_bool,
+		actual = in_inventory,
+		message = string.format("%s is %s player's inventory (expected: %s)", 
+			obj_name,
+			in_inventory and "in" or "not in",
+			expected_bool and "in" or "not in")
+	}
+end
+
+-- Assert that an object is at a specific location
+local function assert_location(obj_name, location_name)
+	local obj_num, obj = find_object_by_name(obj_name)
+	if not obj_num then
+		return {status = "error", message = "Object not found: " .. obj_name}
+	end
+	
+	local loc_num, loc = find_object_by_name(location_name)
+	if not loc_num then
+		return {status = "error", message = "Location not found: " .. location_name}
+	end
+	
+	local obj_loc = LOC(obj_num)
+	local is_at_location = (obj_loc == loc_num)
+	
+	return {
+		status = is_at_location and "pass" or "fail",
+		object = obj_name,
+		location = location_name,
+		expected = true,
+		actual = is_at_location,
+		message = string.format("%s is %s %s (expected: at %s)", 
+			obj_name,
+			is_at_location and "at" or "not at",
+			location_name,
+			location_name)
+	}
+end
+
 -- Parse test command and execute appropriate check
 local function handle_test_command(cmd)
 	local parts = {}
@@ -398,7 +501,15 @@ local function handle_test_command(cmd)
 		table.insert(parts, part)
 	end
 	
-	if parts[1] == "check-flag" and #parts >= 3 then
+	-- Assertion commands (with expected values)
+	if parts[1] == "assert-flag" and #parts >= 4 then
+		return assert_flag(parts[2], parts[3], parts[4])
+	elseif parts[1] == "assert-inventory" and #parts >= 3 then
+		return assert_inventory(parts[2], parts[3])
+	elseif parts[1] == "assert-location" and #parts >= 3 then
+		return assert_location(parts[2], parts[3])
+	-- Check commands (backward compatible - just report state)
+	elseif parts[1] == "check-flag" and #parts >= 3 then
 		return check_flag(parts[2], parts[3])
 	elseif parts[1] == "check-location" and #parts >= 3 then
 		return check_location(parts[2], parts[3])
