@@ -2,6 +2,21 @@
 
 This document describes how to test that the horror.zil adventure game is winnable using the automated test infrastructure.
 
+## Important Note About Game State
+
+**Current Status**: Testing has revealed several issues in horror.zil that prevent the game from being winnable in its current state:
+
+1. **Light Source Accessibility Issue**: Many rooms (Operating Theater, Patient Ward, Morgue, and all basement rooms) are dark (lack ONBIT flag), but the only light sources (flashlight and oil lantern) are located in dark basement rooms. This creates a chicken-and-egg problem where you need light to get to the light sources.
+
+2. **Container Item Access Issue**: Items in containers (like the patient ledger in the bottom drawer) are visible after opening the container but cannot be taken with the standard "take" command. This appears to be a verb implementation or game logic bug.
+
+**Recommended Fixes**:
+1. Add ONBIT flag to OPERATING-THEATER, PATIENT-WARD, and potentially MORGUE rooms
+2. OR move a working light source (OIL-LANTERN) to an initially lit room (SANITARIUM-GATE or RECEPTION-ROOM)
+3. Fix container item taking mechanics to allow items to be removed from open containers
+
+**Testing Value**: The test infrastructure provided here successfully identifies these issues and can be used to verify when they are fixed, or to test modified versions of the game.
+
 ## Overview
 
 The test infrastructure provides two key capabilities:
@@ -9,22 +24,33 @@ The test infrastructure provides two key capabilities:
 1. **Automated walkthrough testing** - Run a complete game walkthrough to verify the game can be completed
 2. **State verification helpers** - Check game state during tests to ensure puzzles are solved correctly
 
-## Running the Horror Walkthrough Test
+## Running the Horror Tests
 
-To verify that horror.zil is winnable, run the complete walkthrough test:
+### Available Tests
 
-```bash
-lua tests/run_tests.lua tests/horror-walkthrough.lua
-```
+1. **horror-test-helpers.lua** - Basic test to verify helper functions work
+   ```bash
+   lua5.3 tests/run_tests.lua tests/horror-test-helpers.lua
+   ```
 
-This test executes all 101 commands from the complete walkthrough documented in `adventure/horror-walkthrough.md`, including:
-- Taking all necessary items
-- Solving all puzzles (key puzzles, steam valve, chain cutting, safe puzzle)
-- Navigating through all 22 rooms
-- Reaching the final chapel location
-- Triggering the win condition (saying "hello" to Patient 189)
+2. **horror-partial.lua** - Tests accessible portions of the game (recommended)
+   ```bash
+   lua5.3 tests/run_tests.lua tests/horror-partial.lua
+   ```
+   This test demonstrates:
+   - Test infrastructure functionality
+   - Basic gameplay mechanics (taking items, using keys, unlocking)
+   - The darkness/light accessibility issue
+   - The container item access issue
+   - State verification using test commands
 
-## Test Helper Commands
+3. **horror-walkthrough.lua** - Complete walkthrough (will fail due to game issues)
+   ```bash
+   lua5.3 tests/run_tests.lua tests/horror-walkthrough.lua
+   ```
+   This test is based on the walkthrough in `adventure/horror-walkthrough.md` but will fail due to the issues noted above. It serves as a template for what a complete winnability test would look like if the game issues are fixed.
+
+## Verifying Winnability
 
 The test infrastructure includes special helper commands that can be used in test files to verify game state. These commands are prefixed with `test:` and are handled by the bootstrap system.
 
@@ -209,19 +235,34 @@ These functions are integrated into the game's READ loop and respond to inputs p
 
 ## Verifying Winnability
 
-To verify horror.zil is winnable:
+**Current State**: As of this testing, horror.zil is **not winnable** in its current implementation due to the issues described above.
 
-1. Run the complete walkthrough test
-2. Check that all test assertions pass (inventory checks, flag checks, location checks)
-3. Verify the final win condition is reached (entering chapel and greeting Patient 189)
+To verify winnability once the issues are fixed:
 
-The test should complete without errors, demonstrating that:
-- All necessary items can be found and collected
-- All puzzles can be solved with the available items and commands
-- All required rooms can be accessed
-- The win condition can be triggered
+1. **Fix the identified issues** in horror.zil:
+   - Add light to required rooms OR move a light source to an accessible location
+   - Fix container item access mechanics
 
-## Troubleshooting
+2. **Run the complete walkthrough test**:
+   ```bash
+   lua5.3 tests/run_tests.lua tests/horror-walkthrough.lua
+   ```
+
+3. **Verify all test assertions pass**:
+   - All inventory checks should show items were successfully collected
+   - All flag checks should show objects in expected states (drawers open, lights on, etc.)
+   - All location checks should confirm progression through the game
+   - The final commands should reach the chapel and trigger the win condition
+
+4. **Watch for test failures** that indicate:
+   - Items that couldn't be picked up
+   - Doors/containers that couldn't be opened
+   - Rooms that couldn't be accessed
+   - The win condition not being reachable
+
+The test infrastructure will clearly show `[TEST] ok` for passing assertions and `[TEST] error` for failures, making it easy to identify where the game flow breaks.
+
+## Test Helper Commands
 
 ### Test Command Not Found
 If you see "Unknown test command", ensure:
