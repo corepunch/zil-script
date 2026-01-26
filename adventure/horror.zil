@@ -762,7 +762,7 @@
                 <RTRUE>)>>
 <OBJECT PATIENT-LEDGER
         (IN BOTTOM-DRAWER)
-        (SYNONYM LEDGER BOOK JOURNAL)
+        (SYNONYM LEDGER BOOK)
         (ADJECTIVE PATIENT LEATHER)
         (DESC "patient ledger")
         (LDESC "A leather-bound ledger with names and dates. The final entry reads: 'Patient 237 - Treatment discontinued. Subject expired during procedure. Dr. Mordecai.'")

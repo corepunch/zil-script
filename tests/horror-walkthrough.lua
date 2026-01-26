@@ -43,8 +43,8 @@ return {
 		{input="examine drawers",text="drawers",description="Find glowing contents"},
 		{input="take serum",inventory="STRANGE-SERUM",description="Take strange glowing serum (Compound 237)"},
 		{input="examine bundle",text="Patient 237",description="See canvas-wrapped body"},
-		{input="take journal",inventory="MORDECAIS-JOURNAL",description="Take Dr. Mordecai's journal"},
-		{input="read journal",text="experiment",description="Learn about the terrible experiment"},
+		{input="take journal",inventory="MORDECAI-JOURNAL",description="Take Dr. Mordecai's journal"},
+		{input="read journal",text="mistake",description="Learn about the terrible experiment"},
 		
 		-- Act 2: Basement Exploration
 		{input="south",description="Return to Patient Ward"},
