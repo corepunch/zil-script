@@ -111,7 +111,7 @@ return {
 		{input="take key",inventory="SAFE-KEY",description="Take safe key"},
 		{input="examine safe",text="locked",description="Notice wall safe"},
 		{input="unlock safe",flag="WALL-SAFE OPENBIT",description="Open safe with safe key"},
-		{input="take notes",inventory="PRIVATE-NOTES",description="Take Dr. Mordecai's private notes"},
+		{input="take notes",inventory="MORDECAI-NOTES",description="Take Dr. Mordecai's private notes"},
 		{input="read notes",text="transcended",description="Learn Patient 189 transcended death"},
 		{input="take key",inventory="CHAPEL-KEY",description="Take chapel key (iron key with cross)"},
 		{input="west",description="Return to Administrative Wing"},
