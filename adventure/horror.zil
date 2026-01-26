@@ -5,7 +5,7 @@
 <ROOM SANITARIUM-GATE
       (IN ROOMS)
       (DESC "Sanitarium Gate")
-      (LDESC "You stand before the rusted iron gates of an abandoned sanitarium. The structure looms against the darkening sky, its windows like hollow eye sockets. Weeds choke the gravel path leading north to the entrance. A flashlight lies on the ground near the gate.")
+      (LDESC "You stand before the rusted iron gates of an abandoned sanitarium. The structure looms against the darkening sky, its windows like hollow eye sockets. Weeds choke the gravel path leading north to the entrance.")
       (NORTH TO SANITARIUM-ENTRANCE)
       (FLAGS RLANDBIT ONBIT)>
 <OBJECT BRASS-PLAQUE
@@ -38,7 +38,7 @@
                 <TELL "A sturdy metal flashlight with fresh batteries. It looks like it was recently dropped here." CR>
                 <RTRUE>)>>
 <OBJECT WORKING-FLASHLIGHT
-        (IN SANITARIUM-GATE)
+        (IN SANITARIUM-ENTRANCE)
         (SYNONYM FLASHLIGHT LIGHT TORCH LAMP)
         (ADJECTIVE METAL WORKING)
         (DESC "flashlight")
@@ -49,7 +49,7 @@
 <ROOM SANITARIUM-ENTRANCE
       (IN ROOMS)
       (DESC "Sanitarium Entrance Hall")
-      (LDESC "The entrance hall reeks of mildew and decay. A grand staircase ascends to darkness in the east. To the west, a doorway leads to what might have been a reception area. North, you can make out an operating theater through a half-open door. A narrow staircase descends into the basement.")
+      (LDESC "The entrance hall reeks of mildew and decay. A grand staircase ascends to darkness in the east. To the west, a doorway leads to what might have been a reception area. North, you can make out an operating theater through a half-open door. A narrow staircase descends into the basement. A flashlight lies abandoned on the dusty floor.")
       (SOUTH TO SANITARIUM-GATE)
       (WEST TO RECEPTION-ROOM)
       (NORTH TO OPERATING-THEATER)

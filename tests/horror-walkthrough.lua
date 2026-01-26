@@ -16,11 +16,11 @@ return {
 		-- Note: Object names use underscores (e.g., BRASS-PLAQUE) because ZIL hyphens
 		-- are converted to underscores during Lua compilation
 		{input="look",here="SANITARIUM-GATE",description="Start at Sanitarium Gate"},
-		{input="take flashlight",inventory="WORKING-FLASHLIGHT",description="Take the working flashlight"},
-		{input="light flashlight",flag="WORKING-FLASHLIGHT ONBIT",description="Turn on the flashlight for dark areas"},
 		{input="examine plaque",text="Blackwood",description="Learn about Blackwood Sanitarium"},
 		{input="take plaque",inventory="BRASS-PLAQUE",description="Take the brass plaque"},
 		{input="north",here="SANITARIUM-ENTRANCE",description="Enter Sanitarium Entrance Hall"},
+		{input="take flashlight",inventory="WORKING-FLASHLIGHT",description="Take the working flashlight"},
+		{input="light flashlight",flag="WORKING-FLASHLIGHT ONBIT",description="Turn on the flashlight for dark areas"},
 		{input="examine wallpaper",text="Victorian",description="Notice the Victorian-era decay"},
 		{input="west",description="Go to Reception Room"},
 		{input="take key",inventory="BRASS-KEY",description="Take brass key from scattered papers"},
