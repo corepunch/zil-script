@@ -9,7 +9,7 @@ LIB_PATH = $(BUILD_DIR)
 help:
 	@echo "Available targets:"
 	@echo "  run               - Run the game in GUI mode"
-	@echo "  run_text          - Run the game in text mode"
+	@echo "  run-text          - Run the game in text mode"
 	@echo "  clean             - Clean up build artifacts"
 	@echo ""
 	@echo "Test targets:"
@@ -29,14 +29,14 @@ run:
 	@echo "Setting DYLD_LIBRARY_PATH to $(LIB_PATH) and running $(APP_NAME)..."
 	DYLD_LIBRARY_PATH=$(LIB_PATH) $(BUILD_DIR)/$(APP_NAME) $(DATA_DIR)
 
-run_text:
+run-text:
 	lua main.lua
 
 cluster:
 	@echo "Setting DYLD_LIBRARY_PATH to $(LIB_PATH) and running $(APP_NAME)..."
 	DYLD_LIBRARY_PATH=$(LIB_PATH) $(BUILD_DIR)/$(APP_NAME) -lib=$(BUILD_DIR) -data=$(CLUSTER_DIR)
 
-copy_resources:
+copy-resources:
 	@echo "Copying contents of current directory to $(RESOURCES_DIR)..."
 	@mkdir -p $(RESOURCES_DIR)  # Ensure the target directory exists
 	@cp -r ./* $(RESOURCES_DIR)
