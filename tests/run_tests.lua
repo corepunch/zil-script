@@ -3,6 +3,7 @@
 -- Usage: lua tests/run_tests.lua [test_file]
 
 local runtime = require 'zil.runtime'
+local test_format = require 'zil.test_format'
 
 local function run_test_file(test_file_path)
 	print("=== Running test: " .. test_file_path .. " ===\n")
@@ -56,16 +57,7 @@ local function run_test_file(test_file_path)
 		if result then
 			-- Check if result is a test response (table with status)
 			if type(result) == "table" and result.status then
-				-- Add ANSI color codes for status
-				local color_codes = {
-					ok = "\27[1;32m",    -- Green for ok/pass
-					pass = "\27[1;32m",  -- Green for pass
-					fail = "\27[1;31m",  -- Red for fail
-					error = "\27[1;31m", -- Red for error
-				}
-				local reset = "\27[0m"
-				local color = color_codes[result.status] or ""
-				print(string.format("[TEST] %s%s%s: %s", color, result.status, reset, result.message))
+				print(test_format.format_test_result(result))
 			else
 				print(result)
 			end
