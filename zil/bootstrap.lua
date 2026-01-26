@@ -266,7 +266,7 @@ function TELL(...)
 		if v == D then object = true
 		elseif object then object = false io_write(GETP(v, _G["PQDESC"]))
 		elseif type(v) == "number" then io_write(mem: string(v))
-		elseif v == '>' then -- skip
+		-- elseif v == '>' then -- skip
 		else io_write(tostring(v)) end
 	end
 end

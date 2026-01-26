@@ -65,6 +65,7 @@ repeat
   --   end
   -- end
   input = io.read()
+  io.write("\n")
 until not input or not game:is_running()
 
 -- local ast = parser.parse_file "zork1/actions.zil"
