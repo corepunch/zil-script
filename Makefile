@@ -4,7 +4,7 @@ DATA_DIR = /Users/igor/Developer/zil-engine
 LIB_PATH = $(BUILD_DIR)
 
 # Targets
-.PHONY: run clean test test-all test-unit test-integration test-zork1 test-parser test-containers test-directions test-light test-pronouns test-take help
+.PHONY: run clean test test-all test-unit test-integration test-zork1 test-parser test-containers test-directions test-light test-pronouns test-take test-horror-helpers test-horror-partial test-horror test-horror-all help
 
 help:
 	@echo "Available targets:"
@@ -24,6 +24,10 @@ help:
 	@echo "  test-light        - Run light source tests"
 	@echo "  test-pronouns     - Run pronoun tests"
 	@echo "  test-take         - Run TAKE command tests"
+	@echo "  test-horror-helpers - Run horror test helpers"
+	@echo "  test-horror-partial - Run horror partial walkthrough"
+	@echo "  test-horror       - Run horror complete walkthrough"
+	@echo "  test-horror-all   - Run all horror tests"
 
 run:
 	@echo "Setting DYLD_LIBRARY_PATH to $(LIB_PATH) and running $(APP_NAME)..."
@@ -56,7 +60,7 @@ test-unit:
 	@echo "Running unit tests..."
 	lua tests/unit/run_all.lua
 
-test-integration: test-zork1 test-parser
+test-integration: test-zork1 test-parser test-horror-all
 	@echo "All integration tests completed!"
 
 test-zork1:
@@ -85,3 +89,18 @@ test-pronouns:
 test-take:
 	@echo "Running take command tests..."
 	lua tests/run_tests.lua tests/test-take.lua
+
+test-horror-helpers:
+	@echo "Running horror test helpers..."
+	lua tests/run_tests.lua tests/horror-test-helpers.lua
+
+test-horror-partial:
+	@echo "Running horror partial walkthrough tests..."
+	lua tests/run_tests.lua tests/horror-partial.lua
+
+test-horror:
+	@echo "Running horror complete walkthrough tests..."
+	lua tests/run_tests.lua tests/horror-walkthrough.lua
+
+test-horror-all: test-horror-helpers test-horror-partial test-horror
+	@echo "All horror tests completed!"
