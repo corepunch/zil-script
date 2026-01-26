@@ -16,6 +16,8 @@ return {
 		-- Note: Object names use underscores (e.g., BRASS-PLAQUE) because ZIL hyphens
 		-- are converted to underscores during Lua compilation
 		{input="look",here="SANITARIUM-GATE",description="Start at Sanitarium Gate"},
+		{input="take flashlight",inventory="WORKING-FLASHLIGHT",description="Take the working flashlight"},
+		{input="turn on flashlight",flag="WORKING-FLASHLIGHT ONBIT",description="Turn on the flashlight for dark areas"},
 		{input="examine plaque",text="Blackwood",description="Learn about Blackwood Sanitarium"},
 		{input="take plaque",inventory="BRASS-PLAQUE",description="Take the brass plaque"},
 		{input="north",here="SANITARIUM-ENTRANCE",description="Enter Sanitarium Entrance Hall"},
