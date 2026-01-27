@@ -54,7 +54,11 @@ local function run_test_file(test_file_path)
 		
 		-- print("> " .. cmd.input)
 		-- Capture the output from the game
-		local output = game_coro:resume(cmd.input)
+		-- Skip the initial resume if this is a test-only command (no input)
+		local output
+		if cmd.input then
+			output = game_coro:resume(cmd.input)
+		end
 
 		local GREEN = "\27[1;32m"
 		local RED = "\27[1;31m"
@@ -63,15 +67,19 @@ local function run_test_file(test_file_path)
 
 		local function feedback(test, err)
 			if err then
-				print(RED .. "[FAIL] " .. (cmd.description or test) .. RESET .. " (" .. cmd.input .. ")")
-				print(RED .. output .. RESET)
+				local input_str = cmd.input or test
+				print(RED .. "[FAIL] " .. (cmd.description or test) .. RESET .. " (" .. input_str .. ")")
+				if output then
+					print(RED .. output .. RESET)
+				end
 				if output and output:find("too many things") then
 					print(RED .. game_coro:resume("inventory") .. RESET)
 				elseif type(err) == "string" then
 					print(RED .. err .. RESET)
 				end
 			else
-				print(GREEN .. "[PASS] " .. (cmd.description or test) .. RESET .. " (" .. cmd.input .. ")")
+				local input_str = cmd.input or test
+				print(GREEN .. "[PASS] " .. (cmd.description or test) .. RESET .. " (" .. input_str .. ")")
 			end
 		end
 		local function report(test) 
@@ -86,8 +94,12 @@ local function run_test_file(test_file_path)
 			report("test:lose "..cmd.lose)
 		elseif cmd.flag then
 			report("test:flag "..cmd.flag)
+		elseif cmd.no_flag then
+			report("test:no-flag "..cmd.no_flag)
 		elseif cmd.global then
 			report("test:global "..cmd.global)
+		elseif cmd.start_location then
+			report("test:start-location "..cmd.start_location)
 		elseif cmd.text then
 			feedback(cmd.text, not (output or ""):lower():find(cmd.text:lower(), 1, true))
 		else
