@@ -737,10 +737,10 @@ function SYNTAX(syn)
 	-- Resolve ACTION from string name to function
 	local action_func = FUNCTION_NAMES[syn.ACTION] or _G[syn.ACTION]
 	if not action_func then
-		-- Action function not found - this might be okay if it's defined later
-		-- For now, create a placeholder
+		-- Action function not found - use a placeholder that does nothing
+		-- This allows syntax to be registered even if the action isn't implemented
 		print(string.format("Warning: ACTION function '%s' not found for SYNTAX %s", syn.ACTION, syn.VERB))
-		return
+		action_func = function() end
 	end
 	local action = action_id(ACTIONS, fn(action_func))
 	
@@ -768,12 +768,14 @@ function SYNTAX(syn)
 		PUT(VERBS, num, mem:write(string.char(1)..bytecode))
 		_G['ACTQ'..syn.VERB] = learn(name, PSQVERB, 255-num)
 	end
-	_G[syn.ACTION:gsub("_", "Q", 1)] = action
+	-- Convert ACTION name to global variable name (replace first hyphen/underscore with Q)
+	local global_name = syn.ACTION:gsub("[-_]", "Q", 1)
+	_G[global_name] = action
 	if syn.PREACTION then 
 		local preaction_func = FUNCTION_NAMES[syn.PREACTION] or _G[syn.PREACTION]
 		if not preaction_func then
 			print(string.format("Warning: PREACTION function '%s' not found for SYNTAX %s", syn.PREACTION, syn.VERB))
-			return
+			preaction_func = function() end
 		end
 		PREACTIONS[action] = fn(preaction_func)
 	end
