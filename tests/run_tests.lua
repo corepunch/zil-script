@@ -45,11 +45,6 @@ local function run_test_file(test_file_path)
 		print(result)
 	end
 	
-	-- Set starting location if specified
-	if test_config.start then
-		game_coro:resume("test:start_location " .. test_config.start)
-	end
-	
 	-- Feed test commands to the coroutine
 	for i, cmd in ipairs(test_config.commands) do
 		if not game_coro:is_running() then
@@ -103,6 +98,8 @@ local function run_test_file(test_file_path)
 			report("test:no-flag "..cmd.no_flag)
 		elseif cmd.global then
 			report("test:global "..cmd.global)
+		elseif cmd.start then
+			report("test:start-location "..cmd.start)
 		elseif cmd.start_location then
 			report("test:start-location "..cmd.start_location)
 		elseif cmd.text then

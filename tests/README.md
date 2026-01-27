@@ -115,9 +115,6 @@ Test files are Lua scripts that return a table with the following structure:
 return {
     name = "Test Suite Name",
     
-    -- Optional: Set starting location (default is the game's default starting location)
-    start = "ROOM_NAME",
-    
     -- List of ZIL files to compile and load
     files = {
         "zork1/globals.zil",
@@ -142,8 +139,6 @@ return {
     }
 }
 ```
-
-**Note:** The `start` parameter sets the player's initial location before any commands are executed. Use this instead of a `start_location` command at the beginning of your test.
 
 ## Test Assertion Commands
 
@@ -213,14 +208,14 @@ Asserts that an object does NOT have a specific flag set. Useful for testing fai
 }
 ```
 
-#### `start_location` - Set Starting Location
-Sets the player's starting location to a specific room. Useful for testing different game states or scenarios.
+#### `start` - Teleport to Location
+Teleports the player to a specific room. Useful for testing different game states or starting positions.
 
 **Usage:**
 ```lua
 {
-    start_location = "RECEPTION_ROOM",
-    description = "Start at Reception Room"
+    start = "RECEPTION_ROOM",
+    description = "Move to Reception Room"
 }
 ```
 
@@ -254,7 +249,6 @@ Asserts that the game output contains specific text (case-insensitive).
 ```lua
 return {
     name = "Drawer Unlock Test",
-    start = "RECEPTION_ROOM",  -- Start at Reception Room
     files = {
         "zork1/globals.zil",
         "adventure/horror.zil",
@@ -264,6 +258,11 @@ return {
         "zork1/main.zil",
     },
     commands = {
+        -- Move to the test location
+        {
+            start = "RECEPTION_ROOM",
+            description = "Move to Reception Room"
+        },
         -- Verify we're at the right location
         {
             here = "RECEPTION_ROOM",

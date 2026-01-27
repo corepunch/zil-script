@@ -1,10 +1,9 @@
 -- Test file for horror.zil failing conditions
 -- Tests that certain actions fail when prerequisites haven't been met
--- Demonstrates the use of test:no-flag and test:start-location
+-- Demonstrates the use of test:no-flag and start command
 
 return {
 	name = "Horror.zil Failing Conditions Test",
-	start = "RECEPTION_ROOM",
 	files = {
 		"zork1/globals.zil",
 		"adventure/horror.zil",
@@ -18,8 +17,12 @@ return {
 		-- Test 1: Drawer cannot be opened without unlocking first
 		-- =================================================================
 		{
-			input = "look",
+			start = "RECEPTION_ROOM",
 			description = "Start at Reception Room"
+		},
+		{
+			input = "look",
+			description = "Look at reception room"
 		},
 		{
 			no_flag = "BOTTOM_DRAWER OPENBIT",
@@ -58,8 +61,8 @@ return {
 		-- Test 3: Start at different location - Sanitarium Gate
 		-- =================================================================
 		{
-			start_location = "SANITARIUM_GATE",
-			description = "Set starting location to Sanitarium Gate"
+			start = "SANITARIUM_GATE",
+			description = "Move to Sanitarium Gate"
 		},
 		{
 			here = "SANITARIUM_GATE",
@@ -86,8 +89,8 @@ return {
 		-- Test 4: Start at Reception Room again
 		-- =================================================================
 		{
-			start_location = "RECEPTION_ROOM",
-			description = "Set starting location to Reception Room"
+			start = "RECEPTION_ROOM",
+			description = "Move to Reception Room"
 		},
 		{
 			here = "RECEPTION_ROOM",
@@ -114,7 +117,7 @@ return {
 		-- Test 6: Without key, drawer cannot be unlocked
 		-- =================================================================
 		{
-			start_location = "RECEPTION_ROOM",
+			start = "RECEPTION_ROOM",
 			description = "Reset to Reception Room (fresh state, no key)"
 		},
 		{
@@ -154,8 +157,8 @@ return {
 		-- Test 8: Start at Entrance Hall to test movement
 		-- =================================================================
 		{
-			start_location = "SANITARIUM_ENTRANCE",
-			description = "Set starting location to Entrance Hall"
+			start = "SANITARIUM_ENTRANCE",
+			description = "Move to Entrance Hall"
 		},
 		{
 			here = "SANITARIUM_ENTRANCE",
