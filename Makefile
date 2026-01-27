@@ -66,7 +66,7 @@ test-integration: test-zork1 test-parser test-horror-all
 
 test-zork1:
 	@echo "Running Zork1 integration tests..."
-	lua tests/run_tests.lua tests/zork1_basic.lua
+	lua tests/run_tests.lua tests/zork1_walkthrough.lua
 
 test-parser: test-containers test-directions test-light test-pronouns test-take
 	@echo "All parser/runtime tests completed!"

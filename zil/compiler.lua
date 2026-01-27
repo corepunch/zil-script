@@ -86,13 +86,22 @@ end
 
 -- Field writer functions
 local function write_list_string(buf, node)
+  local list = {}
   buf.write("{")
-  local first = true
   for child in Compiler.iter_children(node, 1) do
-    if not first then buf.write(",") end
-    buf.write('"%s"', value(child))
-    first = false
+    table.insert(list, string.format('"%s"', value(child)))
   end
+  buf.write(table.concat(list, ", "))
+  buf.write("}")
+end
+
+local function write_list(buf, node)
+  local list = {} 
+  buf.write("{")
+  for child in Compiler.iter_children(node, 1) do
+    table.insert(list, value(child))
+  end
+  buf.write(table.concat(list, ", "))
   buf.write("}")
 end
 
@@ -123,6 +132,7 @@ local FIELD_WRITERS = {
   FDESC = write_string_field,
   ACTION = write_value_field,
   IN = write_value_field,
+  GLOBAL = write_list,
 }
 -- Navigation direction writer
 -- Format: (direction TO room [IF condition [IS flag]] [ELSE say])

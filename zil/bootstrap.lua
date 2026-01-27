@@ -598,6 +598,7 @@ function OBJECT(object)
 				if not _G[f] then _G[f] = register(FLAGS, f) end
 				o.FLAGS = o.FLAGS | (1 << _G[f])
 			end
+		elseif k == "GLOBAL" then table.insert(t, makeprop(table.concat2(v, string.char), k))
 		elseif k == "LOC" then o.LOC = v
 		elseif type(v) == 'string' then table.insert(t, makeprop(mem:writestring_alt(v), k))
 		elseif type(v) == 'number' then table.insert(t, makeprop(string.char(v&0xff), k))

@@ -5,9 +5,9 @@
       "label": "run lua",
       "type": "shell",
       "command": "make",
-      "args": [ "test-horror" ],
-      // "command": "lua",
-      // "args": [ "main.lua" ],
+      "args": [ "test-zork1" ],
+      // "args": [ "test-horror" ],
+      // "args": [ "run-text" ],
       "group": {
         "kind": "build",
         "isDefault": true

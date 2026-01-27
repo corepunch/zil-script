@@ -83,6 +83,7 @@ local function run_test_file(test_file_path)
 				elseif type(err) == "string" then
 					print(RED .. err .. RESET)
 				end
+				error("Test failed")
 			else
 				local input_str = cmd.input or test
 				print(GREEN .. "[PASS] " .. (cmd.description or test) .. RESET .. " (" .. input_str .. ")")
