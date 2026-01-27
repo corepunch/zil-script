@@ -483,6 +483,8 @@ form.CONSTANT = form.GLOBAL
 
 -- SYNTAX
 form.SYNTAX = function(buf, node, indent)
+  Compiler.current_decl.writeln('_G["NUM_%s"] = (_G["NUM_%s"] or 0) + 1', node[1].value, node[1].value)
+
   buf.writeln("SYNTAX {")
   buf.writeln('\tVERB = "%s\",', node[1].value)
   

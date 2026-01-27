@@ -265,7 +265,7 @@ function TELL(...)
 		local v = select(i, ...)
 		if v == D then object = true
 		elseif object then object = false io_write(GETP(v, _G["PQDESC"]))
-		elseif type(v) == "number" then io_write(mem: string(v))
+		elseif type(v) == "number" then io_write(tostring(v))
 		elseif v == '>' then -- skip
 		else io_write(tostring(v)) end
 	end
@@ -589,10 +589,9 @@ function OBJECT(object)
 			end)
 			table.insert(t, makeprop(body, k))
 		elseif k == "ADJECTIVE" then
-			local body = table.concat2(v, function(adj)
+			table.insert(t, makeprop(table.concat2(v, function(adj)
 				return string.char(learn(adj, PSQADJECTIVE, ADJECTIVES))
-			end)
-			table.insert(t, makeprop(body, k))
+			end), k))
 		elseif k == "FLAGS" then
 			for _, f in ipairs(v) do
 				if not _G[f] then _G[f] = register(FLAGS, f) end
@@ -646,14 +645,9 @@ function PUT(obj, i, val)
 		error("PUT: Unsupported type "..type(obj))
 	end
 end
-function PUTB(obj, i, val) 
-	if type(obj) == 'number' then
-		mem:write(string.char(i&0xff), i)
-	-- elseif type(obj) == 'table' then
-	-- 	obj[i] = val
-	else 
-		error("PUT: Unsupported type "..type(obj))
-	end
+function PUTB(s, i, val) 
+	assert(type(s) == 'number', "PUTB: Only number types")
+	mem:write(string.char(val&0xff), s+i)
 end
 -- function GET(t, i) return type(t) == 'table' and t[i * 2] or 0 end
 -- function GETB(t, i) return type(t) == 'table' and t[i] or 0 end
@@ -733,15 +727,20 @@ function SYNTAX(syn)
 	end
 	if cache.verbs[name] then
 		local ptr = GET(VERBS, cache.verbs[name])
-		PUTB(ptr, GETB(ptr, 0) + 1)
-		mem:write(encode(syn))
+		local num = GETB(ptr, 0)
+		local bytecode = encode(syn)
+		mem:write(string.char(num + 1), ptr)
+		mem:write(bytecode, ptr + 1 + num * #bytecode)
 	else
 		local num = register(cache.verbs, name)
-		PUT(VERBS, num, mem:write(string.char(1)..encode(syn)))
+		local bytecode = string.rep(encode(syn), _G["NUM_"..syn.VERB] or 1)
+		PUT(VERBS, num, mem:write(string.char(1)..bytecode))
 		_G['ACTQ'..syn.VERB] = learn(name, PSQVERB, 255-num)
 	end
 	_G[syn.ACTION:gsub("_", "Q", 1)] = action
-	if syn.PREACTION then PREACTIONS[action] = fn(_G[syn.PREACTION]) end
+	if syn.PREACTION then 
+		PREACTIONS[action] = fn(_G[syn.PREACTION]) 
+	end
 end
 
 function BUZZ(...)
