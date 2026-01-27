@@ -4,6 +4,7 @@
 
 return {
 	name = "Horror.zil Failing Conditions Test",
+	start = "RECEPTION_ROOM",
 	files = {
 		"zork1/globals.zil",
 		"adventure/horror.zil",
@@ -18,15 +19,7 @@ return {
 		-- =================================================================
 		{
 			input = "look",
-			description = "Start game"
-		},
-		{
-			start_location = "RECEPTION_ROOM",
-			description = "Set starting location to Reception Room"
-		},
-		{
-			input = "look",
-			description = "Look at reception room"
+			description = "Start at Reception Room"
 		},
 		{
 			no_flag = "BOTTOM_DRAWER OPENBIT",
