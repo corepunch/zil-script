@@ -318,12 +318,24 @@ local function assert_flag(obj_name, flag_name)
 	assert(FSETQ(obj_num, flag), "Object does not have flag: " .. flag_name)
 end
 
+local function assert_no_flag(obj_name, flag_name)
+	local obj_num = find_object_by_name(obj_name)
+	local flag = _G[flag_name]
+	assert(obj_num, "Object not found: " .. obj_name)
+	assert(flag, "Unknown flag: " .. flag_name)
+	assert(not FSETQ(obj_num, flag), "Object has flag (expected NOT to have): " .. flag_name)
+end
+
 local function assert_location(obj_name, location_name)
 	local obj_num = find_object_by_name(obj_name)
 	local loc_num = find_object_by_name(location_name)
 	assert(obj_num, "Object not found: " .. obj_name)	
 	assert(loc_num, "Location not found: " .. location_name)
-	assert(LOC(obj_num) == loc_num, obj_name .. " is not at the specified location: " .. location_name)
+	local actual_loc = LOC(obj_num)
+	if actual_loc ~= loc_num then
+		local actual_name = actual_loc and OBJECTS[actual_loc] and OBJECTS[actual_loc].NAME or tostring(actual_loc)
+		error(obj_name .. " is not at the specified location: " .. location_name .. " (actually at: " .. actual_name .. ")")
+	end
 end
 
 local function assert_inventory(obj_name)
@@ -346,13 +358,28 @@ local function assert_global(var_name)
 	assert(_G[var_name], "Global variable not set: " .. var_name)
 end
 
+local function set_start_location(location_name)
+	local loc_num = find_object_by_name(location_name)
+	local adv_num = find_object_by_name("ADVENTURER")
+	assert(loc_num, "Location not found: " .. location_name)
+	assert(adv_num, "ADVENTURER not found")
+	-- Update global state
+	_G.HERE = loc_num
+	_G.WINNER = adv_num
+	-- Move the adventurer
+	MOVE(adv_num, loc_num)
+end
+
 local test_cmds = {
 	["test:flag"] = { assert_flag, 3 },
+	["test:no-flag"] = { assert_no_flag, 3 },
+	["test:no_flag"] = { assert_no_flag, 3 },  -- underscore version for test runner
 	["test:here"] = { assert_here, 2 },
 	["test:location"] = { assert_location, 3 },
 	["test:take"] = { assert_inventory, 2 },
 	["test:global"] = { assert_global, 2 },
 	["test:lose"] = { assert_lose, 2 },
+	["test:start-location"] = { set_start_location, 2 },
 }
 
 local routes = {
@@ -601,9 +628,9 @@ function REST(s, i)
 end
 
 function APPLY(func, ...)
-	if type(func)=='number' then
+	if type(func) == 'number' then
 		if func == 0 then return end
-		FUNCTIONS[func](...)
+		return FUNCTIONS[func](...)
 	else
 		return func and func(...)
 	end

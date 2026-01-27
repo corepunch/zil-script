@@ -54,42 +54,64 @@ local function run_test_file(test_file_path)
 		
 		-- print("> " .. cmd.input)
 		-- Capture the output from the game
-		local output = game_coro:resume(cmd.input)
-
+		-- Skip the initial resume if this is a test-only command (no input)
+		local output = ""
 		local GREEN = "\27[1;32m"
 		local RED = "\27[1;31m"
 		local NEUTRAL = "\27[36m"
 		local RESET = "\27[0m"
 
+		if cmd.start then
+			if game_coro:resume("test:start-location " .. cmd.start) then
+				print(RED .. "[WARN] Failed to set start location to " .. cmd.start .. RESET)
+			end
+		end
+		
+		if cmd.input then
+			output = game_coro:resume(cmd.input)
+		end
+
 		local function feedback(test, err)
 			if err then
-				print(RED .. "[FAIL] " .. (cmd.description or test) .. RESET .. " (" .. cmd.input .. ")")
-				print(RED .. output .. RESET)
+				local input_str = cmd.input or test
+				print(RED .. "[FAIL] " .. (cmd.description or test) .. RESET .. " (" .. input_str .. ")")
+				if output then
+					print(RED .. output .. RESET)
+				end
 				if output and output:find("too many things") then
 					print(RED .. game_coro:resume("inventory") .. RESET)
 				elseif type(err) == "string" then
 					print(RED .. err .. RESET)
 				end
 			else
-				print(GREEN .. "[PASS] " .. (cmd.description or test) .. RESET .. " (" .. cmd.input .. ")")
+				local input_str = cmd.input or test
+				print(GREEN .. "[PASS] " .. (cmd.description or test) .. RESET .. " (" .. input_str .. ")")
 			end
 		end
+		
 		local function report(test) 
 			feedback(test, game_coro:resume(test:gsub("-", "_")))
 		end
+		
+		local function silent_execute(test)
+			local ok, err = pcall(function()
+				game_coro:resume(test:gsub("-", "_"))
+			end)
+			if not ok then
+				-- If there's an error, we still want to know about it
+				error(err)
+			end
+		end
 
-		if cmd.here then
-			report("test:here "..cmd.here)
-		elseif cmd.take then
-			report("test:take "..cmd.take)
-		elseif cmd.lose then
-			report("test:lose "..cmd.lose)
-		elseif cmd.flag then
-			report("test:flag "..cmd.flag)
-		elseif cmd.global then
-			report("test:global "..cmd.global)
+		if cmd.here then report("test:here "..cmd.here)
+		elseif cmd.take then report("test:take "..cmd.take)
+		elseif cmd.lose then report("test:lose "..cmd.lose)
+		elseif cmd.flag then report("test:flag "..cmd.flag)
+		elseif cmd.no_flag then report("test:no-flag "..cmd.no_flag)
+		elseif cmd.global then report("test:global "..cmd.global)
 		elseif cmd.text then
-			feedback(cmd.text, not (output or ""):lower():find(cmd.text:lower(), 1, true))
+			local found = not (output or ""):lower():find(cmd.text:lower(), 1, true)
+			feedback(cmd.text, found)
 		else
 			print(NEUTRAL .. "[SKIP] " .. (cmd.description or cmd.input) .. RESET)
 		end

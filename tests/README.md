@@ -18,28 +18,28 @@ Each test consists of:
 - A `.zil` file defining a minimal test world with specific objects and rooms
 - A `.lua` file defining the test commands to execute
 
-### Game Integration Tests
+### Horror.zil Game Integration Tests
 
-- `zork1_basic.lua` - Basic Zork1 game interaction tests
-- `zork1_extended.lua` - Extended command sequence tests
+The following tests validate the horror.zil adventure game:
 
-## Test Categories
+- `horror-test-helpers.lua` - Basic verification that helper functions work
+- `horror-partial.lua` - Tests accessible portions of the game (lit rooms only)
+- `horror-walkthrough.lua` - Complete game walkthrough test
+- `horror-failures.lua` - **NEW**: Tests failing conditions to ensure prerequisites are required
 
-### Parser/Runtime Tests (Inspired by ZILF)
+**Running horror.zil tests:**
+```bash
+# Run the failing conditions test
+lua tests/run_tests.lua tests/horror-failures.lua
 
-The following tests focus on core ZIL parser and runtime functionality, inspired by the ZILF test suite:
+# Run partial walkthrough
+lua tests/run_tests.lua tests/horror-partial.lua
 
-- `test-directions.lua` / `test-directions.zil` - Tests direction/movement parsing and execution
-- `test-take.lua` / `test-take.zil` - Tests the TAKE command with various objects
-- `test-containers.lua` / `test-containers.zil` - Tests container interactions (open/close, put/take)
-- `test-light.lua` / `test-light.zil` - Tests light source mechanics and darkness handling
-- `test-pronouns.lua` / `test-pronouns.zil` - Tests basic command execution and object interactions
+# Run all horror tests
+make test-horror-all
+```
 
-Each test consists of:
-- A `.zil` file defining a minimal test world with specific objects and rooms
-- A `.lua` file defining the test commands to execute
-
-### Game Integration Tests
+### Zork1 Game Integration Tests
 
 - `zork1_basic.lua` - Basic Zork1 game interaction tests
 - `zork1_extended.lua` - Extended command sequence tests
@@ -139,6 +139,182 @@ return {
     }
 }
 ```
+
+## Test Assertion Commands
+
+The test framework provides several assertion commands that can be used in test files to verify game state. These commands are specified as keys in the command table instead of using the `input` field.
+
+### Available Test Commands
+
+#### `here` - Assert Player Location
+Asserts that the player (ADVENTURER) is at a specific location.
+
+**Usage:**
+```lua
+{
+    here = "RECEPTION_ROOM",
+    description = "Verify player is in Reception Room"
+}
+```
+
+#### `take` - Assert Object in Inventory
+Asserts that an object is in the player's inventory.
+
+**Usage:**
+```lua
+{
+    take = "BRASS_KEY",
+    description = "Verify brass key is in inventory"
+}
+```
+
+#### `lose` - Assert Object NOT in Inventory
+Asserts that an object is NOT in the player's inventory.
+
+**Usage:**
+```lua
+{
+    lose = "BRASS_PLAQUE",
+    description = "Verify plaque is not in inventory"
+}
+```
+
+#### `flag` - Assert Object Has Flag
+Asserts that an object has a specific flag set.
+
+**Usage:**
+```lua
+{
+    flag = "BOTTOM_DRAWER OPENBIT",
+    description = "Verify drawer is open"
+}
+```
+
+**Common flags:**
+- `OPENBIT` - Container/door is open
+- `ONBIT` - Light source is lit / Room is naturally lit
+- `TAKEBIT` - Object can be taken
+- `LIGHTBIT` - Object is a light source
+- `CONTBIT` - Object is a container
+
+#### `no_flag` - Assert Object Does NOT Have Flag
+Asserts that an object does NOT have a specific flag set. Useful for testing failing conditions.
+
+**Usage:**
+```lua
+{
+    no_flag = "BOTTOM_DRAWER OPENBIT",
+    description = "Verify drawer is NOT open (locked)"
+}
+```
+
+#### `start` - Teleport to Location
+Teleports the player to a specific room. Useful for testing different game states or starting positions.
+
+**Usage:**
+```lua
+{
+    start = "RECEPTION_ROOM",
+    description = "Move to Reception Room"
+}
+```
+
+**Note:** This moves the player to the specified location but does not reset object states or inventory. To test fresh scenarios, you may need to carefully manage object states in your test sequence.
+
+#### `global` - Assert Global Variable Set
+Asserts that a global variable is set (truthy value).
+
+**Usage:**
+```lua
+{
+    global = "SOME_FLAG",
+    description = "Verify global flag is set"
+}
+```
+
+#### `text` - Assert Output Contains Text
+Asserts that the game output contains specific text (case-insensitive).
+
+**Usage:**
+```lua
+{
+    input = "examine plaque",
+    text = "blackwood sanitarium",
+    description = "Verify plaque mentions Blackwood Sanitarium"
+}
+```
+
+### Example Test with Assertions
+
+```lua
+return {
+    name = "Drawer Unlock Test",
+    files = {
+        "zork1/globals.zil",
+        "adventure/horror.zil",
+        "zork1/parser.zil",
+        "zork1/verbs.zil",
+        "zork1/syntax.zil",
+        "zork1/main.zil",
+    },
+    commands = {
+        -- Move to the test location
+        {
+            start = "RECEPTION_ROOM",
+            description = "Move to Reception Room"
+        },
+        -- Verify we're at the right location
+        {
+            here = "RECEPTION_ROOM",
+            description = "Verify we are at Reception Room"
+        },
+        -- Test failing condition: drawer is locked
+        {
+            no_flag = "BOTTOM_DRAWER OPENBIT",
+            description = "Verify drawer is NOT open initially"
+        },
+        {
+            input = "open drawer",
+            description = "Try to open locked drawer (should fail)"
+        },
+        {
+            no_flag = "BOTTOM_DRAWER OPENBIT",
+            description = "Verify drawer is still NOT open"
+        },
+        -- Get the key
+        {
+            input = "take key",
+            description = "Take the brass key"
+        },
+        {
+            take = "BRASS_KEY",
+            description = "Verify key is in inventory"
+        },
+        -- Unlock and open drawer
+        {
+            input = "unlock drawer with key",
+            description = "Unlock the drawer"
+        },
+        {
+            input = "open drawer",
+            description = "Open the drawer"
+        },
+        {
+            flag = "BOTTOM_DRAWER OPENBIT",
+            description = "Verify drawer is now open"
+        },
+    }
+}
+```
+
+### Test Passing Criteria
+
+- Tests with `input` field are always marked as `[SKIP]` - they execute but are not validated
+- Tests with assertion fields (`here`, `take`, `flag`, etc.) are marked as:
+  - `[PASS]` if the assertion succeeds
+  - `[FAIL]` if the assertion fails (with error details)
+
+This allows you to verify that game state matches expected conditions after executing commands.
 
 ## Writing Integration Tests
 

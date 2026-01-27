@@ -4,7 +4,7 @@ DATA_DIR = /Users/igor/Developer/zil-engine
 LIB_PATH = $(BUILD_DIR)
 
 # Targets
-.PHONY: run clean test test-all test-unit test-integration test-zork1 test-parser test-containers test-directions test-light test-pronouns test-take test-horror-helpers test-horror-partial test-horror test-horror-all help
+.PHONY: run clean test test-all test-unit test-integration test-zork1 test-parser test-containers test-directions test-light test-pronouns test-take test-horror-helpers test-horror-partial test-horror test-horror-failures test-horror-all help
 
 help:
 	@echo "Available targets:"
@@ -26,6 +26,7 @@ help:
 	@echo "  test-take         - Run TAKE command tests"
 	@echo "  test-horror-helpers - Run horror test helpers"
 	@echo "  test-horror-partial - Run horror partial walkthrough"
+	@echo "  test-horror-failures - Run horror failing conditions tests"
 	@echo "  test-horror       - Run horror complete walkthrough"
 	@echo "  test-horror-all   - Run all horror tests"
 
@@ -102,5 +103,9 @@ test-horror:
 	@echo "Running horror complete walkthrough tests..."
 	lua tests/run_tests.lua tests/horror-walkthrough.lua
 
-test-horror-all: test-horror-helpers test-horror-partial test-horror
+test-horror-failures:
+	@echo "Running horror failing conditions tests..."
+	lua tests/run_tests.lua tests/horror-failures.lua
+
+test-horror-all: test-horror-helpers test-horror-partial test-horror-failures test-horror
 	@echo "All horror tests completed!"
