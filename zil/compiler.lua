@@ -55,10 +55,8 @@ local function Buffer()
       -- Count newlines in the formatted text
       count_newlines_and_map(text)
       
-      -- Count the newline we just added
-      current_line = current_line + 1
-      
-      -- Record source mapping if we have source info
+      -- Record source mapping for the line we're about to finish
+      -- This must happen BEFORE incrementing current_line
       if Compiler.current_lua_filename and Compiler.current_source then
         local src = Compiler.current_source
         sourcemap.add_mapping(
@@ -69,6 +67,9 @@ local function Buffer()
           src.col
         )
       end
+      
+      -- Count the newline we just added (increment after recording mapping)
+      current_line = current_line + 1
     end,
     indent = function(level)
       table.insert(lines, string.rep("  ", level))
