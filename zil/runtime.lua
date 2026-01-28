@@ -3,6 +3,7 @@
 
 local parser = require 'zil.parser'
 local compiler = require 'zil.compiler'
+local sourcemap = require 'zil.sourcemap'
 
 local M = {}
 
@@ -44,8 +45,10 @@ function M.execute(code, name, env, silent)
 	
 	local ok, run_err = pcall(chunk)
 	if not ok then
+		-- Translate the error traceback to use ZIL source locations
+		local translated_err = sourcemap.translate_traceback(tostring(run_err))
 		-- if not silent then
-			print("Runtime error: " .. run_err)
+			print("Runtime error: " .. translated_err)
 		-- end
 		return false
 	end
@@ -94,8 +97,8 @@ function M.load_zil_files(files, env, options)
 			return false
 		end
 		
-		local result = compiler.compile(ast)
 		local basename = 'zil_'..(f:match("^.+[/\\](.+)$") or f):gsub(".zil", ".lua")
+		local result = compiler.compile(ast, basename)
 		
 		-- Optionally save the compiled Lua file
 		-- if options.save_lua then
@@ -131,8 +134,10 @@ function M.create_game(env, silent)
 		coroutine = coroutine.create(function()
 			local ok, err = xpcall(M.execute, debug.traceback, "GO()", 'main', env, silent)
 			if not ok then
-				print("Coroutine error:\n" .. tostring(err))
-				error(err) -- rethrow so resume() fails
+				-- Translate the traceback to use ZIL source locations
+				local translated_err = sourcemap.translate_traceback(tostring(err))
+				print("Coroutine error:\n" .. translated_err)
+				error(translated_err) -- rethrow so resume() fails
 			else
 				print("\n*** Game has ended ***\n")
 	    end

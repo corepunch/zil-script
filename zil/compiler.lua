@@ -1,24 +1,75 @@
 -- ZIL to Lua Compiler
+local sourcemap = require 'zil.sourcemap'
+
 local Compiler = {
   flags = {},
   current_flag = 1,
   current_decl = nil,
   current_verbs = {},
-  prog = 1
+  prog = 1,
+  current_lua_filename = nil,  -- Track the current output Lua filename
+  current_source = nil          -- Track the current ZIL source location
 }
 
 -- Output buffers using tables for efficient concatenation
 local function Buffer()
   local lines = {}
+  local current_line = 1  -- Track current Lua line number
+  
+  -- Helper to count newlines and record source mapping
+  local function count_newlines_and_map(text)
+    local newline_count = 0
+    for _ in text:gmatch("\n") do
+      newline_count = newline_count + 1
+      current_line = current_line + 1
+      
+      -- Record source mapping if we have source info
+      if Compiler.current_lua_filename and Compiler.current_source then
+        local src = Compiler.current_source
+        sourcemap.add_mapping(
+          Compiler.current_lua_filename,
+          current_line,
+          src.filename,
+          src.line,
+          src.col
+        )
+      end
+    end
+    return newline_count
+  end
+  
   return {
     write = function(fmt, ...)
-      table.insert(lines, string.format(fmt, ...))
+      local text = string.format(fmt, ...)
+      table.insert(lines, text)
+      count_newlines_and_map(text)
     end,
     writeln = function(fmt, ...)
+      local text = ""
       if fmt then
-        table.insert(lines, string.format(fmt, ...))
+        text = string.format(fmt, ...)
+        table.insert(lines, text)
       end
       table.insert(lines, "\n")
+      
+      -- Count newlines in the formatted text
+      count_newlines_and_map(text)
+      
+      -- Record source mapping for the line we're about to finish
+      -- This must happen BEFORE incrementing current_line
+      if Compiler.current_lua_filename and Compiler.current_source then
+        local src = Compiler.current_source
+        sourcemap.add_mapping(
+          Compiler.current_lua_filename,
+          current_line,
+          src.filename,
+          src.line,
+          src.col
+        )
+      end
+      
+      -- Count the newline we just added (increment after recording mapping)
+      current_line = current_line + 1
     end,
     indent = function(level)
       table.insert(lines, string.rep("  ", level))
@@ -28,6 +79,10 @@ local function Buffer()
     end,
     clear = function()
       lines = {}
+      current_line = 1
+    end,
+    get_line = function()
+      return current_line
     end
   }
 end
@@ -570,6 +625,12 @@ end
 -- Main code generation
 function print_node(buf, node, indent)
   indent = indent or 0
+  
+  -- Update current source location from node metadata
+  local meta = getmetatable(node)
+  if meta and meta.source then
+    Compiler.current_source = meta.source
+  end
 
   if node.type == "expr" then
     if #node.name == 0 then buf.write("nil")  return true  end
@@ -705,11 +766,15 @@ local DIRECT_STATEMENTS = {
 }
 
 -- Main compilation entry point
-function Compiler.compile(ast)
+-- lua_filename: the name of the Lua file being generated (for source mapping) - optional
+function Compiler.compile(ast, lua_filename)
   local decl = Buffer()
   local body = Buffer()
 
+  -- Reset compiler state for this compilation
   Compiler.current_decl = decl
+  Compiler.current_lua_filename = lua_filename or "unknown.lua"
+  Compiler.current_source = nil
   
   for i = 1, #ast do
     local node = ast[i]

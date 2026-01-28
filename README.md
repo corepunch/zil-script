@@ -6,6 +6,13 @@ A Lua-based runtime for the Zork Implementation Language (ZIL).
 
 This project provides a runtime environment for executing ZIL programs, including the classic Zork adventure games.
 
+## Features
+
+- **ZIL to Lua Compilation**: Compiles ZIL source code to Lua for execution
+- **Source Mapping**: Error messages automatically reference ZIL source files instead of generated Lua files (see [SOURCE_MAPPING.md](SOURCE_MAPPING.md))
+- **Interactive Gameplay**: Full support for classic text adventure games
+- **Comprehensive Testing**: Unit and integration tests for all components
+
 ## Requirements
 
 - Lua 5.4 or compatible version
