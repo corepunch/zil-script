@@ -45,10 +45,17 @@ local function Buffer()
       count_newlines_and_map(text)
     end,
     writeln = function(fmt, ...)
+      local text = ""
       if fmt then
-        table.insert(lines, string.format(fmt, ...))
+        text = string.format(fmt, ...)
+        table.insert(lines, text)
       end
       table.insert(lines, "\n")
+      
+      -- Count newlines in the formatted text
+      count_newlines_and_map(text)
+      
+      -- Count the newline we just added
       current_line = current_line + 1
       
       -- Record source mapping if we have source info
@@ -763,8 +770,10 @@ function Compiler.compile(ast, lua_filename)
   local decl = Buffer()
   local body = Buffer()
 
+  -- Reset compiler state for this compilation
   Compiler.current_decl = decl
   Compiler.current_lua_filename = lua_filename or "unknown.lua"
+  Compiler.current_source = nil
   
   for i = 1, #ast do
     local node = ast[i]

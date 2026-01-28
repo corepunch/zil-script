@@ -40,7 +40,9 @@ end
 
 -- Clear all source maps (useful for testing)
 function M.clear()
-  source_maps = {}
+  for k in pairs(source_maps) do
+    source_maps[k] = nil
+  end
 end
 
 -- Translate a Lua traceback to use ZIL source locations
@@ -52,9 +54,9 @@ function M.translate_traceback(traceback)
   end
   
   -- Pattern to match Lua file references in traceback
-  -- Matches: @zil_filename.lua:123: or zil_filename.lua:123: or [string "..."]:123:
+  -- Matches: zil_*.lua files or paths containing zil_*.lua
   -- We need to handle tabs/spaces before filenames in stack traces
-  local result = traceback:gsub("([@%s]*)([^%s:]+%.lua):(%d+):", function(prefix, lua_file, lua_line)
+  local result = traceback:gsub("([@%s]*)([^%s:]*zil_[^%s:]+%.lua):(%d+):", function(prefix, lua_file, lua_line)
     -- Try to find source mapping
     local source = M.get_source(lua_file, tonumber(lua_line))
     
