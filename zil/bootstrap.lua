@@ -550,7 +550,7 @@ function PUTP(obj, prop, val)
 	end
 	assert(type(val) == 'number', "Only numbers are supported in PUTP, not "..type(val))
 	assert(PTSIZE(ptr) == 1, "Number size must be 1")
-	mem:write(string.char(math.min(val,0xff)), ptr)
+	mem:write(string.char(math.min(math.max(0,val),0xff)), ptr)
 end
 function GETP(obj, prop)
 	if not GETPT(obj, prop) then return nil end
