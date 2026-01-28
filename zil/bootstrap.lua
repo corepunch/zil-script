@@ -202,6 +202,7 @@ local mem = setmetatable({size=0},{__index={
 local cache = {
 	verbs = {},
 	words = {},
+	synonyms = {},
 }
 
 local function fn(f) 
@@ -216,14 +217,6 @@ local function register(tbl, value)
 	for k, v in pairs(tbl) do n = n + 1 end
 	if not tbl[value] then tbl[value] = n + 1 end
 	return tbl[value]
-end
-
-local function tohex(s)
-    local t = {}
-    for i = 1, #s do
-        t[#t+1] = string.format("%02X", s:byte(i))
-    end
-    return table.concat(t, " ")
 end
 
 -- === Utility functions ===
@@ -422,7 +415,7 @@ function READ(inbuf, parse)
 	
 	local p = {}
 	for pos, word in s:gmatch("()(%S+)") do
-		local index = cache.words[word: lower()] or 0
+		local index = cache.words[word:lower()] or 0
 		table.insert(p, makeword(index).. string.char(#word, pos&0xff))
 	end
 	mem:write(s: lower()..'\0', inbuf+1)
@@ -515,6 +508,9 @@ local function learn(word, atom, value)
 		local pos = mem:write(enc)
 		cache.words[word] = pos
 		_G['WQ'..upper2(word)] = enc
+	end
+	for _, syn in ipairs(cache.synonyms[word] or {}) do
+		mem:write(mem:read(8, cache.words[word]), cache.words[syn:lower()])
 	end
 	return value or cache.words[word]
 end
@@ -757,9 +753,15 @@ function BUZZ(...)
 end
 
 function SYNONYM(verb, ...)
+	verb = verb:lower()
+	cache.synonyms[verb] = {...}
   for _, syn in ipairs {...} do
-    cache.words[syn] = cache.words[verb]
-		_G['WQ'..syn:upper()] = cache.words[verb]
+		if cache.words[verb] then
+			cache.words[syn:lower()] = mem:write(mem:read(8, cache.words[verb]))
+		else
+			cache.words[syn:lower()] = mem:write(string.rep('\0', 8))
+		end
+		_G['WQ'..syn:upper()] = cache.words[syn:lower()]
   end
 end
 
