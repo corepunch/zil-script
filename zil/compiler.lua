@@ -8,7 +8,8 @@ local Compiler = {
   current_verbs = {},
   prog = 1,
   current_lua_filename = nil,  -- Track the current output Lua filename
-  current_source = nil          -- Track the current ZIL source location
+  current_source = nil,          -- Track the current ZIL source location
+  local_vars = {}                -- Track local variables in current scope
 }
 
 -- Output buffers using tables for efficient concatenation
@@ -119,6 +120,9 @@ local function value(node)
     return string.format('PQ%s', val:sub(4))
   end
 
+  -- Check if this is a local variable reference (starts with .)
+  local is_local = val:match("^%.")
+  
   -- Convert identifier to Lua-safe name
   local result = val
     :gsub("^[,.]+", "")        -- Remove leading commas/dots
@@ -136,7 +140,34 @@ local function value(node)
     end)
   end
   
+  -- Add _local suffix for local variable references (those that started with .)
+  if is_local then
+    result = result .. "_local"
+  end
+  
   return result
+end
+
+-- Helper function to convert a bare identifier to a local variable name
+-- This is used in contexts where we know an identifier is a local variable
+-- but it doesn't have the . prefix (e.g., SET target, function parameters)
+local function local_var_name(node)
+  local bare_name = value(node)
+  -- If it already has _local suffix (from a .VAR reference), return as is
+  if bare_name:match("_local$") then
+    return bare_name
+  end
+  
+  -- Get the original identifier name to check if it's in the local vars list
+  local original_name = tostring(node.value or node.name)
+  
+  -- Only add _local suffix if this is actually a local variable
+  if Compiler.local_vars[original_name] then
+    return bare_name .. "_local"
+  end
+  
+  -- Otherwise, return as is (it's a global)
+  return bare_name
 end
 
 -- Field writer functions
@@ -288,7 +319,7 @@ local function write_function_header(buf, node)
     return
   end
 
-  -- Parse argument list
+  -- Parse argument list and register local variables
   for arg in Compiler.iter_children(args_node) do
     if arg.type == "string" then
       if arg.value == "AUX" then
@@ -298,17 +329,30 @@ local function write_function_header(buf, node)
       end
     elseif arg.type == "list" then
       if mode == "locals" then
+        -- Register AUX variable
+        local var_name = tostring(arg[1].value or arg[1].name)
+        Compiler.local_vars[var_name] = true
         table.insert(locals, arg)
       else
-        table.insert(params, value(arg[1]))
+        -- Register optional parameter
+        local var_name = tostring(arg[1].value or arg[1].name)
+        Compiler.local_vars[var_name] = true
+        table.insert(params, local_var_name(arg[1]))
         table.insert(optionals, arg)
       end
     elseif arg.type == "ident" then
       if mode == "locals" then
+        -- Register AUX variable
+        local var_name = tostring(arg.value or arg.name)
+        Compiler.local_vars[var_name] = true
         table.insert(locals, arg)
       else
-        table.insert(params, value(arg))
-        table.insert(mandatory, value(arg))
+        -- Register mandatory parameter
+        local var_name = tostring(arg.value or arg.name)
+        Compiler.local_vars[var_name] = true
+        local param_with_suffix = local_var_name(arg)
+        table.insert(params, param_with_suffix)
+        table.insert(mandatory, param_with_suffix)
       end
     end
   end
@@ -322,17 +366,17 @@ local function write_function_header(buf, node)
   for _, local_node in ipairs(locals) do
     if local_node.type == "list" then
       buf.indent(1)
-      buf.write("local %s = ", value(local_node[1]))
+      buf.write("local %s = ", local_var_name(local_node[1]))
       print_node(buf, local_node[2], 2)
       buf.writeln()
     else
-      buf.writeln("\tlocal %s", value(local_node))
+      buf.writeln("\tlocal %s", local_var_name(local_node))
     end
   end
   
   -- Write optional defaults
   for i, opt in ipairs(optionals) do
-    buf.write("\tif select('#', ...) < %d then %s = ", #mandatory+i, value(opt[1]))
+    buf.write("\tif select('#', ...) < %d then %s = ", #mandatory+i, local_var_name(opt[1]))
     print_node(buf, opt[2], 2)
     buf.writeln(" end")
   end
@@ -405,7 +449,8 @@ end
 
 -- SET/SETG
 local function compile_set(buf, node, indent)
-  buf.write("APPLY(function() %s = ", value(node[1]))
+  local target = local_var_name(node[1])
+  buf.write("APPLY(function() %s = ", target)
   for i = 2, #node do
     if is_cond(node[i]) then
       buf.write("APPLY(function()")
@@ -415,22 +460,24 @@ local function compile_set(buf, node, indent)
       print_node(buf, node[i], indent + 1)
     end
   end
-  -- buf.write(" print('\t"..value(node[1]).."', "..value(node[1])..")")
-  -- buf.write(" if '"..value(node[1]).."' == 'P_NAM' then print(debug.traceback()) end")
-  buf.write(" return %s end)", value(node[1]))
+  -- buf.write(" print('\t"..target.."', "..target..")")
+  -- buf.write(" if '"..target.."' == 'P_NAM' then print(debug.traceback()) end")
+  buf.write(" return %s end)", target)
 end
 
 form.SET = compile_set
 form.SETG = compile_set
 
 form["IGRTR?"] = function(buf, node, indent)
-  buf.write("APPLY(function() %s = %s + 1", value(node[1]), value(node[1]))
-  buf.write(" return %s > %s end)", value(node[1]), value(node[2]))
+  local target = local_var_name(node[1])
+  buf.write("APPLY(function() %s = %s + 1", target, target)
+  buf.write(" return %s > %s end)", target, value(node[2]))
 end
 
 form["DLESS?"] = function(buf, node, indent)
-  buf.write("APPLY(function() %s = %s - 1", value(node[1]), value(node[1]))
-  buf.write(" return %s < %s end)", value(node[1]), value(node[2]))
+  local target = local_var_name(node[1])
+  buf.write("APPLY(function() %s = %s - 1", target, target)
+  buf.write(" return %s < %s end)", target, value(node[2]))
 end
 
 -- RETURN
@@ -682,6 +729,7 @@ end
 local function compile_routine(decl, body, node)
   local name = value(node[1])
   Compiler.current_verbs = {}
+  Compiler.local_vars = {}  -- Reset local variables for new routine
   -- decl.writeln("%s = nil", name)
   decl.writeln("%s = function(...)", name)
   write_function_header(decl, node)
