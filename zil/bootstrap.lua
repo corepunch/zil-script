@@ -568,7 +568,7 @@ function GETP(obj, prop)
 	local ptr = GETPT(obj, prop)
 	local ptsize = PTSIZE(ptr)
 	if ptsize == 1 then return mem:byte(ptr) end
-	if ptsize == 2 then return mem:string(mem:word(ptr)) end
+	if ptsize == 2 then return mem:word(ptr) ~= 0 and mem:string(mem:word(ptr)) or nil end
 	assert(false, "Unsupported property to get")
 end
 function NEXTP(obj, prop)
@@ -643,12 +643,8 @@ function OBJECT(object)
 		elseif k == "GLOBAL" then table.insert(t, makeprop(table.concat2(v, string.char), k))
 		elseif k == "LOC" then o.LOC = v
 		-- using PQACTION for ACTION property, commented out original function support
-		elseif k == "ACTION" then 
-			-- if makeprop(type(v) == 'function' then
-			-- 	table.insert(t, makeprop(mem:stringprop(fn(v)), k))
-			-- end
-			-- assert(type(v) == 'function', "ACTION property must be a function, not "..type(v).." "..tostring(v))
-			table.insert(t, makeprop(type(v) == 'function' and mem:stringprop(fn(v)) or '\0', k))
+		elseif k == "ACTION" or k == "DESCFCN" then 
+			table.insert(t, makeprop(type(v) == 'function' and mem:stringprop(fn(v)) or '\0\0', k))
 		elseif type(v) == 'string' then table.insert(t, makeprop(mem:stringprop(v), k))
 		elseif type(v) == 'number' then table.insert(t, makeprop(string.char(math.min(v,0xff)), k))
 		elseif type(v) == 'function' then table.insert(t, makeprop(mem:stringprop(fn(v)), k))
