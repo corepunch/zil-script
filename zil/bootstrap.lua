@@ -470,7 +470,7 @@ MULL = MUL
 local function getobj(num) return num and OBJECTS[num] end
 
 function LOC(obj) local o = getobj(obj) return o and o.LOC end
-function INQ(obj, room) local o = getobj(obj) return o and o.LOC == room end
+function INQ(obj, room) local o = getobj(obj) return o and o.LOC == room or false end
 function MOVE(obj, dest) local o = getobj(obj) if o then o.LOC = dest end end
 function REMOVE(obj) local o = getobj(obj) if o then o.LOC = nil end end
 
@@ -530,7 +530,7 @@ end
 
 function FSET(obj, flag) local o = getobj(obj) if o then o.FLAGS = (o.FLAGS or 0) | (1<<flag) end end
 function FCLEAR(obj, flag) local o = getobj(obj) if o then o.FLAGS = (o.FLAGS or 0) & ~(1<<flag) end end
-function FSETQ(obj, flag) local o = getobj(obj) return o and o.FLAGS and (o.FLAGS & (1<<flag)) ~= 0 end
+function FSETQ(obj, flag) local o = getobj(obj) return o and o.FLAGS and (o.FLAGS & (1<<flag)) ~= 0 or false end
 function GETPT(obj, prop)
 	local o = getobj(obj)
 	if not o or not o.tbl then return nil end
