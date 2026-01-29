@@ -467,12 +467,12 @@ LESSQ = LQ
 MULL = MUL
 
 -- Object / room ops
-local function getobj(num) return OBJECTS[num] end
+local function getobj(num) return num and OBJECTS[num] end
 
-function LOC(obj) return getobj(obj).LOC end
-function INQ(obj, room) return getobj(obj).LOC == room end
-function MOVE(obj, dest) getobj(obj).LOC = dest end
-function REMOVE(obj) getobj(obj).LOC = nil end
+function LOC(obj) local o = getobj(obj) return o and o.LOC end
+function INQ(obj, room) local o = getobj(obj) return o and o.LOC == room end
+function MOVE(obj, dest) local o = getobj(obj) if o then o.LOC = dest end end
+function REMOVE(obj) local o = getobj(obj) if o then o.LOC = nil end end
 
 function FIRSTQ(obj)
 	for n, o in ipairs(OBJECTS) do
@@ -528,11 +528,13 @@ local function learn(word, atom, value)
 	return value or cache.words[word]
 end
 
-function FSET(obj, flag) getobj(obj).FLAGS = (getobj(obj).FLAGS or 0) | (1<<flag) end
-function FCLEAR(obj, flag) getobj(obj).FLAGS = (getobj(obj).FLAGS or 0) & ~(1<<flag) end
-function FSETQ(obj, flag) return getobj(obj).FLAGS and (getobj(obj).FLAGS & (1<<flag)) ~= 0 end
+function FSET(obj, flag) local o = getobj(obj) if o then o.FLAGS = (o.FLAGS or 0) | (1<<flag) end end
+function FCLEAR(obj, flag) local o = getobj(obj) if o then o.FLAGS = (o.FLAGS or 0) & ~(1<<flag) end end
+function FSETQ(obj, flag) local o = getobj(obj) return o and o.FLAGS and (o.FLAGS & (1<<flag)) ~= 0 end
 function GETPT(obj, prop)
-	local tbl = getobj(obj).tbl
+	local o = getobj(obj)
+	if not o or not o.tbl then return nil end
+	local tbl = o.tbl
 	local l = mem:byte(tbl)+tbl+1
 	local pname, psize = mem:byte(l), mem:byte(l+1)
 	local header = 2
