@@ -642,6 +642,9 @@ function OBJECT(object)
 			elseif type(v[1]) == 'string' then
 				str = mem:write(v[1].."\0") -- NEXIT = 2
 			else
+				if v[1] == nil then
+					error("Room exit '" .. k .. "' has nil destination in object: " .. (o.NAME or "unknown"))
+				end
 				str = string.char(v[1]) -- UEXIT = 1
 				local say = v.say and mem:write(v.say.."\0") or makeword(0)
 				if v.door then

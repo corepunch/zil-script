@@ -6,13 +6,11 @@ return {
 	name = "Zork1 Extended Tests",
 	files = {
 		"zork1/globals.zil",
-		"zork1/clock.zil",
 		"zork1/parser.zil",
 		"zork1/syntax.zil",
-		"zork1/macros.zil",
 		"zork1/verbs.zil",
+		"zork1/actions.zil",  -- Load actions before dungeon to define functions
 		"zork1/dungeon.zil",
-		"zork1/actions.zil",
 		"zork1/main.zil",
 	},
 	commands = {
