@@ -75,6 +75,25 @@ local function safeget(node, attr)
   return node and node[attr] or nil
 end
 
+-- Helper: Convert leading digits to letters (0-9 -> a-j)
+local function digits_to_letters(str)
+  return str:gsub("^(%d+)", function(digits)
+    return digits:gsub("%d", function(d)
+      return string.char(string.byte('a') + tonumber(d))
+    end)
+  end)
+end
+
+-- Helper: Normalize identifier to Lua-safe name
+local function normalize_identifier(str)
+  return str
+    :gsub("^[,.]+", "")        -- Remove leading commas/dots
+    :gsub("[,.]", "")          -- Remove internal commas/dots
+    :gsub("%-", "_")           -- Replace - with _
+    :gsub("%?", "Q")           -- Question mark to Q
+    :gsub("\\", "/")           -- Backslash to forward slash
+end
+
 -- Convert ZIL values to Lua representations
 local function value(node)
   -- Handle number nodes (where value is already a number)
@@ -99,7 +118,6 @@ local function value(node)
   
   -- Property references (,P?...)
   if val:match("^,P%?") then
-    -- return string.format('"PQ%s"', val:sub(4))
     return string.format('PQ%s', val:sub(4))
   end
 
@@ -107,20 +125,11 @@ local function value(node)
   local is_local = val:match("^%.")
   
   -- Convert identifier to Lua-safe name
-  local result = val
-    :gsub("^[,.]+", "")        -- Remove leading commas/dots
-    :gsub("[,.]", "")          -- Remove internal commas/dots
-    :gsub("%-", "_") -- Replace - between alphanumeric chars
-    :gsub("%?", "Q")           -- Question mark to Q
-    :gsub("\\", "/")           -- Backslash to forward slash
+  local result = normalize_identifier(val)
   
-  -- Convert leading numbers to letters (a-j for 0-9)
+  -- Convert leading numbers to letters
   if result:match("^%d") then
-    result = result:gsub("^(%d+)", function(digits)
-      return digits:gsub("%d", function(d)
-        return string.char(string.byte('a') + tonumber(d))
-      end)
-    end)
+    result = digits_to_letters(result)
   end
   
   -- Add m_ prefix for local variable references (those that started with .)
@@ -437,7 +446,6 @@ form.COND = function(buf, node, indent)
     
     -- Then clauses
     for j = 2, #clause do
-    -- for j = math.min(#clause, 2), #clause do
       buf.writeln()
       buf.indent(indent + 1)
       if need_return(clause[j]) then buf.write("\t__tmp = ") end
@@ -721,10 +729,8 @@ local function compile_routine(decl, body, node)
   local name = value(node[1])
   Compiler.current_verbs = {}
   Compiler.local_vars = {}  -- Reset local variables for new routine
-  -- decl.writeln("%s = nil", name)
   decl.writeln("%s = function(...)", name)
   write_function_header(decl, node)
-  -- decl.writeln("\tprint('\t%s')", name:gsub("_", "-"))
   decl.writeln("\tlocal __ok, __res = pcall(function()")
   decl.writeln("\tlocal __tmp = nil")
   for i = 3, #node do
@@ -733,9 +739,7 @@ local function compile_routine(decl, body, node)
     decl.writeln()
   end
   decl.writeln("\t return __tmp end)")
-  -- decl.writeln("\tif __ok or (type(__res) ~= 'string' and type(__res) ~= 'nil') then")
   decl.writeln("\tif __ok or type(__res) ~= 'string' then")
-  -- decl.writeln("print('\t\t(%s) '..tostring(__res))", name:gsub("_", "-"))
   decl.writeln("return __res")
   decl.writeln(string.format("\telse error(__res and '%s\\n'..__res or '%s') end", name, name))
   decl.writeln("end")
@@ -810,6 +814,12 @@ local DIRECT_STATEMENTS = {
   -- PROG = true,
 }
 
+-- Helper: Get source line number from AST node
+local function get_source_line(node_or_ast)
+  local meta = getmetatable(node_or_ast)
+  return meta and meta.source and meta.source.line or 0
+end
+
 -- Main compilation entry point
 -- lua_filename: the name of the Lua file being generated (for source mapping) - optional
 function Compiler.compile(ast, lua_filename)
@@ -827,31 +837,24 @@ function Compiler.compile(ast, lua_filename)
     if node.type == "expr" then
       local name = node.name or ""
       
-      -- Skip GDECL
+      -- Skip forms that don't generate output
       if name == "GDECL" or name == "PROG" then
-        goto continue
-      end
-      
-      -- Direct statements
-      if DIRECT_STATEMENTS[name] then
+        -- Skip
+      -- Direct statements (print to body directly)
+      elseif DIRECT_STATEMENTS[name] then
         print_node(body, node, 0, false)
-        goto continue
-      end
-      
-      -- Compile with appropriate handler
-      if safeget(node[1], 'value') then
+      -- Forms with specialized compilers
+      elseif safeget(node[1], 'value') then
         local compiler = TOP_LEVEL_COMPILERS[name]
         if compiler then
           compiler(decl, body, node)
         else
-          io.stderr:write(string.format("Unknown top-level form: %s on line %d\n", name, getmetatable(ast).source.line))
+          io.stderr:write(string.format("Unknown top-level form: %s on line %d\n", name, get_source_line(ast)))
         end
       else
-        io.stderr:write(string.format("Expected type in <%s> on line %d\n", name, getmetatable(ast).source.line))
+        io.stderr:write(string.format("Expected type in <%s> on line %d\n", name, get_source_line(ast)))
       end
     end
-    
-    ::continue::
   end
   
   return {
