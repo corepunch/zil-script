@@ -56,7 +56,7 @@ local ok, err = pcall(function()
 end)
 
 if not ok then
-  local translated = sourcemap.translate_traceback(tostring(err))
+  local translated = sourcemap.translate(tostring(err))
   print("Error traceback:")
   print(translated)
   print()

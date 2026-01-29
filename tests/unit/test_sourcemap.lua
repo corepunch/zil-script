@@ -21,7 +21,7 @@ print("✓ Test 2: Returns nil for unmapped lines")
 sourcemap.clear()
 sourcemap.add_mapping("zil_action.lua", 235, "action.zil", 123, 0)
 local traceback = "zil_action.lua:235: no such variable whatever"
-local translated = sourcemap.translate_traceback(traceback)
+local translated = sourcemap.translate(traceback)
 assert(translated:match("action%.zil:123:"), "Should translate to ZIL source")
 print("✓ Test 3: Traceback translation works")
 print("  Original:   " .. traceback)
@@ -34,14 +34,14 @@ sourcemap.add_mapping("zil_parser.lua", 200, "parser.zil", 75, 0)
 local complex_traceback = [[stack traceback:
 	zil_action.lua:100: in function 'foo'
 	zil_parser.lua:200: in main chunk]]
-local translated2 = sourcemap.translate_traceback(complex_traceback)
+local translated2 = sourcemap.translate(complex_traceback)
 assert(translated2:match("action%.zil:50:"), "Should translate first file")
 assert(translated2:match("parser%.zil:75:"), "Should translate second file")
 print("✓ Test 4: Multiple translations work")
 
 -- Test 5: Preserve unmapped references
 local traceback3 = "zil_unknown.lua:999: some error"
-local translated3 = sourcemap.translate_traceback(traceback3)
+local translated3 = sourcemap.translate(traceback3)
 assert(translated3:match("zil_unknown%.lua:999:"), "Should preserve unmapped references")
 print("✓ Test 5: Preserves unmapped references")
 

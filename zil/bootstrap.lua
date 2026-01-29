@@ -171,7 +171,7 @@ local mem = setmetatable({size=0},{__index={
 		return pos
 	end,
 
-	writestring_property = function (self, s)
+	stringprop = function (self, s)
 		if type(s) == 'number' then s = encode_fptr(s) end
 		return makeword(self:write(makeword(#s)..s))
 	end,
@@ -232,8 +232,12 @@ function RANDOM(base)
 end
 
 function PICK_ONE(table)
-	local table_size = mem:byte(table)
-	return mem:word(table + RANDOM(table_size) * 2)
+	local num = mem:word(table)/2
+	-- local sel = math.random(2, num)
+	local sel = RANDOM(num-1)+1
+	return mem:word(table+sel*2)
+	-- local table_size = mem:byte(table)
+	-- return mem:word(table + RANDOM(table_size) * 2)
 end
 
 function RANDOM_ELEMENT(frob)
@@ -544,12 +548,19 @@ end
 function PUTP(obj, prop, val)
 	local ptr = GETPT(obj, prop)
 	if type(val) == 'string' then
-		assert(PTSIZE(ptr) == 2, "String size must be 2")
-		mem:write(mem:writestring_property(val), ptr)
+		assert(PTSIZE(ptr) == 2, "String property "..prop.." size must be 2")
+		mem:write(mem:stringprop(val), ptr)
 		return
+	elseif type(val) == 'function' then
+		print(prop, PTSIZE(ptr))
+		assert(PTSIZE(ptr) == 2, "Function property "..prop.." size must be 2")
+		mem:write(mem:stringprop(fn(val)), ptr)
+	end
+	if PTSIZE(ptr) ~= 1 then
+		print(translate(debug.traceback()))
 	end
 	assert(type(val) == 'number', "Only numbers are supported in PUTP, not "..type(val))
-	assert(PTSIZE(ptr) == 1, "Number size must be 1")
+	assert(PTSIZE(ptr) == 1, "Number property "..prop.." size must be 1 for value "..val)
 	mem:write(string.char(math.min(math.max(0,val),0xff)), ptr)
 end
 function GETP(obj, prop)
@@ -631,10 +642,16 @@ function OBJECT(object)
 			end
 		elseif k == "GLOBAL" then table.insert(t, makeprop(table.concat2(v, string.char), k))
 		elseif k == "LOC" then o.LOC = v
-		-- elseif k == "ACTION" then table.insert(t, makeprop(table.concat2(v, string.char), k))
-		elseif type(v) == 'string' then table.insert(t, makeprop(mem:writestring_property(v), k))
+		-- using PQACTION for ACTION property, commented out original function support
+		elseif k == "ACTION" then 
+			-- if makeprop(type(v) == 'function' then
+			-- 	table.insert(t, makeprop(mem:stringprop(fn(v)), k))
+			-- end
+			-- assert(type(v) == 'function', "ACTION property must be a function, not "..type(v).." "..tostring(v))
+			table.insert(t, makeprop(type(v) == 'function' and mem:stringprop(fn(v)) or '\0', k))
+		elseif type(v) == 'string' then table.insert(t, makeprop(mem:stringprop(v), k))
 		elseif type(v) == 'number' then table.insert(t, makeprop(string.char(math.min(v,0xff)), k))
-		elseif type(v) == 'function' then table.insert(t, makeprop(mem:writestring_property(fn(v)), k))
+		elseif type(v) == 'function' then table.insert(t, makeprop(mem:stringprop(fn(v)), k))
 		elseif _DIRECTIONS[k] then			
 			local str
 			if v.per then
@@ -850,7 +867,7 @@ C_TABLELEN = 180
 C_INTLEN = 6  -- Size of each interrupt entry (not used in Lua but kept for clarity)
 
 -- Entry offsets (in original ZIL these are array indices)
-C_ENABLED = 1  -- ZIL: 0
+C_ENABLEDQ = 1 -- ZIL: 0
 C_TICK = 2     -- ZIL: 1
 C_RTN = 3      -- ZIL: 2
 
@@ -890,7 +907,7 @@ function INT(rtn, demon)
     
     -- Create new interrupt entry at C_INTS + 1
     local new_int = {
-        [C_ENABLED] = 0,  -- 0 = disabled
+        [C_ENABLEDQ] = 0,  -- 0 = disabled
         [C_TICK] = 0,
         [C_RTN] = rtn
     }
@@ -901,11 +918,11 @@ end
 
 -- ENABLE/DISABLE helpers
 function ENABLE(i)
-    i[C_ENABLED] = 1
+    i[C_ENABLEDQ] = 1
 end
 
 function DISABLE(i)
-    i[C_ENABLED] = 0
+    i[C_ENABLEDQ] = 0
 end
 
 -- CLOCKER: Process all active interrupts/demons each turn
@@ -925,7 +942,7 @@ function CLOCKER()
     -- Process each interrupt/demon
     for i = start, C_TABLELEN do
         local entry = C_TABLE[i]
-        if entry and entry[C_ENABLED] ~= 0 then
+        if entry and entry[C_ENABLEDQ] ~= 0 then
             local tick = entry[C_TICK]
             if tick ~= 0 then
                 -- Decrement tick counter
@@ -943,6 +960,14 @@ function CLOCKER()
     
     MOVES = MOVES + 1
     return flag
+end
+
+function FLAMINGQ(OBJ)
+	return FSETQ(OBJ, FLAMEBIT) and FSETQ(OBJ, ONBIT)
+end
+
+function OPENABLEQ(OBJ)
+		return FSETQ(OBJ, DOORBIT) or FSETQ(OBJ, CONTBIT)
 end
 
 -- === Done ===

@@ -28,6 +28,7 @@ function M.create_game_env()
 		select = select,
 		math = math,
 		next = next,
+		translate = sourcemap.translate,
 	}
 end
 
@@ -46,7 +47,7 @@ function M.execute(code, name, env, silent)
 	local ok, run_err = pcall(chunk)
 	if not ok then
 		-- Translate the error traceback to use ZIL source locations
-		local translated_err = sourcemap.translate_traceback(tostring(run_err))
+		local translated_err = sourcemap.translate(tostring(run_err))
 		-- if not silent then
 			print("Runtime error: " .. translated_err)
 		-- end
@@ -135,7 +136,7 @@ function M.create_game(env, silent)
 			local ok, err = xpcall(M.execute, debug.traceback, "GO()", 'main', env, silent)
 			if not ok then
 				-- Translate the traceback to use ZIL source locations
-				local translated_err = sourcemap.translate_traceback(tostring(err))
+				local translated_err = sourcemap.translate(tostring(err))
 				print("Coroutine error:\n" .. translated_err)
 				error(translated_err) -- rethrow so resume() fails
 			else

@@ -72,7 +72,7 @@ if not call_ok then
   print(call_err)
   
   -- Translate the error
-  local translated = sourcemap.translate_traceback(tostring(call_err))
+  local translated = sourcemap.translate(tostring(call_err))
   print("\nTranslated error:")
   print(translated)
   

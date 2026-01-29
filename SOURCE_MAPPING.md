@@ -35,7 +35,7 @@ During ZIL-to-Lua compilation (`zil/compiler.lua`):
 
 When errors occur (`zil/runtime.lua`):
 - Error messages and stack traces are captured
-- The `sourcemap.translate_traceback()` function scans for Lua file references
+- The `sourcemap.translate()` function scans for Lua file references
 - Each reference is looked up in the mapping table
 - Lua references are replaced with their corresponding ZIL source locations
 
@@ -44,7 +44,7 @@ When errors occur (`zil/runtime.lua`):
 The `zil/sourcemap.lua` module provides:
 - `add_mapping(lua_file, lua_line, zil_file, zil_line, zil_col)` - Record a mapping
 - `get_source(lua_file, lua_line)` - Retrieve ZIL source for a Lua location
-- `translate_traceback(traceback_string)` - Translate a full traceback
+- `translate(traceback_string)` - Translate a full traceback
 - `clear()` - Clear all mappings (useful for testing)
 
 ## Testing
@@ -132,7 +132,7 @@ The `Buffer()` function in `compiler.lua` now tracks:
 
 ### Pattern Matching
 
-The `translate_traceback()` function uses a regex pattern to find Lua file references:
+The `translate()` function uses a regex pattern to find Lua file references:
 ```lua
 "([@%s]*)([^%s:]+%.lua):(%d+):"
 ```

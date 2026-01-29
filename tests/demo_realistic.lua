@@ -103,7 +103,7 @@ if not ok then
   
   -- The error has already been translated by the runtime
   local sourcemap = require 'zil.sourcemap'
-  local translated = sourcemap.translate_traceback(tostring(err))
+  local translated = sourcemap.translate(tostring(err))
   
   print("💥 ERROR MESSAGE:")
   print()

@@ -62,7 +62,7 @@ local function run_test_file(test_file_path)
 		local RESET = "\27[0m"
 
 		if cmd.start then
-			if game_coro:resume("test:start-location " .. cmd.start) then
+			if game_coro:resume("test:start-location " .. cmd.start:gsub("-", "_")) then
 				print(RED .. "[WARN] Failed to set start location to " .. cmd.start .. RESET)
 			end
 		end
