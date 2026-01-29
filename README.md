@@ -1,4 +1,4 @@
-<img width="1536" height="702" alt="f6924f3d-5e1b-4d8c-9685-23504f6ef419" src="https://github.com/user-attachments/assets/619bb272-d6de-4d73-a81b-6324e50d1066" />
+<img width="1536" height="750" alt="ChatGPT Image Jan 29, 2026 at 11_29_14 AM" src="https://github.com/user-attachments/assets/c47af592-c21f-4b86-9a51-b22432890298" />
 
 A Lua-based runtime for the Zork Implementation Language (ZIL).
 
