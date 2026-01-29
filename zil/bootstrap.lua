@@ -481,7 +481,9 @@ function FIRSTQ(obj)
 end
 
 function NEXTQ(obj)
-  local parent = getobj(obj).LOC
+  local o = getobj(obj)
+  if not o then return nil end
+  local parent = o.LOC
   local found = false
   for n, o in ipairs(OBJECTS) do
     if o.LOC == parent then
