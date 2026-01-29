@@ -1,15 +1,21 @@
 -- Extended tests for Zork1
 -- This test file demonstrates more complex command sequences
 -- Based on the commented-out tests from the original bootstrap.lua
+--
+-- NOTE: This test currently has issues with the Zork1 runtime:
+-- - All commands trigger ZORKMID-FUNCTION instead of proper actions
+-- - This is a known runtime bug that needs investigation
+-- - The test successfully loads and initializes Zork1, which is progress
 
 return {
 	name = "Zork1 Extended Tests",
 	files = {
 		"zork1/globals.zil",
+		-- NOTE: clock.zil is NOT loaded because it conflicts with bootstrap INT function
 		"zork1/parser.zil",
 		"zork1/syntax.zil",
 		"zork1/verbs.zil",
-		"zork1/actions.zil",  -- Load actions before dungeon to define functions
+		"zork1/actions.zil",  -- Load actions before dungeon to resolve forward function references
 		"zork1/dungeon.zil",
 		"zork1/main.zil",
 	},
