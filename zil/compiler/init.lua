@@ -1,6 +1,6 @@
 -- ZIL to Lua Compiler
 -- Main module that coordinates all compiler components
--- Now uses TypeScript-inspired architecture with diagnostics and optional semantic checking
+-- Uses TypeScript-inspired architecture with diagnostics and optional semantic checking
 
 local buffer_module = require 'zil.compiler.buffer'
 local utils = require 'zil.compiler.utils'
@@ -81,10 +81,9 @@ function Compiler.compile(ast, lua_filename, options)
     checker.check_ast(ast)
     
     -- If there are semantic errors, report them but continue compilation
-    -- (for backward compatibility, we don't halt on semantic errors)
     if diagnostics.has_errors() then
-      io.stderr:write("Semantic analysis found issues:\n")
-      diagnostics.report()
+      -- Errors are in diagnostics, no need for stderr output
+      -- Users can access via result.diagnostics
     end
   end
   
@@ -120,7 +119,7 @@ function Compiler.compile(ast, lua_filename, options)
         if compiler_fn then
           compiler_fn(decl, body, node, Compiler, print_node)
         else
-          -- Use diagnostics for better error reporting
+          -- Use diagnostics for error reporting (no stderr)
           local source_loc = diagnostics_module.get_source_location(node)
           diagnostics.error(
             diagnostics_module.Code.UNKNOWN_FORM,
@@ -128,11 +127,9 @@ function Compiler.compile(ast, lua_filename, options)
             source_loc,
             node
           )
-          -- Still write to stderr for backward compatibility
-          io.stderr:write(string.format("Unknown top-level form: %s on line %d\n", name, utils.get_source_line(node)))
         end
       else
-        -- Use diagnostics for better error reporting
+        -- Use diagnostics for error reporting (no stderr)
         local source_loc = diagnostics_module.get_source_location(node)
         diagnostics.error(
           diagnostics_module.Code.EXPECTED_TYPE,
@@ -140,8 +137,6 @@ function Compiler.compile(ast, lua_filename, options)
           source_loc,
           node
         )
-        -- Still write to stderr for backward compatibility
-        io.stderr:write(string.format("Expected type in <%s> on line %d\n", name, utils.get_source_line(node)))
       end
     end
   end

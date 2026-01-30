@@ -1,15 +1,17 @@
--- AST node printing logic
+-- AST node code generation using visitor pattern principles
+-- This module provides the print_node function that generates Lua code from ZIL AST
+-- It follows visitor pattern principles by delegating to specialized handlers
 local utils = require 'zil.compiler.utils'
 
 local PrintNode = {}
 
 -- Main code generation function
--- This is the core of the compiler that traverses the AST and generates Lua code
+-- Implements visitor pattern by traversing AST and delegating to specialized handlers
 function PrintNode.create_print_node(compiler, form_handlers)
   local function print_node(buf, node, indent)
     indent = indent or 0
     
-    -- Update current source location from node metadata
+    -- Track source location for diagnostics and source mapping
     local meta = getmetatable(node)
     if meta and meta.source then
       compiler.current_source = meta.source
@@ -17,15 +19,19 @@ function PrintNode.create_print_node(compiler, form_handlers)
 
     if node.type == "expr" then
       if #node.name == 0 then buf.write("nil")  return true  end
+      
+      -- Visitor pattern: check for specialized handler
       local handler = form_handlers[node.name]
       if handler then
-        -- Use specialized handler
+        -- Delegate to specialized handler (visitor callback)
         handler(buf, node, indent)
       else
-        -- Generic function call
+        -- Default handler for generic function calls
         if indent == 1 then buf.indent(indent) end
         if node.name == 'VERB?' then table.insert(compiler.current_verbs, node[1].value) end
         buf.write("%s(", utils.normalize_function_name(node.name))
+        
+        -- Visit children (visitor pattern)
         for i = 1, #node do
           if utils.is_cond(node[i]) then
             buf.write("APPLY(function()")
@@ -42,7 +48,7 @@ function PrintNode.create_print_node(compiler, form_handlers)
       end
       
     else
-      -- Atoms: ident, string, number, symbol
+      -- Leaf nodes: ident, string, number, symbol
       buf.write("%s", compiler.value(node))
     end
 
