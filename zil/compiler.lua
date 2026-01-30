@@ -363,7 +363,9 @@ local function write_function_header(buf, node)
       else
         local param_with_suffix = local_var_name(arg)
         table.insert(params, param_with_suffix)
-        table.insert(mandatory, param_with_suffix)
+        if mode == "params" then  -- Only add to mandatory if in params mode, not optional
+          table.insert(mandatory, param_with_suffix)
+        end
       end
     end
   end

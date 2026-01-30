@@ -5,6 +5,7 @@ return {
 	name = "Container Interaction Tests",
 	files = {
 		"zork1/globals.zil",
+		"zork1/clock.zil",
 		"tests/test-containers.zil",
 		"zork1/parser.zil",
 		"zork1/verbs.zil",

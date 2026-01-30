@@ -3,6 +3,7 @@ return {
 	name = "Horror.zil Test Helpers Verification",
 	files = {
 		"zork1/globals.zil",
+		"zork1/clock.zil",
 		"adventure/horror.zil",
 		"zork1/parser.zil",
 		"zork1/verbs.zil",

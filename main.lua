@@ -3,6 +3,7 @@ local test_format = require 'zil.test_format'
 
 local files = {
   "zork1/globals.zil",
+  "zork1/clock.zil",
   "zork1/parser.zil",
   "zork1/verbs.zil",
   -- "zork1/actions.zil",

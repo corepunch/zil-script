@@ -686,14 +686,10 @@ function APPLY(func, ...)
 end
 
 function PUT(obj, i, val)
-	if type(obj) == 'number' then
-		mem:write(makeword(val or 0), obj+i*2)
-	elseif type(obj) == 'table' then
-		obj[i] = val
-	else 
-		error("PUT: Unsupported type "..type(obj))
-	end
+	assert(type(obj) == 'number', "PUT: Only number types, not "..type(obj))
+	mem:write(makeword(type(val) == 'function' and fn(val) or val or 0), obj+i*2)
 end
+
 function PUTB(s, i, val) 
 	assert(type(s) == 'number', "PUTB: Only number types, not "..type(s))
 	mem:write(string.char(math.min(val,0xff)), s+i)
@@ -852,107 +848,19 @@ end
 
 BUZZ(".", ",", "\"")
 
--- GCLOCK - Clock/Interrupt system for Zork
--- (c) Copyright 1983 Infocom, Inc. All Rights Reserved
 
--- Constants
-C_TABLELEN = 180
-C_INTLEN = 6  -- Size of each interrupt entry (not used in Lua but kept for clarity)
-
--- Entry offsets (in original ZIL these are array indices)
-C_ENABLEDQ = 1 -- ZIL: 0
-C_TICK = 2     -- ZIL: 1
-C_RTN = 3      -- ZIL: 2
-
--- Globals
-C_TABLE = {}  -- Will store interrupt entries as objects
-C_DEMONS = C_TABLELEN  -- Pointer to where demons start (grows backwards)
-C_INTS = C_TABLELEN    -- Pointer to where interrupts start (grows backwards)
-CLOCK_WAIT = false
-MOVES = 0
-P_WON = false  -- Game state flag
-
--- QUEUE: Set or update an interrupt's tick count
-function QUEUE(rtn, tick)
-    local cint = INT(rtn)
-    cint[C_TICK] = tick
-    return cint
-end
-
--- INT: Find or create an interrupt/demon entry
-function INT(rtn, demon)
-    demon = demon or false
-    
-    -- Search for existing entry with this routine
-    for i = C_INTS + 1, C_TABLELEN do
-        local entry = C_TABLE[i]
-        if entry and entry[C_RTN] == rtn then
-            return entry
-        end
-    end
-    
-    -- Not found - create new entry
-    -- Move the pointer(s) back to make space
-    C_INTS = C_INTS - 1
-    if demon then
-        C_DEMONS = C_DEMONS - 1
-    end
-    
-    -- Create new interrupt entry at C_INTS + 1
-    local new_int = {
-        [C_ENABLEDQ] = 0,  -- 0 = disabled
-        [C_TICK] = 0,
-        [C_RTN] = rtn
-    }
-    
-    C_TABLE[C_INTS + 1] = new_int
-    return new_int
-end
-
--- ENABLE/DISABLE helpers
+-- ENABLE/DISABLE helpers for clock interrupts
+-- These are defined as macros in ZIL (macros.zil) but we implement them as functions
+-- ENABLE: <DEFMAC ENABLE ('INT) <FORM PUT .INT ,C-ENABLED? 1>>
+-- DISABLE: <DEFMAC DISABLE ('INT) <FORM PUT .INT ,C-ENABLED? 0>>
 function ENABLE(i)
-    i[C_ENABLEDQ] = 1
+    PUT(i, C_ENABLEDQ, 1)
+    return i
 end
 
 function DISABLE(i)
-    i[C_ENABLEDQ] = 0
-end
-
--- CLOCKER: Process all active interrupts/demons each turn
-function CLOCKER()
-    -- If clock is paused, unpause and skip this turn
-    if CLOCK_WAIT then
-        CLOCK_WAIT = false
-        return false
-    end
-    
-    -- Determine starting point:
-    -- If game won (P_WON), process all interrupts from C_INTS
-    -- Otherwise, only process demons from C_DEMONS
-    local start = (P_WON and C_INTS or C_DEMONS) + 1
-    local flag = false
-    
-    -- Process each interrupt/demon
-    for i = start, C_TABLELEN do
-        local entry = C_TABLE[i]
-        if entry and entry[C_ENABLEDQ] ~= 0 then
-            local tick = entry[C_TICK]
-            if tick ~= 0 then
-                -- Decrement tick counter
-                entry[C_TICK] = tick - 1
-                
-                -- Check the OLD value (tick <= 1), not the new one!
-                if tick <= 1 then
-                    if entry[C_RTN]() then
-                        flag = true
-                    end
-                end
-            end
-        end
-    end
-    
-    MOVES = MOVES + 1
-    return flag
+    PUT(i, C_ENABLEDQ, 0)
+    return i
 end
 
 function FLAMINGQ(OBJ)

@@ -5,6 +5,7 @@ return {
 	name = "Horror.zil Complete Walkthrough Test",
 	files = {
 		"zork1/globals.zil",
+		"zork1/clock.zil",
 		"adventure/horror.zil",
 		"zork1/parser.zil",
 		"zork1/verbs.zil",

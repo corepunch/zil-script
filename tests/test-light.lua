@@ -5,6 +5,7 @@ return {
 	name = "Light Source Tests",
 	files = {
 		"zork1/globals.zil",
+		"zork1/clock.zil",
 		"tests/test-light.zil",
 		"zork1/parser.zil",
 		"zork1/verbs.zil",

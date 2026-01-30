@@ -5,6 +5,7 @@ return {
 	name = "Pronoun Handling Tests",
 	files = {
 		"zork1/globals.zil",
+		"zork1/clock.zil",
 		"tests/test-pronouns.zil",
 		"zork1/parser.zil",
 		"zork1/verbs.zil",

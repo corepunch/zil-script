@@ -6,6 +6,7 @@ return {
 	name = "Zork1 Basic Tests",
 	files = {
 		"zork1/globals.zil",
+		"zork1/clock.zil",
 		"zork1/parser.zil",
 		"zork1/verbs.zil",
 		"zork1/syntax.zil",

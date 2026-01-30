@@ -6,6 +6,7 @@ return {
 	name = "Horror.zil Partial Walkthrough (Accessible Areas)",
 	files = {
 		"zork1/globals.zil",
+		"zork1/clock.zil",
 		"adventure/horror.zil",
 		"zork1/parser.zil",
 		"zork1/verbs.zil",

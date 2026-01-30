@@ -13,6 +13,7 @@ return {
 	name = "Test Check Commands (ok/fail behavior)",
 	files = {
 		"zork1/globals.zil",
+		"zork1/clock.zil",
 		"adventure/horror.zil",
 		"zork1/parser.zil",
 		"zork1/verbs.zil",
