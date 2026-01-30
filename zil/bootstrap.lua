@@ -895,6 +895,11 @@ end
 -- === Finalize PREPOSITIONS table ===
 -- Convert PREPOSITIONS from hash table to array format expected by PREP-FIND
 function FINALIZE_PREPOSITIONS()
+	-- Guard against being called multiple times
+	if PREPOSITIONS[0] ~= nil then
+		return  -- Already finalized
+	end
+	
 	-- Build array format: [0]=count, [1]=word_ptr1, [2]=index1, [3]=word_ptr2, [4]=index2, ...
 	local temp = {}
 	for word, index in pairs(PREPOSITIONS) do
@@ -903,15 +908,19 @@ function FINALIZE_PREPOSITIONS()
 		end
 	end
 	
-	-- Convert to array format
-	local array = {[0] = #temp}  -- Store count at index 0
+	-- Convert to array format, counting only successfully added entries
+	local array = {}
+	local count = 0
 	for index, word in ipairs(temp) do
 		local word_ptr = cache.words[word]
 		if word_ptr then
-			array[index * 2 - 1] = word_ptr  -- word pointer at odd indices
-			array[index * 2] = index          -- index at even indices
+			count = count + 1
+			array[count * 2 - 1] = word_ptr  -- word pointer at odd indices
+			array[count * 2] = index          -- index at even indices
 		end
 	end
+	
+	array[0] = count  -- Store actual count at index 0
 	
 	-- Replace PREPOSITIONS with the array
 	PREPOSITIONS = array
