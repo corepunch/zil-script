@@ -1,8 +1,18 @@
 # ZIL Compiler Module
 
-This directory contains the modularized ZIL to Lua compiler. The compiler has been split into separate files for better organization and maintainability.
+This directory contains the modularized ZIL to Lua compiler. The compiler architecture is inspired by the TypeScript compiler, featuring clean separation of concerns, visitor pattern for AST traversal, diagnostic collection, and modular code generation.
 
-## Module Structure
+## Architecture Overview
+
+The compiler follows a multi-phase architecture similar to TypeScript:
+
+```
+Source Code → Parser → AST → Checker → Emitter → Lua Code
+                              ↓
+                        Diagnostics
+```
+
+## Core Modules
 
 ### `init.lua`
 Main module entry point. Coordinates all compiler components and provides the public API:
@@ -54,6 +64,106 @@ Top-level compilation functions:
 AST node printing logic:
 - `create_print_node(compiler, form_handlers)` - Create the main print_node function that traverses AST and generates Lua code
 
+## Advanced Modules (TypeScript-Inspired)
+
+### `visitor.lua`
+AST visitor pattern implementation (inspired by TypeScript's `forEachChild`):
+- `Visitor.new(handlers, default_handler)` - Create a visitor with custom node handlers
+- `visitor.visit_node(node, context)` - Visit a single AST node
+- `visitor.visit_children(node, context, skip)` - Visit all children of a node
+- `visitor.for_each_child(node, fn, context)` - Iterate over children with callback
+- `visitor.transform(node, context)` - Transform AST by visiting and modifying nodes
+- `visitor.walk(node, context)` - Depth-first tree traversal
+- `Visitor.collector(predicate)` - Create a visitor that collects matching nodes
+- `Visitor.counter()` - Create a visitor that counts nodes by type
+
+**Example Usage:**
+```lua
+local visitor = require 'zil.compiler.visitor'
+
+-- Collect all ROUTINE nodes
+local collector = visitor.collector(function(node)
+  return node.type == "expr" and node.name == "ROUTINE"
+end)
+collector.walk(ast, {})
+local routines = collector.get_collected()
+```
+
+### `diagnostics.lua`
+Structured error collection and reporting (inspired by TypeScript's diagnostic system):
+- `Diagnostics.new()` - Create a diagnostic collection
+- `collection.error(code, message, location, node)` - Add an error diagnostic
+- `collection.warning(code, message, location, node)` - Add a warning diagnostic
+- `collection.has_errors()` - Check if any errors were reported
+- `collection.format_all()` - Format all diagnostics for display
+- `collection.report()` - Report diagnostics to stderr
+- Diagnostic categories: ERROR, WARNING, INFO, MESSAGE
+- Diagnostic codes for different error types (UNKNOWN_FORM, UNDEFINED_VARIABLE, etc.)
+
+**Example Usage:**
+```lua
+local diagnostics = require 'zil.compiler.diagnostics'
+
+local diag = diagnostics.new()
+diag.error(diagnostics.Code.UNDEFINED_VARIABLE, 
+           "Variable 'foo' is not defined",
+           {filename = "test.zil", line = 42, col = 10})
+
+if diag.has_errors() then
+  diag.report()  -- Prints: test.zil:42:10 ERROR [ZIL1004]: Variable 'foo' is not defined
+end
+```
+
+### `emitter.lua`
+Code generation abstraction (inspired by TypeScript's emitter):
+- `Emitter.new(compiler)` - Create a code emitter
+- `emitter.emit_function(name, params, body_fn)` - Emit a function definition
+- `emitter.emit_block(fn)` - Emit a block with automatic indentation
+- `emitter.emit_table(entries_fn)` - Emit a table constructor
+- `emitter.emit_if(condition, then_fn, else_fn)` - Emit conditional statement
+- Automatic indentation management
+- Source location tracking for source maps
+
+**Example Usage:**
+```lua
+local emitter_module = require 'zil.compiler.emitter'
+
+local emitter = emitter_module.new(compiler)
+emitter.emit_function("my_function", {"param1", "param2"}, function()
+  emitter.writeln_indented("print(param1)")
+  emitter.writeln_indented("return param2")
+end)
+local code = emitter.get_output()
+```
+
+### `checker.lua`
+Semantic analysis and symbol table management (inspired by TypeScript's binder/checker):
+- `Checker.new(diagnostics)` - Create a semantic checker with optional diagnostic collection
+- `checker.declare_symbol(name, kind, declaration)` - Declare a new symbol
+- `checker.lookup_symbol(name)` - Look up a symbol by name
+- `checker.enter_scope(kind)` - Enter a new lexical scope
+- `checker.exit_scope()` - Exit current scope
+- `checker.check_defined(name, node)` - Verify a symbol is defined
+- `checker.check_ast(ast)` - Perform semantic analysis on entire AST
+- Symbol kinds: ROUTINE, GLOBAL, CONSTANT, LOCAL, PARAMETER, OBJECT, ROOM
+- Automatic scope tracking and symbol resolution
+
+**Example Usage:**
+```lua
+local checker_module = require 'zil.compiler.checker'
+local diagnostics = require 'zil.compiler.diagnostics'
+
+local diag = diagnostics.new()
+local checker = checker_module.new(diag)
+
+-- Check AST for semantic errors
+checker.check_ast(ast)
+
+if diag.has_errors() then
+  diag.report()
+end
+```
+
 ## Usage
 
 The module can be required as before:
@@ -70,7 +180,15 @@ The result is a table with three fields:
 
 ## Design Principles
 
+Inspired by the TypeScript compiler architecture, the ZIL compiler follows these principles:
+
 1. **Separation of Concerns**: Each module handles a specific aspect of compilation
+   - Parser generates AST
+   - Visitor traverses AST
+   - Checker performs semantic analysis
+   - Emitter generates code
+   - Diagnostics collect and report errors
+
 2. **Clear Dependencies**: Modules depend on each other in a clear hierarchy:
    - `init.lua` orchestrates all other modules
    - `buffer.lua` is self-contained with only sourcemap dependency
@@ -80,5 +198,60 @@ The result is a table with three fields:
    - `forms.lua` depends on `utils.lua`
    - `toplevel.lua` depends on `utils.lua` and `fields.lua`
    - `print_node.lua` depends on `utils.lua`
-3. **Backward Compatibility**: The module maintains the same public API as the original monolithic compiler
-4. **Testability**: Each module can be tested independently
+   - `visitor.lua` is self-contained (no dependencies)
+   - `diagnostics.lua` is self-contained
+   - `emitter.lua` depends on `buffer.lua` and `utils.lua`
+   - `checker.lua` depends on `diagnostics.lua` and `visitor.lua`
+
+3. **Visitor Pattern**: Clean AST traversal using the visitor pattern
+   - Separates tree traversal from node processing
+   - Extensible through custom handlers
+   - Supports transformation and collection operations
+
+4. **Diagnostic Collection**: Errors don't halt compilation immediately
+   - Multiple errors can be collected and reported together
+   - Structured error messages with codes and source locations
+   - Categorized by severity (ERROR, WARNING, INFO)
+
+5. **Lazy Evaluation**: Following TypeScript's approach
+   - Checker only resolves what's needed
+   - Emitter generates code on-demand
+   - Efficient for large codebases
+
+6. **Backward Compatibility**: The module maintains the same public API as the original monolithic compiler
+
+7. **Testability**: Each module can be tested independently
+
+## Comparison with TypeScript Compiler
+
+| Feature | TypeScript | ZIL Compiler |
+|---------|-----------|--------------|
+| **Scanner** | `scanner.ts` | Built into `parser.lua` |
+| **Parser** | `parser.ts` | `parser.lua` |
+| **AST Nodes** | `Node` hierarchy | Table-based with type field |
+| **Binder** | `binder.ts` | `checker.lua` (symbol table) |
+| **Checker** | `checker.ts` | `checker.lua` (semantic analysis) |
+| **Emitter** | `emitter.ts` | `emitter.lua` + `print_node.lua` |
+| **Diagnostics** | Built-in system | `diagnostics.lua` |
+| **Visitor Pattern** | `forEachChild` | `visitor.lua` |
+| **Source Maps** | Full support | `sourcemap.lua` + `buffer.lua` |
+| **Symbol Table** | Global + scoped | `checker.lua` scopes |
+
+## Migration Path
+
+The new modules are optional and don't break existing code:
+
+1. **Current code** continues to work with `init.lua` API
+2. **New projects** can use visitor, diagnostics, emitter, and checker modules
+3. **Gradual migration** possible by adopting modules one at a time
+
+## Future Enhancements
+
+Potential improvements inspired by TypeScript:
+
+1. **Transformer Pipeline**: Add AST transformation passes before emission
+2. **Module System**: Better support for ZIL includes and dependencies
+3. **Incremental Compilation**: Cache compilation results for faster rebuilds
+4. **Language Server Protocol**: Enable IDE integration
+5. **Control Flow Analysis**: Track variable initialization and usage
+6. **Type Inference**: Optional type checking for ZIL code
