@@ -355,7 +355,7 @@ return {
 		{ input="walk northe", text="Grating Room" },
 		{ input="unlock grate", text="grate", description="Unlock the grate" },
 		{ input="open grate", text="The grating opens to reveal trees above you." },
-		-- { input="walk up", text="Clearing" },
+		{ input="walk up", here="GRATING-CLEARING" }, --text="Clearing" },
 		-- { input="walk south", text="Forest Path" },
 		-- { input="climb tree", text="Up a Tree" },
 		-- { input="wind up canary", text="The canary chirps, slightly off-key, an aria from a forgotten opera. From out of the greenery flies a lovely songbird. It perches on a limb just over your head and opens its beak to sing. As it does so a beautiful brass bauble drops from its mouth, bounces off the top of your head, and lands glimmering in the grass. As the canary winds down, the songbird flies away." },
