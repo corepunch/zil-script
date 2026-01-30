@@ -1,0 +1,201 @@
+-- Top-level compilation functions (ROUTINE, OBJECT, etc.)
+local utils = require 'zil.compiler.utils'
+local fields = require 'zil.compiler.fields'
+
+local TopLevel = {}
+
+-- Location flags for syntax objects
+local loc_flags = {
+  ["ON-GROUND"] = "SOG",
+  ["IN-ROOM"] = "SIR",
+  ["CARRIED"] = "SC",
+  ["MANY"] = "SMANY",
+  ["HAVE"] = "SHAVE",
+  ["TAKE"] = "STAKE",
+  ["HELD"] = "SH",
+}
+
+-- Syntax object helper
+function TopLevel.print_syntax_object(buf, nodes, start_idx, field_name, compiler)
+  buf.writeln("\t%s = {", field_name)
+  
+  local i = start_idx + 1
+  while utils.safeget(nodes[i], 'type') == "list" do
+    local clause = nodes[i]
+    if utils.safeget(clause[1], 'value') == "FIND" then
+      buf.writeln("\t\tFIND = %s,", compiler.value(clause[2]))
+    else
+      buf.write("\t\tWHERE = ")
+      for j = 1, #clause do
+        buf.write(j == 1 and '%s' or '+%s', loc_flags[clause[j].value])
+      end
+      buf.writeln(",")
+    end
+    i = i + 1
+  end
+  
+  buf.writeln("\t},")
+  return i
+end
+
+-- Function header with locals and optional parameters
+function TopLevel.write_function_header(buf, node, compiler, print_node)
+  local params = {}
+  local locals = {}
+  local optionals = {}
+  local mandatory = {}
+  local mode = "params" -- params, locals, optional
+  
+  local args_node = node[2]
+  if not args_node or args_node.type ~= "list" then
+    buf.writeln(")")
+    return
+  end
+
+  -- Parse argument list and register local variables
+  for arg in compiler.iter_children(args_node) do
+    if arg.type == "string" then
+      if arg.value == "AUX" then
+        mode = "locals"
+      elseif arg.value == "OPTIONAL" then
+        mode = "optional"
+      end
+    elseif arg.type == "list" then
+      local first_elem = arg[1]
+      compiler.register_local_var(first_elem)
+      if mode == "locals" then
+        table.insert(locals, arg)
+      else
+        table.insert(params, compiler.local_var_name(first_elem))
+        table.insert(optionals, arg)
+      end
+    elseif arg.type == "ident" then
+      compiler.register_local_var(arg)
+      if mode == "locals" then
+        table.insert(locals, arg)
+      else
+        local param_with_suffix = compiler.local_var_name(arg)
+        table.insert(params, param_with_suffix)
+        if mode == "params" then  -- Only add to mandatory if in params mode, not optional
+          table.insert(mandatory, param_with_suffix)
+        end
+      end
+    end
+  end
+  
+  -- Write parameters
+  if #params > 0 then
+    buf.writeln("\tlocal %s = ...", table.concat(params, ", "))
+  end
+
+  -- Write local declarations
+  for _, local_node in ipairs(locals) do
+    if local_node.type == "list" then
+      buf.indent(1)
+      buf.write("local %s = ", compiler.local_var_name(local_node[1]))
+      print_node(buf, local_node[2], 2)
+      buf.writeln()
+    else
+      buf.writeln("\tlocal %s", compiler.local_var_name(local_node))
+    end
+  end
+  
+  -- Write optional defaults
+  for i, opt in ipairs(optionals) do
+    buf.write("\tif select('#', ...) < %d then %s = ", #mandatory+i, compiler.local_var_name(opt[1]))
+    print_node(buf, opt[2], 2)
+    buf.writeln(" end")
+  end
+end
+
+-- Compile a ROUTINE
+function TopLevel.compile_routine(decl, body, node, compiler, print_node)
+  local name = compiler.value(node[1])
+  compiler.current_verbs = {}
+  compiler.local_vars = {}  -- Reset local variables for new routine
+  decl.writeln("%s = function(...)", name)
+  TopLevel.write_function_header(decl, node, compiler, print_node)
+  decl.writeln("\tlocal __ok, __res = pcall(function()")
+  decl.writeln("\tlocal __tmp = nil")
+  for i = 3, #node do
+    if utils.need_return(node[i]) then decl.write("\t__tmp = ") end
+    print_node(decl, node[i], 1)
+    decl.writeln()
+  end
+  decl.writeln("\t return __tmp end)")
+  decl.writeln("\tif __ok or type(__res) ~= 'string' then")
+  decl.writeln("return __res")
+  decl.writeln(string.format("\telse error(__res and '%s\\n'..__res or '%s') end", name, name))
+  decl.writeln("end")
+
+  decl.writeln("_%s = {", name)
+  for _, v in ipairs(compiler.current_verbs) do
+   decl.writeln("\t'%s',", v)
+  end
+  decl.writeln("}")
+end
+
+-- Normalize property name (IN/LOCATION -> LOC)
+local function normalize_property(prop)
+  if prop == "IN" or prop == "LOCATION" then return "LOC" end
+  return prop
+end
+
+-- Compile an OBJECT or ROOM
+function TopLevel.compile_object(decl, body, node, compiler)
+  local name = compiler.value(node[1])
+
+  decl.writeln('%s = DECL_OBJECT("%s")', name, name)
+  body.writeln("%s {", node.name)
+  body.writeln("\tNAME = \"%s\",", name)
+  
+  for i = 2, #node do
+    local field = node[i]
+    if field.type == "list" and utils.safeget(field[1], 'type') == "ident" and field[2] then
+      local field_name = compiler.value(field[1])
+      local field_value = compiler.value(field[2])
+      
+      if field_value == "TO" then
+        body.write("\t%s = ", field_name)
+        fields.write_nav(body, field, compiler)
+        body.writeln(",")
+      elseif field_value == "PER" then
+        body.writeln("\t%s = { per = %s },", field_name, compiler.value(field[3]))
+      else
+        local prop = normalize_property(field_name)
+        body.write("\t%s = ", prop)
+        fields.write_field(body, field, field[1].value, compiler)
+        body.writeln(",")
+      end
+    end
+  end
+  body.writeln("}", name)
+end
+
+-- Top-level compiler registry
+TopLevel.TOP_LEVEL_COMPILERS = {
+  ROOM = TopLevel.compile_object,
+  OBJECT = TopLevel.compile_object,
+  ROUTINE = TopLevel.compile_routine,
+  GDECL = function() end,
+  DIRECTIONS = function(_, buf, node)
+    buf.write("%s(", node.name)
+    for _, dir in ipairs(node) do
+      buf.write("\"%s\", ", dir.value)
+    end
+    buf.writeln("nil)")
+  end,
+}
+
+-- Top-level statements that should be printed directly
+TopLevel.DIRECT_STATEMENTS = {
+  COND = true,
+  BUZZ = true,
+  SYNONYM = true,
+  SYNTAX = true,
+  GLOBAL = true,
+  CONSTANT = true,
+  SETG = true,
+}
+
+return TopLevel
