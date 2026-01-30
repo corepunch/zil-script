@@ -25,7 +25,7 @@ jobs:
       run: lua tests/run_tests.lua tests/zork1_basic.lua
     
     - name: Run extended tests
-      run: lua tests/run_tests.lua tests/zork1_extended.lua
+      run: lua tests/run_tests.lua tests/zork1_walkthrough.lua
     
     - name: Run parser/runtime tests - directions
       run: lua tests/run_tests.lua tests/test-directions.lua
