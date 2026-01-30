@@ -265,19 +265,11 @@ return {
 		{ input="take shovel", text="Taken." },
 		{ input="walk northe", text="Sandy Cave" },
 
-		-- { input="dig", text="What do you want to dig in?" },
-		-- { input="sand", text="(with the shovel)" },
-		-- { input="dig sand", text="(with the shovel)" },
-		-- { input="dig sand", text="(with the shovel)" },
-		-- { input="dig sand", text="(with the shovel)" },
-		-- { input="take scarab", text="Taken." },
-		-- { input="drop shovel", text="Dropped." },
-
 		{ input="dig", text="What do you want to dig?" },
-		{ input="sand", text="( the shovel)" },
-		{ input="dig sand", text="( the shovel)" },
-		{ input="dig sand", text="( the shovel)" },
-		{ input="dig sand", text="( the shovel)" },
+		{ input="sand", text="(with the shovel)" },
+		{ input="dig sand", text="(with the shovel)" },
+		{ input="dig sand", text="(with the shovel)" },
+		{ input="dig sand", text="(with the shovel)" },
 		{ input="drop shovel", text="Dropped." },
 		{ input="take scarab", text="Taken." },
 

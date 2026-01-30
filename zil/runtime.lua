@@ -124,6 +124,9 @@ function M.load_zil_files(files, env, options)
 		end
 	end
 	
+	-- Finalize PREPOSITIONS table after all files are loaded
+	M.execute("if FINALIZE_PREPOSITIONS then FINALIZE_PREPOSITIONS() end", 'finalize', env, options.silent)
+	
 	return true
 end
 
