@@ -9,7 +9,10 @@ return {
 		"tests/test-clock.zil",
 		"zork1/parser.zil",
 		"zork1/verbs.zil",
+		"zork1/actions.zil",
 		"zork1/syntax.zil",
+		"zork1/dungeon.zil",
+		"zork1/actions.zil",
 		"zork1/main.zil",
 	},
 	commands = {
