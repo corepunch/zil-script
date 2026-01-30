@@ -254,6 +254,7 @@ return {
 		{ input="wait", text="Time passes..." },
 		{ input="wait", text="Time passes..." },
 		{ input="wait", text="Time passes..." },
+		{ input="wait", text="Time passes..." },
 		{ input="take buoy", text="Taken." },
 		{ input="walk east", text="The magic boat comes to a rest on the shore." },
 		{ input="leave boat", text="You are on your own feet again." },
