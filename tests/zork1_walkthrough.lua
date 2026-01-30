@@ -265,19 +265,11 @@ return {
 		{ input="take shovel", text="Taken." },
 		{ input="walk northe", text="Sandy Cave" },
 
-		-- { input="dig", text="What do you want to dig in?" },
-		-- { input="sand", text="(with the shovel)" },
-		-- { input="dig sand", text="(with the shovel)" },
-		-- { input="dig sand", text="(with the shovel)" },
-		-- { input="dig sand", text="(with the shovel)" },
-		-- { input="take scarab", text="Taken." },
-		-- { input="drop shovel", text="Dropped." },
-
 		{ input="dig", text="What do you want to dig?" },
-		{ input="sand", text="( the shovel)" },
-		{ input="dig sand", text="( the shovel)" },
-		{ input="dig sand", text="( the shovel)" },
-		{ input="dig sand", text="( the shovel)" },
+		{ input="sand", text="(with the shovel)" },
+		{ input="dig sand", text="(with the shovel)" },
+		{ input="dig sand", text="(with the shovel)" },
+		{ input="dig sand", text="(with the shovel)" },
 		{ input="drop shovel", text="Dropped." },
 		{ input="take scarab", text="Taken." },
 
@@ -308,7 +300,9 @@ return {
 		{ input="climb tree", text="Up a Tree" },
 		{ input="take egg", text="Taken." },
 		{ input="climb down", text="(tree)" },
-		-- { input="climb down", text="(down the tree)" },
+		-- NOTE: Reference Zork outputs "(down the tree)" but ZIL source shows this is correct:
+		-- When P-END-ON-PREP is true (command ends on preposition), GWIM prints just the object desc
+		-- See zork1/parser.zil GWIM function lines 912-924
 		{ input="walk south", text="North of House" },
 		{ input="walk east", text="Behind House" },
 		{ input="enter house", text="Kitchen" },

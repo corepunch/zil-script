@@ -280,10 +280,17 @@ end
 function PRINT(n) io_write(mem:string(n)) end
 function PRINTD(ptr) io_write(GETP(ptr, _G["PQDESC"])) end
 function PRINTR(ptr) io_write(GETP(ptr, _G["PQLDESC"])) end
-function PRINTB(ptr) 
-	for word, index in pairs(cache. words) do
-		if index == ptr then io_write(word) end
+function PRINTB(ptr)
+	-- Debug: uncomment to see what's happening
+	-- io_write("[PRINTB ptr=" .. tostring(ptr) .. "]")
+	for word, index in pairs(cache.words) do
+		if index == ptr then 
+			io_write(word)
+			return
+		end
 	end
+	-- If we get here, no word was found for this pointer
+	-- io_write("[NO_WORD:" .. tostring(ptr) .. "]")
 end
 function PRINTI(n) io_write(tostring(n)) end
 function PRINTN(n) io_write(tostring(n)) end
@@ -883,6 +890,40 @@ end
 
 function OPENABLEQ(OBJ)
 		return FSETQ(OBJ, DOORBIT) or FSETQ(OBJ, CONTBIT)
+end
+
+-- === Finalize PREPOSITIONS table ===
+-- Convert PREPOSITIONS from hash table to array format expected by PREP-FIND
+function FINALIZE_PREPOSITIONS()
+	-- Guard against being called multiple times
+	if PREPOSITIONS[0] ~= nil then
+		return  -- Already finalized
+	end
+	
+	-- Build array format: [0]=count, [1]=word_ptr1, [2]=index1, [3]=word_ptr2, [4]=index2, ...
+	local temp = {}
+	for word, index in pairs(PREPOSITIONS) do
+		if type(word) == "string" then
+			temp[index] = word
+		end
+	end
+	
+	-- Convert to array format, counting only successfully added entries
+	local array = {}
+	local count = 0
+	for index, word in ipairs(temp) do
+		local word_ptr = cache.words[word]
+		if word_ptr then
+			count = count + 1
+			array[count * 2 - 1] = word_ptr  -- word pointer at odd indices
+			array[count * 2] = index          -- index at even indices
+		end
+	end
+	
+	array[0] = count  -- Store actual count at index 0
+	
+	-- Replace PREPOSITIONS with the array
+	PREPOSITIONS = array
 end
 
 -- === Done ===
