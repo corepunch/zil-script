@@ -11,6 +11,7 @@ local M = {}
 function M.create_game_env()
 	return { 
 		print = print, 
+		io = io,
 		os = os,
 		coroutine = coroutine,
 		setmetatable = setmetatable,
@@ -133,15 +134,13 @@ function M.create_game(env, silent)
 		-- Start the game by calling GO()
 		-- Returns true on success, false on failure
 		coroutine = coroutine.create(function()
-			local ok, err = xpcall(M.execute, debug.traceback, "GO()", 'main', env, silent)
-			if not ok then
-				-- Translate the traceback to use ZIL source locations
-				local translated_err = sourcemap.translate(tostring(err))
-				print("Coroutine error:\n" .. translated_err)
-				error(translated_err) -- rethrow so resume() fails
-			else
+			local success = M.execute("GO()", 'main', env, silent)
+			if not success then
+				error("Failed to start game: GO() not defined or failed")
+			end
+			if not silent then
 				print("\n*** Game has ended ***\n")
-	    end
+			end
 		end),
 		-- Resume the game coroutine with input
 		-- Returns: status (boolean), result (any value or error message)
