@@ -62,13 +62,18 @@ function Compiler.compile(ast, lua_filename)
   Compiler.current_source = nil
   
   -- Create form handlers and print_node function
-  -- These need to be created after we have access to compiler instance
-  local form_handlers = forms_module.create_handlers(Compiler, nil) -- print_node added below
-  local print_node = print_node_module.create_print_node(Compiler, form_handlers)
+  -- We need to resolve the circular dependency between forms and print_node
+  local form_handlers = {}
+  local print_node
   
-  -- Now update form handlers with the actual print_node function
-  form_handlers = forms_module.create_handlers(Compiler, print_node)
+  -- Create print_node with access to form_handlers (which will be populated below)
   print_node = print_node_module.create_print_node(Compiler, form_handlers)
+  
+  -- Now populate form_handlers with the actual handlers (which can use print_node)
+  local handlers = forms_module.create_handlers(Compiler, print_node)
+  for k, v in pairs(handlers) do
+    form_handlers[k] = v
+  end
   
   for i = 1, #ast do
     local node = ast[i]
