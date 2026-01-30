@@ -21,10 +21,13 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y lua5.4
     
-    - name: Run basic tests
+    - name: Run unit tests
+      run: lua tests/unit/run_all.lua
+    
+    - name: Run Zork1 basic tests
       run: lua tests/run_tests.lua tests/zork1_basic.lua
     
-    - name: Run extended tests
+    - name: Run Zork1 walkthrough tests
       run: lua tests/run_tests.lua tests/zork1_walkthrough.lua
     
     - name: Run parser/runtime tests - directions
@@ -41,3 +44,9 @@ jobs:
     
     - name: Run parser/runtime tests - pronouns
       run: lua tests/run_tests.lua tests/test-pronouns.lua
+    
+    - name: Run parser/runtime tests - clock
+      run: lua tests/run_tests.lua tests/test-clock.lua
+    
+    - name: Run test assertion tests
+      run: lua tests/run_tests.lua tests/test-assertions.lua

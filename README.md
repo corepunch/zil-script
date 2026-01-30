@@ -29,97 +29,23 @@ This will compile the ZIL files specified in `main.lua` and start the interactiv
 
 ## Testing
 
-The project includes both unit tests for individual components and integration tests for the full game runtime.
+The project includes comprehensive testing at multiple levels: unit tests (134+), integration tests, and game walkthroughs.
 
-### Quick Start with Make
-
-The easiest way to run tests is using the provided Makefile targets:
+### Quick Start
 
 ```bash
 make test              # Run all tests (unit + integration)
 make test-unit         # Run unit tests only
-make test-integration  # Run all integration tests
-make test-parser       # Run all parser/runtime tests
+make test-integration  # Run integration tests only
 ```
 
-For a complete list of available test targets, run:
+### Test Categories
 
-```bash
-make help
-```
+- **Unit Tests**: Parser (60 tests), Compiler (44 tests), Runtime (25 tests), Source Mapping (5 tests)
+- **Integration Tests**: Zork1 game tests, parser/runtime tests, horror game tests
+- **Parser/Runtime Tests**: Directions, containers, light, take, pronouns
 
-### Running Unit Tests
-
-To run all unit tests using make:
-
-```bash
-make test-unit
-```
-
-Or directly with lua:
-
-```bash
-lua tests/unit/run_all.lua
-```
-
-To run tests for a specific component:
-
-```bash
-lua tests/unit/test_parser.lua    # Parser tests
-lua tests/unit/test_compiler.lua  # Compiler tests
-lua tests/unit/test_runtime.lua   # Runtime tests
-```
-
-### Running Integration Tests
-
-To run all integration tests using make:
-
-```bash
-make test-integration
-```
-
-To run a specific integration test file:
-
-```bash
-make test-directions               # Run direction tests
-make test-containers               # Run container tests
-```
-
-Or directly with lua:
-
-```bash
-lua tests/run_tests.lua tests/test-directions.lua
-lua tests/run_tests.lua tests/zork1_extended.lua
-```
-
-### Available Test Files
-
-**Unit Tests** (in `tests/unit/`):
-- `test_parser.lua` - Parser module tests
-- `test_compiler.lua` - Compiler module tests
-- `test_runtime.lua` - Runtime module tests
-
-**Integration Tests** (in `tests/`):
-- `zork1_basic.lua` - Basic game interaction tests
-- `zork1_extended.lua` - Extended command sequence tests
-
-#### Parser/Runtime Tests (Inspired by ZILF)
-
-- `tests/test-directions.lua` - Direction and movement parsing
-- `tests/test-take.lua` - TAKE command functionality  
-- `tests/test-containers.lua` - Container interactions
-- `tests/test-light.lua` - Light source mechanics
-- `tests/test-pronouns.lua` - Basic object interactions
-
-#### Parser/Runtime Tests (Inspired by ZILF)
-
-- `tests/test-directions.lua` - Direction and movement parsing
-- `tests/test-take.lua` - TAKE command functionality  
-- `tests/test-containers.lua` - Container interactions
-- `tests/test-light.lua` - Light source mechanics
-- `tests/test-pronouns.lua` - Basic object interactions
-
-See `tests/README.md` for detailed information on writing and running tests.
+For complete test documentation including all available tests, how to write tests, and test assertion commands, see **[tests/TESTS.md](tests/TESTS.md)**.
 
 ## Project Structure
 
@@ -161,24 +87,28 @@ You can modify this list to load different ZIL files or create your own adventur
 
 ## Development
 
-### Code Quality
+### Architecture
 
-The ZIL runtime codebase is structured for testability and maintainability:
+The ZIL runtime is modular and well-tested:
 
-- **Modular Design**: Parser, compiler, and runtime are separate modules with clear interfaces
-- **Unit Testing**: 120+ unit tests cover core functionality
-- **Integration Testing**: Full end-to-end tests validate game execution
-- **Error Handling**: Proper error reporting for parsing, compilation, and runtime errors
+- **Parser** (`zil/parser.lua`): Parses ZIL source code into AST
+- **Compiler** (`zil/compiler/`): Compiles ZIL AST to Lua code (8 focused modules)
+- **Runtime** (`zil/runtime.lua`): Executes compiled Lua code
+- **Bootstrap** (`zil/bootstrap.lua`): Core runtime functions and globals
+- **Source Mapping** (`zil/sourcemap.lua`): Maps Lua errors back to ZIL source locations
 
-### Adding New Tests
+See [zil/compiler/README.md](zil/compiler/README.md) for compiler module documentation.
 
-1. Create a new test file in `tests/` (e.g., `tests/my_test.lua`)
-2. Define test commands following the format in existing test files
-3. Run the test with `lua tests/run_tests.lua tests/my_test.lua`
+### Key Features
+
+- **Source Mapping**: Error messages reference ZIL source files, not generated Lua files (see [SOURCE_MAPPING.md](SOURCE_MAPPING.md))
+- **Modular Compiler**: Clean separation of concerns across 8 focused modules
+- **Test Infrastructure**: 134+ unit tests plus comprehensive integration tests
+- **Test Assertions**: Built-in test commands for verifying game state
 
 ### Debugging
 
-The generated Lua files (with `zil_` prefix) are created during compilation but are excluded from git via `.gitignore`.
+Generated Lua files (with `zil_` prefix) are created during compilation and excluded from git via `.gitignore`.
 
 ## License
 
