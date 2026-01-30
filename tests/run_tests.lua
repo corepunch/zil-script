@@ -97,7 +97,7 @@ local function run_test_file(test_file_path)
 				local input_str = cmd.input or test
 				print(GREEN .. "[PASS] " .. (cmd.description or test) .. RESET .. " (" .. input_str .. ")")
 			end
-			print(output)
+			-- print(output)
 		end
 		
 		local function report(test) 
