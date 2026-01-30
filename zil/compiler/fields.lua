@@ -6,7 +6,8 @@ local Fields = {}
 -- Helper: Write a list with optional formatting function
 local function write_formatted_list(buf, node, formatter, compiler)
   local list = {}
-  for child in compiler.iter_children(node, 1) do
+  for i = 2, #node do
+    local child = node[i]
     table.insert(list, formatter and formatter(child) or compiler.value(child))
   end
   buf.write("{")
@@ -28,13 +29,13 @@ end
 
 -- Write first child with optional quoting
 local function write_first_child(buf, node, quote_non_strings, compiler)
-  for child in compiler.iter_children(node, 1) do
+  if #node >= 2 then
+    local child = node[2]
     if quote_non_strings and child.type ~= "string" then
       buf.write('"%s"', child.value)
     else
       buf.write("%s", compiler.value(child))
     end
-    break
   end
 end
 
@@ -67,8 +68,8 @@ function Fields.write_nav(buf, node, compiler)
   local parts = {}
   
   -- Collect navigation parts
-  for child in compiler.iter_children(node, 1) do
-    table.insert(parts, child)
+  for i = 2, #node do
+    table.insert(parts, node[i])
   end
   
   -- parts[1] = TO

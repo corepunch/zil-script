@@ -24,19 +24,6 @@ local Compiler = {
   enable_semantic_check = false  -- Enable semantic checking with checker module
 }
 
--- AST node iteration helper
-function Compiler.iter_children(node, skip)
-  skip = skip or 0
-  local i = skip + 1
-  return function()
-    if node[i] then
-      local child = node[i]
-      i = i + 1
-      return child
-    end
-  end
-end
-
 -- Bind value conversion functions to compiler
 Compiler.value = function(node)
   return value_module.value(node, Compiler)

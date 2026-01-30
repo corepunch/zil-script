@@ -53,7 +53,8 @@ function TopLevel.write_function_header(buf, node, compiler, print_node)
   end
 
   -- Parse argument list and register local variables
-  for arg in compiler.iter_children(args_node) do
+  for i = 1, #args_node do
+    local arg = args_node[i]
     if arg.type == "string" then
       if arg.value == "AUX" then
         mode = "locals"

@@ -26,7 +26,6 @@ Main module entry point. Coordinates all compiler components and provides the pu
     - `body` - Main code body
     - `combined` - Combined output
     - `diagnostics` - Diagnostic collection with any errors/warnings
-- `Compiler.iter_children(node, skip)` - AST node iteration helper
 
 **Integration with TypeScript-inspired modules:**
 The compiler now internally uses:
