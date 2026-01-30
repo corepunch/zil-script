@@ -666,11 +666,11 @@ function OBJECT(object)
 				str = mem:write(v[1].."\0") -- NEXIT = 2
 			else
 				str = string.char(v[1]) -- UEXIT = 1
-				local say = v.say and mem:write(v.say.."\0") or makeword(0)
+				local say = v.say and mem:write(v.say.."\0") or 0
 				if v.door then
-					str = str..string.char(v.door)..say..string.char(0) -- DEXIT = 5
+					str = str..string.char(v.door)..makeword(say)..string.char(0) -- DEXIT = 5
 				elseif v.flag then
-					str = str..string.char(v.flag)..say -- CEXIT = 4
+					str = str..string.char(v.flag)..makeword(say) -- CEXIT = 4
 				end
 			end
 			table.insert(t, makeprop(str, k))
