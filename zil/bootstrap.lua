@@ -376,6 +376,19 @@ local function set_start_location(location_name)
 	MOVE(adv_num, loc_num)
 end
 
+local function move_object_to_location(obj_name, location_name)
+	local obj_num = find_object_by_name(obj_name)
+	local loc_num = find_object_by_name(location_name)
+	assert(obj_num, "Object not found: " .. obj_name)
+	assert(loc_num, "Location not found: " .. location_name)
+	-- Move the object to the location
+	MOVE(obj_num, loc_num)
+	-- Special handling for THIEF: clear INVISIBLE flag so they can be interacted with
+	if obj_name:upper():gsub("-", "_") == "THIEF" and _G.INVISIBLE then
+		FCLEAR(obj_num, _G.INVISIBLE)
+	end
+end
+
 local test_cmds = {
 	["test:flag"] = { assert_flag, 3 },
 	["test:no-flag"] = { assert_no_flag, 3 },
@@ -386,6 +399,7 @@ local test_cmds = {
 	["test:global"] = { assert_global, 2 },
 	["test:lose"] = { assert_lose, 2 },
 	["test:start-location"] = { set_start_location, 2 },
+	["test:move"] = { move_object_to_location, 3 },
 }
 
 local routes = {
