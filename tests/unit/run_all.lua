@@ -4,7 +4,8 @@
 local test_files = {
 	"tests/unit/test_parser.lua",
 	"tests/unit/test_compiler.lua",
-	"tests/unit/test_runtime.lua"
+	"tests/unit/test_runtime.lua",
+	"tests/unit/test_typescript_modules.lua"
 }
 
 local all_passed = true

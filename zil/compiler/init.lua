@@ -1,5 +1,6 @@
 -- ZIL to Lua Compiler
 -- Main module that coordinates all compiler components
+-- Uses TypeScript-inspired architecture with diagnostics and optional semantic checking
 
 local buffer_module = require 'zil.compiler.buffer'
 local utils = require 'zil.compiler.utils'
@@ -7,6 +8,8 @@ local value_module = require 'zil.compiler.value'
 local forms_module = require 'zil.compiler.forms'
 local toplevel = require 'zil.compiler.toplevel'
 local print_node_module = require 'zil.compiler.print_node'
+local diagnostics_module = require 'zil.compiler.diagnostics'
+local checker_module = require 'zil.compiler.checker'
 
 local Compiler = {
   flags = {},
@@ -16,7 +19,9 @@ local Compiler = {
   prog = 1,
   current_lua_filename = nil,  -- Track the current output Lua filename
   current_source = nil,          -- Track the current ZIL source location
-  local_vars = {}                -- Track local variables in current scope
+  local_vars = {},               -- Track local variables in current scope
+  diagnostics = nil,             -- Diagnostic collection for error reporting
+  enable_semantic_check = false  -- Enable semantic checking with checker module
 }
 
 -- AST node iteration helper
@@ -52,7 +57,14 @@ end
 
 -- Main compilation entry point
 -- lua_filename: the name of the Lua file being generated (for source mapping) - optional
-function Compiler.compile(ast, lua_filename)
+-- options: optional table with compilation options:
+--   - enable_semantic_check: boolean, enable semantic analysis (default: false)
+function Compiler.compile(ast, lua_filename, options)
+  options = options or {}
+  
+  -- Create diagnostic collection for better error reporting
+  local diagnostics = diagnostics_module.new()
+  
   local decl = buffer_module.new(Compiler)
   local body = buffer_module.new(Compiler)
 
@@ -60,6 +72,20 @@ function Compiler.compile(ast, lua_filename)
   Compiler.current_decl = decl
   Compiler.current_lua_filename = lua_filename or "unknown.lua"
   Compiler.current_source = nil
+  Compiler.diagnostics = diagnostics
+  Compiler.enable_semantic_check = options.enable_semantic_check or false
+  
+  -- Optional: Run semantic analysis first
+  if Compiler.enable_semantic_check then
+    local checker = checker_module.new(diagnostics)
+    checker.check_ast(ast)
+    
+    -- If there are semantic errors, report them but continue compilation
+    if diagnostics.has_errors() then
+      -- Errors are in diagnostics, no need for stderr output
+      -- Users can access via result.diagnostics
+    end
+  end
   
   -- Create form handlers and print_node function
   -- We need to resolve the circular dependency between forms and print_node
@@ -93,10 +119,24 @@ function Compiler.compile(ast, lua_filename)
         if compiler_fn then
           compiler_fn(decl, body, node, Compiler, print_node)
         else
-          io.stderr:write(string.format("Unknown top-level form: %s on line %d\n", name, utils.get_source_line(node)))
+          -- Use diagnostics for error reporting (no stderr)
+          local source_loc = diagnostics_module.get_source_location(node)
+          diagnostics.error(
+            diagnostics_module.Code.UNKNOWN_FORM,
+            string.format("Unknown top-level form: %s", name),
+            source_loc,
+            node
+          )
         end
       else
-        io.stderr:write(string.format("Expected type in <%s> on line %d\n", name, utils.get_source_line(node)))
+        -- Use diagnostics for error reporting (no stderr)
+        local source_loc = diagnostics_module.get_source_location(node)
+        diagnostics.error(
+          diagnostics_module.Code.EXPECTED_TYPE,
+          string.format("Expected type in <%s>", name),
+          source_loc,
+          node
+        )
       end
     end
   end
@@ -104,7 +144,8 @@ function Compiler.compile(ast, lua_filename)
   return {
     declarations = decl.get(),
     body = body.get(),
-    combined = decl.get() .. "\n" .. body.get()
+    combined = decl.get() .. "\n" .. body.get(),
+    diagnostics = diagnostics  -- Provide access to diagnostics for advanced usage
   }
 end
 

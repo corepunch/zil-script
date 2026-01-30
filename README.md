@@ -89,21 +89,25 @@ You can modify this list to load different ZIL files or create your own adventur
 
 ### Architecture
 
-The ZIL runtime is modular and well-tested:
+The ZIL runtime is modular and well-tested, with a compiler architecture inspired by TypeScript:
 
 - **Parser** (`zil/parser.lua`): Parses ZIL source code into AST
-- **Compiler** (`zil/compiler/`): Compiles ZIL AST to Lua code (8 focused modules)
+- **Compiler** (`zil/compiler/`): Compiles ZIL AST to Lua code (12 focused modules)
+  - **Core modules**: `init`, `buffer`, `utils`, `value`, `fields`, `forms`, `toplevel`, `print_node`
+  - **TypeScript-inspired modules** ✨: `visitor`, `diagnostics`, `emitter`, `checker`
 - **Runtime** (`zil/runtime.lua`): Executes compiled Lua code
 - **Bootstrap** (`zil/bootstrap.lua`): Core runtime functions and globals
 - **Source Mapping** (`zil/sourcemap.lua`): Maps Lua errors back to ZIL source locations
 
 See [zil/compiler/README.md](zil/compiler/README.md) for compiler module documentation.
+See [TYPESCRIPT_IMPROVEMENTS.md](TYPESCRIPT_IMPROVEMENTS.md) for details on TypeScript-inspired improvements.
 
 ### Key Features
 
 - **Source Mapping**: Error messages reference ZIL source files, not generated Lua files (see [SOURCE_MAPPING.md](SOURCE_MAPPING.md))
-- **Modular Compiler**: Clean separation of concerns across 8 focused modules
-- **Test Infrastructure**: 134+ unit tests plus comprehensive integration tests
+- **Modular Compiler**: Clean separation of concerns across 12 focused modules
+- **TypeScript-Inspired Architecture**: Visitor pattern, diagnostic collection, semantic checking, and structured emission
+- **Test Infrastructure**: 149+ unit test assertions plus comprehensive integration tests
 - **Test Assertions**: Built-in test commands for verifying game state
 
 ### Debugging
