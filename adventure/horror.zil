@@ -158,6 +158,12 @@
                (<AND <VERB? OPEN>
                      <NOT ,CHAINS-CUT-FLAG>>
                 <TELL "The door is secured with heavy chains. You need to cut through them." CR>
+                <RTRUE>)
+               (<VERB? KNOCK>
+                <TELL "You knock on the door. The sound echoes hollowly. No response comes from within." CR>
+                <RTRUE>)
+               (<VERB? LISTEN>
+                <TELL "You press your ear to the door. From beyond comes an eerie silence—too complete, too absolute." CR>
                 <RTRUE>)>>
 <OBJECT HEAVY-DOOR
         (IN PATIENT-WARD)
@@ -484,6 +490,12 @@
 <ROUTINE WALL-SCRATCHES-F ()
          <COND (<VERB? EXAMINE COUNT>
                 <TELL "The scratches are too numerous to count. They cover every inch of the cell walls. Some form words: 'HELP ME' 'NO MORE' 'PLEASE'. One message is larger than the rest: 'PATIENT 189 STILL ALIVE IN THE CHAPEL'." CR>
+                <RTRUE>)
+               (<VERB? RUB>
+                <TELL "You run your fingers over the scratches. They're deep—gouged by fingernails over years of desperation." CR>
+                <RTRUE>)
+               (<VERB? READ>
+                <TELL "Among the chaos of scratches, you can make out words: 'HELP ME' 'NO MORE' 'PLEASE'. The largest message reads: 'PATIENT 189 STILL ALIVE IN THE CHAPEL'." CR>
                 <RTRUE>)>>
 <OBJECT WALL-SCRATCHES
         (IN ISOLATION-WARD)
@@ -506,6 +518,15 @@
                 <RTRUE>)
                (<VERB? BOARD>
                 <TELL "You have no desire to sit in that terrible chair." CR>
+                <RTRUE>)
+               (<VERB? SIT>
+                <TELL "You have no desire to sit in that terrible chair." CR>
+                <RTRUE>)
+               (<VERB? RUB>
+                <TELL "You touch the cold metal armrest. The leather restraints feel disturbingly well-worn. You pull your hand away quickly." CR>
+                <RTRUE>)
+               (<VERB? PUSH PULL>
+                <TELL "The chair is bolted firmly to the floor. It doesn't budge." CR>
                 <RTRUE>)>>
 <OBJECT SHOCK-CHAIR
         (IN ELECTROSHOCK-THEATER)
@@ -517,6 +538,12 @@
 <ROUTINE SHOCK-MACHINE-F ()
          <COND (<VERB? EXAMINE>
                 <TELL "The machine has various dials and switches. Labels indicate voltage levels up to dangerous levels. The electrodes are stained dark." CR>
+                <RTRUE>)
+               (<VERB? TURN SWITCH-ON>
+                <TELL "You reach for a switch, but think better of it. Who knows what might happen if you activated this nightmare device." CR>
+                <RTRUE>)
+               (<VERB? RUB>
+                <TELL "You touch one of the electrodes. It's cold and stained with something dark. You feel a faint tingle and quickly pull your hand away." CR>
                 <RTRUE>)>>
 <OBJECT SHOCK-MACHINE
         (IN ELECTROSHOCK-THEATER)
@@ -534,6 +561,15 @@
 <ROUTINE PADDING-F ()
          <COND (<VERB? EXAMINE READ>
                 <TELL "The padding is torn and moldering. On one wall, written in what appears to be dried blood, are the words: 'THE CHAPEL BEYOND THE GARDEN. HE WAITS THERE. PATIENT 189.'." CR>
+                <RTRUE>)
+               (<VERB? RUB>
+                <TELL "You touch the rotting padding. It's damp and spongy, falling apart at the slightest pressure." CR>
+                <RTRUE>)
+               (<VERB? SMELL>
+                <TELL "The padding reeks of mildew, decay, and something else—the sour smell of old fear." CR>
+                <RTRUE>)
+               (<VERB? PULL>
+                <TELL "The padding tears away in chunks when you pull it, but there's nothing behind it but more rot." CR>
                 <RTRUE>)>>
 <OBJECT PADDING
         (IN PADDED-CELL)
@@ -548,6 +584,12 @@
                 <RTRUE>)
                (<VERB? WEAR>
                 <TELL "You'd rather not." CR>
+                <RTRUE>)
+               (<VERB? SMELL>
+                <TELL "The straitjacket smells of sweat, fear, and something metallic—perhaps old blood." CR>
+                <RTRUE>)
+               (<VERB? RUB>
+                <TELL "The canvas is rough and stiff. The stains feel crusty under your fingers." CR>
                 <RTRUE>)>>
 <OBJECT STRAITJACKET
         (IN PADDED-CELL)
@@ -630,6 +672,15 @@
 <ROUTINE PORTRAIT-F ()
          <COND (<VERB? EXAMINE>
                 <TELL "The portrait shows Dr. Mordecai, a gaunt man with piercing eyes and a cruel mouth. The nameplate reads: 'Dr. Heinrich Mordecai - Director 1935-1952'. His eyes seem to follow you around the room." CR>
+                <RTRUE>)
+               (<VERB? RUB>
+                <TELL "You reach out to touch the portrait. The paint feels oddly warm. You could swear the eyes moved." CR>
+                <RTRUE>)
+               (<VERB? TAKE>
+                <TELL "The portrait is securely fastened to the wall. Besides, you have no desire to carry that man's visage with you." CR>
+                <RTRUE>)
+               (<VERB? ATTACK>
+                <TELL "You consider defacing the portrait, but something stops you. Those painted eyes seem to dare you to try." CR>
                 <RTRUE>)>>
 <OBJECT MORDECAI-PORTRAIT
         (IN DIRECTORS-OFFICE)
@@ -718,6 +769,17 @@
 <ROUTINE DEAD-GARDEN-F ()
          <COND (<VERB? EXAMINE SEARCH>
                 <TELL "The garden has been dead for decades. Thorny vines choke what remains of flower beds. Among the weeds, you can see broken stone benches and a crumbling fountain." CR>
+                <RTRUE>)
+               (<AND <VERB? DIG>
+                     <IN? ,COAL-SHOVEL ,WINNER>>
+                <TELL "You dig into the dead earth with the shovel. The soil is dry and lifeless. After a few moments, you give up—nothing but rocks and roots here." CR>
+                <RTRUE>)
+               (<AND <VERB? DIG>
+                     <NOT <IN? ,COAL-SHOVEL ,WINNER>>>
+                <TELL "You'd need a shovel or similar tool to dig here." CR>
+                <RTRUE>)
+               (<VERB? SMELL>
+                <TELL "The garden smells of decay and rot, with an underlying odor of something else—something chemical and wrong." CR>
                 <RTRUE>)>>
 <OBJECT DEAD-GARDEN
         (IN OVERGROWN-GARDEN)
@@ -748,6 +810,12 @@
                 <RTRUE>)
                (<VERB? READ>
                 <TELL "The words carved above the door read: 'HE WHO ENTERS ABANDONS HOPE'." CR>
+                <RTRUE>)
+               (<VERB? KNOCK>
+                <TELL "You knock on the heavy oak door. The sound echoes dully, and you think you hear something shift on the other side." CR>
+                <RTRUE>)
+               (<VERB? LISTEN>
+                <TELL "You press your ear against the door. From within comes a faint sound—breathing? Or just the wind?" CR>
                 <RTRUE>)>>
 <OBJECT CHAPEL-DOOR
         (IN OVERGROWN-GARDEN)
@@ -765,6 +833,15 @@
 <ROUTINE PEWS-F ()
          <COND (<VERB? EXAMINE>
                 <TELL "The PEWS are ancient and rotting. Strange symbols are carved into the wood—symbols that hurt to look at." CR>
+                <RTRUE>)
+               (<VERB? BOARD SIT>
+                <TELL "You sit on one of the pews. The wood is cold and uncomfortable. The symbols carved into it seem to pulse beneath your hands, and you quickly stand back up." CR>
+                <RTRUE>)
+               (<VERB? PRAY>
+                <TELL "You bow your head and try to pray, but the words die in your throat. This place mocks faith." CR>
+                <RTRUE>)
+               (<VERB? RUB>
+                <TELL "You run your fingers over the carved symbols. They're strangely warm to the touch, and you quickly pull your hand away." CR>
                 <RTRUE>)>>
 <OBJECT PEWS
         (IN CHAPEL)
@@ -776,6 +853,18 @@
 <ROUTINE GREEN-CANDLES-F ()
          <COND (<VERB? EXAMINE>
                 <TELL "The CANDLES burn with green flames that give off no heat. The light makes everything look diseased." CR>
+                <RTRUE>)
+               (<VERB? LAMP-OFF>
+                <TELL "You try to extinguish the candles, but the green flames resist. No amount of blowing can put them out. They burn with an unnatural persistence." CR>
+                <RTRUE>)
+               (<VERB? BLOW>
+                <TELL "You try to blow out the candles, but the green flames refuse to be extinguished." CR>
+                <RTRUE>)
+               (<VERB? RUB>
+                <TELL "You reach toward the flame, expecting heat. Instead, you feel only cold—a deep, bone-chilling cold that makes you recoil." CR>
+                <RTRUE>)
+               (<VERB? TAKE>
+                <TELL "The candles seem fixed in place, as if welded to their holders. They won't budge." CR>
                 <RTRUE>)>>
 <OBJECT GREEN-CANDLES
         (IN CHAPEL)
@@ -817,6 +906,18 @@
 <ROUTINE ANCIENT-RELIC-F ()
          <COND (<VERB? EXAMINE>
                 <TELL "An ancient silver cross, tarnished black with age. Strange symbols are etched into its surface—symbols that seem to writhe when you look directly at them. Despite its age, it radiates a strange warmth." CR>
+                <RTRUE>)
+               (<VERB? RUB>
+                <TELL "The cross feels unnaturally warm in your hand. The symbols seem to pulse under your touch." CR>
+                <RTRUE>)
+               (<VERB? PRAY>
+                <TELL "You clutch the cross and try to pray. The symbols grow warmer, almost hot, as if responding to your faith—or mocking it." CR>
+                <RTRUE>)
+               (<VERB? THROW>
+                <TELL "The cross seems too important to discard." CR>
+                <RTRUE>)
+               (<VERB? GIVE>
+                <TELL "The cross seems too important to give away." CR>
                 <RTRUE>)>>
 <OBJECT ANCIENT-RELIC
         (IN WOODEN-BOX)
@@ -837,6 +938,12 @@
                (<VERB? HELLO>
                 <TELL "The figure tilts its head slightly. A voice like wind through dead leaves whispers: 'Free... at last... thank... you...' Then it turns to ash and crumbles to the floor. The green flames extinguish. Whatever held it here is finally broken." CR>
                 <REMOVE ,PATIENT-189>
+                <RTRUE>)
+               (<VERB? RUB>
+                <TELL "You reach toward Patient 189, but stop yourself. The air around it feels wrong—cold and electric." CR>
+                <RTRUE>)
+               (<VERB? GIVE>
+                <TELL "Patient 189 shows no interest in earthly possessions. It simply watches you with those glowing eyes." CR>
                 <RTRUE>)>>
 <OBJECT PATIENT-189
         (IN CHAPEL)
@@ -889,6 +996,12 @@
 <ROUTINE SCALPEL-F ()
          <COND (<VERB? EXAMINE>
                 <TELL "The scalpel's blade is rusty but still razor-sharp along one edge. The handle is stained with something dark." CR>
+                <RTRUE>)
+               (<VERB? RUB>
+                <TELL "You carefully touch the blade. It's still very sharp—sharp enough to cut." CR>
+                <RTRUE>)
+               (<VERB? THROW>
+                <TELL "You're not about to throw away a potentially useful tool." CR>
                 <RTRUE>)>>
 <OBJECT SCALPEL
         (IN METAL-CABINET)
@@ -905,6 +1018,12 @@
                 <RTRUE>)
                (<VERB? DRINK>
                 <TELL "That would be an extremely bad idea." CR>
+                <RTRUE>)
+               (<VERB? SMELL>
+                <TELL "You carefully sniff the bottle. The sweet, sickly smell of ether makes your head spin. You quickly cap it again." CR>
+                <RTRUE>)
+               (<VERB? OPEN>
+                <TELL "You carefully uncap the bottle. The smell of ether wafts out." CR>
                 <RTRUE>)>>
 <OBJECT ETHER-BOTTLE
         (IN METAL-CABINET)
@@ -924,6 +1043,15 @@
                 <RTRUE>)
                (<VERB? TAKE>
                 <TELL "You can't bring yourself to touch it." CR>
+                <RTRUE>)
+               (<VERB? SMELL>
+                <TELL "Even from here, the smell of decay is overwhelming. You step back, fighting nausea." CR>
+                <RTRUE>)
+               (<VERB? RUB>
+                <TELL "Your hand stops inches from the bundle. Every instinct screams at you not to touch it." CR>
+                <RTRUE>)
+               (<VERB? PUSH>
+                <TELL "You cannot bring yourself to push the bundle. The thought of touching it fills you with dread." CR>
                 <RTRUE>)>>
 <OBJECT CANVAS-BUNDLE
         (IN DISSECTION-TABLE)
@@ -953,6 +1081,12 @@
 <ROUTINE SHOVEL-F ()
          <COND (<VERB? EXAMINE>
                 <TELL "A heavy coal shovel with a wooden handle. The blade is caked with ancient coal dust." CR>
+                <RTRUE>)
+               (<VERB? SWING>
+                <TELL "You swing the shovel experimentally. It's heavy but well-balanced—could work as a weapon if needed." CR>
+                <RTRUE>)
+               (<VERB? DIG>
+                <TELL "You'd need to specify what you want to dig. The shovel is ready." CR>
                 <RTRUE>)>>
 <OBJECT COAL-SHOVEL
         (IN IRON-BOILER)
@@ -998,6 +1132,9 @@
                 <RTRUE>)
                (<VERB? EXAMINE>
                 <TELL "A brass oil lantern with a glass chimney. It still contains fuel." CR>
+                <RTRUE>)
+               (<VERB? SHAKE>
+                <TELL "You shake the lantern gently. You can hear oil sloshing inside." CR>
                 <RTRUE>)>>
 <OBJECT OIL-LANTERN
         (IN SHELVES)
@@ -1108,6 +1245,12 @@
                 <RTRUE>)
                (<VERB? EXAMINE>
                 <TELL "A small brass bell with a button on top. It still works." CR>
+                <RTRUE>)
+               (<VERB? LISTEN>
+                <TELL "The bell makes a clear ringing sound when struck." CR>
+                <RTRUE>)
+               (<VERB? SHAKE>
+                <TELL "You shake the bell. It rings with a cheerful tone that seems out of place in this dead building." CR>
                 <RTRUE>)>>
 <OBJECT BELL
         (IN SERVING-COUNTER)
