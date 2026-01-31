@@ -8,7 +8,7 @@ function Utils.safeget(node, attr)
 end
 
 -- Convert leading digits to letters (0-9 -> a-j)
-function Utils.digits_to_letters(str)
+function Utils.digitsToLetters(str)
   return str:gsub("^(%d+)", function(digits)
     return digits:gsub("%d", function(d)
       return string.char(string.byte('a') + tonumber(d))
@@ -17,7 +17,7 @@ function Utils.digits_to_letters(str)
 end
 
 -- Normalize identifier to Lua-safe name
-function Utils.normalize_identifier(str)
+function Utils.normalizeIdentifier(str)
   return str
     :gsub("^[,.]+", "")        -- Remove leading commas/dots
     :gsub("[,.]", "")          -- Remove internal commas/dots
@@ -27,7 +27,7 @@ function Utils.normalize_identifier(str)
 end
 
 -- Convert ZIL function name to Lua function name
-function Utils.normalize_function_name(name)
+function Utils.normalizeFunctionName(name)
   local OPERATOR_MAP = {
     ["+"] = "ADD",
     ["-"] = "SUB",
@@ -44,18 +44,18 @@ function Utils.normalize_function_name(name)
 end
 
 -- Check if node is a COND expression
-function Utils.is_cond(n)
+function Utils.isCond(n)
   return n.type == "expr" and n.name == "COND"
 end
 
 -- Check if node needs a return wrapper
-function Utils.need_return(node)
+function Utils.needReturn(node)
   local nodes = {COND=true,PROG=true,REPEAT=true,AGAIN=true,RETURN=true,RTRUE=true,RFALSE=true,GLOBAL=true}
   return node.value ~= "" and (node.type ~= "expr" or not nodes[node.name])
 end
 
 -- Get source line number from AST node
-function Utils.get_source_line(node_or_ast)
+function Utils.getSourceLine(node_or_ast)
   local meta = getmetatable(node_or_ast)
   return meta and meta.source and meta.source.line or 0
 end

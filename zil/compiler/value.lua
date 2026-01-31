@@ -34,11 +34,11 @@ function Value.value(node, compiler)
   local is_local = val:match("^%.")
   
   -- Convert identifier to Lua-safe name
-  local result = utils.normalize_identifier(val)
+  local result = utils.normalizeIdentifier(val)
   
   -- Convert leading numbers to letters
   if result:match("^%d") then
-    result = utils.digits_to_letters(result)
+    result = utils.digitsToLetters(result)
   end
   
   -- Add m_ prefix for local variable references (those that started with .)
@@ -52,7 +52,7 @@ end
 -- Helper function to convert a bare identifier to a local variable name
 -- This is used in contexts where we know an identifier is a local variable
 -- but it doesn't have the . prefix (e.g., SET target, function parameters)
-function Value.local_var_name(node, compiler)
+function Value.localVarName(node, compiler)
   local bare_name = Value.value(node, compiler)
   -- If it already has m_ prefix (from a .VAR reference), return as is
   if bare_name:match("^m_") then
@@ -72,7 +72,7 @@ function Value.local_var_name(node, compiler)
 end
 
 -- Register a variable as local and return its name
-function Value.register_local_var(arg, compiler)
+function Value.registerLocalVar(arg, compiler)
   local var_name = tostring(arg.value or arg.name)
   compiler.local_vars[var_name] = true
   return var_name

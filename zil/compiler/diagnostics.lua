@@ -164,7 +164,7 @@ function Diagnostics.new()
 end
 
 -- Helper: Extract source location from a node
-function Diagnostics.get_source_location(node)
+function Diagnostics.getSourceLocation(node)
   if not node then return nil end
   
   local meta = getmetatable(node)
@@ -176,8 +176,8 @@ function Diagnostics.get_source_location(node)
 end
 
 -- Helper: Create a diagnostic from a node
-function Diagnostics.from_node(category, code, message, node)
-  local location = Diagnostics.get_source_location(node)
+function Diagnostics.fromNode(category, code, message, node)
+  local location = Diagnostics.getSourceLocation(node)
   local collection = Diagnostics.new()
   collection.add(category, code, message, location, node)
   return collection

@@ -7,8 +7,8 @@ local PrintNode = {}
 
 -- Main code generation function
 -- Implements visitor pattern by traversing AST and delegating to specialized handlers
-function PrintNode.create_print_node(compiler, form_handlers)
-  local function print_node(buf, node, indent)
+function PrintNode.createPrintNode(compiler, form_handlers)
+  local function printNode(buf, node, indent)
     indent = indent or 0
     
     -- Track source location for diagnostics and source mapping
@@ -29,18 +29,18 @@ function PrintNode.create_print_node(compiler, form_handlers)
         -- Default handler for generic function calls
         if indent == 1 then buf.indent(indent) end
         if node.name == 'VERB?' then table.insert(compiler.current_verbs, node[1].value) end
-        buf.write("%s(", utils.normalize_function_name(node.name))
+        buf.write("%s(", utils.normalizeFunctionName(node.name))
         
         -- Visit children (visitor pattern)
         for i = 1, #node do
-          if utils.is_cond(node[i]) then
+          if utils.isCond(node[i]) then
             buf.write("APPLY(function()")
-            print_node(buf, node[i], indent + 1, true)
+            printNode(buf, node[i], indent + 1, true)
             buf.write(" end) or __tmp")
           elseif node.name == 'VERB?' then
             buf.write("VQ%s", compiler.value(node[i]))
           else
-            print_node(buf, node[i], indent + 1, false)
+            printNode(buf, node[i], indent + 1, false)
           end
           if i < #node then buf.write(", ") end
         end
@@ -55,7 +55,7 @@ function PrintNode.create_print_node(compiler, form_handlers)
     return true
   end
   
-  return print_node
+  return printNode
 end
 
 return PrintNode

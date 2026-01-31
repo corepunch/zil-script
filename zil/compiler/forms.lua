@@ -4,12 +4,12 @@ local utils = require 'zil.compiler.utils'
 local Forms = {}
 
 -- Helper: Generate error return with specified value
-local function write_error_return(buf, error_value)
+local function writeErrorReturn(buf, error_value)
   buf.write("\terror(%s)", error_value)
 end
 
 -- Helper: Generate a function call with string arguments from node values
-local function write_string_call(buf, name, node)
+local function writeStringCall(buf, name, node)
   buf.write("%s(", name)
   for i = 1, #node do
     if i > 1 then buf.write(", ") end
@@ -19,19 +19,19 @@ local function write_string_call(buf, name, node)
 end
 
 -- Helper: Generate a table constructor call (LTABLE, TABLE share same pattern)
-local function write_table_call(buf, name, node, print_node)
+local function writeTableCall(buf, name, node, printNode)
   local start = utils.safeget(node[1], 'type') == "list" and 2 or 1
   buf.write("%s(", name)
   for i = start, #node do
-    print_node(buf, node[i], 0)
+    printNode(buf, node[i], 0)
     if i < #node then buf.write(",") end
   end
   buf.write(")")
 end
 
 -- Helper: Increment/decrement with comparison (IGRTR?, DLESS? share pattern)
-local function write_modify_compare(buf, node, op, cmp, compiler)
-  local target = compiler.local_var_name(node[1])
+local function writeModifyCompare(buf, node, op, cmp, compiler)
+  local target = compiler.localVarName(node[1])
   buf.write("APPLY(function() %s = %s %s 1", target, target, op)
   buf.write(" return %s %s %s end)", target, cmp, compiler.value(node[2]))
 end
@@ -39,7 +39,7 @@ end
 local __again = 0xDEADBEEF
 
 -- Helper: Generate pcall-wrapped prog block (PROG and REPEAT share structure)
-local function write_prog_block(buf, node, indent, is_repeat, compiler, print_node)
+local function writeProgBlock(buf, node, indent, is_repeat, compiler, printNode)
   local p = compiler.prog
   compiler.prog = compiler.prog + 1
   buf.writeln()
@@ -47,7 +47,7 @@ local function write_prog_block(buf, node, indent, is_repeat, compiler, print_no
   buf.writeln("local __prog%d = function()", p)
   for i = 2, #node do
     buf.indent(indent + 1)
-    print_node(buf, node[i], indent + 1)
+    printNode(buf, node[i], indent + 1)
     if is_repeat then buf.writeln() end
   end
   if is_repeat then
@@ -64,32 +64,32 @@ local function write_prog_block(buf, node, indent, is_repeat, compiler, print_no
 end
 
 -- SET/SETG implementation
-local function compile_set(buf, node, indent, compiler, print_node)
-  local target = compiler.local_var_name(node[1])
+local function compileSet(buf, node, indent, compiler, printNode)
+  local target = compiler.localVarName(node[1])
   buf.write("APPLY(function() %s = ", target)
   for i = 2, #node do
-    if utils.is_cond(node[i]) then
+    if utils.isCond(node[i]) then
       buf.write("APPLY(function()")
-      print_node(buf, node[i], indent + 1)
+      printNode(buf, node[i], indent + 1)
       buf.write(" return __tmp end)")
     else
-      print_node(buf, node[i], indent + 1)
+      printNode(buf, node[i], indent + 1)
     end
   end
   buf.write(" return %s end)", target)
 end
 
 -- AND/OR implementation
-local function compile_logical(buf, node, indent, op, compiler, print_node)
+local function compileLogical(buf, node, indent, op, compiler, printNode)
   if indent == 1 then buf.indent(indent) end
   buf.write("PASS(")
   for i = 1, #node do
-    if utils.is_cond(node[i]) then
+    if utils.isCond(node[i]) then
       buf.write("APPLY(function() ")
-      print_node(buf, node[i], indent + 1)
+      printNode(buf, node[i], indent + 1)
       buf.write(" end)")
     else
-      print_node(buf, node[i], indent + 1)
+      printNode(buf, node[i], indent + 1)
     end
     if i < #node then buf.write(string.format(" %s ", string.lower(op))) end
   end
@@ -97,7 +97,7 @@ local function compile_logical(buf, node, indent, op, compiler, print_node)
 end
 
 -- Create form handlers table
-function Forms.create_handlers(compiler, print_node)
+function Forms.createHandlers(compiler, printNode)
   local form = {}
 
   -- COND (if-elseif-else)
@@ -110,7 +110,7 @@ function Forms.create_handlers(compiler, print_node)
       else
         buf.write(i == 1 and "if " or "elseif ")
         buf.write("APPLY(function() __tmp = ")
-        print_node(buf, clause[1], indent + 1)
+        printNode(buf, clause[1], indent + 1)
         buf.write(" return __tmp end)")
         buf.write(" then ")
       end
@@ -119,8 +119,8 @@ function Forms.create_handlers(compiler, print_node)
       for j = 2, #clause do
         buf.writeln()
         buf.indent(indent + 1)
-        if utils.need_return(clause[j]) then buf.write("\t__tmp = ") end
-        print_node(buf, clause[j], indent + 1)
+        if utils.needReturn(clause[j]) then buf.write("\t__tmp = ") end
+        printNode(buf, clause[j], indent + 1)
       end
     end
     buf.writeln()
@@ -130,24 +130,24 @@ function Forms.create_handlers(compiler, print_node)
 
   -- SET/SETG
   form.SET = function(buf, node, indent)
-    compile_set(buf, node, indent, compiler, print_node)
+    compileSet(buf, node, indent, compiler, printNode)
   end
   form.SETG = form.SET
 
   -- IGRTR?, DLESS?
   form["IGRTR?"] = function(buf, node, indent)
-    write_modify_compare(buf, node, "+", ">", compiler)
+    writeModifyCompare(buf, node, "+", ">", compiler)
   end
 
   form["DLESS?"] = function(buf, node, indent)
-    write_modify_compare(buf, node, "-", "<", compiler)
+    writeModifyCompare(buf, node, "-", "<", compiler)
   end
 
   -- RETURN
   form.RETURN = function(buf, node, indent)
     if node[1] then
       buf.write("error(")
-      print_node(buf, node[1], indent + 1)
+      printNode(buf, node[1], indent + 1)
       buf.write(")")
     else
       buf.write("return true")
@@ -156,25 +156,25 @@ function Forms.create_handlers(compiler, print_node)
 
   -- RTRUE, RFALSE, RFATAL
   form.RTRUE = function(buf, node, indent)
-    write_error_return(buf, "true")
+    writeErrorReturn(buf, "true")
   end
 
   form.RFALSE = function(buf, node, indent)
-    write_error_return(buf, "false")
+    writeErrorReturn(buf, "false")
   end
 
   form.RFATAL = function(buf, node, indent)
-    write_error_return(buf, "2")
+    writeErrorReturn(buf, "2")
   end
 
   -- PROG (do block)
   form.PROG = function(buf, node, indent)
-    write_prog_block(buf, node, indent, false, compiler, print_node)
+    writeProgBlock(buf, node, indent, false, compiler, printNode)
   end
 
   -- REPEAT (while true loop)
   form.REPEAT = function(buf, node, indent)
-    write_prog_block(buf, node, indent, true, compiler, print_node)
+    writeProgBlock(buf, node, indent, true, compiler, printNode)
   end
 
   form.AGAIN = function(buf, node, indent)
@@ -183,18 +183,18 @@ function Forms.create_handlers(compiler, print_node)
 
   -- BUZZ and SYNONYM
   form.BUZZ = function(buf, node, indent)
-    write_string_call(buf, "BUZZ", node)
+    writeStringCall(buf, "BUZZ", node)
   end
 
   form.SYNONYM = function(buf, node, indent)
-    write_string_call(buf, "SYNONYM", node)
+    writeStringCall(buf, "SYNONYM", node)
   end
 
   -- GLOBAL and CONSTANT
   form.GLOBAL = function(buf, node, indent)
     buf.write("%s = ", compiler.value(node[1]))
     for i = 2, #node do
-      print_node(buf, node[i], 0)
+      printNode(buf, node[i], 0)
       buf.writeln()
     end
   end
@@ -215,7 +215,7 @@ function Forms.create_handlers(compiler, print_node)
     end
     
     if utils.safeget(node[i], 'value') == "OBJECT" then
-      i = compiler.print_syntax_object(buf, node, i, "OBJECT")
+      i = compiler.printSyntaxObject(buf, node, i, "OBJECT")
     end
     
     if utils.safeget(node[i], 'value') ~= "OBJECT" and node[i].value ~= "=" then
@@ -224,7 +224,7 @@ function Forms.create_handlers(compiler, print_node)
     end
     
     if utils.safeget(node[i], 'value') == "OBJECT" then
-      i = compiler.print_syntax_object(buf, node, i, "SUBJECT")
+      i = compiler.printSyntaxObject(buf, node, i, "SUBJECT")
     end
     
     if utils.safeget(node[i], 'value') == "=" then
@@ -241,11 +241,11 @@ function Forms.create_handlers(compiler, print_node)
 
   -- LTABLE, TABLE, ITABLE
   form.LTABLE = function(buf, node)
-    write_table_call(buf, "LTABLE", node, print_node)
+    writeTableCall(buf, "LTABLE", node, printNode)
   end
 
   form.TABLE = function(buf, node)
-    write_table_call(buf, "TABLE", node, print_node)
+    writeTableCall(buf, "TABLE", node, printNode)
   end
 
   form.ITABLE = function(buf, node)
@@ -255,11 +255,11 @@ function Forms.create_handlers(compiler, print_node)
 
   -- AND/OR
   form.AND = function(buf, node, indent)
-    compile_logical(buf, node, indent, "AND", compiler, print_node)
+    compileLogical(buf, node, indent, "AND", compiler, printNode)
   end
 
   form.OR = function(buf, node, indent)
-    compile_logical(buf, node, indent, "OR", compiler, print_node)
+    compileLogical(buf, node, indent, "OR", compiler, printNode)
   end
 
   return form

@@ -19,7 +19,7 @@ Checker.SymbolKind = {
 }
 
 -- Create a new symbol
-local function create_symbol(name, kind, declaration, scope)
+local function createSymbol(name, kind, declaration, scope)
   return {
     name = name,
     kind = kind,
@@ -30,7 +30,7 @@ local function create_symbol(name, kind, declaration, scope)
 end
 
 -- Create a new scope
-local function create_scope(parent, kind)
+local function createScope(parent, kind)
   return {
     parent = parent,
     kind = kind or "block",
@@ -45,7 +45,7 @@ function Checker.new(diagnostics)
   
   local checker = {
     diagnostics = diagnostics,
-    global_scope = create_scope(nil, "global"),
+    global_scope = createScope(nil, "global"),
     current_scope = nil,
     symbols = {}  -- All symbols indexed by name
   }
@@ -55,7 +55,7 @@ function Checker.new(diagnostics)
   
   -- Enter a new scope
   function checker.enter_scope(kind)
-    local new_scope = create_scope(checker.current_scope, kind)
+    local new_scope = createScope(checker.current_scope, kind)
     table.insert(checker.current_scope.children, new_scope)
     checker.current_scope = new_scope
     return new_scope
@@ -76,13 +76,13 @@ function Checker.new(diagnostics)
       checker.diagnostics.error(
         diagnostics_module.Code.DUPLICATE_DECLARATION,
         string.format("Duplicate declaration of '%s'", name),
-        diagnostics_module.get_source_location(declaration),
+        diagnostics_module.getSourceLocation(declaration),
         declaration
       )
       return existing
     end
     
-    local symbol = create_symbol(name, kind, declaration, checker.current_scope)
+    local symbol = createSymbol(name, kind, declaration, checker.current_scope)
     checker.current_scope.symbols[name] = symbol
     
     -- Add to global symbol table for lookup
@@ -125,7 +125,7 @@ function Checker.new(diagnostics)
       checker.diagnostics.error(
         diagnostics_module.Code.UNDEFINED_VARIABLE,
         string.format("Undefined identifier '%s'", name),
-        diagnostics_module.get_source_location(node),
+        diagnostics_module.getSourceLocation(node),
         node
       )
       return false

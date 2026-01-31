@@ -120,13 +120,13 @@ end
 function Visitor.collector(predicate)
   local collected = {}
   
-  local function collect_handler(node)
+  local function collectHandler(node)
     if predicate(node) then
       table.insert(collected, node)
     end
   end
   
-  local visitor = Visitor.new({}, collect_handler)
+  local visitor = Visitor.new({}, collectHandler)
   
   visitor.get_collected = function()
     return collected
@@ -143,7 +143,7 @@ end
 function Visitor.counter()
   local counts = {}
   
-  local function count_handler(node)
+  local function countHandler(node)
     local key = node.type
     if node.type == "expr" and node.name then
       key = node.name
@@ -151,7 +151,7 @@ function Visitor.counter()
     counts[key] = (counts[key] or 0) + 1
   end
   
-  local visitor = Visitor.new({}, count_handler)
+  local visitor = Visitor.new({}, countHandler)
   
   visitor.get_counts = function()
     return counts
