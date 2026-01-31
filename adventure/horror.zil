@@ -41,6 +41,10 @@
       (LDESC "This cramped room once served as the sanitarium's reception. Filing cabinets line the opposite wall, their drawers hanging open like gaping mouths. Something glints among the papers scattered on the floor. A doorway to the east opens back to the entrance hall.")
       (EAST TO SANITARIUM-ENTRANCE)
       (FLAGS RLANDBIT ONBIT)>
+<ROUTINE DESK-F ()
+         <COND (<VERB? EXAMINE LOOK-INSIDE>
+                <TELL "The desk has three drawers. The top two are broken and empty. The bottom drawer is intact but locked." CR>
+                <RTRUE>)>>
 <OBJECT OAK-DESK
         (IN RECEPTION-ROOM)
         (SYNONYM DESK)
@@ -50,6 +54,48 @@
         (FLAGS CONTBIT OPENBIT SURFACEBIT)
         (TEXT "The desk has three drawers. The top two are broken and empty. The bottom drawer appears intact but is locked tight.")
         (ACTION DESK-F)>
+<ROUTINE DESK-DRAWER-F ()
+         <COND (<AND <VERB? EXAMINE>
+                     <NOT <FSET? ,DESK-DRAWER ,OPENBIT>>>
+                <TELL "The bottom drawer of the desk is locked. The keyhole has the number '3' engraved beside it." CR>
+                <RTRUE>)
+               (<AND <VERB? EXAMINE>
+                     <FSET? ,DESK-DRAWER ,OPENBIT>>
+                <TELL "The drawer is open. " <COND (<IN? ,PATIENT-FILE ,DESK-DRAWER> <TELL "Inside is a file folder.">)(<ELSE> <TELL "It's empty now.">)> CR>
+                <RTRUE>)
+               (<AND <VERB? OPEN UNLOCK>
+                     <NOT <FSET? ,DESK-DRAWER ,OPENBIT>>
+                     <NOT <IN? ,BRASS-KEY ,WINNER>>>
+                <TELL "The drawer is locked. You need a key with the number '3' on it." CR>
+                <RTRUE>)
+               (<AND <VERB? OPEN UNLOCK>
+                     <NOT <FSET? ,DESK-DRAWER ,OPENBIT>>
+                     <IN? ,BRASS-KEY ,WINNER>>
+                <TELL "You insert the brass key into the lock. It turns smoothly. The drawer slides open, revealing an old file folder inside." CR>
+                <FSET ,DESK-DRAWER ,OPENBIT>
+                <RTRUE>)>>
+<OBJECT DESK-DRAWER
+        (IN RECEPTION-ROOM)
+        (SYNONYM DRAWER)
+        (ADJECTIVE BOTTOM LOCKED DESK)
+        (DESC "desk drawer")
+        (LDESC "The bottom drawer of the oak desk is locked.")
+        (FLAGS CONTBIT OPENABLEBIT)
+        (CAPACITY 10)
+        (ACTION DESK-DRAWER-F)>
+<ROUTINE PATIENT-FILE-F ()
+         <COND (<VERB? READ EXAMINE>
+                <TELL "A file folder labeled 'Patient 189 - CONFIDENTIAL'. Inside are medical records and notes. 'Subject shows extraordinary resistance to pain. Mental state deteriorating. Recommending transfer to isolation wing. Dr. Mordecai has expressed personal interest in this case. Update: Patient transferred to chapel for experimental treatment. Nov 1, 1952.'" CR>
+                <RTRUE>)>>
+<OBJECT PATIENT-FILE
+        (IN DESK-DRAWER)
+        (SYNONYM FILE FOLDER RECORDS)
+        (ADJECTIVE PATIENT CONFIDENTIAL)
+        (DESC "patient file")
+        (LDESC "A file folder marked 'Patient 189 - CONFIDENTIAL'.")
+        (FLAGS TAKEBIT READBIT)
+        (SIZE 3)
+        (ACTION PATIENT-FILE-F)>
 <OBJECT BRASS-KEY
         (IN RECEPTION-ROOM)
         (SYNONYM KEY)
@@ -274,7 +320,7 @@
       (FLAGS RLANDBIT ONBIT)>
 <ROUTINE SHELVES-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE SEARCH>
-                <TELL "You search through the shelves. Most items are ruined by time and moisture. Among the debris, you find a lantern and some old medical records." CR>
+                <TELL "You search through the shelves. Most items are ruined by time and moisture. Among the debris, you find a lantern, a medical bag, and some old medical records." CR>
                 <RTRUE>)>>
 <OBJECT SHELVES
         (IN STORAGE-ROOM)
@@ -284,6 +330,60 @@
         (LDESC "Shelves line the walls, sagging under the weight of moldering supplies.")
         (FLAGS CONTBIT OPENBIT)
         (ACTION SHELVES-F)>
+<ROUTINE MEDICAL-BAG-F ()
+         <COND (<VERB? EXAMINE LOOK-INSIDE>
+                <TELL "An old leather doctor's bag, cracked and worn.">
+                <COND (<FSET? ,MEDICAL-BAG ,OPENBIT>
+                       <TELL " Looking inside, you can see">
+                       <COND (<IN? ,BANDAGES ,MEDICAL-BAG>
+                              <TELL " some bandages">)>
+                       <COND (<AND <IN? ,MORPHINE-VIAL ,MEDICAL-BAG>
+                                   <IN? ,BANDAGES ,MEDICAL-BAG>>
+                              <TELL " and">)>
+                       <COND (<IN? ,MORPHINE-VIAL ,MEDICAL-BAG>
+                              <TELL " a vial">)>
+                       <TELL ".">)>
+                <CRLF>
+                <RTRUE>)>>
+<OBJECT MEDICAL-BAG
+        (IN SHELVES)
+        (SYNONYM BAG SATCHEL)
+        (ADJECTIVE MEDICAL LEATHER DOCTOR)
+        (DESC "medical bag")
+        (LDESC "An old leather medical bag sits on one of the shelves.")
+        (FLAGS CONTBIT OPENABLEBIT OPENBIT TAKEBIT)
+        (CAPACITY 15)
+        (SIZE 10)
+        (ACTION MEDICAL-BAG-F)>
+<ROUTINE BANDAGES-F ()
+         <COND (<VERB? EXAMINE>
+                <TELL "Yellowed cloth bandages, surprisingly clean despite their age. They might still be useful." CR>
+                <RTRUE>)>>
+<OBJECT BANDAGES
+        (IN MEDICAL-BAG)
+        (SYNONYM BANDAGES BANDAGE CLOTH)
+        (ADJECTIVE YELLOWED CLEAN)
+        (DESC "bandages")
+        (LDESC "Clean bandages wrapped in yellowed cloth.")
+        (FLAGS TAKEBIT)
+        (SIZE 3)
+        (ACTION BANDAGES-F)>
+<ROUTINE MORPHINE-VIAL-F ()
+         <COND (<VERB? EXAMINE>
+                <TELL "A small glass vial labeled 'Morphine Sulfate - 10mg'. The seal is intact." CR>
+                <RTRUE>)
+               (<VERB? DRINK>
+                <TELL "You're not desperate enough to start taking random drugs from an abandoned sanitarium." CR>
+                <RTRUE>)>>
+<OBJECT MORPHINE-VIAL
+        (IN MEDICAL-BAG)
+        (SYNONYM VIAL MORPHINE BOTTLE)
+        (ADJECTIVE GLASS SMALL)
+        (DESC "morphine vial")
+        (LDESC "A sealed glass vial of morphine.")
+        (FLAGS TAKEBIT)
+        (SIZE 2)
+        (ACTION MORPHINE-VIAL-F)>
 <ROOM FLOODING-CHAMBER
       (IN ROOMS)
       (DESC "Flooded Chamber")
@@ -684,6 +784,49 @@
         (DESC "green candles")
         (LDESC "Candles burn with an unnatural green flame.")
         (ACTION GREEN-CANDLES-F)>
+<ROUTINE WOODEN-BOX-F ()
+         <COND (<AND <VERB? EXAMINE>
+                     <NOT <FSET? ,WOODEN-BOX ,OPENBIT>>>
+                <TELL "A small wooden box sits beneath the altar. It's locked tight with an iron clasp." CR>
+                <RTRUE>)
+               (<AND <VERB? EXAMINE>
+                     <FSET? ,WOODEN-BOX ,OPENBIT>>
+                <TELL "The box is now open. " <COND (<IN? ,ANCIENT-RELIC ,WOODEN-BOX> <TELL "Inside is an ancient relic.">)(<ELSE> <TELL "It's empty.">)> CR>
+                <RTRUE>)
+               (<AND <VERB? OPEN>
+                     <NOT <FSET? ,WOODEN-BOX ,OPENBIT>>
+                     <NOT <IN? ,SCALPEL ,WINNER>>>
+                <TELL "The lock is rusted but holds fast. You need something to pry it open." CR>
+                <RTRUE>)
+               (<AND <VERB? OPEN>
+                     <NOT <FSET? ,WOODEN-BOX ,OPENBIT>>
+                     <IN? ,SCALPEL ,WINNER>>
+                <TELL "You use the scalpel to pry open the rusted clasp. The box opens with a creak, revealing an ancient relic inside." CR>
+                <FSET ,WOODEN-BOX ,OPENBIT>
+                <RTRUE>)>>
+<OBJECT WOODEN-BOX
+        (IN CHAPEL)
+        (SYNONYM BOX CASE)
+        (ADJECTIVE WOODEN LOCKED SMALL)
+        (DESC "wooden box")
+        (LDESC "A small wooden box sits beneath the altar, its surface carved with disturbing symbols.")
+        (FLAGS CONTBIT OPENABLEBIT TAKEBIT)
+        (CAPACITY 10)
+        (SIZE 8)
+        (ACTION WOODEN-BOX-F)>
+<ROUTINE ANCIENT-RELIC-F ()
+         <COND (<VERB? EXAMINE>
+                <TELL "An ancient silver cross, tarnished black with age. Strange symbols are etched into its surface—symbols that seem to writhe when you look directly at them. Despite its age, it radiates a strange warmth." CR>
+                <RTRUE>)>>
+<OBJECT ANCIENT-RELIC
+        (IN WOODEN-BOX)
+        (SYNONYM RELIC CROSS SILVER AMULET)
+        (ADJECTIVE ANCIENT SILVER TARNISHED)
+        (DESC "ancient relic")
+        (LDESC "An ancient silver cross with writhing symbols etched into its surface.")
+        (FLAGS TAKEBIT)
+        (SIZE 4)
+        (ACTION ANCIENT-RELIC-F)>
 <ROUTINE PATIENT-189-F ()
          <COND (<VERB? EXAMINE>
                 <TELL "PATIENT 189 stands impossibly still. Its skin is pale as death, its eyes glowing faintly green. It watches you with an intelligence that is distinctly not human. Dr. Mordecai's greatest achievement—and greatest horror." CR>
@@ -975,6 +1118,29 @@
         (FLAGS TAKEBIT)
         (SIZE 2)
         (ACTION BELL-F)>
+; Clock-driven atmospheric routines (I- style demons and interrupts)
+<ROUTINE I-WHISPER ()
+	<COND (<EQUAL? ,HERE ,SANITARIUM-ENTRANCE ,PATIENT-WARD ,MORGUE ,CHAPEL>
+	       <TELL "You hear a faint, anguished whisper echoing through the halls..." CR>)>
+	<RTRUE>>
+
+<ROUTINE I-FOOTSTEPS ()
+	<COND (<EQUAL? ,HERE ,SANITARIUM-ENTRANCE ,RECEPTION-ROOM ,OPERATING-THEATER>
+	       <TELL "Distant footsteps echo from somewhere above you." CR>)>
+	<RTRUE>>
+
+<ROUTINE I-FLICKERING ()
+	<COND (<AND ,LIT
+	            <EQUAL? ,HERE ,BASEMENT-STAIRS ,BOILER-ROOM ,MORGUE>>
+	       <TELL "The shadows seem to flicker and move of their own accord." CR>)>
+	<RTRUE>>
+
+<ROUTINE I-COLD-DRAFT ()
+	<COND (<EQUAL? ,HERE ,MORGUE ,CHAPEL ,PATIENT-WARD>
+	       <TELL "A cold draft makes you shiver, though there are no open windows." CR>)>
+	<RTRUE>>
+
+; Initialize clock-driven demons for atmospheric effects in GO routine
 <ROUTINE GO ()
 	<SETG HERE ,SANITARIUM-GATE>
 	<THIS-IS-IT ,BRASS-PLAQUE>
@@ -982,6 +1148,10 @@
 	<SETG WINNER ,ADVENTURER>
 	<SETG PLAYER ,WINNER>
 	<MOVE ,WINNER ,HERE>
+	<QUEUE I-WHISPER 8>
+	<QUEUE I-FOOTSTEPS 12>
+	<QUEUE I-FLICKERING 10>
+	<QUEUE I-COLD-DRAFT 15>
       <V-LOOK>
       <MAIN-LOOP>
 	<AGAIN>>

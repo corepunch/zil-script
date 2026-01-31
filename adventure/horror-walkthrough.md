@@ -52,10 +52,11 @@ This is a complete walkthrough for the horror.zil adventure game - an expansion 
 5. `west` - Go to Reception Room
 6. `take key` (brass key) - Find it among scattered papers
 7. `examine desk` - Notice the bottom drawer is locked
-8. `unlock drawer` or `open drawer` (while holding brass key) - Unlock bottom drawer
-9. `take ledger` - Take patient ledger from drawer
-10. `read ledger` - Learn about Patient 237 and Dr. Mordecai
-11. `east` - Return to Entrance Hall
+8. `examine drawer` - See the locked drawer with keyhole marked "3"
+9. `unlock drawer` or `open drawer` (while holding brass key) - Unlock bottom drawer with brass key #3
+10. `take file` (patient file) - Take Patient 189 confidential file from drawer
+11. `read file` - Learn about Patient 189's transfer to isolation and experimental treatment
+12. `east` - Return to Entrance Hall
 12. `north` - Go to Operating Theater
 13. `examine table` - See the gruesome operating table with restraints
 14. `examine cabinet` - Notice the medical cabinet
@@ -89,12 +90,16 @@ This is a complete walkthrough for the horror.zil adventure game - an expansion 
 39. `take flashlight` (though batteries are dead - this is a different one)
 40. `west` - Return to Basement Corridor
 41. `west` - Enter Storage Room
-42. `examine shelves` or `search shelves` - Find supplies
-43. `take lantern` (oil lantern - this one works too!)
-44. `light lantern` or `turn on lantern` - Alternative light source (optional)
-45. `take records` (medical records)
-46. `read records` - Learn about Patient 189
-47. `east` - Return to Basement Corridor
+42. `examine shelves` or `search shelves` - Find supplies including a medical bag
+43. `take bag` (medical bag) - Old leather doctor's bag
+44. `open bag` - Already open, contains medical supplies
+45. `take bandages` (from bag) - Yellowed but clean cloth bandages
+46. `take vial` (morphine vial from bag) - Sealed morphine sulfate (10mg)
+47. `take lantern` (oil lantern - this one works!)
+48. `light lantern` or `turn on lantern` - Alternative light source (optional)
+49. `take records` (medical records)
+50. `read records` - Learn about Patient 189
+51. `east` - Return to Basement Corridor
 48. `north` - Enter Flooding Chamber
 49. `examine water` - Cold ankle-deep water
 50. `examine door` (sealed door to east) - Needs steam to open
@@ -153,13 +158,17 @@ This is a complete walkthrough for the horror.zil adventure game - an expansion 
 
 98. `examine pews` - Strange carved symbols
 99. `examine candles` - Unnatural green flames
-100. `examine patient` or `examine figure` - Patient 189, Dr. Mordecai's greatest achievement and horror
-101. `hello` - **Win condition!** Patient 189 speaks, thanks you for freeing it, and crumbles to ash. The experiment is finally over.
+100. `examine box` (wooden box) - Small wooden box beneath altar with disturbing symbols
+101. `open box` - Use scalpel (if still carrying) to pry open rusted clasp
+102. `take relic` (ancient relic) - Ancient silver cross with writhing symbols
+103. `examine relic` - Tarnished cross radiating strange warmth
+104. `examine patient` or `examine figure` - Patient 189, Dr. Mordecai's greatest achievement and horror
+105. `hello` - **Win condition!** Patient 189 speaks, thanks you for freeing it, and crumbles to ash. The experiment is finally over.
 
 ## Puzzle Elements
 
 1. **Key Puzzles:** Multiple keys to find and use
-   - Brass key → drawer
+   - Brass key (#3) → desk drawer (contains Patient 189 file)
    - Safe key → safe
    - Chapel key → chapel
 
@@ -171,11 +180,27 @@ This is a complete walkthrough for the horror.zil adventure game - an expansion 
 
 5. **Safe Puzzle:** Find safe key in desk drawer to unlock wall safe containing chapel key
 
-6. **Story Clues:** Progressive revelation through documents:
-   - Patient Ledger mentions Patient 237
+6. **Container Puzzles:** Objects within objects
+   - Medical bag (in shelves) contains bandages and morphine vial
+   - Desk drawer (locked with brass key #3) contains Patient 189 file
+   - Wooden box (in chapel, requires scalpel) contains ancient silver relic
+
+7. **Story Clues:** Progressive revelation through documents:
+   - Patient file mentions Patient 189's transfer to isolation
    - Dr. Mordecai's journal reveals experiments
    - Wall scratches point to Patient 189 in chapel
    - Medical records show patient resistance to treatment
+
+## Atmospheric Events
+
+The game features dynamic, clock-driven atmospheric events that occur periodically as you explore:
+
+- **Whispers:** Faint, anguished whispers echo through the halls (Entrance, Patient Ward, Morgue, Chapel)
+- **Footsteps:** Distant footsteps from unseen sources above (Entrance, Reception, Operating Theater)
+- **Flickering Shadows:** Shadows that move of their own accord in lit dark areas (Basement Stairs, Boiler Room, Morgue)
+- **Cold Drafts:** Unnatural cold drafts despite no open windows (Morgue, Chapel, Patient Ward)
+
+These events fire at different intervals throughout gameplay, enhancing immersion and horror atmosphere.
 
 ## Verbs Used (Verified from Zork1)
 
