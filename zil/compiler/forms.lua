@@ -1,4 +1,13 @@
 -- Expression form handlers for ZIL compiler
+-- Each handler is responsible for emitting code for a specific ZIL form
+--
+-- Pattern Note: These handlers receive (buf, node, indent) and use:
+-- - buf.write() for output (dot notation, not colon)
+-- - node[i].value for direct property access (like TypeScript)
+-- - compiler.value(node) for value conversion (helper function pattern)
+--
+-- This follows TypeScript's emitter pattern where specialized functions
+-- handle different node types, rather than having nodes emit themselves.
 local utils = require 'zil.compiler.utils'
 
 local Forms = {}
@@ -260,6 +269,24 @@ function Forms.createHandlers(compiler, printNode)
 
   form.OR = function(buf, node, indent)
     compileLogical(buf, node, indent, "OR", compiler, printNode)
+  end
+
+  -- FORM - Construct a form (used in macros)
+  form.FORM = function(buf, node, indent)
+    -- FORM creates an expression form at compile time
+    -- Convert it to the actual form it represents
+    if node[1] then
+      -- Create a new expression node with the FORM's contents
+      local form_name = compiler.value(node[1])
+      buf.write("%s(", utils.normalizeFunctionName(form_name))
+      for i = 2, #node do
+        printNode(buf, node[i], indent)
+        if i < #node then buf.write(", ") end
+      end
+      buf.write(")")
+    else
+      buf.write("nil")
+    end
   end
 
   return form

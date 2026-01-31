@@ -21,7 +21,8 @@ local Compiler = {
   current_source = nil,          -- Track the current ZIL source location
   local_vars = {},               -- Track local variables in current scope
   diagnostics = nil,             -- Diagnostic collection for error reporting
-  enable_semantic_check = false  -- Enable semantic checking with checker module
+  enable_semantic_check = false, -- Enable semantic checking with checker module
+  macros = {}                    -- Store defined macros for expansion
 }
 
 -- Bind value conversion functions to compiler

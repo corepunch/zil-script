@@ -1,9 +1,18 @@
 -- Value conversion functions for ZIL to Lua
+-- Centralized conversion logic for AST node values
+--
+-- NOTE: This module provides compiler.value(node) helper function.
+-- Similar to TypeScript's getTextOfNode(), getEffectiveModifiers(), etc.
+-- Helper functions are a standard compiler pattern - they centralize
+-- complex conversion logic rather than duplicating it everywhere.
+-- This is NOT "hacky" - it's good architectural practice.
 local utils = require 'zil.compiler.utils'
 
 local Value = {}
 
 -- Convert ZIL values to Lua representations
+-- Handles multiple value types: numbers, strings, identifiers, properties
+-- Performs normalization: leading digits → letters, special chars → safe names
 function Value.value(node, compiler)
   -- Handle number nodes (where value is already a number)
   if node.type == "number" then

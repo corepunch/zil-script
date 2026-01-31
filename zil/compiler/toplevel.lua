@@ -173,11 +173,27 @@ function TopLevel.compileObject(decl, body, node, compiler)
   body.writeln("}", name)
 end
 
+-- Compile a DEFMAC (macro definition)
+function TopLevel.compileMacro(decl, body, node, compiler)
+  local name = compiler.value(node[1])
+  
+  -- Store the macro definition in the compiler
+  -- Macros are expanded at compile time, not runtime
+  compiler.macros[name] = {
+    params = node[2],  -- Parameter list (may include quoted params like 'OBJ, "ARGS")
+    body = node[3]     -- Macro body (typically a FORM expression)
+  }
+  
+  -- DEFMACs don't generate runtime code, only compile-time definitions
+  -- So we don't write anything to decl or body
+end
+
 -- Top-level compiler registry
 TopLevel.TOP_LEVEL_COMPILERS = {
   ROOM = TopLevel.compileObject,
   OBJECT = TopLevel.compileObject,
   ROUTINE = TopLevel.compileRoutine,
+  DEFMAC = TopLevel.compileMacro,
   GDECL = function() end,
   DIRECTIONS = function(_, buf, node)
     buf.write("%s(", node.name)
