@@ -275,6 +275,7 @@ function TELL(...)
 		elseif v == '>' then -- skip
 		else io_write(tostring(v)) end
 	end
+	return true
 end
 
 function PRINT(n) io_write(mem:string(n)) end
