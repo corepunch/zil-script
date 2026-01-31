@@ -31,7 +31,7 @@ jobs:
       run: lua tests/run_tests.lua tests/zork1_walkthrough.lua
 
     - name: Run Horror walkthrough tests
-      run: lua tests/run_tests.lua tests/horror_walkthrough.lua
+      run: lua tests/run_tests.lua tests/horror-walkthrough.lua
 
     - name: Run parser/runtime tests - directions
       run: lua tests/run_tests.lua tests/test-directions.lua
