@@ -57,6 +57,12 @@ print("\n--- Test 2: TURN VALVE WITH BARE HANDS (no tool specified) ---")
 send_command("turn valve")
 -- Should print "Your bare hands don't appear to be enough."
 -- and NOT turn the valve
+if env.VALVE_TURNED then
+	print("✗ FAIL: Valve was turned (should have been blocked by bare hands check)")
+	os.exit(1)
+else
+	print("✓ PASS: Valve was correctly blocked from turning with bare hands")
+end
 
 -- Test 3: Turn wheel WITHOUT TURNBIT - should fail
 print("\n--- Test 3: TURN WHEEL (no TURNBIT) ---")
