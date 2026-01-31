@@ -27,35 +27,7 @@
       (EAST TO PATIENT-WARD)
       (DOWN TO BASEMENT-STAIRS)
       (FLAGS RLANDBIT ONBIT)>
-<ROUTINE WORKING-FLASHLIGHT-F ()
-         <COND (<AND <VERB? LAMP-ON>
-                     <NOT ,WORKING-FLASHLIGHT-LIT-FLAG>>
-                <TELL "You turn on the flashlight. A bright beam cuts through the darkness." CR>
-                <SETG WORKING-FLASHLIGHT-LIT-FLAG T>
-                <FSET ,WORKING-FLASHLIGHT ,ONBIT>
-                <RTRUE>)
-               (<AND <VERB? LAMP-ON>
-                     ,WORKING-FLASHLIGHT-LIT-FLAG>
-                <TELL "The flashlight is already on." CR>
-                <RTRUE>)
-               (<AND <VERB? LAMP-OFF>
-                     ,WORKING-FLASHLIGHT-LIT-FLAG>
-                <TELL "You turn off the flashlight." CR>
-                <SETG WORKING-FLASHLIGHT-LIT-FLAG <>>
-                <FCLEAR ,WORKING-FLASHLIGHT ,ONBIT>
-                <RTRUE>)
-               (<VERB? EXAMINE>
-                <TELL "A sturdy metal flashlight with fresh batteries. It looks like it was recently dropped here." CR>
-                <RTRUE>)>>
-<OBJECT WORKING-FLASHLIGHT
-        (IN SANITARIUM-ENTRANCE)
-        (SYNONYM FLASHLIGHT LIGHT TORCH LAMP)
-        (ADJECTIVE METAL WORKING)
-        (DESC "flashlight")
-        (LDESC "A flashlight lies abandoned on the dusty floor.")
-        (FLAGS TAKEBIT LIGHTBIT)
-        (SIZE 5)
-        (ACTION WORKING-FLASHLIGHT-F)>
+
 <OBJECT WALLPAPER
         (IN SANITARIUM-ENTRANCE)
         (SYNONYM WALLPAPER PAPER PLASTER)
@@ -222,7 +194,7 @@
       (LDESC "A narrow stone staircase descends into darkness. The air grows colder with each step. Moisture drips from the ceiling, and the walls are slick with condensation. The stairs lead down into the basement, while the entrance hall lies to the south.")
       (UP TO SANITARIUM-ENTRANCE)
       (DOWN TO BASEMENT-CORRIDOR)
-      (FLAGS RLANDBIT)>
+      (FLAGS RLANDBIT ONBIT)>
 <ROOM BASEMENT-CORRIDOR
       (IN ROOMS)
       (DESC "Basement Corridor")
@@ -231,7 +203,7 @@
       (EAST TO BOILER-ROOM)
       (WEST TO STORAGE-ROOM)
       (NORTH TO FLOODING-CHAMBER)
-      (FLAGS RLANDBIT)>
+      (FLAGS RLANDBIT ONBIT)>
 <ROUTINE PIPES-F ()
          <COND (<VERB? EXAMINE>
                 <TELL "The pipes are ancient and corroded. Water drips steadily from cracks in the metal. One pipe has a valve." CR>
@@ -269,7 +241,7 @@
       (DESC "Boiler Room")
       (LDESC "This dark room is thick with coal dust that covers everything. The room radiates a sense of dormant power, waiting to awaken. A narrow doorway to the west leads back out to the corridor.")
       (WEST TO BASEMENT-CORRIDOR)
-      (FLAGS RLANDBIT)>
+      (FLAGS RLANDBIT ONBIT)>
 <ROUTINE BOILER-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE>
                 <TELL "The boiler is a hulking iron beast. Its door hangs open, revealing a chamber black with ancient soot. Inside, something gleams faintly." CR>
@@ -299,7 +271,7 @@
       (DESC "Storage Room")
       (LDESC "This dark storage room is filled with old linens, rusted equipment, and unidentifiable containers in every space. A sour smell permeates the air. The exit lies to the east.")
       (EAST TO BASEMENT-CORRIDOR)
-      (FLAGS RLANDBIT)>
+      (FLAGS RLANDBIT ONBIT)>
 <ROUTINE SHELVES-F ()
          <COND (<VERB? EXAMINE LOOK-INSIDE SEARCH>
                 <TELL "You search through the shelves. Most items are ruined by time and moisture. Among the debris, you find a lantern and some old medical records." CR>
@@ -1016,6 +988,5 @@
 <GLOBAL VALVE-TURNED-FLAG <>>
 <GLOBAL STEAM-DOOR-OPEN <>>
 <GLOBAL LANTERN-LIT-FLAG <>>
-<GLOBAL WORKING-FLASHLIGHT-LIT-FLAG <>>
 <GLOBAL CHAPEL-UNLOCKED <>>
 <GLOBAL CHAINS-CUT-FLAG <>>
