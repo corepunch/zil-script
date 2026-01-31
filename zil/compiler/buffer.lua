@@ -9,7 +9,7 @@ function Buffer.new(compiler)
   local current_line = 1  -- Track current Lua line number
   
   -- Helper to record source mapping for current line
-  local function record_mapping()
+  local function recordMapping()
     if compiler.current_lua_filename and compiler.current_source then
       local src = compiler.current_source
       sourcemap.add_mapping(
@@ -23,10 +23,10 @@ function Buffer.new(compiler)
   end
   
   -- Helper to count newlines and record source mapping
-  local function process_newlines(text)
+  local function processNewlines(text)
     for _ in text:gmatch("\n") do
       current_line = current_line + 1
-      record_mapping()
+      recordMapping()
     end
   end
   
@@ -34,16 +34,16 @@ function Buffer.new(compiler)
     write = function(fmt, ...)
       local text = string.format(fmt, ...)
       table.insert(lines, text)
-      process_newlines(text)
+      processNewlines(text)
     end,
     writeln = function(fmt, ...)
       if fmt then
         local text = string.format(fmt, ...)
         table.insert(lines, text)
-        process_newlines(text)
+        processNewlines(text)
       end
       table.insert(lines, "\n")
-      record_mapping()
+      recordMapping()
       current_line = current_line + 1
     end,
     indent = function(level)

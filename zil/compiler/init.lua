@@ -29,17 +29,17 @@ Compiler.value = function(node)
   return value_module.value(node, Compiler)
 end
 
-Compiler.local_var_name = function(node)
-  return value_module.local_var_name(node, Compiler)
+Compiler.localVarName = function(node)
+  return value_module.localVarName(node, Compiler)
 end
 
-Compiler.register_local_var = function(arg)
-  return value_module.register_local_var(arg, Compiler)
+Compiler.registerLocalVar = function(arg)
+  return value_module.registerLocalVar(arg, Compiler)
 end
 
 -- Bind toplevel functions to compiler
-Compiler.print_syntax_object = function(buf, nodes, start_idx, field_name)
-  return toplevel.print_syntax_object(buf, nodes, start_idx, field_name, Compiler)
+Compiler.printSyntaxObject = function(buf, nodes, start_idx, field_name)
+  return toplevel.printSyntaxObject(buf, nodes, start_idx, field_name, Compiler)
 end
 
 -- Main compilation entry point
@@ -80,10 +80,10 @@ function Compiler.compile(ast, lua_filename, options)
   local print_node
   
   -- Create print_node with access to form_handlers (which will be populated below)
-  print_node = print_node_module.create_print_node(Compiler, form_handlers)
+  print_node = print_node_module.createPrintNode(Compiler, form_handlers)
   
   -- Now populate form_handlers with the actual handlers (which can use print_node)
-  local handlers = forms_module.create_handlers(Compiler, print_node)
+  local handlers = forms_module.createHandlers(Compiler, print_node)
   for k, v in pairs(handlers) do
     form_handlers[k] = v
   end
@@ -107,7 +107,7 @@ function Compiler.compile(ast, lua_filename, options)
           compiler_fn(decl, body, node, Compiler, print_node)
         else
           -- Use diagnostics for error reporting (no stderr)
-          local source_loc = diagnostics_module.get_source_location(node)
+          local source_loc = diagnostics_module.getSourceLocation(node)
           diagnostics.error(
             diagnostics_module.Code.UNKNOWN_FORM,
             string.format("Unknown top-level form: %s", name),
@@ -117,7 +117,7 @@ function Compiler.compile(ast, lua_filename, options)
         end
       else
         -- Use diagnostics for error reporting (no stderr)
-        local source_loc = diagnostics_module.get_source_location(node)
+        local source_loc = diagnostics_module.getSourceLocation(node)
         diagnostics.error(
           diagnostics_module.Code.EXPECTED_TYPE,
           string.format("Expected type in <%s>", name),

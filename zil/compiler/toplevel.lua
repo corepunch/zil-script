@@ -16,7 +16,7 @@ local loc_flags = {
 }
 
 -- Syntax object helper
-function TopLevel.print_syntax_object(buf, nodes, start_idx, field_name, compiler)
+function TopLevel.printSyntaxObject(buf, nodes, start_idx, field_name, compiler)
   buf.writeln("\t%s = {", field_name)
   
   local i = start_idx + 1
@@ -39,7 +39,7 @@ function TopLevel.print_syntax_object(buf, nodes, start_idx, field_name, compile
 end
 
 -- Function header with locals and optional parameters
-function TopLevel.write_function_header(buf, node, compiler, print_node)
+function TopLevel.writeFunctionHeader(buf, node, compiler, printNode)
   local params = {}
   local locals = {}
   local optionals = {}
@@ -63,19 +63,19 @@ function TopLevel.write_function_header(buf, node, compiler, print_node)
       end
     elseif arg.type == "list" then
       local first_elem = arg[1]
-      compiler.register_local_var(first_elem)
+      compiler.registerLocalVar(first_elem)
       if mode == "locals" then
         table.insert(locals, arg)
       else
-        table.insert(params, compiler.local_var_name(first_elem))
+        table.insert(params, compiler.localVarName(first_elem))
         table.insert(optionals, arg)
       end
     elseif arg.type == "ident" then
-      compiler.register_local_var(arg)
+      compiler.registerLocalVar(arg)
       if mode == "locals" then
         table.insert(locals, arg)
       else
-        local param_with_suffix = compiler.local_var_name(arg)
+        local param_with_suffix = compiler.localVarName(arg)
         table.insert(params, param_with_suffix)
         if mode == "params" then  -- Only add to mandatory if in params mode, not optional
           table.insert(mandatory, param_with_suffix)
@@ -93,24 +93,24 @@ function TopLevel.write_function_header(buf, node, compiler, print_node)
   for _, local_node in ipairs(locals) do
     if local_node.type == "list" then
       buf.indent(1)
-      buf.write("local %s = ", compiler.local_var_name(local_node[1]))
-      print_node(buf, local_node[2], 2)
+      buf.write("local %s = ", compiler.localVarName(local_node[1]))
+      printNode(buf, local_node[2], 2)
       buf.writeln()
     else
-      buf.writeln("\tlocal %s", compiler.local_var_name(local_node))
+      buf.writeln("\tlocal %s", compiler.localVarName(local_node))
     end
   end
   
   -- Write optional defaults
   for i, opt in ipairs(optionals) do
-    buf.write("\tif select('#', ...) < %d then %s = ", #mandatory+i, compiler.local_var_name(opt[1]))
-    print_node(buf, opt[2], 2)
+    buf.write("\tif select('#', ...) < %d then %s = ", #mandatory+i, compiler.localVarName(opt[1]))
+    printNode(buf, opt[2], 2)
     buf.writeln(" end")
   end
 end
 
 -- Compile a ROUTINE
-function TopLevel.compile_routine(decl, body, node, compiler, print_node)
+function TopLevel.compileRoutine(decl, body, node, compiler, printNode)
   local name = compiler.value(node[1])
   compiler.current_verbs = {}
   compiler.local_vars = {}  -- Reset local variables for new routine
@@ -137,13 +137,13 @@ function TopLevel.compile_routine(decl, body, node, compiler, print_node)
 end
 
 -- Normalize property name (IN/LOCATION -> LOC)
-local function normalize_property(prop)
+local function normalizeProperty(prop)
   if prop == "IN" or prop == "LOCATION" then return "LOC" end
   return prop
 end
 
 -- Compile an OBJECT or ROOM
-function TopLevel.compile_object(decl, body, node, compiler)
+function TopLevel.compileObject(decl, body, node, compiler)
   local name = compiler.value(node[1])
 
   decl.writeln('%s = DECL_OBJECT("%s")', name, name)
@@ -158,14 +158,14 @@ function TopLevel.compile_object(decl, body, node, compiler)
       
       if field_value == "TO" then
         body.write("\t%s = ", field_name)
-        fields.write_nav(body, field, compiler)
+        fields.writeNav(body, field, compiler)
         body.writeln(",")
       elseif field_value == "PER" then
         body.writeln("\t%s = { per = %s },", field_name, compiler.value(field[3]))
       else
-        local prop = normalize_property(field_name)
+        local prop = normalizeProperty(field_name)
         body.write("\t%s = ", prop)
-        fields.write_field(body, field, field[1].value, compiler)
+        fields.writeField(body, field, field[1].value, compiler)
         body.writeln(",")
       end
     end
@@ -175,9 +175,9 @@ end
 
 -- Top-level compiler registry
 TopLevel.TOP_LEVEL_COMPILERS = {
-  ROOM = TopLevel.compile_object,
-  OBJECT = TopLevel.compile_object,
-  ROUTINE = TopLevel.compile_routine,
+  ROOM = TopLevel.compileObject,
+  OBJECT = TopLevel.compileObject,
+  ROUTINE = TopLevel.compileRoutine,
   GDECL = function() end,
   DIRECTIONS = function(_, buf, node)
     buf.write("%s(", node.name)

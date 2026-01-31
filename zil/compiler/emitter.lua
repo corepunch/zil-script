@@ -180,7 +180,7 @@ function Emitter.new(compiler)
 end
 
 -- Factory: Create emitters for declarations and body
-function Emitter.create_pair(compiler)
+function Emitter.createPair(compiler)
   return {
     declarations = Emitter.new(compiler),
     body = Emitter.new(compiler)
