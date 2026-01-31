@@ -235,7 +235,6 @@ return {
 		{ input="take trunk", text="Taken." },
 		{ input="walk north", text="Reservoir North" },
 		{ input="take pump", text="Taken." },
-		{ input="take pump", text="Taken." },
 		{ input="walk north", text="Atlantis Room" },
 		{ input="take trident", text="Your load is too heavy." },
 		{ input="inventory", text="You are carrying:" },
