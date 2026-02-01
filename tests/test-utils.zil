@@ -1,0 +1,13 @@
+;"Common test utilities for ZIL tests"
+
+<OBJECT ADVENTURER
+        (DESC "you")
+        (SYNONYM ADVENTURER ME SELF)
+        (FLAGS)>
+
+<ROUTINE TEST-SETUP (ROOM-OBJ)
+    <SETG HERE .ROOM-OBJ>
+    <SETG LIT T>
+    <SETG WINNER ,ADVENTURER>
+    <SETG PLAYER ,WINNER>
+    <MOVE ,ADVENTURER ,HERE>>

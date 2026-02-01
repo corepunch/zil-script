@@ -7,7 +7,7 @@
 require 'zil.bootstrap'
 
 local compiler = require 'zil.compiler'
-local parser = require 'zil.parser'
+local preprocessor = require 'zil.preprocessor'
 
 local function run_simple_zil_test(test_file_path)
 	print("=== Running simple ZIL test: " .. test_file_path .. " ===\n")
@@ -21,8 +21,8 @@ local function run_simple_zil_test(test_file_path)
 	local code = file:read("*a")
 	file:close()
 	
-	-- Parse the ZIL code
-	local ast, parse_err = parser.parse(code, test_file_path)
+	-- Parse the ZIL code (with INSERT-FILE preprocessing)
+	local ast, parse_err = preprocessor.parse(code, test_file_path)
 	if not ast then
 		print("Parse error:", parse_err)
 		os.exit(1)

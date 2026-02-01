@@ -5,6 +5,7 @@
 local parser = require 'zil.parser'
 local compiler = require 'zil.compiler'
 local sourcemap = require 'zil.sourcemap'
+local preprocessor = require 'zil.preprocessor'
 
 local M = {}
 
@@ -35,7 +36,8 @@ function M.to_lua(text, options)
 		return nil, "expecting string (got " .. type(text) .. ")"
 	end
 	
-	local ok, ast, err = pcall(parser.parse, text)
+	-- Use preprocessor to handle INSERT-FILE directives
+	local ok, ast, err = pcall(preprocessor.parse, text, options.filename or "unknown.zil")
 	if not ok then
 		return nil, "Parse error: " .. tostring(ast)
 	end

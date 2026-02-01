@@ -1,5 +1,5 @@
 # Targets
-.PHONY: test test-all test-unit test-integration test-zork1 test-parser test-containers test-directions test-light test-pronouns test-take test-horror-helpers test-horror-partial test-horror test-horror-failures test-horror-all help
+.PHONY: test test-all test-unit test-integration test-zork1 test-parser test-containers test-directions test-light test-pronouns test-take test-horror-helpers test-horror-partial test-horror test-horror-failures test-horror-all test-pure-zil help
 
 help:
 	@echo "Available targets:"
@@ -12,6 +12,7 @@ help:
 	@echo "  test-integration  - Run all integration tests"
 	@echo "  test-zork1        - Run Zork1 integration tests"
 	@echo "  test-parser       - Run all parser/runtime tests"
+	@echo "  test-pure-zil     - Run pure ZIL tests (using ASSERT functions)"
 	@echo "  test-containers   - Run container interaction tests"
 	@echo "  test-directions   - Run direction/movement tests"
 	@echo "  test-light        - Run light source tests"
@@ -85,3 +86,11 @@ test-horror-failures:
 
 test-horror-all: test-horror-helpers test-horror-partial test-horror-failures test-horror
 	@echo "All horror tests completed!"
+
+test-pure-zil:
+	@echo "Running pure ZIL tests..."
+	@echo "  - Simple assertions..."
+	@lua5.4 tests/test-simple.lua
+	@echo "  - INSERT-FILE functionality..."
+	@lua5.4 tests/test-insert.lua
+	@echo "All pure ZIL tests passed!"
