@@ -1,14 +1,14 @@
 -- Test file to verify assertion commands work correctly
 return {
 	name = "Test Assertion Commands",
-	files = {
-		"zork1/globals.zil",
-		"zork1/clock.zil",
-		"adventure/horror.zil",
-		"zork1/parser.zil",
-		"zork1/verbs.zil",
-		"zork1/syntax.zil",
-		"zork1/main.zil",
+	modules = {
+		"zork1.globals",
+		"zork1.clock",
+		"adventure.horror",
+		"zork1.parser",
+		"zork1.verbs",
+		"zork1.syntax",
+		"zork1.main",
 	},
 	commands = {
 		{

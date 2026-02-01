@@ -7,9 +7,129 @@ local sourcemap = require 'zil.sourcemap'
 
 local M = {}
 
+local dir = PROJECTDIR or "."
+
+-- Helper function to convert module name to file path
+-- e.g., "zork1.globals" -> "zork1/globals"
+local function module_to_path(modname)
+	return modname:gsub("%.", "/")
+end
+
+-- Helper function to search for a module file
+-- Returns file path and file type (".lua" or ".zil") if found, nil otherwise
+local function search_module(modname, env)
+	local name_path = module_to_path(modname)
+	local found_lua, found_zil
+	
+	-- Search for .lua files using package.path
+	for path_pattern in package.path:gmatch("[^;]+") do
+		local filepath = path_pattern:gsub("?", name_path)
+		local file = io.open(filepath, "r")
+		if file then
+			file:close()
+			found_lua = filepath
+			break
+		end
+	end
+	
+	-- Search for .zil files using package.zilpath if it exists and ZIL is loaded in env
+	if env._ZIL_LOADER_INSTALLED and package.zilpath then
+		for path_pattern in package.zilpath:gmatch("[^;]+") do
+			local filepath = path_pattern:gsub("?", name_path)
+			local file = io.open(filepath, "r")
+			if file then
+				file:close()
+				found_zil = filepath
+				break
+			end
+		end
+	end
+	
+	-- Prefer .zil files if both exist and ZIL loader is installed
+	if found_zil and env._ZIL_LOADER_INSTALLED then
+		return found_zil, ".zil"
+	elseif found_lua then
+		return found_lua, ".lua"
+	elseif found_zil then
+		-- ZIL file exists but loader not installed - error
+		error("ZIL file found but ZIL loader not installed. Call env.require('zil') first.")
+	end
+	
+	return nil, nil
+end
+
+-- Create a per-environment require function
+-- This function loads modules into the specific environment
+function M.create_env_require(env)
+	return function(modname)
+		-- Check if already loaded in this environment
+		if env._LOADED[modname] ~= nil then
+			return env._LOADED[modname]
+		end
+		
+		-- Special handling for 'zil' module - installs ZIL loader into this environment
+		if modname == 'zil' then
+			local base = require 'zil.base'
+			base.install_into(env)
+			env._LOADED[modname] = true
+			return true
+		end
+		
+		-- Search for the module file
+		local filepath, filetype = search_module(modname, env)
+		
+		if not filepath then
+			error("module '" .. modname .. "' not found in environment")
+		end
+		
+		-- Load and compile the module
+		local code
+		if filetype == ".zil" then
+			-- Compile ZIL file
+			local ok, ast, err = pcall(parser.parse_file, filepath)
+			if not ok then
+				error("Failed to parse " .. filepath .. ": " .. tostring(ast))
+			end
+			if not ast then
+				error("Failed to parse " .. filepath .. ": " .. (err or "unknown error"))
+			end
+			
+			local basename = 'zil_'..(filepath:match("^.+[/\\](.+)$") or filepath):gsub(".zil", ".lua")
+			local result = compiler.compile(ast, basename)
+			code = result.combined
+		else
+			-- Load Lua file
+			local file = assert(io.open(filepath, "r"))
+			code = file:read("*a")
+			file:close()
+		end
+		
+		-- Execute the code in the environment
+		env._G = env
+		local chunk, err = load(code, '@'..filepath, 't', env)
+		if not chunk then
+			error("Error loading module '" .. modname .. "': " .. err)
+		end
+		
+		local ok, result = pcall(chunk)
+		if not ok then
+			local translated_err = sourcemap.translate(tostring(result))
+			error("Runtime error in module '" .. modname .. "': " .. translated_err)
+		end
+		
+		-- Cache the result
+		if result == nil then
+			result = true  -- Modules that don't return anything default to true
+		end
+		env._LOADED[modname] = result
+		
+		return result
+	end
+end
+
 -- Create a standard game environment with all required globals
 function M.create_game_env()
-	return { 
+	local env = { 
 		print = print, 
 		io = io,
 		os = os,
@@ -30,7 +150,13 @@ function M.create_game_env()
 		math = math,
 		next = next,
 		translate = sourcemap.translate,
+		_LOADED = {},  -- Per-environment module cache
 	}
+	
+	-- Create per-environment require function
+	env.require = M.create_env_require(env)
+	
+	return env
 end
 
 -- Execute a Lua string in the given environment
@@ -62,7 +188,7 @@ local dir = PROJECTDIR or "."
 
 -- Load and execute the bootstrap file
 -- Returns true on success, false on failure
-function M.load_bootstrap(env, silent)
+function M.init(env, silent)
 	local file = assert(io.open(dir.."/zil/bootstrap.lua", "r"))
 	local bootstrap_code = file:read("*a")
 	file:close()
@@ -125,6 +251,42 @@ function M.load_zil_files(files, env, options)
 	end
 	
 	-- Finalize PREPOSITIONS table after all files are loaded
+	M.execute("if FINALIZE_PREPOSITIONS then FINALIZE_PREPOSITIONS() end", 'finalize', env, options.silent)
+	
+	return true
+end
+
+-- Load a list of modules into the given environment
+-- Options table can contain:
+--   - silent: if true, suppresses load messages
+-- Returns true if all modules loaded successfully
+function M.load_modules(env, modules, options)
+	options = options or {}
+	local seen = {}
+	
+	for _, modname in ipairs(modules) do
+		-- If we've seen this module before in this load_modules call,
+		-- clear it from the cache to force a reload
+		-- This maintains backward compatibility with tests that load the same file twice
+		if seen[modname] then
+			env._LOADED[modname] = nil
+		end
+		seen[modname] = true
+		
+		local ok, err = pcall(env.require, modname)
+		if not ok then
+			if not options.silent then
+				print("Failed to load module " .. modname .. ": " .. tostring(err))
+			end
+			return false
+		end
+		
+		if not options.silent then
+			print("Loaded module: " .. modname)
+		end
+	end
+	
+	-- Finalize PREPOSITIONS table after all modules are loaded
 	M.execute("if FINALIZE_PREPOSITIONS then FINALIZE_PREPOSITIONS() end", 'finalize', env, options.silent)
 	
 	return true

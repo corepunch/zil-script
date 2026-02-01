@@ -4,14 +4,14 @@
 
 return {
 	name = "Zork1 Basic Tests",
-	files = {
-		"zork1/globals.zil",
-		"zork1/clock.zil",
-		"zork1/parser.zil",
-		"zork1/verbs.zil",
-		"zork1/syntax.zil",
-		"adventure/horror.zil",
-		"zork1/main.zil",
+	modules = {
+		"zork1.globals",
+		"zork1.clock",
+		"zork1.parser",
+		"zork1.verbs",
+		"zork1.syntax",
+		"adventure.horror",
+		"zork1.main",
 	},
 	commands = {
 		-- Test examining objects (from bootstrap.lua)

@@ -1,31 +1,29 @@
--- Initialize ZIL require system
-require 'zil'
-
 local runtime = require 'zil.runtime'
 local test_format = require 'zil.test_format'
 
-local files = {
-  "zork1/globals.zil",
-  "zork1/clock.zil",
-  "zork1/parser.zil",
-  "zork1/verbs.zil",
-  -- "zork1/actions.zil",
-  "zork1/syntax.zil",
-  -- "zork1/dungeon.zil",
-  "adventure/horror.zil",
-  "zork1/main.zil",
+local modules = {
+  "zork1.globals",
+  "zork1.clock",
+  "zork1.parser",
+  "zork1.verbs",
+  -- "zork1.actions",
+  "zork1.syntax",
+  -- "zork1.dungeon",
+  "adventure.horror",
+  "zork1.main",
 }
 
 -- Create game environment
 local env = runtime.create_game_env()
 
 -- Load bootstrap
-if not runtime.load_bootstrap(env) then
+if not runtime.init(env) then
 	os.exit(1)
 end
 
--- Load ZIL files (save compiled .lua files to disk)
-if not runtime.load_zil_files(files, env, {save_lua = true}) then
+-- Install ZIL support and load modules
+env.require('zil')
+if not runtime.load_modules(env, modules, {save_lua = true}) then
 	os.exit(1)
 end
 

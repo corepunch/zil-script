@@ -1,24 +1,22 @@
 -- Direct tests for clock/interrupt system
 -- These tests verify the QUEUE, INT, and CLOCKER functions work correctly
 
--- Initialize ZIL require system
-require 'zil'
-
 local runtime = require 'zil.runtime'
 
 print("=== Clock System Direct Tests ===\n")
 
 -- Load clock.zil
-local files = {
-  "zork1/globals.zil",
-  "zork1/clock.zil",
-  "zork1/verbs.zil",  -- For MOVES
-  "zork1/main.zil",   -- For P_WON
+local modules = {
+  "zork1.globals",
+  "zork1.clock",
+  "zork1.verbs",  -- For MOVES
+  "zork1.main",   -- For P_WON
 }
 
 local env = runtime.create_game_env()
-runtime.load_bootstrap(env)
-runtime.load_zil_files(files, env)
+runtime.init(env)
+env.require('zil')
+runtime.load_modules(env, modules)
 
 -- Helper to run code in env
 local function run(code)

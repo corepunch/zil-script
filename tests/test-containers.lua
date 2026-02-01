@@ -3,14 +3,14 @@
 
 return {
 	name = "Container Interaction Tests",
-	files = {
-		"zork1/globals.zil",
-		"zork1/clock.zil",
-		"tests/test-containers.zil",
-		"zork1/parser.zil",
-		"zork1/verbs.zil",
-		"zork1/syntax.zil",
-		"zork1/main.zil",
+	modules = {
+		"zork1.globals",
+		"zork1.clock",
+		"tests.test-containers",
+		"zork1.parser",
+		"zork1.verbs",
+		"zork1.syntax",
+		"zork1.main",
 	},
 	commands = {
 		{

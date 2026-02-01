@@ -3,17 +3,17 @@
 
 return {
 	name = "Clock/Interrupt System Tests",
-	files = {
-		"zork1/globals.zil",
-		"zork1/clock.zil",
-		"tests/test-clock.zil",
-		"zork1/parser.zil",
-		"zork1/verbs.zil",
-		"zork1/actions.zil",
-		"zork1/syntax.zil",
-		"zork1/dungeon.zil",
-		"zork1/actions.zil",
-		"zork1/main.zil",
+	modules = {
+		"zork1.globals",
+		"zork1.clock",
+		"tests.test-clock",
+		"zork1.parser",
+		"zork1.verbs",
+		"zork1.actions",
+		"zork1.syntax",
+		"zork1.dungeon",
+		"zork1.actions",
+		"zork1.main",
 	},
 	commands = {
 		-- Basic test to verify clock is loaded

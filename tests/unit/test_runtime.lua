@@ -89,7 +89,7 @@ test.describe("Runtime - Bootstrap Loading", function(t)
 	t.it("should load bootstrap file", function(assert)
 		local env = runtime.create_game_env()
 		
-		local success = runtime.load_bootstrap(env, true)
+		local success = runtime.init(env, true)
 		
 		assert.assert_true(success)
 		-- Bootstrap should define some ZIL runtime functions
@@ -100,7 +100,7 @@ end)
 test.describe("Runtime - ZIL File Loading", function(t)
 	t.it("should handle empty file list", function(assert)
 		local env = runtime.create_game_env()
-		runtime.load_bootstrap(env, true)
+		runtime.init(env, true)
 		
 		local success = runtime.load_zil_files({}, env, {silent = true})
 		
@@ -109,7 +109,7 @@ test.describe("Runtime - ZIL File Loading", function(t)
 	
 	t.it("should return false for non-existent file", function(assert)
 		local env = runtime.create_game_env()
-		runtime.load_bootstrap(env, true)
+		runtime.init(env, true)
 		
 		local success = runtime.load_zil_files(
 			{"non_existent_file.zil"},
@@ -162,7 +162,7 @@ test.describe("Runtime - Options Handling", function(t)
 	
 	t.it("should handle options in load_zil_files", function(assert)
 		local env = runtime.create_game_env()
-		runtime.load_bootstrap(env, true)
+		runtime.init(env, true)
 		
 		-- Test with silent option
 		local success = runtime.load_zil_files(

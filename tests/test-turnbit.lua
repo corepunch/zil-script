@@ -1,33 +1,31 @@
 -- Test TURNBIT flag functionality
--- Initialize ZIL require system
-require 'zil'
-
 local runtime = require 'zil.runtime'
 
 print("=== TURNBIT Flag Test ===")
 
-local files = {
-  "zork1/globals.zil",
-  "zork1/clock.zil",
-  "zork1/parser.zil",
-  "zork1/verbs.zil",
-  "zork1/syntax.zil",
-  "tests/test-turnbit.zil",
-  "zork1/main.zil",
+local modules = {
+  "zork1.globals",
+  "zork1.clock",
+  "zork1.parser",
+  "zork1.verbs",
+  "zork1.syntax",
+  "tests.test-turnbit",
+  "zork1.main",
 }
 
 -- Create game environment
 local env = runtime.create_game_env()
 
 -- Load bootstrap
-if not runtime.load_bootstrap(env) then
+if not runtime.init(env) then
 	print("Failed to load bootstrap")
 	os.exit(1)
 end
 
--- Load ZIL files
-if not runtime.load_zil_files(files, env) then
-	print("Failed to load ZIL files")
+-- Install ZIL support and load modules
+env.require('zil')
+if not runtime.load_modules(env, modules) then
+	print("Failed to load modules")
 	os.exit(1)
 end
 

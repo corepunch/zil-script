@@ -164,4 +164,18 @@ function M.remove_loader()
 	return false
 end
 
+-- Install ZIL loader into a specific environment
+-- This marks the environment as having ZIL support and ensures package.zilpath exists
+function M.install_into(env)
+	-- Create package.zilpath if it doesn't exist
+	if not package.zilpath then
+		package.zilpath = create_zilpath(package.path)
+	end
+	
+	-- Mark this environment as having ZIL loader installed
+	env._ZIL_LOADER_INSTALLED = true
+	
+	return true
+end
+
 return M

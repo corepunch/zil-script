@@ -4,16 +4,16 @@
 
 return {
 	name = "Zork1 Extended Tests",
-	files = {
-		"zork1/globals.zil",
-		"zork1/clock.zil",
-		"zork1/parser.zil",
-		"zork1/verbs.zil",
-	  "zork1/actions.zil",
-  	"zork1/syntax.zil",
-  	"zork1/dungeon.zil",
-	  "zork1/actions.zil",
-		"zork1/main.zil",
+	modules = {
+		"zork1.globals",
+		"zork1.clock",
+		"zork1.parser",
+		"zork1.verbs",
+	  "zork1.actions",
+  	"zork1.syntax",
+  	"zork1.dungeon",
+	  "zork1.actions",
+		"zork1.main",
 	},
 	commands = {
 		{ input="open mailbox", text="Opening the small mailbox reveals a leaflet." },

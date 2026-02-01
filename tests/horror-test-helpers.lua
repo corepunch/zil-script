@@ -1,14 +1,14 @@
 -- Minimal test to verify test helper functions work
 return {
 	name = "Horror.zil Test Helpers Verification",
-	files = {
-		"zork1/globals.zil",
-		"zork1/clock.zil",
-		"adventure/horror.zil",
-		"zork1/parser.zil",
-		"zork1/verbs.zil",
-		"zork1/syntax.zil",
-		"zork1/main.zil",
+	modules = {
+		"zork1.globals",
+		"zork1.clock",
+		"adventure.horror",
+		"zork1.parser",
+		"zork1.verbs",
+		"zork1.syntax",
+		"zork1.main",
 	},
 	commands = {
 		{input="look",here="SANITARIUM-GATE",description="Start at Sanitarium Gate"},
