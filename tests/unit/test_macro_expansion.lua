@@ -1,7 +1,7 @@
 -- Test DEFMAC macro expansion
 local test = require 'tests.unit.test_framework'
-local parser = require 'zil-script.parser'
-local compiler = require 'zil-script.compiler'
+local parser = require 'zilscript.parser'
+local compiler = require 'zilscript.compiler'
 
 test.describe("DEFMAC Macro Expansion", function(t)
 

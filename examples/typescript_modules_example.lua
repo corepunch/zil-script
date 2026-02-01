@@ -1,11 +1,11 @@
 -- Example: Using TypeScript-Inspired Compiler Modules
 -- This example demonstrates how to use the new visitor, diagnostics, emitter, and checker modules
 
-local parser = require 'zil-script.parser'
-local visitor = require 'zil-script.compiler.visitor'
-local diagnostics = require 'zil-script.compiler.diagnostics'
-local emitter_module = require 'zil-script.compiler.emitter'
-local checker = require 'zil-script.compiler.checker'
+local parser = require 'zilscript.parser'
+local visitor = require 'zilscript.compiler.visitor'
+local diagnostics = require 'zilscript.compiler.diagnostics'
+local emitter_module = require 'zilscript.compiler.emitter'
+local checker = require 'zilscript.compiler.checker'
 
 print("=== Example 1: Using the Visitor Pattern ===\n")
 

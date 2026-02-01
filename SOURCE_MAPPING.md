@@ -26,14 +26,14 @@ action.zil:123: no such variable whatever
 
 ### 1. Compilation Phase
 
-During ZIL-to-Lua compilation (`zil-script/compiler.lua`):
+During ZIL-to-Lua compilation (`zilscript/compiler.lua`):
 - The compiler tracks which ZIL source line corresponds to each generated Lua line
 - This mapping is stored in the `sourcemap` module
 - Source information comes from the parser's metadata on AST nodes
 
 ### 2. Runtime Phase
 
-When errors occur (`zil-script/runtime.lua`):
+When errors occur (`zilscript/runtime.lua`):
 - Error messages and stack traces are captured
 - The `sourcemap.translate()` function scans for Lua file references
 - Each reference is looked up in the mapping table
@@ -41,7 +41,7 @@ When errors occur (`zil-script/runtime.lua`):
 
 ### 3. Source Map Module
 
-The `zil-script/sourcemap.lua` module provides:
+The `zilscript/sourcemap.lua` module provides:
 - `add_mapping(lua_file, lua_line, zil_file, zil_line, zil_col)` - Record a mapping
 - `get_source(lua_file, lua_line)` - Retrieve ZIL source for a Lua location
 - `translate(traceback_string)` - Translate a full traceback
@@ -113,7 +113,7 @@ Shows a before/after comparison of error messages with source mapping.
 1. **Line accuracy**: The mapping tracks the ZIL line that was being compiled when each Lua line was generated. For complex expressions that span multiple ZIL lines or generate multiple Lua lines, the mapping may not be exact but should be close enough for debugging.
 
 2. **Unmapped references**: Some Lua code comes from:
-   - The bootstrap file (`zil-script/bootstrap.lua`)
+   - The bootstrap file (`zilscript/bootstrap.lua`)
    - Runtime library functions
    - Code generated without source metadata
    

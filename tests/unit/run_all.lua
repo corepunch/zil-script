@@ -2,7 +2,7 @@
 -- Run all unit tests
 
 -- Initialize ZIL require system
-require 'zil-script'
+require 'zilscript'
 
 local test_files = {
 	"tests/unit/test_parser.lua",

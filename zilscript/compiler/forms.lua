@@ -8,7 +8,7 @@
 --
 -- This follows TypeScript's emitter pattern where specialized functions
 -- handle different node types, rather than having nodes emit themselves.
-local utils = require 'zil-script.compiler.utils'
+local utils = require 'zilscript.compiler.utils'
 
 local Forms = {}
 

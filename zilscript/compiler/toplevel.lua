@@ -1,6 +1,6 @@
 -- Top-level compilation functions (ROUTINE, OBJECT, etc.)
-local utils = require 'zil-script.compiler.utils'
-local fields = require 'zil-script.compiler.fields'
+local utils = require 'zilscript.compiler.utils'
+local fields = require 'zilscript.compiler.fields'
 
 local TopLevel = {}
 

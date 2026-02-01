@@ -3,10 +3,10 @@
 -- Usage: lua tests/run_tests.lua [test_file]
 
 -- Initialize ZIL require system
-require 'zil-script'
+require 'zilscript'
 
-local runtime = require 'zil-script.runtime'
-local test_format = require 'zil-script.test_format'
+local runtime = require 'zilscript.runtime'
+local test_format = require 'zilscript.test_format'
 
 local function run_test_file(test_file_path)
 	print("=== Running test: " .. test_file_path .. " ===\n")
@@ -35,7 +35,7 @@ local function run_test_file(test_file_path)
 	if test_config.modules then
 		-- New module-based approach
 		-- First install ZIL support in the environment
-		game.require('zil-script')		
+		game.require('zilscript')		
 		assert(runtime.load_modules(game, test_config.modules, {silent = true}), "Failed to load modules")
 	elseif test_config.files then
 		-- Old file-based approach (for backward compatibility)

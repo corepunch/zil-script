@@ -1,5 +1,5 @@
-local runtime = require 'zil-script.runtime'
-local test_format = require 'zil-script.test_format'
+local runtime = require 'zilscript.runtime'
+local test_format = require 'zilscript.test_format'
 
 local modules = {
   "zork1.globals",
@@ -22,7 +22,7 @@ if not runtime.init(env) then
 end
 
 -- Install ZIL support and load modules
-env.require('zil-script')
+env.require('zilscript')
 if not runtime.load_modules(env, modules, {save_lua = true}) then
 	os.exit(1)
 end

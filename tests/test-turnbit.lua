@@ -1,5 +1,5 @@
 -- Test TURNBIT flag functionality
-local runtime = require 'zil-script.runtime'
+local runtime = require 'zilscript.runtime'
 
 print("=== TURNBIT Flag Test ===")
 
@@ -23,7 +23,7 @@ if not runtime.init(env) then
 end
 
 -- Install ZIL support and load modules
-env.require('zil-script')
+env.require('zilscript')
 if not runtime.load_modules(env, modules) then
 	print("Failed to load modules")
 	os.exit(1)

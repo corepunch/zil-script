@@ -2,7 +2,7 @@
 -- Inspired by TypeScript's emitter architecture
 -- Separates code generation from AST traversal
 
-local buffer_module = require 'zil-script.compiler.buffer'
+local buffer_module = require 'zilscript.compiler.buffer'
 
 local Emitter = {}
 

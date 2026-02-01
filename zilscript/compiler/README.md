@@ -124,7 +124,7 @@ Here's what happens when you compile a ZIL ROUTINE:
 ### Basic Usage
 
 ```lua
-local compiler = require 'zil-script.compiler'
+local compiler = require 'zilscript.compiler'
 
 -- ast is from the parser
 local result = compiler.compile(ast, "output.lua")

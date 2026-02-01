@@ -1,11 +1,11 @@
 -- Test for ZIL require system
--- Tests that require "zil-script" enables loading .zil files
+-- Tests that require "zilscript" enables loading .zil files
 
 print("=== Testing ZIL Require System ===\n")
 
 -- Test 1: Basic require of zil module
 print("Test 1: Loading zil module...")
-local zil = require "zil-script"
+local zil = require "zilscript"
 assert(zil, "Failed to load zil module")
 assert(type(zil.insert_loader) == "function", "zil.insert_loader should be a function")
 assert(type(zil.zil_loader) == "function", "zil.zil_loader should be a function")
@@ -87,15 +87,15 @@ end
 assert(found_again, "Loader should be re-inserted")
 print("✓ Loader re-inserted successfully\n")
 
--- Test 9: Verify require "zil-script" doesn't insert loader multiple times
-print("Test 9: Testing that require 'zil-script' is idempotent...")
+-- Test 9: Verify require "zilscript" doesn't insert loader multiple times
+print("Test 9: Testing that require 'zilscript' is idempotent...")
 local count_before = 0
 for _, loader in ipairs(loaders) do
 	if loader == zil.zil_loader then
 		count_before = count_before + 1
 	end
 end
-require "zil-script"  -- Call again
+require "zilscript"  -- Call again
 local count_after = 0
 for _, loader in ipairs(loaders) do
 	if loader == zil.zil_loader then
@@ -103,7 +103,7 @@ for _, loader in ipairs(loaders) do
 	end
 end
 assert(count_before == count_after, "Loader should not be inserted multiple times")
-print("✓ Loader count unchanged after second require 'zil-script'\n")
+print("✓ Loader count unchanged after second require 'zilscript'\n")
 
 -- Clean up
 package.path = original_path

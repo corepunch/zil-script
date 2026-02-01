@@ -2,10 +2,10 @@
 -- This shows how Lua errors are automatically translated to ZIL source locations
 
 -- Initialize ZIL require system
-require 'zil-script'
+require 'zilscript'
 
-local runtime = require 'zil-script.runtime'
-local sourcemap = require 'zil-script.sourcemap'
+local runtime = require 'zilscript.runtime'
+local sourcemap = require 'zilscript.sourcemap'
 
 print("=== Source Mapping Demonstration ===\n")
 
@@ -38,8 +38,8 @@ print(demo_zil)
 print()
 
 -- Compile it
-local parser = require 'zil-script.parser'
-local compiler = require 'zil-script.compiler'
+local parser = require 'zilscript.parser'
+local compiler = require 'zilscript.compiler'
 
 local ast = parser.parse_file(temp_zil)
 local lua_filename = "zil_demo.lua"

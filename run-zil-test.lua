@@ -22,8 +22,8 @@ function ASSERT(condition, msg)
 	end
 end
 
-require "zil-script"
-require "zil-script.bootstrap"
+require "zilscript"
+require "zilscript.bootstrap"
 
 -- Set up direct output (bypass ZIL's buffering system)
 _G['io_write'] = io.write
