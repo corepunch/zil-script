@@ -84,7 +84,7 @@
     <SETG HERE ,STARTROOM>
     <ASSERT <==? <LOC ,ADVENTURER> ,STARTROOM> "Back to STARTROOM">
     
-    <TEST-SUMMARY>>
+    <TELL CR "All tests completed!" CR>>
 
 <ROUTINE GO ()
     <TEST-DIRECTIONS>>
