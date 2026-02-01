@@ -252,17 +252,41 @@ ZPROB = PROB
 
 -- At the top of bootstrap, add output buffer
 local output_buffer = {}
+local direct_output_mode = false  -- When true, print directly instead of buffering
 
 local function io_write(...)
-	for i = 1, select("#", ...) do
-		table.insert(output_buffer, tostring(select(i, ...)))
+	if direct_output_mode then
+		-- Direct output mode for simple tests (no coroutine)
+		for i = 1, select("#", ...) do
+			io.write(tostring(select(i, ...)))
+		end
+	else
+		-- Buffered mode for coroutine-based games
+		for i = 1, select("#", ...) do
+			table.insert(output_buffer, tostring(select(i, ...)))
+		end
 	end
 end
 
 local function io_flush()
-	local text = table.concat(output_buffer)
-	output_buffer = {}
-	return text
+	if direct_output_mode then
+		io.flush()
+		return ""
+	else
+		local text = table.concat(output_buffer)
+		output_buffer = {}
+		return text
+	end
+end
+
+-- Enable direct output mode (for simple tests without coroutines)
+function ENABLE_DIRECT_OUTPUT()
+	direct_output_mode = true
+end
+
+-- Disable direct output mode (for coroutine-based games)
+function DISABLE_DIRECT_OUTPUT()
+	direct_output_mode = false
 end
 
 function TELL(...)
@@ -323,6 +347,11 @@ end
 local GREEN = "\27[1;32m"
 local RED = "\27[1;31m"
 local RESET = "\27[0m"
+
+-- Test result tracking
+local test_count = 0
+local test_passed = 0
+local test_failed = 0
 
 local function assert_flag(obj_name, flag_name)	
 	local obj_num = find_object_by_name(obj_name)
@@ -394,6 +423,200 @@ local function move_object_to_location(obj_name, location_name)
 	-- Special handling for THIEF: clear INVISIBLE flag so they can be interacted with
 	if obj_name:upper():gsub("-", "_") == "THIEF" and _G.INVISIBLE then
 		FCLEAR(obj_num, _G.INVISIBLE)
+	end
+end
+
+-- === ZIL-Callable Test Assertion Functions ===
+-- These functions can be called directly from ZIL code using <ASSERT ...>
+
+-- ASSERT-TRUE: Check if a condition is true
+function ASSERT_TRUE(condition, msg)
+	test_count = test_count + 1
+	if condition then
+		test_passed = test_passed + 1
+		TELL(GREEN, "[PASS] ", msg or "Assertion passed", RESET, CR)
+		return true
+	else
+		test_failed = test_failed + 1
+		TELL(RED, "[FAIL] ", msg or "Assertion failed", RESET, CR)
+		return false
+	end
+end
+
+-- ASSERT-FALSE: Check if a condition is false
+function ASSERT_FALSE(condition, msg)
+	return ASSERT_TRUE(not condition, msg)
+end
+
+-- ASSERT-EQUAL: Check if two values are equal
+function ASSERT_EQUAL(actual, expected, msg)
+	test_count = test_count + 1
+	if (actual or 0) == (expected or 0) then
+		test_passed = test_passed + 1
+		TELL(GREEN, "[PASS] ", msg or "Values are equal", RESET, CR)
+		return true
+	else
+		test_failed = test_failed + 1
+		TELL(RED, "[FAIL] ", msg or "Values not equal", " - Expected: ", tostring(expected), ", Actual: ", tostring(actual), RESET, CR)
+		return false
+	end
+end
+
+-- ASSERT-NOT-EQUAL: Check if two values are not equal
+function ASSERT_NOT_EQUAL(actual, expected, msg)
+	test_count = test_count + 1
+	if (actual or 0) ~= (expected or 0) then
+		test_passed = test_passed + 1
+		TELL(GREEN, "[PASS] ", msg or "Values are not equal", RESET, CR)
+		return true
+	else
+		test_failed = test_failed + 1
+		TELL(RED, "[FAIL] ", msg or "Values are equal (expected different)", " - Both values: ", tostring(actual), RESET, CR)
+		return false
+	end
+end
+
+-- ASSERT-IN-INVENTORY: Check if object is in inventory
+function ASSERT_IN_INVENTORY(obj, msg)
+	test_count = test_count + 1
+	local obj_num = type(obj) == "number" and obj or find_object_by_name(obj)
+	if not obj_num then
+		test_failed = test_failed + 1
+		TELL(RED, "[FAIL] ", msg or "Object not found", RESET, CR)
+		return false
+	end
+	local winner = _G.WINNER or find_object_by_name("ADVENTURER")
+	if LOC(obj_num) == winner then
+		test_passed = test_passed + 1
+		TELL(GREEN, "[PASS] ", msg or "Object in inventory", RESET, CR)
+		return true
+	else
+		test_failed = test_failed + 1
+		TELL(RED, "[FAIL] ", msg or "Object not in inventory", RESET, CR)
+		return false
+	end
+end
+
+-- ASSERT-NOT-IN-INVENTORY: Check if object is not in inventory
+function ASSERT_NOT_IN_INVENTORY(obj, msg)
+	test_count = test_count + 1
+	local obj_num = type(obj) == "number" and obj or find_object_by_name(obj)
+	if not obj_num then
+		test_failed = test_failed + 1
+		TELL(RED, "[FAIL] ", msg or "Object not found", RESET, CR)
+		return false
+	end
+	local winner = _G.WINNER or find_object_by_name("ADVENTURER")
+	if LOC(obj_num) ~= winner then
+		test_passed = test_passed + 1
+		TELL(GREEN, "[PASS] ", msg or "Object not in inventory", RESET, CR)
+		return true
+	else
+		test_failed = test_failed + 1
+		TELL(RED, "[FAIL] ", msg or "Object is in inventory (expected not to be)", RESET, CR)
+		return false
+	end
+end
+
+-- ASSERT-AT-LOCATION: Check if object is at a specific location
+function ASSERT_AT_LOCATION(obj, loc, msg)
+	test_count = test_count + 1
+	local obj_num = type(obj) == "number" and obj or find_object_by_name(obj)
+	local loc_num = type(loc) == "number" and loc or find_object_by_name(loc)
+	if not obj_num then
+		test_failed = test_failed + 1
+		TELL(RED, "[FAIL] ", msg or "Object not found", RESET, CR)
+		return false
+	end
+	if not loc_num then
+		test_failed = test_failed + 1
+		TELL(RED, "[FAIL] ", msg or "Location not found", RESET, CR)
+		return false
+	end
+	if LOC(obj_num) == loc_num then
+		test_passed = test_passed + 1
+		TELL(GREEN, "[PASS] ", msg or "Object at correct location", RESET, CR)
+		return true
+	else
+		test_failed = test_failed + 1
+		TELL(RED, "[FAIL] ", msg or "Object not at expected location", RESET, CR)
+		return false
+	end
+end
+
+-- ASSERT-HAS-FLAG: Check if object has a flag set
+function ASSERT_HAS_FLAG(obj, flag, msg)
+	test_count = test_count + 1
+	local obj_num = type(obj) == "number" and obj or find_object_by_name(obj)
+	if not obj_num then
+		test_failed = test_failed + 1
+		TELL(RED, "[FAIL] ", msg or "Object not found", RESET, CR)
+		return false
+	end
+	local flag_num = type(flag) == "number" and flag or _G[flag]
+	if not flag_num then
+		test_failed = test_failed + 1
+		TELL(RED, "[FAIL] ", msg or "Unknown flag", RESET, CR)
+		return false
+	end
+	if FSETQ(obj_num, flag_num) then
+		test_passed = test_passed + 1
+		TELL(GREEN, "[PASS] ", msg or "Object has flag", RESET, CR)
+		return true
+	else
+		test_failed = test_failed + 1
+		TELL(RED, "[FAIL] ", msg or "Object does not have flag", RESET, CR)
+		return false
+	end
+end
+
+-- ASSERT-NOT-HAS-FLAG: Check if object does not have a flag set
+function ASSERT_NOT_HAS_FLAG(obj, flag, msg)
+	test_count = test_count + 1
+	local obj_num = type(obj) == "number" and obj or find_object_by_name(obj)
+	if not obj_num then
+		test_failed = test_failed + 1
+		TELL(RED, "[FAIL] ", msg or "Object not found", RESET, CR)
+		return false
+	end
+	local flag_num = type(flag) == "number" and flag or _G[flag]
+	if not flag_num then
+		test_failed = test_failed + 1
+		TELL(RED, "[FAIL] ", msg or "Unknown flag", RESET, CR)
+		return false
+	end
+	if not FSETQ(obj_num, flag_num) then
+		test_passed = test_passed + 1
+		TELL(GREEN, "[PASS] ", msg or "Object does not have flag", RESET, CR)
+		return true
+	else
+		test_failed = test_failed + 1
+		TELL(RED, "[FAIL] ", msg or "Object has flag (expected not to have)", RESET, CR)
+		return false
+	end
+end
+
+-- TEST-SUMMARY: Print test summary and exit with appropriate code
+function TEST_SUMMARY()
+	CRLF()
+	TELL("=== Test Summary ===", CR)
+	TELL("Total tests: ", tostring(test_count), CR)
+	TELL(GREEN, "Passed: ", tostring(test_passed), RESET, CR)
+	if test_failed > 0 then
+		TELL(RED, "Failed: ", tostring(test_failed), RESET, CR)
+	else
+		TELL("Failed: ", tostring(test_failed), CR)
+	end
+	CRLF()
+	if test_failed == 0 and test_count > 0 then
+		TELL(GREEN, "All tests passed!", RESET, CR)
+		os.exit(0)
+	elseif test_count == 0 then
+		TELL(RED, "No tests were run!", RESET, CR)
+		os.exit(1)
+	else
+		TELL(RED, "Some tests failed!", RESET, CR)
+		os.exit(1)
 	end
 end
 
