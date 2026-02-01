@@ -147,7 +147,7 @@ Demonstration files for features (not run in test suite).
 
 ## Test Assertion Commands
 
-Test files can use special assertion commands to verify game state. These are handled by `zil/bootstrap.lua`.
+Test files can use special assertion commands to verify game state. These are handled by `zilscript/bootstrap.lua`.
 
 ### Assertion Commands (Return pass/fail)
 
@@ -300,4 +300,4 @@ Integration tests show command execution:
 For more details on specific topics:
 - **General test info**: See `tests/README.md`
 - **Source mapping**: See `SOURCE_MAPPING.md`
-- **Compiler modules**: See `zil/compiler/README.md`
+- **Compiler modules**: See `zilscript/compiler/README.md`

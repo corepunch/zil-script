@@ -946,5 +946,66 @@ function FINALIZE_PREPOSITIONS()
 	PREPOSITIONS = array
 end
 
+-- === File Inclusion ===
+-- INCLUDE_FILE loads and executes a ZIL file
+-- This is used by INSERT-FILE directive to include other files
+function INCLUDE_FILE(filename)
+	-- Convert module-style filename (e.g., "zork1.globals") to file path
+	local name_path = filename:gsub("%.", "/")
+	local file, filepath
+	
+	-- Search for the file using package.zilpath if available
+	if package and package.zilpath then
+		for path_pattern in package.zilpath:gmatch("[^;]+") do
+			filepath = path_pattern:gsub("?", name_path)
+			file = io.open(filepath, "r")
+			if file then
+				break
+			end
+		end
+	end
+	
+	-- If not found, try direct path with .zil extension
+	if not file then
+		filepath = name_path .. ".zil"
+		file = io.open(filepath, "r")
+	end
+	
+	-- If still not found, try the filename as-is
+	if not file then
+		filepath = filename
+		file = io.open(filepath, "r")
+	end
+	
+	if not file then
+		error(string.format("INCLUDE_FILE: Cannot open file '%s' (tried package.zilpath and direct paths)", filename))
+	end
+	
+	local content = file:read("*all")
+	file:close()
+	
+	-- Parse and compile the ZIL content
+	local parser = require 'zilscript.parser'
+	local compiler = require 'zilscript.compiler'
+	
+	local ok, ast = pcall(parser.parse, content, filename)
+	if not ok then
+		error(string.format("INCLUDE_FILE: Failed to parse '%s': %s", filename, ast))
+	end
+	
+	local result = compiler.compile(ast, filename .. ".lua")
+	
+	-- Execute the compiled code in the current environment
+	local chunk, load_err = load(result.combined, "@" .. filename, "t", _G)
+	if not chunk then
+		error(string.format("INCLUDE_FILE: Failed to load '%s': %s", filename, load_err))
+	end
+	
+	local exec_ok, exec_err = pcall(chunk)
+	if not exec_ok then
+		error(string.format("INCLUDE_FILE: Failed to execute '%s': %s", filename, exec_err))
+	end
+end
+
 -- === Done ===
 print("ZIL runtime initialized.")

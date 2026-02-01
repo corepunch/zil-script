@@ -2,7 +2,7 @@
 -- Unit tests for zil/parser.lua
 
 local test = require 'tests.unit.test_framework'
-local parser = require 'zil.parser'
+local parser = require 'zilscript.parser'
 
 test.describe("Parser - Basic Types", function(t)
 	t.it("should parse numbers", function(assert)

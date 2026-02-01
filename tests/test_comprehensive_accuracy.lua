@@ -1,7 +1,7 @@
 -- Comprehensive line accuracy test
-local parser = require 'zil.parser'
-local compiler = require 'zil.compiler'
-local sourcemap = require 'zil.sourcemap'
+local parser = require 'zilscript.parser'
+local compiler = require 'zilscript.compiler'
+local sourcemap = require 'zilscript.sourcemap'
 
 sourcemap.clear()
 

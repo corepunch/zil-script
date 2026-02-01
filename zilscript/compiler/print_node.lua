@@ -13,7 +13,7 @@
 -- Node Access Pattern: We use direct property access like node[i].value
 -- This matches TypeScript's approach: node.members[0].text
 -- Direct access is clear, performant, and standard in both Lua and TypeScript
-local utils = require 'zil.compiler.utils'
+local utils = require 'zilscript.compiler.utils'
 
 local PrintNode = {}
 

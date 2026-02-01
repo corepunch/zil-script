@@ -2,9 +2,9 @@
 -- Provides loader functionality for .zil files similar to moonscript
 -- Allows using require() to load .zil files automatically
 
-local parser = require 'zil.parser'
-local compiler = require 'zil.compiler'
-local sourcemap = require 'zil.sourcemap'
+local parser = require 'zilscript.parser'
+local compiler = require 'zilscript.compiler'
+local sourcemap = require 'zilscript.sourcemap'
 
 local M = {}
 

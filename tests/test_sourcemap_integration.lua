@@ -1,9 +1,9 @@
 -- Integration test for source mapping
 -- Initialize ZIL require system
-require 'zil'
+require 'zilscript'
 
-local runtime = require 'zil.runtime'
-local sourcemap = require 'zil.sourcemap'
+local runtime = require 'zilscript.runtime'
+local sourcemap = require 'zilscript.sourcemap'
 
 print("Testing source mapping integration...")
 
@@ -34,8 +34,8 @@ zil_file:close()
 
 -- Compile and load the ZIL file
 print("\n2. Compiling ZIL file...")
-local parser = require 'zil.parser'
-local compiler = require 'zil.compiler'
+local parser = require 'zilscript.parser'
+local compiler = require 'zilscript.compiler'
 
 local ast = parser.parse_file("/tmp/test_integration.zil")
 local lua_filename = "zil_test_integration.lua"

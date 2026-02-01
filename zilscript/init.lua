@@ -1,8 +1,8 @@
 -- ZIL main module
 -- Entry point for the ZIL require system
--- Usage: require "zil" to enable loading .zil files via require()
+-- Usage: require "zilscript" to enable loading .zil files via require()
 
-local base = require "zil.base"
+local base = require "zilscript.base"
 
 -- Automatically insert the loader when this module is required
 base.insert_loader()

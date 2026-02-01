@@ -8,7 +8,7 @@
 --
 -- This follows TypeScript's emitter pattern where specialized functions
 -- handle different node types, rather than having nodes emit themselves.
-local utils = require 'zil.compiler.utils'
+local utils = require 'zilscript.compiler.utils'
 
 local Forms = {}
 
@@ -286,6 +286,16 @@ function Forms.createHandlers(compiler, printNode)
       buf.write(")")
     else
       buf.write("nil")
+    end
+  end
+
+  -- INSERT-FILE - Include and execute another ZIL file
+  form["INSERT-FILE"] = function(buf, node, indent)
+    -- Generate INCLUDE_FILE call with the filename
+    if node[1] and node[1].type == "string" then
+      buf.write('INCLUDE_FILE("%s")', node[1].value)
+    else
+      buf.write('INCLUDE_FILE("")')
     end
   end
 

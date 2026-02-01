@@ -2,14 +2,14 @@
 -- Main module that coordinates all compiler components
 -- Uses TypeScript-inspired architecture with diagnostics and optional semantic checking
 
-local buffer_module = require 'zil.compiler.buffer'
-local utils = require 'zil.compiler.utils'
-local value_module = require 'zil.compiler.value'
-local forms_module = require 'zil.compiler.forms'
-local toplevel = require 'zil.compiler.toplevel'
-local print_node_module = require 'zil.compiler.print_node'
-local diagnostics_module = require 'zil.compiler.diagnostics'
-local checker_module = require 'zil.compiler.checker'
+local buffer_module = require 'zilscript.compiler.buffer'
+local utils = require 'zilscript.compiler.utils'
+local value_module = require 'zilscript.compiler.value'
+local forms_module = require 'zilscript.compiler.forms'
+local toplevel = require 'zilscript.compiler.toplevel'
+local print_node_module = require 'zilscript.compiler.print_node'
+local diagnostics_module = require 'zilscript.compiler.diagnostics'
+local checker_module = require 'zilscript.compiler.checker'
 
 local Compiler = {
   flags = {},

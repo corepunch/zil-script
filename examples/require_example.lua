@@ -5,7 +5,7 @@ print("=== ZIL Require System Example ===\n")
 
 -- Step 1: Initialize the ZIL loader
 print("Step 1: Initialize ZIL loader")
-require "zil"  -- This automatically sets up the loader
+require "zilscript"  -- This automatically sets up the loader
 print("✓ ZIL loader initialized\n")
 
 -- Step 2: Now we can require .zil files just like Lua files

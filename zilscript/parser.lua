@@ -1,4 +1,4 @@
-local evaluate = require "zil.evaluate"
+local evaluate = require "zilscript.evaluate"
 
 local ZIL = {}
 

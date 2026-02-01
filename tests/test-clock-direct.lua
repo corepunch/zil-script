@@ -1,7 +1,7 @@
 -- Direct tests for clock/interrupt system
 -- These tests verify the QUEUE, INT, and CLOCKER functions work correctly
 
-local runtime = require 'zil.runtime'
+local runtime = require 'zilscript.runtime'
 
 print("=== Clock System Direct Tests ===\n")
 
@@ -15,7 +15,7 @@ local modules = {
 
 local env = runtime.create_game_env()
 runtime.init(env)
-env.require('zil')
+env.require('zilscript')
 runtime.load_modules(env, modules)
 
 -- Helper to run code in env

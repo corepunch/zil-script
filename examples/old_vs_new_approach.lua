@@ -4,20 +4,20 @@
 print("=== Demonstration: Old vs New Approach ===\n")
 
 print("OLD APPROACH (from main.lua):")
-print("  local runtime = require 'zil.runtime'")
+print("  local runtime = require 'zilscript.runtime'")
 print("  local files = { 'zork1/actions.zil', ... }")
 print("  runtime.load_zil_files(files, env)")
 print("")
 
 print("NEW APPROACH (with require system):")
-print("  require 'zil'  -- Initialize loader")
+print("  require 'zilscript'  -- Initialize loader")
 print("  local actions = require 'zork1.actions'  -- Auto-compiles and loads")
 print("")
 
 print("Let's try the new approach:\n")
 
 -- Initialize the ZIL loader
-require "zil"
+require "zilscript"
 print("✓ ZIL loader initialized")
 
 -- Try to load a simple test file (not zork1.actions as it has dependencies)

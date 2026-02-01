@@ -6,7 +6,7 @@
 --   obj:method() is sugar for obj.method(obj) - passes self as first arg
 --   obj.method() is a plain function call - no self parameter
 -- This matches TypeScript's approach of simple function calls.
-local sourcemap = require 'zil.sourcemap'
+local sourcemap = require 'zilscript.sourcemap'
 
 local Buffer = {}
 

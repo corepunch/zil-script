@@ -6,7 +6,7 @@
 -- Helper functions are a standard compiler pattern - they centralize
 -- complex conversion logic rather than duplicating it everywhere.
 -- This is NOT "hacky" - it's good architectural practice.
-local utils = require 'zil.compiler.utils'
+local utils = require 'zilscript.compiler.utils'
 
 local Value = {}
 

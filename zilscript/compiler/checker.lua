@@ -2,8 +2,8 @@
 -- Inspired by TypeScript's binder and checker
 -- Tracks symbols, scopes, and performs semantic validation
 
-local diagnostics_module = require 'zil.compiler.diagnostics'
-local visitor_module = require 'zil.compiler.visitor'
+local diagnostics_module = require 'zilscript.compiler.diagnostics'
+local visitor_module = require 'zilscript.compiler.visitor'
 
 local Checker = {}
 

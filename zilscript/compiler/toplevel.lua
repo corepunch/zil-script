@@ -1,6 +1,6 @@
 -- Top-level compilation functions (ROUTINE, OBJECT, etc.)
-local utils = require 'zil.compiler.utils'
-local fields = require 'zil.compiler.fields'
+local utils = require 'zilscript.compiler.utils'
+local fields = require 'zilscript.compiler.fields'
 
 local TopLevel = {}
 
@@ -213,6 +213,7 @@ TopLevel.DIRECT_STATEMENTS = {
   GLOBAL = true,
   CONSTANT = true,
   SETG = true,
+  ["INSERT-FILE"] = true,
 }
 
 return TopLevel

@@ -1,5 +1,5 @@
 -- Field writing functions for ZIL objects
-local utils = require 'zil.compiler.utils'
+local utils = require 'zilscript.compiler.utils'
 
 local Fields = {}
 

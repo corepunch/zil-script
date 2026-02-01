@@ -1,7 +1,7 @@
 -- Test to verify line number accuracy
-local parser = require 'zil.parser'
-local compiler = require 'zil.compiler'
-local sourcemap = require 'zil.sourcemap'
+local parser = require 'zilscript.parser'
+local compiler = require 'zilscript.compiler'
+local sourcemap = require 'zilscript.sourcemap'
 
 -- Clear previous mappings
 sourcemap.clear()

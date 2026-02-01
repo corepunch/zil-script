@@ -1,9 +1,9 @@
 -- ZIL Runtime loader module
 -- Shared functionality for loading and executing ZIL files
 
-local parser = require 'zil.parser'
-local compiler = require 'zil.compiler'
-local sourcemap = require 'zil.sourcemap'
+local parser = require 'zilscript.parser'
+local compiler = require 'zilscript.compiler'
+local sourcemap = require 'zilscript.sourcemap'
 
 local M = {}
 
@@ -52,7 +52,7 @@ local function search_module(modname, env)
 		return found_lua, ".lua"
 	elseif found_zil then
 		-- ZIL file exists but loader not installed - error
-		error("ZIL file found but ZIL loader not installed. Call env.require('zil') first.")
+		error("ZIL file found but ZIL loader not installed. Call env.require('zilscript') first.")
 	end
 	
 	return nil, nil
@@ -67,9 +67,9 @@ function M.create_env_require(env)
 			return env._LOADED[modname]
 		end
 		
-		-- Special handling for 'zil' module - installs ZIL loader into this environment
-		if modname == 'zil' then
-			local base = require 'zil.base'
+		-- Special handling for 'zilscript' module - installs ZIL loader into this environment
+		if modname == 'zilscript' then
+			local base = require 'zilscript.base'
 			base.install_into(env)
 			env._LOADED[modname] = true
 			return true
@@ -135,6 +135,7 @@ function M.create_game_env()
 		os = os,
 		coroutine = coroutine,
 		setmetatable = setmetatable,
+		getmetatable = getmetatable,
 		ipairs = ipairs,
 		pairs = pairs,
 		table = table,
@@ -151,6 +152,7 @@ function M.create_game_env()
 		next = next,
 		translate = sourcemap.translate,
 		_LOADED = {},  -- Per-environment module cache
+		package = package,  -- Make package available for INCLUDE_FILE
 	}
 	
 	-- Create per-environment require function
@@ -189,7 +191,7 @@ local dir = PROJECTDIR or "."
 -- Load and execute the bootstrap file
 -- Returns true on success, false on failure
 function M.init(env, silent)
-	local file = assert(io.open(dir.."/zil/bootstrap.lua", "r"))
+	local file = assert(io.open(dir.."/zilscript/bootstrap.lua", "r"))
 	local bootstrap_code = file:read("*a")
 	file:close()
 	
