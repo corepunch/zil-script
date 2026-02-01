@@ -22,7 +22,12 @@ _G['io_write'] = io.write
 _G['io_flush'] = io.flush
 
 -- Load the test module from command line argument
-local test_module = arg[1] or "tests.test-simple-new"
+local test_module = arg[1]
+if not test_module then
+	print("Error: No test module specified")
+	print("Usage: lua5.4 run-zil-test.lua tests.test-name")
+	os.exit(1)
+end
 require(test_module)
 
 -- Run the GO routine

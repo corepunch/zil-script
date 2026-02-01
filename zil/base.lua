@@ -35,7 +35,7 @@ function M.to_lua(text, options)
 		return nil, "expecting string (got " .. type(text) .. ")"
 	end
 	
-	local ok, ast, err = pcall(parser.parse, text, options.filename or "unknown.zil")
+	local ok, ast, err = pcall(parser.parse, text, options.filename)
 	if not ok then
 		return nil, "Parse error: " .. tostring(ast)
 	end
@@ -43,7 +43,7 @@ function M.to_lua(text, options)
 		return nil, err or "Parse failed"
 	end
 	
-	local result = compiler.compile(ast, options.filename or "unknown.lua")
+	local result = compiler.compile(ast, options.filename)
 	if not result or not result.combined then
 		return nil, "Compilation failed"
 	end
