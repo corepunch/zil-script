@@ -69,30 +69,11 @@ Run with the generic test runner:
 lua5.4 run-zil-test.lua tests.my-test
 ```
 
-Or create a custom runner (tests/my-test.lua):
-```lua
-function ASSERT(condition, msg)
-    if condition then
-        print("[PASS] " .. (msg or "Assertion passed"))
-        return true
-    else
-        print("[FAIL] " .. (msg or "Assertion failed"))
-        return false
-    end
-end
-require "zil"
-require "zil.bootstrap"
-_G.io_write = io.write
-_G.io_flush = io.flush
-require "tests.my-test"
-GO()
-io.flush()
-```
-
 **Features:**
 - ASSERT checks condition and prints [PASS] or [FAIL]
 - Combine with ZIL operators: `==?`, `FSET?`, `LOC`, etc.
 - Simple, minimal setup
+- Only ZIL test files needed - one generic Lua runner for all tests
 
 For integration test documentation, see **[tests/TESTS.md](tests/TESTS.md)**.
 
