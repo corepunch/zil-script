@@ -3,9 +3,15 @@
 -- Usage: lua5.4 run-zil-test.lua test-name
 --   e.g., lua5.4 run-zil-test.lua tests.test-simple-new
 
--- Simple ASSERT that uses Lua's built-in assert
-function ASSERT(...)
-	return assert(...)
+-- ASSERT that checks condition and prints [PASS] or [FAIL]
+function ASSERT(condition, msg)
+	if condition then
+		print("[PASS] " .. (msg or "Assertion passed"))
+		return true
+	else
+		print("[FAIL] " .. (msg or "Assertion failed"))
+		return false
+	end
 end
 
 require "zil"

@@ -10,7 +10,15 @@ Enable writing ZIL test files without Lua wrappers.
 Created `run-zil-test.lua` - a generic runner for any ZIL test:
 
 ```lua
-function ASSERT(...) return assert(...) end
+function ASSERT(condition, msg)
+    if condition then
+        print("[PASS] " .. (msg or "Assertion passed"))
+        return true
+    else
+        print("[FAIL] " .. (msg or "Assertion failed"))
+        return false
+    end
+end
 require "zil"
 require "zil.bootstrap"
 _G.io_write = io.write
@@ -24,7 +32,7 @@ Usage: `lua5.4 run-zil-test.lua tests.my-test`
 
 ### ASSERT in Tests
 
-ASSERT is just Lua's `assert()` - simple and powerful:
+ASSERT checks condition and prints [PASS] or [FAIL]:
 
 ```zil
 <ASSERT T "Basic">
@@ -41,7 +49,6 @@ ASSERT is just Lua's `assert()` - simple and powerful:
 
 ## Benefits
 
-- **Minimal** - Just 10 lines for a test runner
-- **Simple** - ASSERT is Lua's assert
+- **Simple** - ASSERT prints [PASS]/[FAIL], no exceptions thrown
 - **Flexible** - Works with any ZIL expression
 - **Direct** - No special output modes needed

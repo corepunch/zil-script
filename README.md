@@ -71,7 +71,15 @@ lua5.4 run-zil-test.lua tests.my-test
 
 Or create a custom runner (tests/my-test.lua):
 ```lua
-function ASSERT(...) return assert(...) end
+function ASSERT(condition, msg)
+    if condition then
+        print("[PASS] " .. (msg or "Assertion passed"))
+        return true
+    else
+        print("[FAIL] " .. (msg or "Assertion failed"))
+        return false
+    end
+end
 require "zil"
 require "zil.bootstrap"
 _G.io_write = io.write
@@ -82,7 +90,7 @@ io.flush()
 ```
 
 **Features:**
-- ASSERT is just Lua's built-in `assert()` - works with any ZIL expression
+- ASSERT checks condition and prints [PASS] or [FAIL]
 - Combine with ZIL operators: `==?`, `FSET?`, `LOC`, etc.
 - Simple, minimal setup
 

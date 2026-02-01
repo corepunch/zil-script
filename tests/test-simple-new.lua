@@ -4,8 +4,14 @@ require "zil"
 require "zil.bootstrap"
 
 -- Set up ASSERT
-function ASSERT(...)
-	return assert(...)
+function ASSERT(condition, msg)
+	if condition then
+		print("[PASS] " .. (msg or "Assertion passed"))
+		return true
+	else
+		print("[FAIL] " .. (msg or "Assertion failed"))
+		return false
+	end
 end
 
 -- Set up direct output
