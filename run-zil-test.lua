@@ -3,13 +3,21 @@
 -- Usage: lua5.4 run-zil-test.lua test-name
 --   e.g., lua5.4 run-zil-test.lua tests.test-simple-new
 
+local GREEN = "\27[1;32m"
+local RED = "\27[1;31m"
+local NEUTRAL = "\27[36m"
+local RESET = "\27[0m"
+
+local success = true
+
 -- ASSERT that checks condition and prints [PASS] or [FAIL]
 function ASSERT(condition, msg)
 	if condition then
-		print("[PASS] " .. (msg or "Assertion passed"))
+		print(GREEN .. "[PASS] " .. (msg or "Assertion passed") .. RESET)
 		return true
 	else
-		print("[FAIL] " .. (msg or "Assertion failed"))
+		success = false
+		print(RED .. "[FAIL] " .. (msg or "Assertion failed") .. RESET)
 		return false
 	end
 end
@@ -28,6 +36,8 @@ if not test_module then
 	print("Usage: lua5.4 run-zil-test.lua tests.test-name")
 	os.exit(1)
 end
+
+print("Running ZIL test: " .. test_module)
 require(test_module)
 
 -- Run the GO routine
@@ -35,3 +45,5 @@ GO()
 
 -- Flush any remaining output
 io.flush()
+
+os.exit(success and 0 or 1)

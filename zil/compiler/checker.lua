@@ -15,7 +15,8 @@ Checker.SymbolKind = {
   LOCAL = "local",
   PARAMETER = "parameter",
   OBJECT = "object",
-  ROOM = "room"
+  ROOM = "room",
+  INSERT_FILE = "insert-file",
 }
 
 -- Create a new symbol

@@ -903,6 +903,15 @@ function OPENABLEQ(OBJ)
 		return FSETQ(OBJ, DOORBIT) or FSETQ(OBJ, CONTBIT)
 end
 
+function CREATE_COROUTINE(func)
+	print("Creating coroutine for function:", func)
+	return coroutine.create(func)
+end
+
+function YIELD_COROUTINE(co, param)
+	return coroutine.yield(co, param)
+end
+
 -- === Finalize PREPOSITIONS table ===
 -- Convert PREPOSITIONS from hash table to array format expected by PREP-FIND
 function FINALIZE_PREPOSITIONS()

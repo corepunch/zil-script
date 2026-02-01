@@ -17,7 +17,7 @@
         (DESC "apple")
         (FLAGS TAKEBIT)>
 
-<ROUTINE TEST-SIMPLE ()
+<ROUTINE GO ()
     <TELL "Testing ASSERT function..." CR CR>
     
     ;"Basic assertions using ASSERT"
@@ -42,6 +42,3 @@
     <ASSERT <==? <LOC ,APPLE> ,ADVENTURER> "Apple in inventory">
     
     <TELL CR "All tests completed!" CR>>
-
-<ROUTINE GO ()
-    <TEST-SIMPLE>>
