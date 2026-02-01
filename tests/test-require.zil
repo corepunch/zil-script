@@ -1,0 +1,7 @@
+<ROUTINE TEST-HELLO ()
+  <TELL "Hello from require test!" CR>>
+
+<GLOBAL TEST-VALUE 42>
+
+<ROUTINE GET-TEST-VALUE ()
+  <RETURN ,TEST-VALUE>>
