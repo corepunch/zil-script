@@ -1,3 +1,10 @@
+<INSERT-FILE "zork1/globals">
+<INSERT-FILE "zork1/clock">
+<INSERT-FILE "zork1/parser">
+<INSERT-FILE "zork1/verbs">
+<INSERT-FILE "zork1/syntax">
+<INSERT-FILE "zork1/main">
+
 <DIRECTIONS NORTH SOUTH EAST WEST>
 <CONSTANT RELEASEID 1>
 
@@ -60,3 +67,14 @@
     <V-LOOK>
     <MAIN-LOOP>
     <AGAIN>>
+
+<GLOBAL CO <CO-CREATE GO>>
+
+<ROUTINE RUN-TEST ()
+    <ASSERT "Take a nearby object" <CO-RESUME ,CO "take apple" T> <==? <LOC ,APPLE> ,ADVENTURER>>
+    <ASSERT-TEXT "apple" <CO-RESUME ,CO "inventory">>
+    <ASSERT "Drop the apple" <CO-RESUME ,CO "drop apple" T> <N==? <LOC ,APPLE> ,ADVENTURER>>
+    <ASSERT "Take another object" <CO-RESUME ,CO "take banana" T> <==? <LOC ,BANANA> ,ADVENTURER>>
+    <ASSERT-TEXT "valiant" <CO-RESUME ,CO "take desk">>
+    <ASSERT-TEXT "banana" <CO-RESUME ,CO "inventory">>
+    <TELL CR "All tests completed!" CR>>

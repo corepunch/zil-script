@@ -1,3 +1,10 @@
+<INSERT-FILE "zork1/globals">
+<INSERT-FILE "zork1/clock">
+<INSERT-FILE "zork1/parser">
+<INSERT-FILE "zork1/verbs">
+<INSERT-FILE "zork1/syntax">
+<INSERT-FILE "zork1/main">
+
 <DIRECTIONS NORTH SOUTH>
 <CONSTANT RELEASEID 1>
 
@@ -50,3 +57,16 @@
     <V-LOOK>
     <MAIN-LOOP>
     <AGAIN>>
+
+<GLOBAL CO <CO-CREATE GO>>
+
+<ROUTINE RUN-TEST ()
+    <ASSERT-TEXT "pitch black" <CO-RESUME ,CO "look">>
+    <ASSERT "Light flashlight" <CO-RESUME ,CO "light flashlight" T> <FSET? ,FLASHLIGHT ,ONBIT>>
+    <ASSERT-TEXT "Start Room" <CO-RESUME ,CO "look">>
+    <ASSERT "Extinguish flashlight" <CO-RESUME ,CO "extinguish flashlight" T> <NOT <FSET? ,FLASHLIGHT ,ONBIT>>>
+    <ASSERT-TEXT "pitch black" <CO-RESUME ,CO "look">>
+    <ASSERT "Light flashlight again" <CO-RESUME ,CO "light flashlight" T> <FSET? ,FLASHLIGHT ,ONBIT>>
+    <ASSERT "Take the lantern" <CO-RESUME ,CO "take lantern" T> <==? <LOC ,LANTERN> ,ADVENTURER>>
+    <ASSERT-TEXT "flashlight" <CO-RESUME ,CO "inventory">>
+    <TELL CR "All tests completed!" CR>>

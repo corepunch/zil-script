@@ -1,3 +1,10 @@
+<INSERT-FILE "zork1/globals">
+<INSERT-FILE "zork1/clock">
+<INSERT-FILE "zork1/parser">
+<INSERT-FILE "zork1/verbs">
+<INSERT-FILE "zork1/syntax">
+<INSERT-FILE "zork1/main">
+
 <DIRECTIONS NORTH SOUTH>
 <VERSION ZIP>
 <CONSTANT RELEASEID 1>
@@ -51,3 +58,12 @@
         <MOVE ,WINNER ,HERE>
         <V-LOOK>
         <MAIN-LOOP>>
+
+<GLOBAL CO <CO-CREATE GO>>
+
+<ROUTINE RUN-TEST ()
+    <ASSERT "Turn valve WITH TURNBIT - should succeed" <CO-RESUME ,CO "turn valve" T> ,VALVE-TURNED>
+    <SETG VALVE-TURNED <>>
+    <ASSERT "Turn valve with bare hands - should NOT turn" <CO-RESUME ,CO "turn valve" T> <NOT ,VALVE-TURNED>>
+    <ASSERT "Turn wheel WITHOUT TURNBIT - should fail" <CO-RESUME ,CO "turn wheel" T> <NOT ,WHEEL-TURNED>>
+    <TELL CR "All tests completed!" CR>>

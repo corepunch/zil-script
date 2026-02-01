@@ -1,3 +1,10 @@
+<INSERT-FILE "zork1/globals">
+<INSERT-FILE "zork1/clock">
+<INSERT-FILE "zork1/parser">
+<INSERT-FILE "zork1/verbs">
+<INSERT-FILE "zork1/syntax">
+<INSERT-FILE "zork1/main">
+
 <DIRECTIONS NORTH SOUTH EAST WEST UP DOWN IN OUT>
 <CONSTANT RELEASEID 1>
 
@@ -42,3 +49,17 @@
     <V-LOOK>
     <MAIN-LOOP>
     <AGAIN>>
+
+<GLOBAL CO <CO-CREATE GO>>
+
+<ROUTINE RUN-TEST ()
+    <ASSERT-TEXT "Start Room" <CO-RESUME ,CO "look">>
+    <ASSERT "Move north to hallway" <CO-RESUME ,CO "north" T> <==? ,HERE ,HALLWAY>>
+    <ASSERT-TEXT "Hallway" <CO-RESUME ,CO "look">>
+    <ASSERT "Move north again to closet" <CO-RESUME ,CO "north" T> <==? ,HERE ,CLOSET>>
+    <ASSERT-TEXT "Closet" <CO-RESUME ,CO "look">>
+    <ASSERT "Move south back to hallway" <CO-RESUME ,CO "south" T> <==? ,HERE ,HALLWAY>>
+    <ASSERT "Move south to start room" <CO-RESUME ,CO "south" T> <==? ,HERE ,STARTROOM>>
+    <ASSERT "Use IN direction" <CO-RESUME ,CO "in" T> <==? ,HERE ,HALLWAY>>
+    <ASSERT "Use OUT direction" <CO-RESUME ,CO "out" T> <==? ,HERE ,STARTROOM>>
+    <TELL CR "All tests completed!" CR>>
