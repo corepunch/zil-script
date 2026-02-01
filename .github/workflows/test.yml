@@ -33,23 +33,32 @@ jobs:
     - name: Run Horror walkthrough tests
       run: lua tests/run_tests.lua tests/horror-walkthrough.lua
 
+    - name: Run horror failing conditions tests
+      run: lua5.4 run-zil-test.lua tests.test-horror-failures
+
     - name: Run parser/runtime tests - directions
-      run: lua tests/run_tests.lua tests/test-directions.lua
+      run: lua5.4 run-zil-test.lua tests.test-directions
     
     - name: Run parser/runtime tests - take
-      run: lua tests/run_tests.lua tests/test-take.lua
+      run: lua5.4 run-zil-test.lua tests.test-take
     
     - name: Run parser/runtime tests - containers
-      run: lua tests/run_tests.lua tests/test-containers.lua
+      run: lua5.4 run-zil-test.lua tests.test-containers
     
     - name: Run parser/runtime tests - light
-      run: lua tests/run_tests.lua tests/test-light.lua
+      run: lua5.4 run-zil-test.lua tests.test-light
     
     - name: Run parser/runtime tests - pronouns
-      run: lua tests/run_tests.lua tests/test-pronouns.lua
+      run: lua5.4 run-zil-test.lua tests.test-pronouns
     
     - name: Run parser/runtime tests - clock
-      run: lua tests/run_tests.lua tests/test-clock.lua
+      run: lua5.4 run-zil-test.lua tests.test-clock
     
     - name: Run test assertion tests
-      run: lua tests/run_tests.lua tests/test-assertions.lua
+      run: lua5.4 run-zil-test.lua tests.test-assertions
+    
+    - name: Run test check commands tests
+      run: lua5.4 run-zil-test.lua tests.test-check-commands
+    
+    - name: Run horror test helpers
+      run: lua5.4 run-zil-test.lua tests.test-horror-helpers
