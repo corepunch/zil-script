@@ -11,7 +11,7 @@ print("=== Source Mapping Demonstration ===\n")
 
 -- Create environment and load bootstrap
 local env = runtime.create_game_env()
-runtime.load_bootstrap(env, true)
+runtime.init(env, true)
 
 -- Create a ZIL file that will generate an error
 local demo_zil = [[

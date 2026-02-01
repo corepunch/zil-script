@@ -188,7 +188,7 @@ local dir = PROJECTDIR or "."
 
 -- Load and execute the bootstrap file
 -- Returns true on success, false on failure
-function M.load_bootstrap(env, silent)
+function M.init(env, silent)
 	local file = assert(io.open(dir.."/zil/bootstrap.lua", "r"))
 	local bootstrap_code = file:read("*a")
 	file:close()

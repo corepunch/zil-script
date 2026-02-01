@@ -17,7 +17,7 @@ local modules = {
 local env = runtime.create_game_env()
 
 -- Load bootstrap
-if not runtime.load_bootstrap(env) then
+if not runtime.init(env) then
 	print("Failed to load bootstrap")
 	os.exit(1)
 end

@@ -45,7 +45,7 @@ print("────────────────────────�
 
 -- Create environment
 local env = runtime.create_game_env()
-runtime.load_bootstrap(env, true)
+runtime.init(env, true)
 
 -- Load the code
 local chunk = load(result.combined, '@zil_verify_fix.lua', 't', env)

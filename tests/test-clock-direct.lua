@@ -14,7 +14,7 @@ local modules = {
 }
 
 local env = runtime.create_game_env()
-runtime.load_bootstrap(env)
+runtime.init(env)
 env.require('zil')
 runtime.load_modules(env, modules)
 

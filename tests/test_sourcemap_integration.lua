@@ -15,7 +15,7 @@ local env = runtime.create_game_env()
 
 -- Load bootstrap
 print("\n1. Loading bootstrap...")
-assert(runtime.load_bootstrap(env, true), "Bootstrap should load")
+assert(runtime.init(env, true), "Bootstrap should load")
 
 -- Create a simple ZIL file with a known error
 local test_zil = [[

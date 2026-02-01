@@ -75,7 +75,7 @@ print()
 
 -- Create environment and load bootstrap
 local env = runtime.create_game_env()
-runtime.load_bootstrap(env, true)
+runtime.init(env, true)
 
 -- Load the compiled code
 print("⚙️  Loading compiled code...")

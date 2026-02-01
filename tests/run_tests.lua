@@ -19,10 +19,7 @@ local function run_test_file(test_file_path)
 	local game = runtime.create_game_env()
 	
 	-- Load bootstrap
-	if not runtime.load_bootstrap(game, true) then
-		print("Failed to load bootstrap")
-		return false
-	end
+	assert(runtime.init(game, true), "Failed to load bootstrap")
 
 	local seed = 0
 	local rnd = [[local n=]] .. tostring(seed) .. [[
@@ -33,43 +30,18 @@ local function run_test_file(test_file_path)
 	end]]
 	runtime.execute(rnd, 'random', game, false)
 	
-	-- Helper function to convert file paths to module names
-	-- e.g., "zork1/globals.zil" -> "zork1.globals"
-	local function file_to_module(filepath)
-		return filepath:gsub("%.zil$", ""):gsub("/", ".")
-	end
-	
 	-- Load ZIL files or modules
 	-- Support both old 'files' format and new 'modules' format
 	if test_config.modules then
 		-- New module-based approach
 		-- First install ZIL support in the environment
-		game.require('zil')
-		
-		if not runtime.load_modules(game, test_config.modules, {silent = true}) then
-			print("Failed to load modules")
-			return false
-		end
+		game.require('zil')		
+		assert(runtime.load_modules(game, test_config.modules, {silent = true}), "Failed to load modules")
 	elseif test_config.files then
 		-- Old file-based approach (for backward compatibility)
-		if not runtime.load_zil_files(test_config.files, game, {silent = true}) then
-			print("Failed to load ZIL files")
-			return false
-		end
+		assert(runtime.load_zil_files(test_config.files, game, {silent = true}), "Failed to load ZIL files")
 	else
-		-- Default files if neither specified
-		local default_files = {
-			"zork1/globals.zil",
-			"zork1/parser.zil",
-			"zork1/verbs.zil",
-			"zork1/syntax.zil",
-			"adventure/horror.zil",
-			"zork1/main.zil",
-		}
-		if not runtime.load_zil_files(default_files, game, {silent = true}) then
-			print("Failed to load default ZIL files")
-			return false
-		end
+		assert(false, "Failed to load default ZIL files")
 	end
 	
 	-- Create game as a coroutine
