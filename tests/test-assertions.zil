@@ -48,8 +48,6 @@
     ;"Unlock and open drawer - the unlock command both unlocks AND opens it"
     <ASSERT "Unlock drawer with key (opens it)" <CO-RESUME ,CO "unlock drawer with key" T> <FSET? ,BOTTOM-DRAWER ,OPENBIT>>
     
-    ;"Check drawer IS open now (should pass)"
-    
     ;"Check ledger location (should pass - ledger should be in drawer)"
     <ASSERT "Ledger is in drawer" <==? <LOC ,PATIENT-LEDGER> ,BOTTOM-DRAWER>>
     
