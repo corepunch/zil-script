@@ -87,6 +87,24 @@ end
 assert(found_again, "Loader should be re-inserted")
 print("✓ Loader re-inserted successfully\n")
 
+-- Test 9: Verify require "zil" doesn't insert loader multiple times
+print("Test 9: Testing that require 'zil' is idempotent...")
+local count_before = 0
+for _, loader in ipairs(loaders) do
+	if loader == zil.zil_loader then
+		count_before = count_before + 1
+	end
+end
+require "zil"  -- Call again
+local count_after = 0
+for _, loader in ipairs(loaders) do
+	if loader == zil.zil_loader then
+		count_after = count_after + 1
+	end
+end
+assert(count_before == count_after, "Loader should not be inserted multiple times")
+print("✓ Loader count unchanged after second require 'zil'\n")
+
 -- Clean up
 package.path = original_path
 

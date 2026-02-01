@@ -8,8 +8,8 @@ local sourcemap = require 'zil.sourcemap'
 
 local M = {}
 
--- Directory separator (Unix-style by default)
-M.dirsep = "/"
+-- Directory separator (OS-appropriate)
+M.dirsep = package.config:sub(1,1)
 
 -- Create package.zilpath from package.path
 -- Converts .lua patterns to .zil patterns
@@ -67,7 +67,7 @@ function M.zil_loader(name)
 	end
 	
 	if not file then
-		return nil, "Could not find zil file"
+		return nil, "Could not find zil file for module: " .. name
 	end
 	
 	-- Read the .zil file
