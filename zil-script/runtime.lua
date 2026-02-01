@@ -1,9 +1,9 @@
 -- ZIL Runtime loader module
 -- Shared functionality for loading and executing ZIL files
 
-local parser = require 'zil.parser'
-local compiler = require 'zil.compiler'
-local sourcemap = require 'zil.sourcemap'
+local parser = require 'zil-script.parser'
+local compiler = require 'zil-script.compiler'
+local sourcemap = require 'zil-script.sourcemap'
 
 local M = {}
 
@@ -69,7 +69,7 @@ function M.create_env_require(env)
 		
 		-- Special handling for 'zil' module - installs ZIL loader into this environment
 		if modname == 'zil' then
-			local base = require 'zil.base'
+			local base = require 'zil-script.base'
 			base.install_into(env)
 			env._LOADED[modname] = true
 			return true
@@ -189,7 +189,7 @@ local dir = PROJECTDIR or "."
 -- Load and execute the bootstrap file
 -- Returns true on success, false on failure
 function M.init(env, silent)
-	local file = assert(io.open(dir.."/zil/bootstrap.lua", "r"))
+	local file = assert(io.open(dir.."/zil-script/bootstrap.lua", "r"))
 	local bootstrap_code = file:read("*a")
 	file:close()
 	

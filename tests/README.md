@@ -76,7 +76,7 @@ See [TESTS.md](TESTS.md) for complete documentation and examples.
 
 - **Test Runner** (`run_tests.lua`): Loads ZIL files, executes commands, displays results
 - **Unit Framework** (`unit/test_framework.lua`): Assertions, test organization, reporting
-- **Assertion Commands**: Built into `zil/bootstrap.lua` for state verification
+- **Assertion Commands**: Built into `zil-script/bootstrap.lua` for state verification
 
 For detailed information about all available tests, writing new tests, and test commands, see **[TESTS.md](TESTS.md)**.
 

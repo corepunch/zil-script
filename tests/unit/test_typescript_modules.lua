@@ -2,11 +2,11 @@
 -- Unit tests for new TypeScript-inspired compiler modules
 
 local test = require 'tests.unit.test_framework'
-local parser = require 'zil.parser'
-local visitor_module = require 'zil.compiler.visitor'
-local diagnostics_module = require 'zil.compiler.diagnostics'
-local emitter_module = require 'zil.compiler.emitter'
-local checker_module = require 'zil.compiler.checker'
+local parser = require 'zil-script.parser'
+local visitor_module = require 'zil-script.compiler.visitor'
+local diagnostics_module = require 'zil-script.compiler.diagnostics'
+local emitter_module = require 'zil-script.compiler.emitter'
+local checker_module = require 'zil-script.compiler.checker'
 
 -- Visitor Tests
 test.describe("Visitor Module", function(t)

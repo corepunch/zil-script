@@ -80,7 +80,7 @@ For integration test documentation, see **[tests/TESTS.md](tests/TESTS.md)**.
 ## Project Structure
 
 - `main.lua` - Main entry point for running the game
-- `zil/` - ZIL runtime implementation
+- `zil-script/` - ZIL runtime implementation
   - `init.lua` - Main module for require system (loads when you `require "zil"`)
   - `base.lua` - Core loader functionality for .zil files
   - `bootstrap.lua` - Core runtime functions and globals (includes ASSERT function)
@@ -185,15 +185,15 @@ zil.insert_loader()  -- Re-insert the ZIL loader
 
 The ZIL runtime is modular and well-tested, with a compiler architecture inspired by TypeScript:
 
-- **Parser** (`zil/parser.lua`): Parses ZIL source code into AST
-- **Compiler** (`zil/compiler/`): Compiles ZIL AST to Lua code (12 focused modules)
+- **Parser** (`zil-script/parser.lua`): Parses ZIL source code into AST
+- **Compiler** (`zil-script/compiler/`): Compiles ZIL AST to Lua code (12 focused modules)
   - **Core modules**: `init`, `buffer`, `utils`, `value`, `fields`, `forms`, `toplevel`, `print_node`
   - **TypeScript-inspired modules** ✨: `visitor`, `diagnostics`, `emitter`, `checker`
-- **Runtime** (`zil/runtime.lua`): Executes compiled Lua code
-- **Bootstrap** (`zil/bootstrap.lua`): Core runtime functions and globals
-- **Source Mapping** (`zil/sourcemap.lua`): Maps Lua errors back to ZIL source locations
+- **Runtime** (`zil-script/runtime.lua`): Executes compiled Lua code
+- **Bootstrap** (`zil-script/bootstrap.lua`): Core runtime functions and globals
+- **Source Mapping** (`zil-script/sourcemap.lua`): Maps Lua errors back to ZIL source locations
 
-See [zil/compiler/README.md](zil/compiler/README.md) for detailed compiler module documentation.
+See [zil-script/compiler/README.md](zil-script/compiler/README.md) for detailed compiler module documentation.
 
 ### Key Features
 

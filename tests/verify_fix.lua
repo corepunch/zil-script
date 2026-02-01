@@ -2,12 +2,12 @@
 -- This test demonstrates that line numbers are now accurate
 
 -- Initialize ZIL require system
-require 'zil'
+require 'zil-script'
 
-local parser = require 'zil.parser'
-local compiler = require 'zil.compiler'
-local sourcemap = require 'zil.sourcemap'
-local runtime = require 'zil.runtime'
+local parser = require 'zil-script.parser'
+local compiler = require 'zil-script.compiler'
+local sourcemap = require 'zil-script.sourcemap'
+local runtime = require 'zil-script.runtime'
 
 print("=== Verification of Off-By-One Fix ===\n")
 

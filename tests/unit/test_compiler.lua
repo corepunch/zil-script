@@ -2,8 +2,8 @@
 -- Unit tests for zil/compiler.lua
 
 local test = require 'tests.unit.test_framework'
-local parser = require 'zil.parser'
-local compiler = require 'zil.compiler'
+local parser = require 'zil-script.parser'
+local compiler = require 'zil-script.compiler'
 
 test.describe("Compiler - Basic Compilation", function(t)
 	t.it("should compile simple routine", function(assert)

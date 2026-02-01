@@ -6,4 +6,4 @@
 -- Note: This compatibility shim can be removed in a future version
 -- For now, it ensures existing code that requires 'zil.compiler' continues to work
 
-return require 'zil.compiler.init'
+return require 'zil-script.compiler.init'

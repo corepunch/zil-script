@@ -1,5 +1,5 @@
-local runtime = require 'zil.runtime'
-local test_format = require 'zil.test_format'
+local runtime = require 'zil-script.runtime'
+local test_format = require 'zil-script.test_format'
 
 local modules = {
   "zork1.globals",

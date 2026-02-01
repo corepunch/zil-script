@@ -1,8 +1,8 @@
 -- Example: Using the Integrated TypeScript-Inspired Compiler
 -- This demonstrates how the compiler now uses diagnostics and optional semantic checking
 
-local parser = require 'zil.parser'
-local compiler = require 'zil.compiler'
+local parser = require 'zil-script.parser'
+local compiler = require 'zil-script.compiler'
 
 print("=== Example 1: Basic Compilation (Backward Compatible) ===\n")
 

@@ -6,9 +6,9 @@ print("=== Real-World Source Mapping Example ===\n")
 print("This demonstrates how error messages now reference ZIL files instead of Lua files.\n")
 
 -- Initialize ZIL require system
-require 'zil'
+require 'zil-script'
 
-local runtime = require 'zil.runtime'
+local runtime = require 'zil-script.runtime'
 
 -- Create a realistic ZIL program with a bug
 local example_zil = [[
@@ -64,8 +64,8 @@ print("────────────────────────�
 print()
 
 -- Compile it
-local parser = require 'zil.parser'
-local compiler = require 'zil.compiler'
+local parser = require 'zil-script.parser'
+local compiler = require 'zil-script.compiler'
 
 print("🔧 Compiling ZIL to Lua...")
 local ast = parser.parse_file(filename)
@@ -105,7 +105,7 @@ if not ok then
   print()
   
   -- The error has already been translated by the runtime
-  local sourcemap = require 'zil.sourcemap'
+  local sourcemap = require 'zil-script.sourcemap'
   local translated = sourcemap.translate(tostring(err))
   
   print("💥 ERROR MESSAGE:")

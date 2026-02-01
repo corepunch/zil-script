@@ -1,5 +1,5 @@
 -- Test source mapping functionality
-local sourcemap = require 'zil.sourcemap'
+local sourcemap = require 'zil-script.sourcemap'
 
 print("Testing source mapping module...")
 

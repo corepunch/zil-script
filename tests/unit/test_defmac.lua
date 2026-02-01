@@ -1,7 +1,7 @@
 -- Test DEFMAC and FORM support
 local test = require 'tests.unit.test_framework'
-local parser = require 'zil.parser'
-local compiler = require 'zil.compiler'
+local parser = require 'zil-script.parser'
+local compiler = require 'zil-script.compiler'
 
 test.describe("DEFMAC and FORM Tests", function(t)
 

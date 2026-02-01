@@ -1,7 +1,7 @@
 -- Direct tests for clock/interrupt system
 -- These tests verify the QUEUE, INT, and CLOCKER functions work correctly
 
-local runtime = require 'zil.runtime'
+local runtime = require 'zil-script.runtime'
 
 print("=== Clock System Direct Tests ===\n")
 

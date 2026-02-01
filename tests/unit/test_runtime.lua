@@ -2,7 +2,7 @@
 -- Unit tests for zil/runtime.lua
 
 local test = require 'tests.unit.test_framework'
-local runtime = require 'zil.runtime'
+local runtime = require 'zil-script.runtime'
 
 test.describe("Runtime - Environment Creation", function(t)
 	t.it("should create game environment", function(assert)

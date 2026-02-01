@@ -3,10 +3,10 @@
 -- Usage: lua tests/run_tests.lua [test_file]
 
 -- Initialize ZIL require system
-require 'zil'
+require 'zil-script'
 
-local runtime = require 'zil.runtime'
-local test_format = require 'zil.test_format'
+local runtime = require 'zil-script.runtime'
+local test_format = require 'zil-script.test_format'
 
 local function run_test_file(test_file_path)
 	print("=== Running test: " .. test_file_path .. " ===\n")
