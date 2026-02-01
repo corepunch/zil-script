@@ -90,7 +90,7 @@ test-check-commands:
 
 test-horror-helpers:
 	@echo "Running horror test helpers..."
-	lua tests/run_tests.lua tests/horror-test-helpers.lua
+	@lua5.4 run-zil-test.lua tests.test-horror-helpers
 
 test-horror-partial:
 	@echo "Running horror partial walkthrough tests..."
