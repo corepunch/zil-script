@@ -18,7 +18,7 @@ return {
 		"zork1.parser",
 		"zork1.verbs",
 		"zork1.syntax",
-		"zork1/main.zil",
+		"zork1.main",
 	},
 	commands = {
 		{
