@@ -35,7 +35,7 @@ local function run_test_file(test_file_path)
 	if test_config.modules then
 		-- New module-based approach
 		-- First install ZIL support in the environment
-		game.require('zil')		
+		game.require('zil-script')		
 		assert(runtime.load_modules(game, test_config.modules, {silent = true}), "Failed to load modules")
 	elseif test_config.files then
 		-- Old file-based approach (for backward compatibility)

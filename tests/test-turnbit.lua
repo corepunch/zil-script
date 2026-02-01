@@ -23,7 +23,7 @@ if not runtime.init(env) then
 end
 
 -- Install ZIL support and load modules
-env.require('zil')
+env.require('zil-script')
 if not runtime.load_modules(env, modules) then
 	print("Failed to load modules")
 	os.exit(1)

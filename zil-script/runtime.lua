@@ -52,7 +52,7 @@ local function search_module(modname, env)
 		return found_lua, ".lua"
 	elseif found_zil then
 		-- ZIL file exists but loader not installed - error
-		error("ZIL file found but ZIL loader not installed. Call env.require('zil') first.")
+		error("ZIL file found but ZIL loader not installed. Call env.require('zil-script') first.")
 	end
 	
 	return nil, nil
@@ -67,8 +67,8 @@ function M.create_env_require(env)
 			return env._LOADED[modname]
 		end
 		
-		-- Special handling for 'zil' module - installs ZIL loader into this environment
-		if modname == 'zil' then
+		-- Special handling for 'zil-script' module - installs ZIL loader into this environment
+		if modname == 'zil-script' then
 			local base = require 'zil-script.base'
 			base.install_into(env)
 			env._LOADED[modname] = true

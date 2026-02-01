@@ -15,7 +15,7 @@ local modules = {
 
 local env = runtime.create_game_env()
 runtime.init(env)
-env.require('zil')
+env.require('zil-script')
 runtime.load_modules(env, modules)
 
 -- Helper to run code in env
