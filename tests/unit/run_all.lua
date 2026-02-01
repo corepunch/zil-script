@@ -1,6 +1,9 @@
 #!/usr/bin/env lua
 -- Run all unit tests
 
+-- Initialize ZIL require system
+require 'zil'
+
 local test_files = {
 	"tests/unit/test_parser.lua",
 	"tests/unit/test_compiler.lua",

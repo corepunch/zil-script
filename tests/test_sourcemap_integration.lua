@@ -1,4 +1,7 @@
 -- Integration test for source mapping
+-- Initialize ZIL require system
+require 'zil'
+
 local runtime = require 'zil.runtime'
 local sourcemap = require 'zil.sourcemap'
 

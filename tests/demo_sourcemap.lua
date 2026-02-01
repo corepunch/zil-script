@@ -1,6 +1,9 @@
 -- Demonstration of source mapping feature
 -- This shows how Lua errors are automatically translated to ZIL source locations
 
+-- Initialize ZIL require system
+require 'zil'
+
 local runtime = require 'zil.runtime'
 local sourcemap = require 'zil.sourcemap'
 

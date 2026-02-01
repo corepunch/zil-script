@@ -1,3 +1,6 @@
+-- Initialize ZIL require system
+require 'zil'
+
 local runtime = require 'zil.runtime'
 local test_format = require 'zil.test_format'
 

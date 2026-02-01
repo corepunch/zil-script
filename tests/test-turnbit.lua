@@ -1,4 +1,7 @@
 -- Test TURNBIT flag functionality
+-- Initialize ZIL require system
+require 'zil'
+
 local runtime = require 'zil.runtime'
 
 print("=== TURNBIT Flag Test ===")

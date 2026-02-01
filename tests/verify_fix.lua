@@ -1,6 +1,9 @@
 -- Verification test for the off-by-one fix
 -- This test demonstrates that line numbers are now accurate
 
+-- Initialize ZIL require system
+require 'zil'
+
 local parser = require 'zil.parser'
 local compiler = require 'zil.compiler'
 local sourcemap = require 'zil.sourcemap'
