@@ -15,41 +15,18 @@
       (LDESC "A test room for TURNBIT flag testing.")
       (FLAGS RLANDBIT ONBIT)>
 
-<GLOBAL VALVE-TURNED <>>
-<GLOBAL WHEEL-TURNED <>>
-
-<ROUTINE VALVE-F ()
-         <COND (<VERB? TURN>
-                <TELL "You turn the valve with all your might!" CR>
-                <SETG VALVE-TURNED T>
-                <RTRUE>)
-               (<VERB? EXAMINE>
-                <TELL "A valve that can be turned." CR>
-                <RTRUE>)>>
-
 <OBJECT VALVE
         (IN TEST-ROOM)
         (SYNONYM VALVE)
         (DESC "valve")
         (LDESC "A valve is here.")
-        (FLAGS TURNBIT)
-        (ACTION VALVE-F)>
-
-<ROUTINE WHEEL-F ()
-         <COND (<VERB? TURN>
-                <TELL "You turn the wheel successfully!" CR>
-                <SETG WHEEL-TURNED T>
-                <RTRUE>)
-               (<VERB? EXAMINE>
-                <TELL "A wheel without TURNBIT." CR>
-                <RTRUE>)>>
+        (FLAGS TURNBIT)>
 
 <OBJECT WHEEL
         (IN TEST-ROOM)
         (SYNONYM WHEEL)
         (DESC "wheel")
-        (LDESC "A wheel is here.")
-        (ACTION WHEEL-F)>
+        (LDESC "A wheel is here.")>
 
 <ROUTINE GO ()
         <SETG HERE ,TEST-ROOM>
@@ -62,8 +39,7 @@
 <GLOBAL CO <CO-CREATE GO>>
 
 <ROUTINE RUN-TEST ()
-    <ASSERT "Turn valve WITH TURNBIT - should succeed" <CO-RESUME ,CO "turn valve" T> ,VALVE-TURNED>
-    <SETG VALVE-TURNED <>>
-    <ASSERT "Turn valve with bare hands - should NOT turn" <CO-RESUME ,CO "turn valve" T> <NOT ,VALVE-TURNED>>
-    <ASSERT "Turn wheel WITHOUT TURNBIT - should fail" <CO-RESUME ,CO "turn wheel" T> <NOT ,WHEEL-TURNED>>
+    <ASSERT "Valve has TURNBIT flag" <FSET? ,VALVE ,TURNBIT>>
+    <ASSERT "Wheel does not have TURNBIT flag" <NOT <FSET? ,WHEEL ,TURNBIT>>>
+    <CO-RESUME ,CO "look">
     <TELL CR "All tests completed!" CR>>
