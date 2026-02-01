@@ -262,8 +262,17 @@ end
 -- Returns true if all modules loaded successfully
 function M.load_modules(env, modules, options)
 	options = options or {}
+	local seen = {}
 	
 	for _, modname in ipairs(modules) do
+		-- If we've seen this module before in this load_modules call,
+		-- clear it from the cache to force a reload
+		-- This maintains backward compatibility with tests that load the same file twice
+		if seen[modname] then
+			env._LOADED[modname] = nil
+		end
+		seen[modname] = true
+		
 		local ok, err = pcall(env.require, modname)
 		if not ok then
 			if not options.silent then
