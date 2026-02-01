@@ -102,7 +102,7 @@ test-horror:
 
 test-horror-failures:
 	@echo "Running horror failing conditions tests..."
-	lua tests/run_tests.lua tests/horror-failures.lua
+	@lua5.4 run-zil-test.lua tests.test-horror-failures
 
 test-horror-all: test-horror-helpers test-horror-partial test-horror-failures test-horror
 	@echo "All horror tests completed!"
@@ -121,5 +121,6 @@ test-pure-zil:
 	@lua5.4 run-zil-test.lua tests.test-assertions
 	@lua5.4 run-zil-test.lua tests.test-check-commands
 	@lua5.4 run-zil-test.lua tests.test-horror-helpers
+	@lua5.4 run-zil-test.lua tests.test-horror-failures
 	@lua5.4 run-zil-test.lua tests.zork1-walkthrough
 	@echo "All pure ZIL tests completed!"
