@@ -252,8 +252,8 @@ function M.load_zil_files(files, env, options)
 		end
 	end
 	
-	-- Finalize PREPOSITIONS table after all files are loaded
-	M.execute("if FINALIZE_PREPOSITIONS then FINALIZE_PREPOSITIONS() end", 'finalize', env, options.silent)
+	-- REMOVED: FINALIZE_PREPOSITIONS call - prepositions now use pre-allocated array format
+	-- M.execute("if FINALIZE_PREPOSITIONS then FINALIZE_PREPOSITIONS() end", 'finalize', env, options.silent)
 	
 	return true
 end
@@ -288,8 +288,8 @@ function M.load_modules(env, modules, options)
 		end
 	end
 	
-	-- Finalize PREPOSITIONS table after all modules are loaded
-	M.execute("if FINALIZE_PREPOSITIONS then FINALIZE_PREPOSITIONS() end", 'finalize', env, options.silent)
+	-- REMOVED: FINALIZE_PREPOSITIONS call - prepositions now use pre-allocated array format
+	-- M.execute("if FINALIZE_PREPOSITIONS then FINALIZE_PREPOSITIONS() end", 'finalize', env, options.silent)
 	
 	return true
 end

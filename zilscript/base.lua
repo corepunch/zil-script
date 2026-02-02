@@ -8,6 +8,12 @@ local sourcemap = require 'zilscript.sourcemap'
 
 local M = {}
 
+-- Configuration options
+M.config = {
+	-- When true, saves compiled .lua files for loaded modules (for debugging)
+	save_lua = false
+}
+
 -- Directory separator (OS-appropriate)
 M.dirsep = package.config:sub(1,1)
 
@@ -78,6 +84,16 @@ function M.zil_loader(name)
 	local lua_code, err = M.to_lua(text, { filename = file_path })
 	if not lua_code then
 		error(file_path .. ": " .. err)
+	end
+	
+	-- Optionally save the compiled Lua file (for debugging)
+	if M.config.save_lua then
+		local lua_filename = file_path:gsub("%.zil$", "") .. ".zil.lua"
+		local lua_file = io.open(lua_filename, "w")
+		if lua_file then
+			lua_file:write(lua_code)
+			lua_file:close()
+		end
 	end
 	
 	-- Load the compiled Lua code

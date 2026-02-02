@@ -39,7 +39,10 @@ VERBS   = nil
 QUEUES  = {}
 ROOMS   = {}
 PROPERTIES = {}
-PREPOSITIONS = {}
+-- PREPOSITIONS: Pre-allocated array format [0]=count, [1]=word_ptr1, [2]=index1, ...
+-- Maximum 128 prepositions, format: index_count, then pairs of (word_ptr, original_index)
+PREPOSITIONS = {[0] = 0}  -- Initialize with count = 0
+PREPOSITIONS._hash = {}   -- Helper hash for quick lookup during population
 ADJECTIVES = {}
 ACTIONS = {}
 PREACTIONS = {}
@@ -214,6 +217,21 @@ end
 local function register(tbl, value)
 	local n = 0
 	if type(value) == "string" then value = value:lower() end
+	
+	-- Special handling for PREPOSITIONS to maintain array format
+	if tbl == PREPOSITIONS then
+		if tbl._hash[value] then
+			return tbl._hash[value]
+		end
+		-- Count existing entries in the hash
+		for k, v in pairs(tbl._hash) do n = n + 1 end
+		local index = n + 1
+		tbl._hash[value] = index
+		-- Will be filled in learn() when word_ptr is available
+		return index
+	end
+	
+	-- Original logic for other tables
 	for k, v in pairs(tbl) do n = n + 1 end
 	if not tbl[value] then tbl[value] = n + 1 end
 	return tbl[value]
@@ -557,6 +575,19 @@ local function learn(word, atom, value)
 	for _, syn in ipairs(cache.synonyms[word] or {}) do
 		mem:write(mem:read(8, cache.words[word]), cache.words[syn:lower()])
 	end
+	
+	-- Special handling for PREPOSITIONS: populate array format immediately
+	if atom == PSQPREPOSITION and value and type(value) == 'number' then
+		local word_ptr = cache.words[word]
+		if word_ptr and PREPOSITIONS._hash[word] then
+			-- Add to array format: [0]=count, [1]=word_ptr1, [2]=index1, [3]=word_ptr2, [4]=index2, ...
+			local count = PREPOSITIONS[0]
+			PREPOSITIONS[count * 2 + 1] = word_ptr
+			PREPOSITIONS[count * 2 + 2] = value
+			PREPOSITIONS[0] = count + 1
+		end
+	end
+	
 	return value or cache.words[word]
 end
 
@@ -920,38 +951,39 @@ function CO_RESUME(co, param, only_flag)
 end
 
 -- === Finalize PREPOSITIONS table ===
--- Convert PREPOSITIONS from hash table to array format expected by PREP-FIND
-function FINALIZE_PREPOSITIONS()
-	-- Guard against being called multiple times
-	if PREPOSITIONS[0] ~= nil then
-		return  -- Already finalized
-	end
-	
-	-- Build array format: [0]=count, [1]=word_ptr1, [2]=index1, [3]=word_ptr2, [4]=index2, ...
-	local temp = {}
-	for word, index in pairs(PREPOSITIONS) do
-		if type(word) == "string" then
-			temp[index] = word
-		end
-	end
-	
-	-- Convert to array format, counting only successfully added entries
-	local array = {}
-	local count = 0
-	for index, word in ipairs(temp) do
-		local word_ptr = cache.words[word]
-		if word_ptr then
-			count = count + 1
-			array[count * 2 - 1] = word_ptr  -- word pointer at odd indices
-			array[count * 2] = index          -- index at even indices
-		end
-	end
-	
-	array[0] = count  -- Store actual count at index 0
-	
-	-- Replace PREPOSITIONS with the array
-	PREPOSITIONS = array
-end
+-- REMOVED: PREPOSITIONS now uses pre-allocated array format that's populated during learn()
+-- The array format [0]=count, [1]=word_ptr1, [2]=index1, ... is built incrementally
+-- function FINALIZE_PREPOSITIONS()
+-- 	-- Guard against being called multiple times
+-- 	if PREPOSITIONS[0] ~= nil then
+-- 		return  -- Already finalized
+-- 	end
+-- 	
+-- 	-- Build array format: [0]=count, [1]=word_ptr1, [2]=index1, [3]=word_ptr2, [4]=index2, ...
+-- 	local temp = {}
+-- 	for word, index in pairs(PREPOSITIONS) do
+-- 		if type(word) == "string" then
+-- 			temp[index] = word
+-- 		end
+-- 	end
+-- 	
+-- 	-- Convert to array format, counting only successfully added entries
+-- 	local array = {}
+-- 	local count = 0
+-- 	for index, word in ipairs(temp) do
+-- 		local word_ptr = cache.words[word]
+-- 		if word_ptr then
+-- 			count = count + 1
+-- 			array[count * 2 - 1] = word_ptr  -- word pointer at odd indices
+-- 			array[count * 2] = index          -- index at even indices
+-- 		end
+-- 	end
+-- 	
+-- 	array[0] = count  -- Store actual count at index 0
+-- 	
+-- 	-- Replace PREPOSITIONS with the array
+-- 	PREPOSITIONS = array
+-- end
 
 -- === File Inclusion ===
 -- INSERT_FILE loads and executes a ZIL file
