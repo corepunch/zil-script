@@ -116,10 +116,6 @@ test-horror-helpers:
 	@echo "Running horror test helpers..."
 	@lua5.4 run-zil-test.lua tests.test-horror-helpers
 
-test-horror-partial:
-	@echo "Running horror partial walkthrough tests..."
-	lua tests/run_tests.lua tests/horror-partial.lua
-
 test-horror:
 	@echo "Running horror complete walkthrough tests..."
 	lua5.4 run-zil-test.lua tests.horror-walkthrough
