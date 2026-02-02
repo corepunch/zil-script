@@ -67,14 +67,4 @@
     <ASSERT "TEMP-VAR should be 77 after LET" <==? ,TEMP-VAR 77>>
     <TELL "LET scope is properly limited" CR CR>
     
-    <TELL CR "=== All LET Tests Passed ===" CR>>
-
-<ROUTINE GO ()
-    <SETG HERE ,TESTROOM>
-    <SETG LIT T>
-    <SETG WINNER ,ADVENTURER>
-    <SETG PLAYER ,WINNER>
-    <MOVE ,WINNER ,HERE>
-    <RUN-TEST>>
-
-<GLOBAL CO <CO-CREATE GO>>
+    <TELL CR "=== All LET Tests Passed ===" CR>
