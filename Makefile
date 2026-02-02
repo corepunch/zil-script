@@ -1,5 +1,5 @@
 # Targets
-.PHONY: test test-all test-unit test-integration test-zork1 test-parser test-containers test-directions test-light test-pronouns test-take test-turnbit test-clock test-clock-direct test-assertions test-check-commands test-horror-helpers test-horror-partial test-horror test-horror-failures test-horror-all test-pure-zil help
+.PHONY: test test-all test-unit test-integration test-zork1 test-parser test-containers test-directions test-light test-pronouns test-take test-turnbit test-clock test-clock-direct test-assertions test-check-commands test-horror-helpers test-horror-partial test-horror test-horror-failures test-horror-all test-pure-zil test-simple-new test-insert-file test-let help
 
 help:
 	@echo "Available targets:"
@@ -13,6 +13,8 @@ help:
 	@echo "  test-zork1        - Run Zork1 integration tests"
 	@echo "  test-parser       - Run all parser/runtime tests"
 	@echo "  test-pure-zil     - Run pure ZIL tests (using ASSERT functions)"
+	@echo ""
+	@echo "Individual parser/runtime tests:"
 	@echo "  test-containers   - Run container interaction tests"
 	@echo "  test-directions   - Run direction/movement tests"
 	@echo "  test-light        - Run light source tests"
@@ -23,6 +25,11 @@ help:
 	@echo "  test-clock-direct - Run clock system direct tests (ZIL)"
 	@echo "  test-assertions   - Run assertion tests"
 	@echo "  test-check-commands - Run check commands tests"
+	@echo "  test-simple-new   - Run simple assertion tests"
+	@echo "  test-insert-file  - Run INSERT-FILE tests"
+	@echo "  test-let          - Run LET form tests"
+	@echo ""
+	@echo "Horror game tests:"
 	@echo "  test-horror-helpers - Run horror test helpers"
 	@echo "  test-horror-partial - Run horror partial walkthrough"
 	@echo "  test-horror-failures - Run horror failing conditions tests"
@@ -50,7 +57,7 @@ test-zork1:
 	@echo "Running Zork1 integration tests..."
 	@lua5.4 run-zil-test.lua tests.zork1-walkthrough
 
-test-parser: test-containers test-directions test-light test-pronouns test-take test-turnbit test-clock test-clock-direct
+test-parser: test-containers test-directions test-light test-pronouns test-take test-turnbit test-clock test-clock-direct test-assertions test-check-commands test-simple-new test-insert-file test-let
 	@echo "All parser/runtime tests completed!"
 
 test-containers:
@@ -93,6 +100,18 @@ test-check-commands:
 	@echo "Running check commands tests..."
 	@lua5.4 run-zil-test.lua tests.test-check-commands
 
+test-simple-new:
+	@echo "Running simple assertion tests..."
+	@lua5.4 run-zil-test.lua tests.test-simple-new
+
+test-insert-file:
+	@echo "Running INSERT-FILE tests..."
+	@lua5.4 run-zil-test.lua tests.test-insert-file
+
+test-let:
+	@echo "Running LET form tests..."
+	@lua5.4 run-zil-test.lua tests.test-let
+
 test-horror-helpers:
 	@echo "Running horror test helpers..."
 	@lua5.4 run-zil-test.lua tests.test-horror-helpers
@@ -116,6 +135,7 @@ test-pure-zil:
 	@echo "Running pure ZIL tests..."
 	@lua5.4 run-zil-test.lua tests.test-simple-new
 	@lua5.4 run-zil-test.lua tests.test-insert-file
+	@lua5.4 run-zil-test.lua tests.test-let
 	@lua5.4 run-zil-test.lua tests.test-containers
 	@lua5.4 run-zil-test.lua tests.test-directions
 	@lua5.4 run-zil-test.lua tests.test-light

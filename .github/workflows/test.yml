@@ -33,6 +33,18 @@ jobs:
     - name: Run horror failing conditions tests
       run: lua5.4 run-zil-test.lua tests.test-horror-failures
 
+    - name: Run horror test helpers
+      run: lua5.4 run-zil-test.lua tests.test-horror-helpers
+
+    - name: Run parser/runtime tests - simple assertions
+      run: lua5.4 run-zil-test.lua tests.test-simple-new
+
+    - name: Run parser/runtime tests - insert file
+      run: lua5.4 run-zil-test.lua tests.test-insert-file
+
+    - name: Run parser/runtime tests - LET form
+      run: lua5.4 run-zil-test.lua tests.test-let
+
     - name: Run parser/runtime tests - directions
       run: lua5.4 run-zil-test.lua tests.test-directions
     
@@ -47,6 +59,9 @@ jobs:
     
     - name: Run parser/runtime tests - pronouns
       run: lua5.4 run-zil-test.lua tests.test-pronouns
+
+    - name: Run parser/runtime tests - turnbit
+      run: lua5.4 run-zil-test.lua tests.test-turnbit
     
     - name: Run parser/runtime tests - clock
       run: lua5.4 run-zil-test.lua tests.test-clock
@@ -59,6 +74,3 @@ jobs:
     
     - name: Run test check commands tests
       run: lua5.4 run-zil-test.lua tests.test-check-commands
-    
-    - name: Run horror test helpers
-      run: lua5.4 run-zil-test.lua tests.test-horror-helpers
