@@ -189,7 +189,7 @@ end
 -- Load and execute the bootstrap file
 -- Returns true on success, false on failure
 function M.init(env, silent)
-	local ok, err = pcall(env.require, 'zilscript.bootstrap')
+	local ok, err = pcall(function() return env.require('zilscript.bootstrap') end)
 	if not ok then
 		if not silent then
 			local translated_err = sourcemap.translate(tostring(err))
