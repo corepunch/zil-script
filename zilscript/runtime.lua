@@ -75,6 +75,34 @@ function M.create_env_require(env)
 			return true
 		end
 		
+		-- Special handling for 'zilscript.bootstrap' module - load bootstrap file directly
+		if modname == 'zilscript.bootstrap' then
+			local file = assert(io.open(dir.."/zilscript/bootstrap.lua", "r"))
+			local code = file:read("*a")
+			file:close()
+			
+			-- Execute the code in the environment
+			env._G = env
+			local chunk, err = load(code, '@zilscript/bootstrap.lua', 't', env)
+			if not chunk then
+				error("Error loading module '" .. modname .. "': " .. err)
+			end
+			
+			local ok, result = pcall(chunk)
+			if not ok then
+				local translated_err = sourcemap.translate(tostring(result))
+				error("Runtime error in module '" .. modname .. "': " .. translated_err)
+			end
+			
+			-- Cache the result
+			if result == nil then
+				result = true  -- Modules that don't return anything default to true
+			end
+			env._LOADED[modname] = result
+			
+			return result
+		end
+		
 		-- Search for the module file
 		local filepath, filetype = search_module(modname, env)
 		
@@ -189,14 +217,7 @@ end
 -- Load and execute the bootstrap file
 -- Returns true on success, false on failure
 function M.init(env, silent)
-	local ok, err = pcall(function() return env.require('zilscript.bootstrap') end)
-	if not ok then
-		if not silent then
-			local translated_err = sourcemap.translate(tostring(err))
-			print("Bootstrap error: " .. translated_err)
-		end
-		return false
-	end
+	env.require('zilscript.bootstrap')
 	
 	if not silent then
 		print("Loaded bootstrap")
