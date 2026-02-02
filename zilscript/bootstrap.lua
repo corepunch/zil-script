@@ -332,128 +332,10 @@ function JIGS_UP(msg)
 	-- os.exit(1)
 end
 
--- === Test Helper Functions ===
--- These functions can be called from tests to verify game state
-
--- Helper function to find an object by name
-local function find_object_by_name(obj_name)
-	-- Convert hyphens to underscores for ZIL naming convention
-	obj_name = obj_name:gsub("-", "_")
-	for n, o in ipairs(OBJECTS) do
-		if o.NAME == obj_name then
-			return n, o
-		end
-	end
-	return nil, nil
-end
-
--- ANSI color codes for test output
-local GREEN = "\27[1;32m"
-local RED = "\27[1;31m"
-local RESET = "\27[0m"
-
-local function assert_flag(obj_name, flag_name)	
-	local obj_num = find_object_by_name(obj_name)
-	local flag = _G[flag_name]
-	assert(obj_num, "Object not found: " .. obj_name)	
-	assert(flag, "Unknown flag: " .. flag_name)	
-	assert(FSETQ(obj_num, flag), "Object does not have flag: " .. flag_name)
-end
-
-local function assert_no_flag(obj_name, flag_name)
-	local obj_num = find_object_by_name(obj_name)
-	local flag = _G[flag_name]
-	assert(obj_num, "Object not found: " .. obj_name)
-	assert(flag, "Unknown flag: " .. flag_name)
-	assert(not FSETQ(obj_num, flag), "Object has flag (expected NOT to have): " .. flag_name)
-end
-
-local function assert_location(obj_name, location_name)
-	local obj_num = find_object_by_name(obj_name)
-	local loc_num = find_object_by_name(location_name)
-	assert(obj_num, "Object not found: " .. obj_name)	
-	assert(loc_num, "Location not found: " .. location_name)
-	local actual_loc = LOC(obj_num)
-	if actual_loc ~= loc_num then
-		local actual_name = actual_loc and OBJECTS[actual_loc] and OBJECTS[actual_loc].NAME or tostring(actual_loc)
-		error(obj_name .. " is not at the specified location: " .. location_name .. " (actually at: " .. actual_name .. ")")
-	end
-end
-
-local function assert_inventory(obj_name)
-	assert_location(obj_name, "ADVENTURER")
-end
-
-local function assert_lose(obj_name)
-	local obj_num = find_object_by_name(obj_name)
-	local loc_num = find_object_by_name("ADVENTURER")
-	assert(obj_num, "Object not found: " .. obj_name)	
-	assert(loc_num, "Location not found: " .. "ADVENTURER")
-	assert(LOC(obj_num) ~= loc_num, obj_name .. " is still in inventory")
-end
-
-local function assert_here(location_name)
-	assert_location("ADVENTURER", location_name)
-end
-
-local function assert_global(var_name)
-	assert(_G[var_name], "Global variable not set: " .. var_name)
-end
-
-local function set_start_location(location_name)
-	local loc_num = find_object_by_name(location_name)
-	local adv_num = find_object_by_name("ADVENTURER")
-	assert(loc_num, "Location not found: " .. location_name)
-	assert(adv_num, "ADVENTURER not found")
-	-- Update global state
-	_G.HERE = loc_num
-	_G.WINNER = adv_num
-	-- Move the adventurer
-	MOVE(adv_num, loc_num)
-end
-
-local function move_object_to_location(obj_name, location_name)
-	local obj_num = find_object_by_name(obj_name)
-	local loc_num = find_object_by_name(location_name)
-	assert(obj_num, "Object not found: " .. obj_name)
-	assert(loc_num, "Location not found: " .. location_name)
-	-- Move the object to the location
-	MOVE(obj_num, loc_num)
-	-- Special handling for THIEF: clear INVISIBLE flag so they can be interacted with
-	if obj_name:upper():gsub("-", "_") == "THIEF" and _G.INVISIBLE then
-		FCLEAR(obj_num, _G.INVISIBLE)
-	end
-end
-
-local test_cmds = {
-	["test:flag"] = { assert_flag, 3 },
-	["test:no-flag"] = { assert_no_flag, 3 },
-	["test:no_flag"] = { assert_no_flag, 3 },  -- underscore version for test runner
-	["test:here"] = { assert_here, 2 },
-	["test:location"] = { assert_location, 3 },
-	["test:take"] = { assert_inventory, 2 },
-	["test:global"] = { assert_global, 2 },
-	["test:lose"] = { assert_lose, 2 },
-	["test:start-location"] = { set_start_location, 2 },
-	["test:move"] = { move_object_to_location, 3 },
-}
-
 local routes = {
 	['room-items'] = add_items,
 	['room-exits'] = add_exits,
 }
-
--- Parse test command and execute appropriate check
-local function handle_test_command(cmd)
-	local parts = {}
-	for part in cmd:gmatch("%S+") do table.insert(parts, part) end
-	local cmd_info = test_cmds[parts[1]]
-	if cmd_info and #parts >= cmd_info[2] then
-		return cmd_info[1](table.unpack(parts, 2))
-	else
-		TELL(RED, "[TEST] Unknown test command: ", cmd, RESET, CR)
-	end
-end
 
 -- Modified READ to yield with output
 function READ(inbuf, parse)
@@ -462,13 +344,6 @@ function READ(inbuf, parse)
 	::restart_read::
 	if routes[s] then
 		s = coroutine.yield(routes[s](HERE))
-		goto restart_read
-	end
-	-- Handle test commands (starting with "test:")
-	if s and s:match("^test:") then
-		local ok, err = pcall(handle_test_command, s)
-		io_flush()
-		s = coroutine.yield(not ok and err or nil)
 		goto restart_read
 	end
 	-- Handle nil input (e.g., EOF)
