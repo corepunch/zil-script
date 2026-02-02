@@ -92,6 +92,8 @@ if not call_ok then
   end
 else
   print("\n❌ FAILED: Expected an error but function succeeded")
+  os.exit(1)
 end
 
 print("\n✅ Integration test completed!")
+os.exit(0)

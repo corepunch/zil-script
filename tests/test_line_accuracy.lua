@@ -47,3 +47,6 @@ end
 print("\n\nExpected mappings (approximate):")
 print("The PRINC calls on ZIL lines 2, 3, 4 should map to their corresponding Lua lines")
 print("If we see Lua line X mapping to ZIL line Y+1, we have an off-by-one error")
+
+-- Exit successfully
+os.exit(0)

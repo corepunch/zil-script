@@ -74,3 +74,6 @@ end
 
 print("\n✅ Test completed - verify that ZIL lines map to the correct Lua lines")
 print("   The PRINC calls should be on the lines they claim to be from")
+
+-- Exit successfully
+os.exit(0)
