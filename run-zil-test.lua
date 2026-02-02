@@ -35,8 +35,10 @@ function ASSERT_TEXT(expected, ok, actual)
 	end
 end
 
-require "zilscript"
+local zil = require "zilscript"
 require "zilscript.bootstrap"
+
+-- zil.config.save_lua = true
 
 -- Set up direct output (bypass ZIL's buffering system)
 -- _G['io_write'] = io.write
