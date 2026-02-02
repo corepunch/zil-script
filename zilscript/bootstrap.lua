@@ -404,6 +404,10 @@ MULL = MUL
 -- Object / room ops
 local function getobj(num) return OBJECTS[num] end
 
+-- VALUE function: identity function for ZIL's <VALUE var> form
+-- In ZIL, <VALUE var> gets the runtime value of a variable
+function VALUE(x) return x end
+
 function LOC(obj) return GETP(obj, PQLOC) end
 function INQ(obj, room) return GETP(obj, PQLOC) == room end
 function MOVE(obj, dest) PUTP(obj, PQLOC, dest) end
