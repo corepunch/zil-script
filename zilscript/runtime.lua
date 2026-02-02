@@ -7,8 +7,6 @@ local sourcemap = require 'zilscript.sourcemap'
 
 local M = {}
 
-local dir = PROJECTDIR or "."
-
 -- Helper function to convert module name to file path
 -- e.g., "zork1.globals" -> "zork1/globals"
 local function module_to_path(modname)
@@ -186,7 +184,7 @@ function M.execute(code, name, env, silent)
 	return true
 end
 
-local dir = PROJECTDIR or "."
+local dir = PROJECTDIR and PROJECTDIR.."/lib/zilscript" or "."
 
 -- Load and execute the bootstrap file
 -- Returns true on success, false on failure
