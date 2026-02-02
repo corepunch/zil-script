@@ -186,20 +186,22 @@ function M.execute(code, name, env, silent)
 	return true
 end
 
-local dir = PROJECTDIR or "."
-
 -- Load and execute the bootstrap file
 -- Returns true on success, false on failure
 function M.init(env, silent)
-	local file = assert(io.open(dir.."/zilscript/bootstrap.lua", "r"))
-	local bootstrap_code = file:read("*a")
-	file:close()
+	local ok, err = pcall(env.require, 'zilscript.bootstrap')
+	if not ok then
+		if not silent then
+			local translated_err = sourcemap.translate(tostring(err))
+			print("Bootstrap error: " .. translated_err)
+		end
+		return false
+	end
 	
-	local success = M.execute(bootstrap_code, 'bootstrap', env, silent)
-	if success and not silent then
+	if not silent then
 		print("Loaded bootstrap")
 	end
-	return success
+	return true
 end
 
 -- Compile and execute a list of ZIL files
