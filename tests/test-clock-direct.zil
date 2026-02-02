@@ -55,6 +55,9 @@
     <COND (,TEST-HAS-RUN <RTRUE>)>
     <SETG TEST-HAS-RUN T>
     
+    ;"Set P-WON to enable interrupt processing (not just demons)"
+    <SETG P-WON T>
+    
     <TELL "=== Clock System Direct Tests ===" CR CR>
     
     ;"Test 1: Verify globals are defined"
@@ -64,7 +67,7 @@
     <ASSERT "C_DEMONS should be 180" <==? ,C-DEMONS 180>>
     <ASSERT "C_INTS should be 180" <==? ,C-INTS 180>>
     <ASSERT "C_INTLEN should be 6" <==? ,C-INTLEN 6>>
-    <ASSERT "C_ENABLEDQ should be 0" <==? ,C-ENABLEDQ 0>>
+    <ASSERT "C_ENABLED_Q should be 0" <==? ,C-ENABLED? 0>>
     <ASSERT "C_TICK should be 1" <==? ,C-TICK 1>>
     <ASSERT "C_RTN should be 2" <==? ,C-RTN 2>>
     <ASSERT "CLOCK_WAIT should be false/nil" <NOT ,CLOCK-WAIT>>
@@ -86,15 +89,14 @@
     ;"Test 4: Test INT function - create a demon"
     <TELL "Test 4: Test INT function (demon)" CR>
     <TELL "  Calling INT to create demon for TEST-INTERRUPT" CR>
-    <LET ((CINT <INT ,TEST-INTERRUPT T>))
+    <LET ((CINT <INT <ROUTINE-NUM ,TEST-INTERRUPT> T>))
       <ASSERT "INT should return a demon entry" CINT>
       <TELL "INT created demon entry" CR CR>>
     
     ;"Test 5: Test QUEUE function"
     <TELL "Test 5: Test QUEUE function" CR>
-    <LET ((DEMO <INT ,TEST-INTERRUPT T>))
-      <ASSERT "QUEUE should return the interrupt entry" <QUEUE ,TEST-INTERRUPT 5>>
-      <TELL "QUEUE set tick count" CR CR>>
+    <ASSERT "QUEUE should return the interrupt entry" <QUEUE <ROUTINE-NUM ,TEST-INTERRUPT> 5>>
+    <TELL "QUEUE set tick count" CR CR>
     
     ;"Test 6: Test CLOCKER increments MOVES"
     <TELL "Test 6: Test CLOCKER increments MOVES" CR>
@@ -115,26 +117,24 @@
     ;"Test 8: Test demon firing when tick counts down"
     <TELL "Test 8: Test demon firing" CR>
     <SETG TEST8-FIRED 0>
-    <LET ((DEMO8 <INT ,TEST8-DEMON T>))
-      <TELL "  Enabling and queuing demon with tick=2" CR>
-      <ENABLE .DEMO8>
-      <QUEUE ,TEST8-DEMON 2>
-      
-      ;"First CLOCKER - should not fire (2->1)"
-      <CLOCKER>
-      <ASSERT "Demon should not fire on first CLOCKER" <==? ,TEST8-FIRED 0>>
-      <TELL "  Tick=2: Demon not fired" CR>
-      
-      ;<TELL "Second CLOCKER - should fire (1->0)" CR>
-      <CLOCKER>
-      <ASSERT "Demon should fire on second CLOCKER" <G? ,TEST8-FIRED 0>>
-      <TELL "  Tick=1: Demon fired" CR>>
+    <TELL "  Enabling and queuing demon with tick=2" CR>
+    <ENABLE <QUEUE <ROUTINE-NUM ,TEST8-DEMON> 2>>
+    
+    ;"First CLOCKER - should not fire (2->1)"
+    <CLOCKER>
+    <ASSERT "Demon should not fire on first CLOCKER" <==? ,TEST8-FIRED 0>>
+    <TELL "  Tick=2: Demon not fired" CR>
+    
+    ;<TELL "Second CLOCKER - should fire (1->0)" CR>
+    <CLOCKER>
+    <ASSERT "Demon should fire on second CLOCKER" <G? ,TEST8-FIRED 0>>
+    <TELL "  Tick=1: Demon fired" CR>
     <TELL "Demon fires at correct time" CR CR>
     
     ;"Test 9: Test INT finds existing demon"
     <TELL "Test 9: Test INT finds existing demon" CR>
-    <LET ((FIRST <INT ,TEST-DEMON1 T>)
-          (SECOND <INT ,TEST-DEMON1 T>))
+    <LET ((FIRST <INT <ROUTINE-NUM ,TEST-DEMON1> T>)
+          (SECOND <INT <ROUTINE-NUM ,TEST-DEMON1> T>))
       <ASSERT "INT should return same entry for same function" <==? .FIRST .SECOND>>
       <TELL "INT reuses existing demon entry" CR CR>>
     
@@ -142,22 +142,18 @@
     <TELL "Test 10: Test multiple demons" CR>
     <SETG COUNT1 0>
     <SETG COUNT2 0>
-    <LET ((D1 <INT ,TEST-DEMON1 T>)
-          (D2 <INT ,TEST-DEMON2 T>))
-      <ENABLE .D1>
-      <ENABLE .D2>
-      <QUEUE ,TEST-DEMON1 1>
-      <QUEUE ,TEST-DEMON2 2>
-      
-      ;"First CLOCKER - d1 should fire (1->0), d2 should not (2->1)"
-      <CLOCKER>
-      <ASSERT "First demon should fire" <==? ,COUNT1 1>>
-      <ASSERT "Second demon should not fire yet" <==? ,COUNT2 0>>
-      
-      ;<TELL "Second CLOCKER - d2 should fire (1->0)" CR>
-      <CLOCKER>
-      <ASSERT "Second demon should fire" <==? ,COUNT2 1>>
-      <TELL "Multiple demons work correctly" CR CR>>
+    <ENABLE <QUEUE <ROUTINE-NUM ,TEST-DEMON1> 1>>
+    <ENABLE <QUEUE <ROUTINE-NUM ,TEST-DEMON2> 2>>
+    
+    ;"First CLOCKER - d1 should fire (1->0), d2 should not (2->1)"
+    <CLOCKER>
+    <ASSERT "First demon should fire" <==? ,COUNT1 1>>
+    <ASSERT "Second demon should not fire yet" <==? ,COUNT2 0>>
+    
+    ;<TELL "Second CLOCKER - d2 should fire (1->0)" CR>
+    <CLOCKER>
+    <ASSERT "Second demon should fire" <==? ,COUNT2 1>>
+    <TELL "Multiple demons work correctly" CR CR>
     
     ;"Test 11: Test demon tracking"
     <TELL "Test 11: Test demon tracking" CR>
@@ -168,22 +164,10 @@
     ;"Test 12: Test tick=0 demons don't fire"
     <TELL "Test 12: Test tick=0 demons don't fire" CR>
     <SETG ZERO-FIRED <>>
-    <LET ((D12 <INT ,TEST-ZERO-DEMON T>))
-      <ENABLE .D12>
-      <QUEUE ,TEST-ZERO-DEMON 0>
-      
-      <CLOCKER>
-      <ASSERT "Demon with tick=0 should not fire" <NOT ,ZERO-FIRED>>
-      <TELL "Tick=0 demons don't fire" CR CR>>
+    <ENABLE <QUEUE <ROUTINE-NUM ,TEST-ZERO-DEMON> 0>>
+    
+    <CLOCKER>
+    <ASSERT "Demon with tick=0 should not fire" <NOT ,ZERO-FIRED>>
+    <TELL "Tick=0 demons don't fire" CR CR>
     
     <TELL CR "=== All Clock System Tests Passed ===" CR>
-
-<ROUTINE GO ()
-    <SETG HERE ,TESTROOM>
-    <SETG LIT T>
-    <SETG WINNER ,ADVENTURER>
-    <SETG PLAYER ,WINNER>
-    <MOVE ,WINNER ,HERE>
-    <RUN-TEST>>
-
-<GLOBAL CO <CO-CREATE GO>>
