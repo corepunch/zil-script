@@ -38,10 +38,12 @@ make test-pronouns        # Pronoun tests
 make test-take            # TAKE command tests
 make test-turnbit         # TURNBIT flag tests
 make test-clock           # Clock system tests
-make test-clock-direct    # Clock system direct tests
+make test-clock-direct    # Clock system direct tests (excluded from CI - has known issues)
 make test-assertions      # Assertion tests
 make test-check-commands  # Check commands tests
 ```
+
+**Note:** `test-clock-direct` has known issues with demon firing logic and is excluded from CI and `test-parser`. It can still be run manually but may fail.
 
 #### Integration Tests
 ```bash

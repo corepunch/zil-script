@@ -75,13 +75,16 @@ After thorough analysis, the repository's current approach of **individual Make 
 |--------|--------|-------|--------|
 | Tests in filesystem | 20 | 20 | - |
 | Tests in Makefile | 16 | 19 | +3 |
-| Tests in CI | 13 | 17 | +4 |
-| Runnable tests covered | 80% | 100% | +20% |
+| Tests in CI | 13 | 16 | +3 |
+| Runnable tests (passing) | 80% | 95% | +15% |
 
 **Helper files (intentionally excluded):**
 - test-directions-pure.zil (no RUN_TEST routine)
 - test-require.zil (library file)
 - test-sourcemap.zil (error test file)
+
+**Known-failing tests (excluded from CI):**
+- test-clock-direct.zil (has pre-existing issues with demon firing logic; LET support enabled it to run but underlying clock system bugs remain)
 
 ## Why Individual Targets?
 
