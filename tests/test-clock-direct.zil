@@ -73,9 +73,9 @@
     
     ;"Test 3: Verify functions are defined and callable"
     <TELL "Test 3: Verify clock functions are callable" CR>
-    <ASSERT "INT should be a routine" <ROUTINE? <INT>>>
-    <ASSERT "QUEUE should be a routine" <ROUTINE? <QUEUE>>>
-    <ASSERT "CLOCKER should be a routine" <ROUTINE? <CLOCKER>>>
+    <ASSERT "INT should be a routine" <==? <type INT> "function">>
+    <ASSERT "QUEUE should be a routine" <==? <type QUEUE> "function">>
+    <ASSERT "CLOCKER should be a routine" <==? <type CLOCKER> "function">>
     <TELL "All functions are callable" CR CR>
     
     ;"Test 4: Test INT function - create a demon"

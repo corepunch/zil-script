@@ -251,10 +251,7 @@ function M.load_zil_files(files, env, options)
 			print("Loaded " .. basename)
 		end
 	end
-	
-	-- REMOVED: FINALIZE_PREPOSITIONS call - prepositions now use pre-allocated array format
-	-- M.execute("if FINALIZE_PREPOSITIONS then FINALIZE_PREPOSITIONS() end", 'finalize', env, options.silent)
-	
+		
 	return true
 end
 
