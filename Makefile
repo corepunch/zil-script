@@ -1,5 +1,5 @@
 # Targets
-.PHONY: test test-all test-unit test-integration test-zork1 test-parser test-containers test-directions test-light test-pronouns test-take test-turnbit test-clock test-assertions test-check-commands test-horror-helpers test-horror-partial test-horror test-horror-failures test-horror-all test-pure-zil help
+.PHONY: test test-all test-unit test-integration test-zork1 test-parser test-containers test-directions test-light test-pronouns test-take test-turnbit test-clock test-clock-direct test-assertions test-check-commands test-horror-helpers test-horror-partial test-horror test-horror-failures test-horror-all test-pure-zil help
 
 help:
 	@echo "Available targets:"
@@ -20,6 +20,7 @@ help:
 	@echo "  test-take         - Run TAKE command tests"
 	@echo "  test-turnbit      - Run TURNBIT flag tests"
 	@echo "  test-clock        - Run clock system tests"
+	@echo "  test-clock-direct - Run clock system direct tests (ZIL)"
 	@echo "  test-assertions   - Run assertion tests"
 	@echo "  test-check-commands - Run check commands tests"
 	@echo "  test-horror-helpers - Run horror test helpers"
@@ -49,7 +50,7 @@ test-zork1:
 	@echo "Running Zork1 integration tests..."
 	lua tests/run_tests.lua tests/zork1_walkthrough.lua
 
-test-parser: test-containers test-directions test-light test-pronouns test-take test-turnbit test-clock
+test-parser: test-containers test-directions test-light test-pronouns test-take test-turnbit test-clock test-clock-direct
 	@echo "All parser/runtime tests completed!"
 
 test-containers:
@@ -80,6 +81,10 @@ test-clock:
 	@echo "Running clock system tests..."
 	@lua5.4 run-zil-test.lua tests.test-clock
 
+test-clock-direct:
+	@echo "Running clock system direct tests..."
+	@lua5.4 run-zil-test.lua tests.test-clock-direct
+
 test-assertions:
 	@echo "Running assertion tests..."
 	@lua5.4 run-zil-test.lua tests.test-assertions
@@ -98,7 +103,7 @@ test-horror-partial:
 
 test-horror:
 	@echo "Running horror complete walkthrough tests..."
-	lua tests/run_tests.lua tests/horror-walkthrough.lua
+	lua5.4 run-zil-test.lua tests.horror-walkthrough
 
 test-horror-failures:
 	@echo "Running horror failing conditions tests..."
@@ -118,6 +123,7 @@ test-pure-zil:
 	@lua5.4 run-zil-test.lua tests.test-take
 	@lua5.4 run-zil-test.lua tests.test-turnbit
 	@lua5.4 run-zil-test.lua tests.test-clock
+	@lua5.4 run-zil-test.lua tests.test-clock-direct
 	@lua5.4 run-zil-test.lua tests.test-assertions
 	@lua5.4 run-zil-test.lua tests.test-check-commands
 	@lua5.4 run-zil-test.lua tests.test-horror-helpers
