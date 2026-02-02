@@ -81,6 +81,8 @@ See `tests/TESTS.md` for ZIL test documentation.
 
 Run it: `lua5.4 run-zil-test.lua tests.unit.test-zil-limitations`
 
+(Note: `run-zil-test.lua` is in the repository root)
+
 ## Documentation
 
 - **Why no conversion?** → [CONVERSION_SUMMARY.md](CONVERSION_SUMMARY.md)

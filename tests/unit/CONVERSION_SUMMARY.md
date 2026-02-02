@@ -37,6 +37,8 @@ Run it with:
 lua5.4 run-zil-test.lua tests.unit.test-zil-limitations
 ```
 
+(The `run-zil-test.lua` runner is in the repository root)
+
 ## What Each Test Type Does
 
 ### Lua Unit Tests (`tests/unit/*.lua`)
