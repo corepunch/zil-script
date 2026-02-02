@@ -23,6 +23,7 @@
 <GLOBAL COUNT1 0>
 <GLOBAL COUNT2 0>
 <GLOBAL ZERO-FIRED <>>
+<GLOBAL TEST-HAS-RUN <>>
 
 ;"Test interrupt function"
 <ROUTINE TEST-INTERRUPT ()
@@ -50,6 +51,10 @@
   T>
 
 <ROUTINE RUN-TEST ()
+    ;"Prevent test from running multiple times due to coroutine system"
+    <COND (,TEST-HAS-RUN <RTRUE>)>
+    <SETG TEST-HAS-RUN T>
+    
     <TELL "=== Clock System Direct Tests ===" CR CR>
     
     ;"Test 1: Verify globals are defined"

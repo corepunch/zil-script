@@ -143,6 +143,63 @@ function Forms.createHandlers(compiler, printNode)
   end
   form.SETG = form.SET
 
+  -- LET - Local variable bindings
+  form.LET = function(buf, node, indent)
+    -- LET has form: <LET ((VAR1 INIT1) (VAR2 INIT2) ...) body...>
+    -- First element is the binding list
+    local bindings = node[1]
+    
+    -- Save the current local_vars state to restore later
+    local saved_local_vars = {}
+    for k, v in pairs(compiler.local_vars) do
+      saved_local_vars[k] = v
+    end
+    
+    -- Emit do block start
+    buf.writeln()
+    buf.indent(indent)
+    buf.writeln("do")
+    
+    -- Process bindings and emit local declarations
+    if bindings and bindings.type == "list" then
+      for _, binding in ipairs(bindings) do
+        if binding.type == "list" then
+          -- Validate binding has exactly 2 elements (variable and initializer)
+          if #binding ~= 2 then
+            error(string.format("LET binding must have exactly 2 elements (variable and initializer), got %d", #binding))
+          end
+          
+          -- Register the variable name
+          compiler.registerLocalVar(binding[1])
+          
+          -- Get the normalized Lua variable name
+          local lua_var_name = compiler.localVarName(binding[1])
+          
+          -- Emit local variable declaration with initialization
+          buf.indent(indent + 1)
+          buf.write("local %s = ", lua_var_name)
+          printNode(buf, binding[2], indent + 2)
+          buf.writeln()
+        end
+      end
+    end
+    
+    -- Process body expressions
+    for i = 2, #node do
+      buf.indent(indent + 1)
+      if utils.needReturn(node[i]) then buf.write("__tmp = ") end
+      printNode(buf, node[i], indent + 1)
+      buf.writeln()
+    end
+    
+    -- Emit do block end
+    buf.indent(indent)
+    buf.writeln("end")
+    
+    -- Restore the previous local_vars state
+    compiler.local_vars = saved_local_vars
+  end
+
   -- IGRTR?, DLESS?
   form["IGRTR?"] = function(buf, node, indent)
     writeModifyCompare(buf, node, "+", ">", compiler)
