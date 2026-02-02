@@ -231,13 +231,13 @@ function M.load_zil_files(files, env, options)
 		local result = compiler.compile(ast, basename)
 		
 		-- Optionally save the compiled Lua file
-		-- if options.save_lua then
+		if options.save_lua then
 			local file = io.open(dir.."/"..basename, "w")
 			if file then
 				file:write(result.combined)
 				file:close()
 			end
-		-- end
+		end
 		
 		-- Execute the compiled code
 		if not M.execute(result.combined, basename, env, options.silent) then
