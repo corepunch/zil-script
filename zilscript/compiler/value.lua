@@ -50,9 +50,18 @@ function Value.value(node, compiler)
     result = utils.digitsToLetters(result)
   end
   
-  -- Add m_ prefix for local variable references (those that started with .)
+  -- Add m_ prefix for local variable references
+  -- This includes:
+  -- 1. Variables that start with . (explicit local reference)
+  -- 2. Bare identifiers that are in compiler.local_vars (implicit local reference)
   if is_local then
     result = "m_" .. result
+  elseif compiler and compiler.local_vars then
+    -- Check if this bare identifier is actually a local variable
+    local original_name = tostring(node.value or node.name)
+    if compiler.local_vars[original_name] then
+      result = "m_" .. result
+    end
   end
   
   return result

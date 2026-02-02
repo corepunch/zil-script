@@ -50,7 +50,7 @@ end
 
 -- Check if node needs a return wrapper
 function Utils.needReturn(node)
-  local nodes = {COND=true,PROG=true,REPEAT=true,AGAIN=true,RETURN=true,RTRUE=true,RFALSE=true,GLOBAL=true}
+  local nodes = {COND=true,PROG=true,REPEAT=true,AGAIN=true,RETURN=true,RTRUE=true,RFALSE=true,GLOBAL=true,LET=true}
   return node.value ~= "" and (node.type ~= "expr" or not nodes[node.name])
 end
 
