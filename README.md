@@ -179,6 +179,30 @@ zil.remove_loader()  -- Remove the ZIL loader
 zil.insert_loader()  -- Re-insert the ZIL loader
 ```
 
+### Debugging: Saving Compiled Lua Files
+
+By default, .zil files are compiled to Lua in memory only. For debugging purposes, you can enable saving of the compiled .lua files:
+
+```lua
+local zil = require "zil"
+
+-- Enable saving compiled .lua files for modules
+zil.config.save_lua = true
+
+-- Now when you require a .zil module, it will save the compiled .lua file
+require "mymodule"  -- Creates mymodule.zil.lua
+
+-- Disable to stop saving files
+zil.config.save_lua = false
+```
+
+When enabled, each .zil module loaded via `require()` will save its compiled Lua code to a `.zil.lua` file in the same directory. This is useful for:
+- Debugging compilation issues
+- Understanding how ZIL code translates to Lua
+- Examining generated code for performance analysis
+
+**Note:** The generated `.zil.lua` files are automatically excluded from git via `.gitignore`.
+
 ## Development
 
 ### Architecture
