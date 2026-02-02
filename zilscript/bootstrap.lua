@@ -215,10 +215,13 @@ local function fn(f)
 end
 
 -- Expose fn as a global function for use in ZIL code
+-- Converts a function reference to its index in the FUNCTIONS table
+-- This is needed for clock system INT/QUEUE functions which expect routine numbers
 function ROUTINE_NUM(f)
-	if type(f) == 'number' then return f end  -- Already a number
-	if type(f) ~= 'function' then return f end  -- Not a function
-	return fn(f)
+	if type(f) == 'number' then return f end  -- Already a number (routine index)
+	if type(f) == 'function' then return fn(f) end  -- Convert function to index
+	-- Invalid type - error with helpful message
+	error("ROUTINE_NUM: expected function or number, got " .. type(f))
 end
 
 local function register(tbl, value)
