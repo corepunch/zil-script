@@ -190,12 +190,7 @@ function M.init(env, silent)
 	local file = assert(io.open("zilscript/bootstrap.lua", "r"))
 	local bootstrap_code = file:read("*a")
 	file:close()
-	
-	local success = M.execute(bootstrap_code, 'bootstrap', env, silent)
-	if success and not silent then
-		print("Loaded bootstrap")
-	end
-	return success
+	return M.execute(bootstrap_code, 'bootstrap', env, silent)
 end
 
 -- Compile and execute a list of ZIL files
@@ -242,10 +237,6 @@ function M.load_zil_files(files, env, options)
 			end
 			return false
 		end
-		
-		if not options.silent then
-			print("Loaded " .. basename)
-		end
 	end
 		
 	return true
@@ -274,10 +265,6 @@ function M.load_modules(env, modules, options)
 				print("Failed to load module " .. modname .. ": " .. tostring(err))
 			end
 			return false
-		end
-		
-		if not options.silent then
-			print("Loaded module: " .. modname)
 		end
 	end
 	
